@@ -100,6 +100,7 @@ installZSH ()
     echo "[ZSH]"
 
     echo "  Linking zsh configuration files..."
+    makelink $MIN_PATH/zsh/zshrc $HOME/.zshrc
 
     echo ""
     return
@@ -124,6 +125,7 @@ installBash ()
     echo "[BASH]"
 
     echo "  Linking bash configuration files..."
+    makelink $MIN_PATH/bash/bash_aliases $HOME/.bash_aliases
 
     echo ""
     return
