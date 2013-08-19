@@ -138,6 +138,8 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'tomasr/molokai'
 
 " Add you own bundles here
 " Bundle 'username/bundlename'
@@ -171,6 +173,9 @@ endfunc
 
 " All files
 autocmd BufWrite * :call DeleteTrailingWS()
+
+" Type :SudoW to save a file with sudo privileges
+command! -bar -nargs=0 SudoW   :silent exe "write !sudo tee % >/dev/null"|silent edit!
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key mapping and remapping
@@ -263,7 +268,10 @@ map <leader>q :e ~/buffer<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
+map <F4> :setlocal paste!<cr>
 
+" Toggle highlight search
+map <leader>hs :set hlsearch!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions

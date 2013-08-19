@@ -5,7 +5,7 @@ alias bigrep="find . -maxdepth 1 -type f | xargs grep -in --color=always "
 alias l='ls -lAh --color'
 alias ll='ls -l --color'
 alias ls='ls --color'
-alias la='ls -A'
+alias la='ls -lA --color'
 alias lad="ls -lApF --group-directories-first --color"
 
 # CD
