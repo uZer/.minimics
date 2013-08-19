@@ -131,11 +131,24 @@ installBash ()
 
 ###############################################################################
 
+MY_DIR=`pwd`
+cd
+
 # Proceed installation
 [ "$INST_GIT" == "true" ] && installGit
 [ "$INST_VIM" == "true" ] && installVim
 [ "$INST_ZSH" == "true" ] && installZSH
 [ "$INST_LSC" == "true" ] && installLSC
 [ "$INST_LSC" == "true" ] && installBash
+
+# Update submodules
+cd $MIN_PATH
+git submodule init
+git submodule update
+
+# Install other vim bundles
 vim +BundleInstall +qall
+
+cd "$MY_DIR"
+
 exit 0
