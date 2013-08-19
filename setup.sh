@@ -89,6 +89,7 @@ installVim ()
     makelink "$MIN_PATH/vim/vimrc" "$HOME/.vimrc"
     makelink "$MIN_PATH/vim" "$HOME/.vim"
 
+    echo ""
     return
 }
 
@@ -125,7 +126,7 @@ installBash ()
     echo "[BASH]"
 
     echo "  Linking bash configuration files..."
-    makelink $MIN_PATH/aliases/aliases $HOME/.bash_aliases
+    makelink $MIN_PATH/bash/bashrc $HOME/.bashrc
 
     echo ""
     return
