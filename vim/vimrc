@@ -27,11 +27,29 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
 " Airline bar
-let g:airline_theme='solarized'
+let g:airline_theme='bubblegum'
 
 " Use Powerline Symbols if your fonts are patched
 " let g:airline_powerline_fonts = 1
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle Config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+Bundle 'bling/vim-airline'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'tomasr/molokai'
+
+" Add you own bundles here
+" Bundle 'username/bundlename'
+
+" Re-enable fletype plugin indent
+filetype plugin indent on
+
+colorscheme jellybeans
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -129,23 +147,6 @@ set magic
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle Config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-Bundle 'bling/vim-airline'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'tomasr/molokai'
-
-" Add you own bundles here
-" Bundle 'username/bundlename'
-
-" Re-enable fletype plugin indent
-filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and saves
