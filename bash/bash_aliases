@@ -1,0 +1,28 @@
+# GREP
+alias bigrep="find . -maxdepth 1 -type f | xargs grep -in --color=always "
+
+# LS
+alias l='ls -lAh --color'
+alias ll='ls -l --color'
+alias ls='ls --color'
+alias la='ls -A'
+alias lad="ls -lApF --group-directories-first --color"
+
+# CD
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../../'
+alias .6='cd ../../../../../../'
+alias .7='cd ../../../../../../../'
+alias .8='cd ../../../../../../../../'
+
+# GIT
+alias yolo='git commit -am "DEAL WITH IT" && git push origin master'
+
+# MISC
+alias c='clear'
+alias stfu='sudo shutdown -h now'
