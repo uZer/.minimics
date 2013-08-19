@@ -13,23 +13,23 @@ a year.
 
 This bundle contains:
 
-- [ ] Vim configuration files
-- [ ] Bash configuration files (coming soon)
-- [ ] ZSH configuration files for people who have taste (coming soon)
-- [ ] Git configuration file
-- [ ] Dircolors configuration (coming soon)
++ Vim configuration files
++ Bash configuration files (coming soon)
++ ZSH configuration files for people who have taste (coming soon)
++ Git configuration file
++ Dircolors configuration (coming soon)
 
 Non-solarized terminal are supported.
 Non-powerlined font system are supported.
 
 This bundle uses:
-- [ ] Sexy visual bar for vim [vim-airline](https://github.com/bling/vim-airline)
-- [ ] Bundle management solution for vim [vundle](https://github.com/gmarik/vundle)
-- [ ] gitconfig from [scyn-conf](https://github.com/scyn-conf/conf)
++ Sexy visual bar for vim [vim-airline](https://github.com/bling/vim-airline)
++ Bundle management solution for vim [vundle](https://github.com/gmarik/vundle)
++ gitconfig from [scyn-conf](https://github.com/scyn-conf/conf)
 
 This bundle can include:
-- [ ] solarize dircolors for [solarized terminals]() (facultative)
-- [ ] [powerline](https://github.com/Lokaltog/powerline) fonts (facultative)
++  solarize dircolors for [solarized terminals]() (facultative)
++ [powerline](https://github.com/Lokaltog/powerline) fonts (facultative)
 
 
 ## Installation
