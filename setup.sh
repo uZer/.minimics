@@ -11,8 +11,8 @@
 INST_GIT="true"     # Enable Git Config install
 INST_VIM="true"     # Enable Vim config install
 INST_ZSH="true"     # Enable ZSH config install
+INST_LSC="true"     # Enable Dir Colors config install
 INST_BASH="true"    # Enable bash config install
-INST_LSC="true"     # Enable LS Colors config install
 # TODO Make params
 
 # Dotfiles path
@@ -20,9 +20,6 @@ MIN_PATH="$HOME/.minimics"
 
 # Backup dir in ~/.minimics/.backup.<timestamp>
 _BACKUPDIR="$MIN_PATH/.backup.`date +%s`"
-
-# Do you have a solarized configured terminal ?
-IS_SOLARIZED="true"
 
 ###############################################################################
 # Configuration file linking method, taking care of old conf if necessary
