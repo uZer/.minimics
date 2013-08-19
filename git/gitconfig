@@ -1,0 +1,69 @@
+# Inspired by Scyn-conf
+# Scyn <remi.chaintron@gmail.com>
+# http://github.com/scyn-conf/zsh
+[core]
+    editor      = vim
+
+[user]
+    name        = uZer
+    email       = piolet.y@gmail.com
+
+[color]
+    ui          = true
+    branch      = auto
+    diff        = auto
+    status      = auto
+
+[color "branch"]
+    current     = blue reverse
+    local       = green
+    remote      = yellow
+[color "diff"]
+    meta        = blue
+    frag        = yellow
+    old         = red
+    new         = green
+[color "status"]
+    added       = green
+    changed     = yellow
+    untracked   = red
+
+[alias]
+# Very useful
+    po          = push origin master
+    mr          = merge remotes/origin/master
+    cl          = clean --force -d
+    lgs         = log --stat --graph
+# status
+    st          = status
+# commit
+    ci          = commit --all
+# branch
+    b           = branch
+    bt          = branch --track
+    ba          = branch --all
+# checkout
+    co          = checkout
+    cob         = checkout -b
+    cobt        = checkout -b --track
+# diff
+    d           = diff
+# log
+    l           = log
+    lp          = log --patch
+    ls          = log --stat
+    lr          = log --raw
+    lg          = log --graph
+    lo          = log --pretty=oneline
+# fetch
+    f           = fetch
+# remote
+    r           = remote
+    rs          = remote show
+    ra          = remote add
+    rd          = remote del
+# misc
+    lsf         = ls-files
+    m           = merge
+    t           = tag
+    ui          = update-index
