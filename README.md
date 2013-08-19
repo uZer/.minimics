@@ -18,7 +18,7 @@ This bundle can include:
 - powerline fonts (facultative)
 
 
-### Content
+## Content
 
 This bundle contains:
 
@@ -32,7 +32,7 @@ Non-solarized terminal are supported.
 Non-powerlined font system are supported.
 
 
-### Installation
+## Installation
 .minimics is very easy to install. You just need to have git installed on you
 system. There is an autoinstall script in your .minimics folder. To install,
 just perform :
@@ -49,7 +49,7 @@ setup script and use:
     ~/.minimics/setup.sh -s
 
 
-### Usage and configuration
+## Usage and configuration
 
 #### Vim
 There are plenty of usefull keyboard mapping in the vimrc configuration file.
@@ -77,7 +77,7 @@ the setup script (comment or uncomment the variables). At any time if your
 unhappy with some color configuration, you can edit the configuration.
 More info coming soon.
 
-### Uninstall
+## Uninstall
 If for any reason you want to uninstall .minimics partially or completely, you
 just have to unlink the configuration files in your home directory.
 
