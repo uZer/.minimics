@@ -137,5 +137,5 @@ installBash ()
 [ "$INST_ZSH" == "true" ] && installZSH
 [ "$INST_LSC" == "true" ] && installLSC
 [ "$INST_LSC" == "true" ] && installBash
-
+vim +BundleInstall +qall
 exit 0
