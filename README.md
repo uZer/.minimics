@@ -40,7 +40,7 @@ just perform :
     git clone https://github.com/uZer/.minimics.git ~/.minimics
     ~/.minimics/setup.sh
 
-A backup of your old configuration files is automaticly made in your minimics
+A backup of your old configuration files is automatically made in your minimics
 folder.
 
 A silent install is possible, you just need to edit the default variables in the
