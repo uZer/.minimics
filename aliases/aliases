@@ -1,4 +1,5 @@
 # GREP
+# Recursively check current directory for files containing your argument
 alias bigrep="find . -maxdepth 1 -type f | xargs grep -in --color=always "
 
 # LS
@@ -21,8 +22,6 @@ alias .6='cd ../../../../../../'
 alias .7='cd ../../../../../../../'
 alias .8='cd ../../../../../../../../'
 
-# GIT
-
 # MISC
 alias c='clear'
 alias a='vim ~/.minimics/aliases/aliases'
@@ -31,7 +30,6 @@ alias a='vim ~/.minimics/aliases/aliases'
 alias yolo='git commit -am "DEAL WITH IT" && git push origin master'
 alias stfu='sudo shutdown -h now'
 alias chmog='chmod'
-
 
 # THECORE
 alias nas='cd /media/storage'
