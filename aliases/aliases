@@ -1,15 +1,19 @@
 # GREP and FIND
-# Recursively check current directory for files containing your argument
-alias bigrep="find -type f | xargs grep -in --color=always "
 alias y='grep -Ri'
 alias n='grep -Rvi'
+
+# Recursively check current directory for files containing your argument
+alias bigrep="find -type f | xargs grep -in --color=always "
+
+# HISTORY
+alias hs='history | grep --color=auto'
 
 # LS
 alias l='ls -lAh --color'
 alias ll='ls -l --color'
 alias ls='ls --color'
-alias al='ls -lA --color'
-alias la='ls -lA --color'
+alias al='ls -lhA --color'
+alias la='ls -lhA --color'
 alias lad="ls -lApF --group-directories-first --color"
 
 # CD
@@ -24,6 +28,17 @@ alias .6='cd ../../../../../../'
 alias .7='cd ../../../../../../../'
 alias .8='cd ../../../../../../../../'
 
+# DU
+alias ducks='du -ckhs * | sort -rn'
+
+# NETWORK
+
+# SPY
+# returns list of open internet sockets, optionally filter (via grep) for
+# host/process/user/etc by adding an argument.
+spy () { lsof -i -P +c 0 +M -n | grep -i "$1" }
+spyn () { lsof -i -P +c 0 +M | grep -i "$1" }
+
 # MISC
 alias c='clear'
 alias a='vim ~/.minimics/aliases/aliases'
@@ -33,6 +48,8 @@ alias yolo='git commit -am "DEAL WITH IT" && git push origin master'
 alias stfu='sudo shutdown -h now'
 alias chmog='chmod'
 
+wiki() { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
+
 # THECORE
 alias nas='cd /media/storage'
 alias core='cd /media/storage'
@@ -41,3 +58,4 @@ alias core='cd /media/storage'
 alias rt='cd /home/rtorrent/'
 alias leech='cd /home/rtorrent/leechme'
 alias seed='cd /home/rtorrent/downloads'
+
