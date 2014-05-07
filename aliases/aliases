@@ -1,6 +1,8 @@
-# GREP
+# GREP and FIND
 # Recursively check current directory for files containing your argument
-alias bigrep="find . -maxdepth 1 -type f | xargs grep -in --color=always "
+alias bigrep="find -type f | xargs grep -in --color=always "
+alias y='grep -Ri'
+alias n='grep -Rvi'
 
 # LS
 alias l='ls -lAh --color'
