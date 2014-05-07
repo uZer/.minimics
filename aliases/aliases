@@ -50,6 +50,7 @@ alias chmog='chmod'
 
 wiki() { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
 
+
 # THECORE
 alias nas='cd /media/storage'
 alias core='cd /media/storage'
@@ -58,4 +59,3 @@ alias core='cd /media/storage'
 alias rt='cd /home/rtorrent/'
 alias leech='cd /home/rtorrent/leechme'
 alias seed='cd /home/rtorrent/downloads'
-
