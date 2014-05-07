@@ -67,3 +67,5 @@
     m           = merge
     t           = tag
     ui          = update-index
+[push]
+	default = simple

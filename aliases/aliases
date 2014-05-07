@@ -26,3 +26,11 @@ alias yolo='git commit -am "DEAL WITH IT" && git push origin master'
 # MISC
 alias c='clear'
 alias stfu='sudo shutdown -h now'
+
+# THECORE
+alias nas='cd /media/storage'
+
+# THEVOID
+alias rt='cd /home/rtorrent/'
+alias leech='cd /home/rtorrent/leechme'
+alias seed='cd /home/rtorrent/downloads'
