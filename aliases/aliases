@@ -29,7 +29,7 @@ alias .7='cd ../../../../../../../'
 alias .8='cd ../../../../../../../../'
 
 # DU
-alias ducks='du -ckhs * | sort -rn'
+alias ducks='du -ckhs * | sort -hr'
 
 # NETWORK
 
