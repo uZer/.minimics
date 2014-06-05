@@ -67,5 +67,12 @@
     m           = merge
     t           = tag
     ui          = update-index
-#[push]
-#	default = simple
+
+# Default behavior for git push
+#    nothing - do not push anything.
+#    matching - push all branches having the same name in both ends.
+#    upstream - push the current branch to its upstream branch.
+#    simple - like upstream, but refuses to push if the upstream branch’s name is different from the local one.
+#    current - push the current branch to a branch of the same name.
+[push]
+    default = current
