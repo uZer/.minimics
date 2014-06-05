@@ -21,7 +21,7 @@ source $ZSH/oh-my-zsh.sh
 # ALIASES
 source $MINIMICS/aliases/aliases
 
-# POWERLINE
+# POWERLINE please comment this line if your don't have it installed
 . $POWERLINE/bindings/zsh/powerline.zsh
 
 # COLORS

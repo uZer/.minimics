@@ -43,12 +43,6 @@ just perform :
 A backup of your old configuration files is automatically made in your minimics
 folder.
 
-A silent install is possible, you just need to edit the default variables in the
-setup script and use:
-
-    ~/.minimics/setup.sh -s
-
-
 ## Usage and configuration
 
 #### Vim
@@ -66,10 +60,13 @@ comment the line containing:
 Coming soon.
 
 #### ZSH
-Coming soon.
+Using oh-my-zsh bundle and custom aliases.
+Also using powerline zsh configuration file, if you don't have any powerline
+installed please comment the appropriated line in your .zshrc
 
 #### Git config
 See the .gitconfig file in your home directory for usefull git shocuts.
+Please make sure you changed the name of your user in your gitrc file
 
 #### Colors
 If you use solarized terminal configurations, you can enable solarized colors in
