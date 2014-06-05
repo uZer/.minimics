@@ -5,7 +5,7 @@ MINIMICS=$HOME/.minimics
 POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline
 
 # OH MY ZSH
-ZSH_THEME="robbyrussell"
+ZSH_THEME="gianu"
 COMPLETION_WAITING_DOTS="true"
 # HIST_STAMPS="mm-dd-yyyy"
 # CASE_SENSITIVE="true"
