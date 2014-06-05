@@ -139,6 +139,12 @@ git submodule update
 # Install other vim bundles
 # vim +BundleInstall +qall
 
+echo
+echo "If you don't have powerline installed,"
+echo "please comment powerline call in your new zshrc file"
+echo
+echo "Installation complete!"
+
 cd "$MY_DIR"
 
 exit 0
