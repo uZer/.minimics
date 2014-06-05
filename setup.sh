@@ -10,12 +10,12 @@
 INST_GIT="true"     # Enable Git Config install
 INST_VIM="true"     # Enable Vim config install
 INST_ZSH="true"     # Enable ZSH config install
-INST_LSC="true"     # Enable Dir Colors config install
 INST_BASH="true"    # Enable bash config install
 # TODO Make params
 
 # Dotfiles path
 MIN_PATH="$HOME/.minimics"
+OHMY_PATH="$HOME/.oh-my-zsh"
 
 # Backup dir in ~/.minimics/.backup.<timestamp>
 _BACKUPDIR="$MIN_PATH/.backup.`date +%s`"
@@ -99,17 +99,9 @@ installZSH ()
     echo "  Linking zsh configuration files..."
     makelink $MIN_PATH/zsh/zshrc $HOME/.zshrc
 
-    echo ""
-    return
-}
-
-# [LSC]
-# Linking new ls colors
-installLSC ()
-{
-    echo "[LSC]"
-
-    echo "  Linking ls_colors configuration files..."
+    if [ ! -e $OHMY_PATH ]; then
+        git clone https://github.com/robbyrussell/oh-my-zsh.git $OHMY_PATH
+    fi
 
     echo ""
     return
@@ -131,7 +123,6 @@ installBash ()
 ###############################################################################
 
 MY_DIR=`pwd`
-cd
 
 # Proceed installation
 [ "$INST_GIT" == "true" ] && installGit
@@ -146,7 +137,7 @@ git submodule init
 git submodule update
 
 # Install other vim bundles
-vim +BundleInstall +qall
+# vim +BundleInstall +qall
 
 cd "$MY_DIR"
 
