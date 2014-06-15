@@ -7,6 +7,7 @@ let mapleader = " "
 set nocompatible               " be iMproved
 syn on
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+set t_ut= " Redraw background correctly
 set encoding=utf-8
 set fileencodings=utf-8,latin2
 
@@ -30,7 +31,7 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 let g:airline_theme='bubblegum'
 
 " Use Powerline Symbols if your fonts are patched
-" let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle Config
