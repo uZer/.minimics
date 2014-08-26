@@ -42,6 +42,7 @@ spyn () { lsof -i -P +c 0 +M | grep -i "$1" }
 # MISC
 alias c='clear'
 alias a='vim ~/.minimics/aliases/aliases'
+alias sup='sudo aptitude update && sudo aptitude upgrade'
 
 # YOLO AND STUFF FOR YOLO PEOPLE
 alias yolo='git commit -am "DEAL WITH IT" && git push origin master'

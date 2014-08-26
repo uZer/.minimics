@@ -1,37 +1,12 @@
 " Leader Key
 let mapleader = " "
-set nocompatible               " be iMproved
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle Config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
-Plugin 'gmarik/vundle'
-Plugin 'bling/vim-airline'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'tomasr/molokai'
-Plugin 'chriskempson/base16-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
-
-" Add you own bundles here
-" Plugin 'username/bundlename'
-
-call vundle#end()
-
-" Re-enable fletype plugin indent
-filetype plugin indent on
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors & Visual
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible               " be iMproved
 syn on
-let base16colorspace=256 " Access colors present in 256 colorspace
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-set t_ut= " Redraw background correctly
 set encoding=utf-8
 set fileencodings=utf-8,latin2
 
@@ -52,16 +27,29 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
 " Airline bar
-let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='bubblegum'
 
 " Use Powerline Symbols if your fonts are patched
 let g:airline_powerline_fonts = 1
 
-" colorscheme for vim using shell BASE16 theme
-set background=dark
-let g:airline_theme='jellybeans'
-colorscheme jellybeans
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle Config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+Bundle 'bling/vim-airline'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'tomasr/molokai'
 
+" Add you own bundles here
+" Bundle 'username/bundlename'
+
+" Re-enable fletype plugin indent
+filetype plugin indent on
+
+colorscheme jellybeans
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -120,7 +108,7 @@ set ruler " Always show current position
 set hidden " A buffer becomes hidden when it is abandoned
 
 " Configure backspace so it acts as it should act
-set backspace=indent,eol,start
+set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
 " Return to last edit position when opening files (You want this!)
