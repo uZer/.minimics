@@ -1,3 +1,7 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Global
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Leader Key
 let mapleader = " "
 set nocompatible               " be iMproved
@@ -5,6 +9,7 @@ set nocompatible               " be iMproved
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle Config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
@@ -27,7 +32,7 @@ call vundle#end()
 filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colors & Visual
+" Colors, terminal & Visual
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syn on
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
@@ -58,10 +63,22 @@ let g:airline#extensions#tabline#enabled = 1
 " Use Powerline Symbols if your fonts are patched
 let g:airline_powerline_fonts = 1
 
-" colorscheme for vim using shell BASE16 theme
+" Colorscheme
 set background=dark
+
+"" Uncomment if you have no taste or no time to spend on your color
+"" configuration. (No Solarized, no base16)
+" let g:airline_theme='jellybeans'
+" colorscheme jellybeans
+
+"" Uncomment if you have a solarized terminal
+"" (eg: solarized for putty, gnome terminal solarized colors...)
 let g:airline_theme='solarized'
 colorscheme solarized
+
+"" Uncomment if you want to use your BASE16 theme
+" let g:airline_theme='base16'
+" colorscheme base16-default
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related
