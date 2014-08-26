@@ -16,6 +16,7 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
 
 " Add you own bundles here
 " Plugin 'username/bundlename'
@@ -24,7 +25,6 @@ call vundle#end()
 
 " Re-enable fletype plugin indent
 filetype plugin indent on
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors & Visual
@@ -287,6 +287,10 @@ map <F4> :setlocal paste!<cr>
 " Toggle highlight search
 map <leader>hs :set hlsearch!<cr>
 
+" NERDtree
+map <F10> <plug>NERDTreeTabsToggle<CR>
+inoremap <F10> <Esc><plug>NERDTreeTabsToggle<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -345,3 +349,11 @@ function! <SID>BufcloseCloseIt()
         execute("bdelete! ".l:currentBufNum)
     endif
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" NERDTree specific
+let g:nerdtree_tabs_open_on_console_startup=0 " Launch at start
+let g:NERDTreeWinPos = "right"
