@@ -15,6 +15,7 @@ Plugin 'tomasr/molokai'
 Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
+Plugin 'altercation/vim-colors-solarized'
 
 " Add you own bundles here
 " Plugin 'username/bundlename'
@@ -29,9 +30,9 @@ filetype plugin indent on
 " Colors & Visual
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syn on
-let base16colorspace=256 " Access colors present in 256 colorspace
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-set t_ut= " Redraw background correctly
+let base16colorspace=256 " Access colors present in 256 colorspace
+" set t_ut= " Redraw background correctly
 set encoding=utf-8
 set fileencodings=utf-8,latin2
 
@@ -59,8 +60,8 @@ let g:airline_powerline_fonts = 1
 
 " colorscheme for vim using shell BASE16 theme
 set background=dark
-let g:airline_theme='jellybeans'
-colorscheme jellybeans
+let g:airline_theme='solarized'
+colorscheme solarized
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related
