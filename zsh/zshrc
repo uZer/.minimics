@@ -22,7 +22,7 @@ source $ZSH/oh-my-zsh.sh
 source $MINIMICS/aliases/aliases
 
 # POWERLINE please comment this line if your don't have it installed
-. $POWERLINE/bindings/zsh/powerline.zsh
+#. $POWERLINE/bindings/zsh/powerline.zsh
 
 # COLORS
 export TERM="xterm-256color"
