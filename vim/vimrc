@@ -22,6 +22,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
 
 " Add you own bundles here
 " Plugin 'username/bundlename'
@@ -73,8 +74,8 @@ set background=dark
 
 "" Uncomment if you have a solarized terminal
 "" (eg: solarized for putty, gnome terminal solarized colors...)
-let g:airline_theme='solarized'
-colorscheme solarized
+let g:airline_theme='powerlineish'
+colorscheme molokai
 
 "" Uncomment if you want to use your BASE16 theme
 " let g:airline_theme='base16'
@@ -305,8 +306,8 @@ map <F4> :setlocal paste!<cr>
 map <leader>hs :set hlsearch!<cr>
 
 " NERDtree
-map <F10> <plug>NERDTreeTabsToggle<CR>
-inoremap <F10> <Esc><plug>NERDTreeTabsToggle<CR>
+map <F8> <plug>NERDTreeTabsToggle<CR>
+inoremap <F8> <Esc><plug>NERDTreeTabsToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
