@@ -10,33 +10,55 @@ set nocompatible               " be iMproved
 " Vundle Config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
-Plugin 'gmarik/vundle'
+""" Vundle plugin manager {{{
+""" Automatically setting up Vundle, taken from
+""" http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc
+let has_vundle=1
+if !filereadable($HOME."/.vim/bundle/Vundle.vim/README.md")
+    echo "Installing Vundle..."
+    echo ""
+    silent !mkdir -p $HOME/.vim/bundle
+    silent !git clone https://github.com/gmarik/Vundle.vim $HOME/.vim/bundle/Vundle.vim
+    let has_vundle=0
+endif
+
+""" Initialize Vundle
+filetype off                                " required to init
+set rtp+=$HOME/.vim/bundle/Vundle.vim       " include vundle
+call vundle#begin()                         " init vundle
+
+Plugin 'gmarik/Vundle.vim'
+
+" Add you own bundles here
+" Plugin 'username/bundlename'
 Plugin 'bling/vim-airline'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'tomasr/molokai'
 Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-
-" Add you own bundles here
-" Plugin 'username/bundlename'
 
 call vundle#end()
 
 " Re-enable fletype plugin indent
 filetype plugin indent on
 
+""" Installing plugins the first time, quits when done {{{
+if has_vundle == 0
+    :silent! PluginInstall
+    :qa
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors, terminal & Visual
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syn on
-set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+if (&term =~ "xterm") || (&term =~ "screen")
+    set t_Co=256
+endif
+" set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
 let base16colorspace=256 " Access colors present in 256 colorspace
 " set t_ut= " Redraw background correctly
 set encoding=utf-8
