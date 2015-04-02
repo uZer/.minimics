@@ -1,14 +1,14 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Global
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Leader Key
 let mapleader = " "
 set nocompatible               " be iMproved
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle Config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """ Vundle plugin manager {{{
 """ Automatically setting up Vundle, taken from
@@ -39,21 +39,27 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
+Plugin 'jistr/vim-nerdtree-tabs'
 
 call vundle#end()
 
 " Re-enable fletype plugin indent
 filetype plugin indent on
-
+augroup FileTypeRules
+    autocmd!
+    autocmd BufNewFile,BufRead *.md set ft=markdown tw=79
+    autocmd BufNewFile,BufRead *.tex set ft=tex tw=79
+    autocmd BufNewFile,BufRead *.txt set ft=sh tw=79
+augroup END
 """ Installing plugins the first time, quits when done {{{
 if has_vundle == 0
     :silent! PluginInstall
     :qa
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors, terminal & Visual
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syn on
 if (&term =~ "xterm") || (&term =~ "screen")
     set t_Co=256
@@ -74,8 +80,12 @@ set t_vb=
 set tm=500
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-highlight ExtraWhitespace ctermbg=darkred guibg=#382424
+highlight ExtraWhitespace   ctermbg=darkred guibg=#382424
+highlight ErrorMsg         ctermbg=darkred guibg=#382424
+match ErrorMsg '\%>80v.\+'
+
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ErrorMsg        ctermbg=red guibg=red
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -97,15 +107,15 @@ set background=dark
 "" Uncomment if you have a solarized terminal
 "" (eg: solarized for putty, gnome terminal solarized colors...)
 let g:airline_theme='powerlineish'
-colorscheme molokai
 
 "" Uncomment if you want to use your BASE16 theme
 " let g:airline_theme='base16'
 " colorscheme base16-default
+colorscheme molokai
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
 set expandtab
 
@@ -117,17 +127,18 @@ set shiftwidth=4
 set tabstop=4
 
 " Linebreak on 80 characters
-set lbr
-set tw=80
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-
+" set lbr
+"set tw=79
+"set ai "Auto indent
+"set si "Smart indent
+"set wrap "Wrap lines
+set colorcolumn=81
 set showmatch
 set incsearch
 set ignorecase
 set backspace=2
+
+
 
 " Run :FixWhitespace to remove end of line white space.
 function! s:FixWhitespace(line1,line2)
@@ -140,9 +151,9 @@ command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Layout, Buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Format the status line
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
@@ -179,9 +190,9 @@ try
 catch
 endtry
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ignorecase
 set smartcase
 set hlsearch
@@ -201,9 +212,9 @@ set magic
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and saves
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nobackup
 set nowb
 set noswapfile
@@ -231,9 +242,9 @@ autocmd BufWrite * :call DeleteTrailingWS()
 " Type :SudoW to save a file with sudo privileges
 command! -bar -nargs=0 SudoW   :silent exe "write !sudo tee % >/dev/null"|silent edit!
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key mapping and remapping
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Move on a line between words
 map <C-h> b
 map <C-l> w
@@ -263,10 +274,9 @@ map <leader>bd :Bclose<cr>
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>th :tabp<cr>
-map <leader>tl :tabn<cr>
+map <leader>tc :Bclose<cr>
+map <leader>th :bprevious<cr>
+map <leader>tl :bnext<cr>
 
 " Useful mappings for managing windows
 map <leader>wn :vsplit<cr>
@@ -328,12 +338,13 @@ map <F4> :setlocal paste!<cr>
 map <leader>hs :set hlsearch!<cr>
 
 " NERDtree
-map <F8> <plug>NERDTreeTabsToggle<CR>
-inoremap <F8> <Esc><plug>NERDTreeTabsToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+map <F5>      <plug>NERDTreeSteppedOpen<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
@@ -390,10 +401,13 @@ function! <SID>BufcloseCloseIt()
     endif
 endfunction
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " NERDTree specific
-let g:nerdtree_tabs_open_on_console_startup=0 " Launch at start
+"let g:nerdtree_tabs_autofind=1
+"let g:nerdtree_tabs_open_on_console_startup=1 " Launch at start
+"let g:nerdtree_tabs_no_startup_for_diff=1
 let g:NERDTreeWinPos = "right"
+
