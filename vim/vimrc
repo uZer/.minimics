@@ -272,8 +272,8 @@ map <leader>bc :Bclose<cr>
 map <leader>bd :Bclose<cr>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
+map <leader>tn :enew<cr>
+" map <leader>to :tabonly<cr>
 map <leader>tc :Bclose<cr>
 map <leader>th :bprevious<cr>
 map <leader>tl :bnext<cr>
