@@ -60,3 +60,13 @@ alias core='cd /media/storage'
 alias rt='cd /home/rtorrent/'
 alias leech='cd /home/rtorrent/leechme'
 alias seed='cd /home/rtorrent/downloads'
+
+# VPN
+thevoid () {
+    if [ ! -f /var/run/openvpn@thevoid.pid ];
+    then sudo systemctl start openvpn@thevoid ;
+    else sudo systemctl stop openvpn@thevoid ;
+    fi
+    sudo journalctl -f -u openvpn@thevoid.service
+}
+alias vpn='thevoid'
