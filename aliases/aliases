@@ -30,6 +30,9 @@ alias .8='cd ../../../../../../../../'
 
 # DU
 alias ducks='du -ckhs * | sort -hr'
+alias coin='du -cks * | sort -rn'
+alias coincoin='du -ckhs * | sort -hr'
+
 
 # NETWORK
 
@@ -42,6 +45,7 @@ spyn () { lsof -i -P +c 0 +M | grep -i "$1" }
 # MISC
 alias c='clear'
 alias a='vim ~/.minimics/aliases/aliases'
+alias aloc='vim ~/.aliases.local'
 alias sup='sudo aptitude update && sudo aptitude upgrade'
 
 # YOLO AND STUFF FOR YOLO PEOPLE
@@ -50,13 +54,3 @@ alias stfu='sudo shutdown -h now'
 alias chmog='chmod'
 
 wiki() { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
-
-
-# THECORE
-alias nas='cd /media/storage'
-alias core='cd /media/storage'
-
-# THEVOID
-alias rt='cd /home/rtorrent/'
-alias leech='cd /home/rtorrent/leechme'
-alias seed='cd /home/rtorrent/downloads'
