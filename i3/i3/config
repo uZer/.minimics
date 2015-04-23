@@ -29,7 +29,7 @@ bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run  -p '>' -fn 'Pragmata Pro for Powerline-9' -i -sb '#859900' -nb '#073642' -sf '#073642' -nf '#859900'
+bindsym $mod+d exec dmenu_run  -p '>' -fn 'Pragmata Pro for Powerline-9' -i -sb '#2aa198' -nb '#073642' -sf '#073642' -nf '#2aa198'
 
 # change focus
 bindsym $mod+j focus left
