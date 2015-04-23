@@ -69,4 +69,14 @@ thevoid () {
     fi
     sudo journalctl -f -u openvpn@thevoid.service
 }
-alias vpn='thevoid'
+thegateway () {
+    if [ ! -f /var/run/openvpn@thegateway.pid ];
+    then sudo systemctl start openvpn@thegateway ;
+    else sudo systemctl stop openvpn@thegateway ;
+    fi
+    sudo journalctl -f -u openvpn@thegateway.service
+}
+alias void='thevoid'
+alias gateway='thegateway'
+alias proxy='thegateway'
+alias vpn='thegateway'

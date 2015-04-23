@@ -106,12 +106,13 @@ set background=dark
 
 "" Uncomment if you have a solarized terminal
 "" (eg: solarized for putty, gnome terminal solarized colors...)
-let g:airline_theme='powerlineish'
+"let g:airline_theme='powerlineish'
+let g:airline_theme='solarized'
 
 "" Uncomment if you want to use your BASE16 theme
 " let g:airline_theme='base16'
 " colorscheme base16-default
-colorscheme molokai
+colorscheme solarized
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related

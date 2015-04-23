@@ -7,6 +7,7 @@
 # ENVIRONMENT
 
 # Install selection
+INST_I3="true"     # Enable Git Config install
 INST_GIT="true"     # Enable Git Config install
 INST_VIM="true"     # Enable Vim config install
 INST_ZSH="true"     # Enable ZSH config install
@@ -89,6 +90,20 @@ installVim ()
     return
 }
 
+# [i3]
+# Linking i3 configuration files
+installI3 ()
+{
+    echo "[I3]"
+
+    echo "  Linking i3 configuration files..."
+    makelink $MIN_PATH/i3/i3/ $HOME/.i3
+    makelink $MIN_PATH/i3/i3status.conf $HOME/.i3status.conf
+
+    echo ""
+    return
+}
+
 # [ZSH]
 # Linking zsh configuration files
 # Retrieving oh-my-zsh
@@ -130,6 +145,7 @@ MY_DIR=`pwd`
 [ "$INST_ZSH" == "true" ] && installZSH
 [ "$INST_LSC" == "true" ] && installLSC
 [ "$INST_LSC" == "true" ] && installBash
+[ "$INST_I3" == "true" ] && installI3
 
 # Update submodules
 cd $MIN_PATH
