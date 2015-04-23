@@ -17,7 +17,6 @@ font pango:pragmataproforpowerline 8
 ## WINDOW LAYOUT ##
 ###################
 workspace_layout tabbed
-hide_edge_borders both
 
 #################
 ## KEY BINDING ##
@@ -141,13 +140,13 @@ bar {
     status_command i3status
     separator_symbol ">>"
     colors {
-      background          #073642
+      background          #002b36
       statusline          #586e75
       separator           #586e75
       focused_workspace   #073642     #2aa198
       active_workspace    #073642     #2aa198
       inactive_workspace  #2aa198     #073642
-      urgent_workspace    #2aa198     #2aa198
+      urgent_workspace    #2aa198     #073642
   }
 }
 
@@ -162,7 +161,9 @@ client.background           #073642
 #client.placeholder      #000000 #0c0c0c #ffffff #002b36
 
 # Wallpaper
-exec --no-startup-id feh --bg-fill /home/ypiolet/walls/wallpaper.png
+exec --no-startup-id feh --bg-fill ~/.i3/wallpaper.png
+
+#gaps inner 5
 
 # Program specific
 for_window [class="firefox"] new_window none

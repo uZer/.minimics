@@ -1,5 +1,5 @@
 # ENV
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.local/bin:/usr/sbin:/sbin:/usr/local/sbin"
+#export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.local/bin:/usr/sbin:/sbin:/usr/local/sbin"
 ZSH=$HOME/.oh-my-zsh
 MINIMICS=$HOME/.minimics
 POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline
