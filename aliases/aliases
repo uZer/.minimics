@@ -34,6 +34,8 @@ alias coin='du -cks * | sort -rn'
 alias coincoin='du -ckhs * | sort -hr'
 
 
+alias mmv='noglob zmv -W'
+
 # NETWORK
 
 # SPY
