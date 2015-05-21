@@ -3,6 +3,7 @@
 # Youenn Piolet
 #
 # DEPENDS: artwiz-font dmenu i3lock feh
+# pragmatapro
 #######################################
 
 # Modifier: Windows key
@@ -10,7 +11,6 @@ set $mod Mod4
 floating_modifier $mod
 
 # Font
-font pango:anorexia 10
 font pango:pragmataproforpowerline 8
 
 ###################
