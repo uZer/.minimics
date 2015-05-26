@@ -10,7 +10,6 @@ set $mod Mod4
 floating_modifier $mod
 
 # Font
-font pango:anorexia 10
 font pango:pragmataproforpowerline 8
 
 ###################
@@ -161,7 +160,7 @@ client.background           #073642
 #client.placeholder      #000000 #0c0c0c #ffffff #002b36
 
 # Wallpaper
-exec --no-startup-id feh --bg-fill ~/.i3/wallpaper.png
+exec --no-startup-id feh --bg-fill ~/.minimics/i3/i3/wallpaper.png
 
 #gaps inner 5
 
