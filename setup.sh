@@ -70,6 +70,17 @@ installGit ()
     echo "[GIT]"
     echo "  Linking git configuration files..."
     makelink $MIN_PATH/git/gitconfig $HOME/.gitconfig
+    echo "  What is your github login?"
+    read GIT_LOGIN
+    echo "  What is your github email?"
+    read GIT_EMAIL
+    echo "
+    [user]
+        name        = uZer
+        email       = piolet.y@gmail.com  "
+
+
+
     echo ""
     return
 }
