@@ -1,6 +1,9 @@
 #!/bin/bash
 IMG=~/.lockbg.png
-MSG='LOCKED'
+if [ $# -eq 0 ];
+then MSG="AFK"
+else MSG=$1
+fi
 FONT='PragmataPro-For-Powerline'
 
 BLURTYPE="2x8"
@@ -18,7 +21,7 @@ MSGCOLOR='#ffffff'
 xset -dpms; xset s off
 scrot $IMG
 convert $IMG \
-    -level 0%,100%,0.6 -blur $BLURTYPE -font $FONT -pointsize 20 \
+    -level 0%,100%,0.6 -blur $BLURTYPE -font $FONT -pointsize 36 \
     -fill $MSGCOLOR -gravity center -annotate +400-400 $MSG $IMG
 
 i3lock \
