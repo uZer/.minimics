@@ -34,6 +34,7 @@ bindsym $mod+d exec dmenu_run  -p '>' -fn 'Pragmata Pro for Powerline-9' -i -sb 
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
+bindsym $mod+m exec /home/ypiolet/.i3/lock.sh
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -162,7 +163,7 @@ client.background           #073642
 
 # Wallpaper
 exec --no-startup-id feh --bg-fill ~/.minimics/i3/i3/wallpaper.png
-
+exec xautolock -time 60 -locker '~/.i3/lock.sh' &
 #gaps inner 5
 
 # Program specific
@@ -170,3 +171,4 @@ for_window [class="firefox"] new_window none
 for_window [class="iceweasel"] new_window none
 for_window [class="Google-chrome"] new_window none
 for_window [class="xbmc"] new_window none
+

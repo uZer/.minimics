@@ -15,7 +15,7 @@ COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git vundle screen tmux theme)
+plugins=(git vundle screen tmux theme taskwarrior cp lol sudo)
 
 source $ZSH/oh-my-zsh.sh
 
