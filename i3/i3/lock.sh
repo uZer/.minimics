@@ -2,7 +2,7 @@
 IMG=~/.lockbg.png
 if [ $# -eq 0 ];
 then MSG="AFK"
-else MSG=$1
+else MSG="$1"
 fi
 FONT='PragmataPro-For-Powerline'
 
@@ -18,11 +18,12 @@ RINGWRONGCOLOR=00000055
 INSIDEWRONGCOLOR=0000001c
 MSGCOLOR='#ffffff'
 
-xset -dpms; xset s off
+xset s noblank ; xset s off ; xset -dpms
+
 scrot $IMG
 convert $IMG \
     -level 0%,100%,0.6 -blur $BLURTYPE -font $FONT -pointsize 36 \
-    -fill $MSGCOLOR -gravity center -annotate +400-400 $MSG $IMG
+    -fill $MSGCOLOR -gravity center -annotate +300-400 "${MSG}" $IMG
 
 i3lock \
     --textcolor=$TEXTCOLOR \
