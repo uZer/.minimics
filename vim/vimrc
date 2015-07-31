@@ -40,6 +40,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'tmhedberg/SimpylFold'
 
 call vundle#end()
 

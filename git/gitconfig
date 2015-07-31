@@ -4,10 +4,6 @@
 [core]
     editor      = vim
 
-[user]
-    name        = uZer
-    email       = piolet.y@gmail.com
-
 [color]
     ui          = true
     branch      = auto
@@ -76,3 +72,6 @@
 #    current - push the current branch to a branch of the same name.
 [push]
     default = current
+[user]
+	name = uZer
+	email = piolet.y@gmail.com
