@@ -42,6 +42,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'chase/vim-ansible-yaml'
 
 call vundle#end()
 
