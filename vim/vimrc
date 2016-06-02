@@ -44,6 +44,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'ClockworkNet/vim-junos-syntax'
 
 call vundle#end()
 
