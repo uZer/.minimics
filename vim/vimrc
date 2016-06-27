@@ -31,7 +31,8 @@ Plugin 'gmarik/Vundle.vim'
 
 " Add you own bundles here
 " Plugin 'username/bundlename'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'tomasr/molokai'
 Plugin 'chriskempson/base16-vim'
@@ -42,6 +43,9 @@ Plugin 'scrooloose/syntastic'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'parkr/vim-jekyll'
+Plugin 'chase/vim-ansible-yaml'
+Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'ClockworkNet/vim-junos-syntax'
 
 call vundle#end()
 

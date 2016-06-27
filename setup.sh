@@ -165,6 +165,9 @@ git submodule update
 # Install other vim bundles
 # vim +BundleInstall +qall
 
+# Adding local aliases file
+touch $HOME/.aliases.local
+
 echo
 echo "If you don't have powerline installed,"
 echo "please comment powerline call in your new zshrc file"
