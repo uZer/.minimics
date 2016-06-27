@@ -41,6 +41,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'parkr/vim-jekyll'
 
 call vundle#end()
 
