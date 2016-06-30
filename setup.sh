@@ -128,7 +128,7 @@ installZSH ()
     if [ ! -e $OHMY_PATH ]; then
         git clone https://github.com/robbyrussell/oh-my-zsh.git $OHMY_PATH
     fi
-
+    touch ~/.aliases.local > /dev/null 2>&1
     echo ""
     return
 }
