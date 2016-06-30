@@ -7,11 +7,12 @@
 # ENVIRONMENT
 
 # Install selection
-INST_I3="true"     # Enable Git Config install
+INST_I3="true"      # Enable Git Config install
 INST_GIT="true"     # Enable Git Config install
 INST_VIM="true"     # Enable Vim config install
 INST_ZSH="true"     # Enable ZSH config install
 INST_BASH="true"    # Enable bash config install
+INST_BSPWM="false"      # Enable Lemonbuddy config install
 # TODO Make params
 
 # Dotfiles path
@@ -145,6 +146,47 @@ installBash ()
     return
 }
 
+# [LEMONBUDDY]
+# Linking lemonbuddy config
+installLemon ()
+{
+    echo "[Lemonbuddy]"
+
+    echo "  Linking Lemonbuddy configuration files..."
+    mkdir $HOME/.config > /dev/null 2>&1
+    makelink $MIN_PATH/lemonbuddy $HOME/.config/lemonbuddy
+
+    echo ""
+    return
+}
+
+# [BSPWM]
+# Linking lemonbuddy config
+installBspwm ()
+{
+    echo "[BSPWM]"
+
+    echo "  Linking bspwm configuration files..."
+    mkdir $HOME/.config > /dev/null 2>&1
+    makelink $MIN_PATH/sxhkd $HOME/.config/sxhkd
+
+    echo ""
+    return
+}
+
+# [SXHKD]
+# Linking lemonbuddy config
+installSxhkd ()
+{
+    echo "[SXHKD]"
+
+    echo "  Linking sxhkd configuration files..."
+    mkdir $HOME/.config > /dev/null 2>&1
+    makelink $MIN_PATH/bspwm $HOME/.config/bspwm
+
+    echo ""
+    return
+}
 ###############################################################################
 
 MY_DIR=`pwd`
@@ -154,8 +196,9 @@ MY_DIR=`pwd`
 [ "$INST_VIM" == "true" ] && installVim
 [ "$INST_ZSH" == "true" ] && installZSH
 [ "$INST_LSC" == "true" ] && installLSC
-[ "$INST_LSC" == "true" ] && installBash
+[ "$INST_BASH" == "true" ] && installBash
 [ "$INST_I3" == "true" ] && installI3
+[ "$INST_BSPWM" == "true" ] && installBspwm; installSxhkd; installLemon;
 
 # Update submodules
 cd $MIN_PATH
@@ -175,5 +218,4 @@ echo
 echo "Installation complete!"
 
 cd "$MY_DIR"
-
 exit 0
