@@ -33,7 +33,6 @@ alias ducks='du -ckhs * | sort -hr'
 alias coin='du -cks * | sort -rn'
 alias coincoin='du -ckhs * | sort -hr'
 
-
 alias mmv='noglob zmv -W'
 
 # NETWORK
@@ -55,6 +54,18 @@ alias stfu='sudo shutdown -h now'
 alias chmog='chmod'
 
 wiki() { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
+
+mkrole() {
+    if [ "${1}" ] && [ ! -d "${1}" ]; then
+        mkdir $1 && cd $1
+        mkdir tasks handlers templates files vars meta
+        echo "---" >> {handlers,meta,tasks,vars}/main.yml
+        echo '# vim:ft=ansible:' >> {handlers,meta,tasks,vars}/main.yml
+        cd ..
+    else
+        echo "File exists."
+    fi
+}
 
 # Other examples
 
