@@ -31,16 +31,20 @@ Plugin 'gmarik/Vundle.vim'
 
 " Add you own bundles here
 " Plugin 'username/bundlename'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'tomasr/molokai'
 Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'tmhedberg/SimpylFold'
+" Plugin 'tmhedberg/SimpylFold'
+Plugin 'chase/vim-ansible-yaml'
+Plugin 'ekalinin/Dockerfile.vim'
 
 call vundle#end()
 
@@ -80,6 +84,9 @@ set novisualbell
 set t_vb=
 set tm=500
 
+" Disable folding
+set nofoldenable
+
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight ExtraWhitespace   ctermbg=darkred guibg=#382424
 highlight ErrorMsg         ctermbg=darkred guibg=#382424
@@ -97,6 +104,7 @@ let g:airline#extensions#tabline#enabled = 1
 " Use Powerline Symbols if your fonts are patched
 let g:airline_powerline_fonts = 1
 
+let g:solarized_termtrans = 1
 " Colorscheme
 set background=dark
 
