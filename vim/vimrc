@@ -37,11 +37,13 @@ Plugin 'nanotech/jellybeans.vim'
 Plugin 'tomasr/molokai'
 Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'tmhedberg/SimpylFold'
+Plugin 'ekalinin/Dockerfile.vim'
+"Plugin 'tmhedberg/SimpylFold'
 Plugin 'parkr/vim-jekyll'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'Glench/Vim-Jinja2-Syntax'
@@ -84,6 +86,9 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
+
+" Disable folding
+set nofoldenable
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight ExtraWhitespace   ctermbg=darkred guibg=#382424

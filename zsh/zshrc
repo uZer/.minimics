@@ -5,7 +5,9 @@ MINIMICS=$HOME/.minimics
 POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline
 
 # OH MY ZSH
-ZSH_THEME="gianu"
+ZSH_THEME="agnoster"
+#ZSH_THEME="jnrowe"
+#ZSH_THEME="gianu"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
 # CASE_SENSITIVE="true"
@@ -14,7 +16,6 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-#plugins=(git vundle nmap screen theme taskwarrior cp lol sudo history systemd systemadmin)
 plugins=(git vundle nmap screen theme taskwarrior cp lol sudo history systemd)
 
 source $ZSH/oh-my-zsh.sh
@@ -40,6 +41,11 @@ export LESS_TERMCAP_mb=$(printf "\e[1;31m") \
 	# ZSH PACKS
 autoload -U zmv
 
+case $TERM in
+    xterm*)
+        precmd () {print -Pn "\e]0;%n@%m: %~\a"}
+        ;;
+esac
 export PATH="$PATH:$HOME/bin"
 export EDITOR=vim
 
