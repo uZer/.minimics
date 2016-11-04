@@ -42,9 +42,12 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'jistr/vim-nerdtree-tabs'
-" Plugin 'tmhedberg/SimpylFold'
-Plugin 'chase/vim-ansible-yaml'
 Plugin 'ekalinin/Dockerfile.vim'
+"Plugin 'tmhedberg/SimpylFold'
+Plugin 'parkr/vim-jekyll'
+Plugin 'chase/vim-ansible-yaml'
+Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'ClockworkNet/vim-junos-syntax'
 
 call vundle#end()
 

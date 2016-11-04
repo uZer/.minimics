@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # GREP and FIND
 alias y='grep -Ri'
@@ -31,8 +31,6 @@ alias .8='cd ../../../../../../../../'
 alias ducks='du -ckhs * | sort -hr'
 alias coin='du -cks * | sort -rn'
 alias coincoin='du -ckhs * | sort -hr'
-
-
 alias mmv='noglob zmv -W'
 
 # NETWORK
@@ -40,8 +38,8 @@ alias mmv='noglob zmv -W'
 # SPY
 # returns list of open internet sockets, optionally filter (via grep) for
 # host/process/user/etc by adding an argument.
-spy () { lsof -i -P +c 0 +M -n | grep -i "$1" }
-spyn () { lsof -i -P +c 0 +M | grep -i "$1" }
+spy() { lsof -i -P +c 0 +M -n | grep -i "$1" }
+spyn() { lsof -i -P +c 0 +M | grep -i "$1" }
 
 # MISC
 alias c='clear'
@@ -56,14 +54,59 @@ alias chmog='chmod'
 wiki() { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
 
 mkrole() {
-  if [ "${1}" ] && [ ! -d "${1}" ]; then
-      mkdir $1 && cd $1
-      mkdir defaults tasks handlers templates files vars meta
-      echo "---" >> {defaults,handlers,meta,tasks,vars}/main.yml
-      echo '# vim:ft=ansible:' >> {defaults,handlers,tasks,meta,vars}/main.yml
-      cd ..
-  else
-      echo "File exists."
-  fi
+    if [ "${1}" ] && [ ! -d "${1}" ]; then
+        mkdir $1 && cd $1
+        mkdir defaults tasks handlers templates files vars meta
+        echo "---" >> {defaults,handlers,meta,tasks,vars}/main.yml
+        echo '# vim:ft=ansible:' >> {defaults,handlers,tasks,meta,vars}/main.yml
+        cd ..
+    else
+        echo "File exists."
+    fi
 }
+
+#echo "Usage: ando <inventory> '<commands>' [-l hostname]"
+ando() {
+    cd ~/msvansible
+    ansible -k --ask-sudo-pass -m shell -i inventories/$1 -m shell -a $2
+}
+
+playsys() {
+    cd ~/msvansible
+    echo "Veuillez maintenant taper votre password FreeIPA pour la connexion admin/root SSH et le password sudo"
+    ansible-playbook -k --ask-become-pass --vault-password-file ~/.vault_pass site.yml -D -i inventories/$@
+}
+
+playapp() {
+    cd ~/msvansible.app
+    echo "Veuillez maintenant taper votre password FreeIPA pour l'utilisation de SUDO"
+    ansible-playbook --ask-become-pass --vault-password-file ~/.vault_pass site.yml -D -i inventories/$@
+}
+
+playvm() {
+    cd ~/msvansible.vm
+    ansible-playbook --vault-password-file ~/.vault_pass site.yml -D -i inventories/all-prod -l $@
+}
+
+# Other examples
+
+# VPN
+#thevoid () {
+#    if [ ! -f /var/run/openvpn@thevoid.pid ];
+#    then sudo systemctl start openvpn@thevoid ;
+#    else sudo systemctl stop openvpn@thevoid ;
+#    fi
+#    sudo journalctl -f -u openvpn@thevoid.service
+#}
+#thegateway () {
+#    if [ ! -f /var/run/openvpn@thegateway.pid ];
+#    then sudo systemctl start openvpn@thegateway ;
+#    else sudo systemctl stop openvpn@thegateway ;
+#    fi
+#    sudo journalctl -f -u openvpn@thegateway.service
+#}
+#alias void='thevoid'
+#alias gateway='thegateway'
+#alias proxy='thegateway'
+#alias vpn='thegateway'
 
