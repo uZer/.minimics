@@ -5,7 +5,8 @@ MINIMICS=$HOME/.minimics
 POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline
 
 # OH MY ZSH
-ZSH_THEME="agnoster"
+ZSH_CUSTOM="$MINIMICS/zsh/custom"
+ZSH_THEME="agnoster-custom"
 #ZSH_THEME="jnrowe"
 #ZSH_THEME="gianu"
 COMPLETION_WAITING_DOTS="true"
