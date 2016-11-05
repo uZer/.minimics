@@ -1,0 +1,8 @@
+! Render setting for cairo -> pango -> gtk
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.autohint:   true
+Xft.hinting:    true
+Xft.rgba:       rgb
+Xft.hintstyle:  hintslight
+Xft.lcdfilter: lcddefault

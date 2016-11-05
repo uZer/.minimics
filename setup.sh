@@ -7,12 +7,13 @@
 # ENVIRONMENT
 
 # Install selection
-INST_I3="true"      # Enable Git Config install
-INST_GIT="true"     # Enable Git Config install
-INST_VIM="true"     # Enable Vim config install
-INST_ZSH="true"     # Enable ZSH config install
+INST_I3="true"      # Enable i3 Config install
+INST_GIT="true"     # Enable git Config install
+INST_VIM="true"     # Enable vim config install
+INST_ZSH="true"     # Enable zsh config install
+INST_HTOP="true"    # Enable htop config install
 INST_BASH="true"    # Enable bash config install
-INST_BSPWM="false"      # Enable Lemonbuddy config install
+INST_BSPWM="false"  # Enable Lemonbuddy config install
 # TODO Make params
 
 # Dotfiles path
@@ -71,10 +72,12 @@ installGit ()
     echo "[GIT]"
     echo "  Linking git configuration files..."
     makelink $MIN_PATH/git/gitconfig $HOME/.gitconfig
-    echo "  What is your github login?"
+    echo "  What is your github login? [Default: uZer]"
     read GIT_LOGIN
-    echo "  What is your github email?"
+    echo "  What is your github email? [Default: piolet.y@gmail.com]"
     read GIT_EMAIL
+    GIT_LOGIN=${GIT_LOGIN:-uZer}
+    GIT_EMAIL=${GIT_EMAIL:-piolet.y@gmail.com}
     echo "
     [user]
         name        = $GIT_LOGIN
@@ -101,6 +104,14 @@ installVim ()
     return
 }
 
+installHtop ()
+{
+    # Make links
+    makelink "$MIN_PATH/htop/htoprc" "$HOME/.config/htop/htoprc"
+    echo ""
+    return
+}
+
 # [i3]
 # Linking i3 configuration files
 installI3 ()
@@ -110,6 +121,7 @@ installI3 ()
     echo "  Linking i3 configuration files..."
     makelink $MIN_PATH/i3/i3/ $HOME/.i3
     makelink $MIN_PATH/i3/i3status.conf $HOME/.i3status.conf
+    makelink $MIN_PATH/Xresources/Xresources $HOME/.Xresources
 
     echo ""
     return
@@ -196,6 +208,7 @@ MY_DIR=`pwd`
 [ "$INST_VIM" == "true" ] && installVim
 [ "$INST_ZSH" == "true" ] && installZSH
 [ "$INST_LSC" == "true" ] && installLSC
+[ "$INST_HTOP" == "true" ] && installHtop
 [ "$INST_BASH" == "true" ] && installBash
 [ "$INST_I3" == "true" ] && installI3
 [ "$INST_BSPWM" == "true" ] && installBspwm; installSxhkd; installLemon;
