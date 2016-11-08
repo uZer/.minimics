@@ -56,9 +56,9 @@ wiki() { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
 mkrole() {
     if [ "${1}" ] && [ ! -d "${1}" ]; then
         mkdir $1 && cd $1
-        mkdir defaults tasks handlers templates files vars meta
-        echo "---" >> {defaults,handlers,meta,tasks,vars}/main.yml
-        echo '# vim:ft=ansible:' >> {defaults,handlers,tasks,meta,vars}/main.yml
+        mkdir defaults tasks handlers templates
+        echo "---" >>               {defaults,handlers,tasks}/main.yml
+        echo '# vim:ft=ansible:' >> {defaults,handlers,tasks}/main.yml
         cd ..
     else
         echo "File exists."
