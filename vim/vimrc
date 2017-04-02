@@ -45,9 +45,10 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'ekalinin/Dockerfile.vim'
 "Plugin 'tmhedberg/SimpylFold'
 Plugin 'parkr/vim-jekyll'
-Plugin 'chase/vim-ansible-yaml'
+" Plugin 'chase/vim-ansible-yaml'
+Plugin 'pearofducks/ansible-vim'
 Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'ClockworkNet/vim-junos-syntax'
+" Plugin 'ClockworkNet/vim-junos-syntax'
 
 call vundle#end()
 
@@ -103,9 +104,44 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
 " Airline bar
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_inactive_collapse=1
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ }
+" let g:airline_theme_patch_func = 'AirlineThemePatch'
+" function! AirlineThemePatch(palette)
+"   if g:airline_theme == 'solarized'
+"     for colors in values(a:palette.inactive)
+"       let colors[3] = 245
+"     endfor
+"   endif
+" endfunctio
 
 " Use Powerline Symbols if your fonts are patched
 let g:airline_powerline_fonts = 1
+let g:airline_skip_empty_sections = 1
+
+" Ansible-vim specific
+let g:ansible_unindent_after_newline = 1
+let g:ansible_name_highlight = 'b'
+let g:ansible_attribute_highlight = "ob"
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 let g:solarized_termtrans = 1
 " Colorscheme
@@ -120,6 +156,7 @@ set background=dark
 "" (eg: solarized for putty, gnome terminal solarized colors...)
 "let g:airline_theme='powerlineish'
 let g:airline_theme='solarized'
+let g:solarized_termtrans='1'
 
 "" Uncomment if you want to use your BASE16 theme
 " let g:airline_theme='base16'
