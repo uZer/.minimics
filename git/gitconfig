@@ -25,6 +25,9 @@
     untracked   = red
 
 [alias]
+    prune       = fetch --prune
+    undo        = reset --soft HEAD^
+
 # Very useful
     po          = push origin master
     mr          = merge remotes/origin/master
@@ -49,7 +52,7 @@
     lp          = log --patch
     ls          = log --stat
     lr          = log --raw
-    lg          = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[33m%an%x09%x1b[32m%d%x1b[0m%x20%s"
+    lg          = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     lo          = log --pretty=oneline
 # fetch
     f           = fetch
@@ -70,8 +73,19 @@
 #    upstream - push the current branch to its upstream branch.
 #    simple - like upstream, but refuses to push if the upstream branch’s name is different from the local one.
 #    current - push the current branch to a branch of the same name.
+[merge]
+    conflictstyle = diff3
+
 [push]
     default = current
+    followTags = true
+
+[status]
+    showUntrackedFiles = all
+
+[transfert]
+    fsckobjects = true
+
 [user]
-	name = ypiolet
-	email = youenn.piolet@canalplustelecom.com
+    name = ypiolet
+    email = youenn.piolet@canalplustelecom.com
