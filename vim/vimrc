@@ -30,24 +30,30 @@ call vundle#begin()                         " init vundle
 Plugin 'gmarik/Vundle.vim'
 
 " Add you own bundles here
+
+" APPEARANCE PLUGINS
 " Plugin 'username/bundlename'
+Plugin 'chriskempson/base16-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'tomasr/molokai'
-Plugin 'chriskempson/base16-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
 Plugin 'altercation/vim-colors-solarized'
+" Plugin 'tomasr/molokai'
+" Plugin 'nanotech/jellybeans.vim'
+
+" TOOLS
+Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
 Plugin 'jistr/vim-nerdtree-tabs'
+" Plugin 'tmhedberg/SimpylFold'
+" Plugin 'tpope/vim-surround'
+
+" SYNTAX PLUGINS
+Plugin 'scrooloose/syntastic'
 Plugin 'ekalinin/Dockerfile.vim'
-"Plugin 'tmhedberg/SimpylFold'
 Plugin 'parkr/vim-jekyll'
-" Plugin 'chase/vim-ansible-yaml'
-Plugin 'pearofducks/ansible-vim'
 Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'pearofducks/ansible-vim'
+" Plugin 'chase/vim-ansible-yaml'
 " Plugin 'ClockworkNet/vim-junos-syntax'
 
 call vundle#end()
@@ -95,11 +101,12 @@ set nofoldenable
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight ExtraWhitespace   ctermbg=darkred guibg=#382424
-highlight ErrorMsg         ctermbg=darkred guibg=#382424
-match ErrorMsg '\%>80v.\+'
-
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight ErrorMsg        ctermbg=red guibg=red
+
+"highlight ErrorMsg         ctermbg=darkred guibg=#382424
+"match ErrorMsg '\%>80v.\+'
+" autocmd ColorScheme * highlight ErrorMsg        ctermbg=red guibg=red
+
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -461,5 +468,5 @@ endfunction
 "let g:nerdtree_tabs_autofind=1
 "let g:nerdtree_tabs_open_on_console_startup=1 " Launch at start
 "let g:nerdtree_tabs_no_startup_for_diff=1
-let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinPos = "left"
 
