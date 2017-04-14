@@ -6,6 +6,11 @@
 let mapleader = " "
 set nocompatible               " be iMproved
 
+" Python path
+let g:UltiSnipsUsePythonVersion = 3
+let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:pymode_python = 'python3'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle Config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -22,17 +27,15 @@ if !filereadable($HOME."/.vim/bundle/Vundle.vim/README.md")
     let has_vundle=0
 endif
 
-""" Initialize Vundle
 filetype off                                " required to init
 set rtp+=$HOME/.vim/bundle/Vundle.vim       " include vundle
 call vundle#begin()                         " init vundle
 
 Plugin 'gmarik/Vundle.vim'
 
-" Add you own bundles here
+""" Plugins """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " APPEARANCE PLUGINS
-" Plugin 'username/bundlename'
 Plugin 'chriskempson/base16-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -41,20 +44,31 @@ Plugin 'altercation/vim-colors-solarized'
 " Plugin 'nanotech/jellybeans.vim'
 
 " TOOLS
-Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
+" Plugin 'tpope/vim-fugitive'
 " Plugin 'tmhedberg/SimpylFold'
 " Plugin 'tpope/vim-surround'
 
-" SYNTAX PLUGINS
+" SYNTAX CHECK AND COMPLETION
+Plugin 'shougo/neocomplete.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+" Plugin 'Valloric/YouCompleteMe'
+
+" LANGUAGE SPECIFIC
+Plugin 'davidhalter/jedi-vim'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'parkr/vim-jekyll'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'pearofducks/ansible-vim'
+" Plugin 'klen/python-mode'
 " Plugin 'chase/vim-ansible-yaml'
 " Plugin 'ClockworkNet/vim-junos-syntax'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call vundle#end()
 
@@ -71,6 +85,7 @@ if has_vundle == 0
     :silent! PluginInstall
     :qa
 endif
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors, terminal & Visual
@@ -144,15 +159,6 @@ let g:ansible_unindent_after_newline = 0
 " yaml indentation
 let g:ansible_name_highlight = 'b'
 let g:ansible_attribute_highlight = "ob"
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
 
 let g:solarized_termtrans = 1
 " Colorscheme
@@ -369,17 +375,11 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 " When you press gv you vimgrep after the selected text
 vnoremap <silent> gv :call VisualSelection('gv')<CR>
 
-" Open vimgrep and put the cursor in the right position
-map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
-
-" Vimgreps in the current file
-map <leader><space> :vimgrep // <C-R>%<C-A><left><left><left><left><left><left><left><left>
-
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
 
-map <leader>cc :botright cope<cr>
 map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+" map <leader>cr :botright cope<cr>
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
@@ -399,6 +399,28 @@ map <leader>hs :set hlsearch!<cr>
 " NERDtree
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 map <F5>      <plug>NERDTreeSteppedOpen<CR>
+
+" NERDcommenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+" let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -470,3 +492,101 @@ endfunction
 "let g:nerdtree_tabs_no_startup_for_diff=1
 let g:NERDTreeWinPos = "left"
 
+" NEOCOMPLETE
+"
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 0
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+" let g:neocomplete#enable_auto_select = 1
+
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python setlocal omnifunc=jedi#completions
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+" ULTISNIP
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<leader><space>"
+let g:UltiSnipsJumpForwardTrigger="<leader><TAB>"
+let g:UltiSnipsJumpBackwardTrigger="<leader><S-TAB>"
+" let g:UltiSnipsEditSplit="horizontal" " If you want to split your window.
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<C-R>=Tab_Snippet_Complete()\<CR>"
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<C-R>=UltiSnips#ExpandTrigger\<CR>"
+
+" SYNTASTIC
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
+silent! autocmd VimEnte2 * SyntasticToggleMode " disable syntastic by default
+silent! nmap <F6> :lprevious<CR>
+silent! nmap <F7> :lnext<CR>
+silent! nmap <leader>sc :SyntasticCheck<CR>
