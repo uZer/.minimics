@@ -52,11 +52,13 @@ Plugin 'jistr/vim-nerdtree-tabs'
 " Plugin 'tpope/vim-surround'
 
 " SYNTAX CHECK AND COMPLETION
-Plugin 'shougo/neocomplete.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plugin 'shougo/neocomplete.vim'
+Plugin 'shougo/neosnippet'
+Plugin 'shougo/neosnippet-snippets'
 " Plugin 'Valloric/YouCompleteMe'
+" Plugin 'SirVer/ultisnips'
+" Plugin 'honza/vim-snippets'
 
 " LANGUAGE SPECIFIC
 Plugin 'davidhalter/jedi-vim'
