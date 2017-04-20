@@ -588,7 +588,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
-silent! autocmd VimEnte2 * SyntasticToggleMode " disable syntastic by default
+silent! autocmd VimEnter * SyntasticToggleMode " disable syntastic by default
 silent! nmap <F6> :lprevious<CR>
 silent! nmap <F7> :lnext<CR>
 silent! nmap <leader>sc :SyntasticCheck<CR>
