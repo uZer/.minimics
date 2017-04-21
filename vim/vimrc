@@ -571,12 +571,33 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " ULTISNIP
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<leader><space>"
-let g:UltiSnipsJumpForwardTrigger="<leader><TAB>"
-let g:UltiSnipsJumpBackwardTrigger="<leader><S-TAB>"
+" let g:UltiSnipsExpandTrigger="<leader><space>"
+" let g:UltiSnipsJumpForwardTrigger="<leader><TAB>"
+" let g:UltiSnipsJumpBackwardTrigger="<leader><S-TAB>"
 " let g:UltiSnipsEditSplit="horizontal" " If you want to split your window.
 " inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<C-R>=Tab_Snippet_Complete()\<CR>"
-" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<C-R>=UltiSnips#ExpandTrigger\<CR>"
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<C-R>=UltiSnips#ExpandTrigger\<CR>
+
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <leader><TAB>     <Plug>(neosnippet_expand_or_jump)
+smap <leader><TAB>     <Plug>(neosnippet_expand_or_jump)
+xmap <leader><TAB>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <leader><TAB>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 " SYNTASTIC
 set statusline+=%#warningmsg#
