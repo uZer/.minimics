@@ -29,6 +29,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run  -p '>' -fn 'Pragmata Pro for Powerline-12' -i -sb '#2aa198' -nb '#073642' -sf '#073642' -nf '#2aa198'
+bindsym $mod+p exec passmenu -p '#' -fn 'Pragmata Pro for Powerline-12' -i -sb '#b58900' -nb '#002b36' -sf '#002b36' -nf '#b58900' -r -x 900 -y 150 -w 400 -l 20 -dim 0.6
 bindsym $mod+Tab exec rofi -now
 
 # change focus
@@ -114,14 +115,14 @@ bindsym $mod+Shift+e exec pkill i3
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym j resize shrink width 5 px or 5 ppt
+    bindsym k resize grow height 5 px or 5 ppt
+    bindsym l resize shrink height 5 px or 5 ppt
+    bindsym semicolon resize grow width 5 px or 5 ppt
+    bindsym Left resize shrink width 5 px or 5 ppt
+    bindsym Down resize grow height 5 px or 5 ppt
+    bindsym Up resize shrink height 5 px or 5 ppt
+    bindsym Right resize grow width 5 px or 5 ppt
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -142,7 +143,6 @@ bar {
     status_command i3status
     separator_symbol " / "
     colors {
-      background          #002b36
       background          #000000
       statusline          #ffffff
       separator           #586e75
@@ -169,13 +169,10 @@ client.background           #073642
 exec compton -cb
 exec nitrogen --restore
 exec xautolock -time 60 -locker '~/.i3/lock.sh' &
+
 gaps outer 10
 gaps inner 2
-# Program specific
-for_window [class="*"] floating enable
-for_window [class="firefox"] new_window none
-for_window [class="iceweasel"] new_window none
-for_window [class="Google-chrome"] new_window none
-for_window [class="xbmc"] new_window none
-for_window [class="xfce4-terminal"] tiling enable
 
+# Program specific
+for_window [class="^.*"] tiling enable
+for_window [class="^.*"] border pixel 0
