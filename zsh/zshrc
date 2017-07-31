@@ -7,7 +7,7 @@ POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline
 # OH MY ZSH
 DEFAULT_USER="ypiolet"
 ZSH_CUSTOM="$MINIMICS/zsh/custom"
-ZSH_THEME="agnoster-custom"
+ZSH_THEME="agnoster"
 #ZSH_THEME="jnrowe"
 #ZSH_THEME="gianu"
 COMPLETION_WAITING_DOTS="true"

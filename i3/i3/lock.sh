@@ -1,12 +1,12 @@
 #!/bin/bash
 IMG=~/.lockbg.png
 if [ $# -eq 0 ];
-then MSG="AFK"
+then MSG="youenn.piolet@osones.com\n+336 4926 4926"
 else MSG="$1"
 fi
-FONT='PragmataPro-For-Powerline'
+FONT='Roboto'
 
-BLURTYPE="2x8"
+BLURTYPE="8x8"
 TEXTCOLOR=ffffff00
 INSIDECOLOR=ffffff1c
 RINGCOLOR=ffffff3e
@@ -23,7 +23,7 @@ xset s noblank ; xset s off ; xset -dpms
 scrot $IMG
 convert $IMG \
     -level 0%,100%,0.6 -blur $BLURTYPE -font $FONT -pointsize 36 \
-    -fill $MSGCOLOR -gravity center -annotate +300-400 "${MSG}" $IMG
+    -fill $MSGCOLOR -gravity center -annotate -300-200 "${MSG}" $IMG
 
 i3lock \
     --textcolor=$TEXTCOLOR \
