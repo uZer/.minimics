@@ -89,3 +89,5 @@
 [user]
 	name = uZer
 	email = piolet.y@gmail.com
+[gpg]
+	program = /usr/bin/gpg
