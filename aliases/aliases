@@ -53,15 +53,14 @@ alias chmog='chmod'
 
 wiki() { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
 
+export ROLESKEL="~/ansible/ansible-skel-role"
 mkrole() {
-    if [ "${1}" ] && [ ! -d "${1}" ]; then
-        mkdir $1 && cd $1
-        mkdir defaults tasks handlers templates
-        echo "---" >>               {defaults,handlers,tasks}/main.yml
-        echo '# vim:ft=ansible:' >> {defaults,handlers,tasks}/main.yml
-        cd ..
+    if [ $# -eq 1 ]; then
+        ansible-galaxy init --role-skeleton=$ROLESKEL $1
+        cd $1
+        git init
     else
-        echo "File exists."
+        echo "Please just add a role name."
     fi
 }
 
