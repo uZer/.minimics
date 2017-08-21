@@ -194,8 +194,9 @@ exec compton -cb
 exec nitrogen --restore
 exec xautolock -time 15 -locker '~/.i3/lock.sh' &
 exec slack
-exec rocketchat
 exec dropbox
+exec rocketchat
+exec redshift-gtk
 
 gaps outer 10
 gaps inner 2

@@ -8,6 +8,9 @@ POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline
 DEFAULT_USER="ypiolet"
 ZSH_CUSTOM="$MINIMICS/zsh/custom"
 ZSH_THEME="agnoster"
+
+POWERLEVEL9K_MODE='awesome-fontconfig'
+ZSH_THEME="powerlevel9k/powerlevel9k"
 #ZSH_THEME="jnrowe"
 #ZSH_THEME="gianu"
 COMPLETION_WAITING_DOTS="true"
