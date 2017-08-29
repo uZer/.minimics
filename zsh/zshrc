@@ -51,7 +51,7 @@ case $TERM in
         precmd () {print -Pn "\e]0;%n@%m: %~\a"}
         ;;
 esac
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.bin"
 export EDITOR=vim
 
 export ZSH_THEME_TERM_TAB_TITLE_IDLE="$HOSTNAME"
