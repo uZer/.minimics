@@ -25,6 +25,9 @@ workspace_layout tabbed
 # start a terminal
 bindsym $mod+Return exec xfce4-terminal
 
+# start a browser
+bindsym $mod+n exec chromium --new-window
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -66,7 +69,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+n split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -98,9 +101,12 @@ bindsym $mod+6 workspace 106:6
 bindsym $mod+7 workspace 107:7
 bindsym $mod+8 workspace 108:8
 bindsym $mod+9 workspace 109:9
-bindsym $mod+i workspace 11:slack
-bindsym $mod+o workspace 12:net.osones
-bindsym $mod+p workspace 13:net.perso
+bindsym $mod+t workspace 10:
+bindsym $mod+y workspace 11:
+bindsym $mod+u workspace 12:
+bindsym $mod+i workspace 13:
+bindsym $mod+o workspace 14:
+bindsym $mod+p workspace 15:
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 101:1
@@ -112,9 +118,24 @@ bindsym $mod+Shift+6 move container to workspace 106:6
 bindsym $mod+Shift+7 move container to workspace 107:7
 bindsym $mod+Shift+8 move container to workspace 108:8
 bindsym $mod+Shift+9 move container to workspace 109:9
-bindsym $mod+Shift+i move container to workspace 11:slack
-bindsym $mod+Shift+o move container to workspace 12:net.osones
-bindsym $mod+Shift+p move container to workspace 13:net.perso
+bindsym $mod+Shift+t move container to workspace 10:
+bindsym $mod+Shift+y move container to workspace 11:
+bindsym $mod+Shift+u move container to workspace 12:
+bindsym $mod+Shift+i move container to workspace 13:
+bindsym $mod+Shift+o move container to workspace 14:
+bindsym $mod+Shift+p move container to workspace 15:
+
+# Program specific
+for_window [class="^.*"] tiling enable
+for_window [class="^.*"] border pixel 0
+for_window [class="^Slack$"] 13:
+for_window [class="^Rocket$"] 13:
+for_window [class="^Atom$"] 12:
+for_window [title=".*Kraken"] 10:
+assign [class="^Slack$"] 13:
+assign [class="^Rocket$"] 13:
+assign [class="^Atom$"] 12:
+assign [title=".*Kraken"] 10:
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -204,10 +225,3 @@ exec redshift-gtk
 gaps outer 10
 gaps inner 2
 
-# Program specific
-for_window [class="^.*"] tiling enable
-for_window [class="^.*"] border pixel 0
-for_window [class="^Slack$"] 11:slack
-for_window [class="^Rocket$"] 11:slack
-assign [class="^Slack$"] 11:slack
-assign [class="^Rocket$"] 11:slack
