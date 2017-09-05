@@ -32,8 +32,8 @@ bindsym $mod+n exec chromium --new-window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d          exec dmenu_run         -p '' -fn 'roboto-mono-12' -i -sb '#2aa198' -nb '#073642' -sf '#073642' -nf '#2aa198'
-bindsym $mod+BackSpace  exec passmenu   --type -p '' -fn 'roboto-mono-12' -i -sb '#b58900' -nb '#002b36' -sf '#002b36' -nf '#b58900' -r -x 900 -y 150 -w 400 -l 20 -dim 0.6
+bindsym $mod+d          exec dmenu_run         -p '>' -fn 'roboto-mono-12' -i -sb '#2aa198' -nb '#073642' -sf '#073642' -nf '#2aa198'
+bindsym $mod+BackSpace  exec passmenu   --type -p '#' -fn 'roboto-mono-12' -i -sb '#b58900' -nb '#002b36' -sf '#002b36' -nf '#b58900' -r -x 900 -y 150 -w 400 -l 20 -dim 0.6
 # bindsym $mod+Tab exec rofi -now
 
 # change focus
@@ -131,13 +131,13 @@ for_window [class="^.*"] border pixel 0
 for_window [class="^Slack$"] 13:
 for_window [class="^Rocket$"] 13:
 for_window [class="^Atom$"] 12:
-for_window [title=".*Kraken"] 10:
-for_window [title="Spotify"] 11:
+for_window [class="Spotify"] 11:
+for_window [class="feh"] floating enable
 assign [class="^Slack$"] 13:
 assign [class="^Rocket$"] 13:
 assign [class="^Atom$"] 12:
-assign [title=".*Kraken"] 10:
-assign [title="Spotify"] 11:
+assign [class="Spotify"] 11:
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -172,6 +172,9 @@ bindsym XF86Display exec ~/.i3/screen.sh
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioPrev exec --no-startup-id sp prev
+bindsym XF86AudioNext exec --no-startup-id sp next
+bindsym Pause exec --no-startup-id sp pause
 
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
