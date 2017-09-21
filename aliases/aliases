@@ -43,7 +43,7 @@ spyn() { lsof -i -P +c 0 +M | grep -i "$1" }
 
 # MISC
 alias c='clear'
-alias a='vim ~/.minimics/aliases/aliases'
+# alias a='vim ~/.minimics/aliases/aliases'
 alias aloc='vim ~/.aliases.local'
 
 # YOLO AND STUFF FOR YOLO PEOPLE
@@ -71,5 +71,5 @@ ando() {
 }
 
 reverse() {
-    echo -e "IP ADDRESS  \tPING\tREVERSE"; for i in $(nmap -sL -n $1 | grep 'Nmap scan report for' | awk '{ print $5 }'); do echo -e "$i\t$(fping -c1 -t 100 $i 2&>1 > /dev/null && echo -e "\e[32mOK\e[39m" || echo -e "\e[31mKO\e[39m")\t$(dig +short +answer -x $i)"; done
+    echo -e "IP ADDRESS  \tPING\tREVERSE"; for i in $(nmap -sL -n $1 | grep 'Nmap scan report for' | awk '{ print $5 }'); do echo -e "$i\t$(fping -c1 -t 100 $i > /dev/null 2>&1 && echo -e "\e[32mOK\e[39m" || echo -e "\e[31mKO\e[39m")\t$(dig +short +answer -x $i)"; done
 }
