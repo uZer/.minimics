@@ -73,3 +73,10 @@ ando() {
 reverse() {
     echo -e "IP ADDRESS  \tPING\tREVERSE"; for i in $(nmap -sL -n $1 | grep 'Nmap scan report for' | awk '{ print $5 }'); do echo -e "$i\t$(fping -c1 -t 100 $i > /dev/null 2>&1 && echo -e "\e[32mOK\e[39m" || echo -e "\e[31mKO\e[39m")\t$(dig +short +answer -x $i)"; done
 }
+
+latest() {
+    git push origin -d latest
+    git tag -d latest
+    git tag latest -am "Latest"
+    git push
+}
