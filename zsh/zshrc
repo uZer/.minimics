@@ -7,7 +7,7 @@ POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline
 # OH MY ZSH
 DEFAULT_USER="ypiolet"
 ZSH_CUSTOM="$MINIMICS/zsh/custom"
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
 
 POWERLEVEL9K_MODE='awesome-fontconfig'
 ZSH_THEME="powerlevel9k/powerlevel9k"
