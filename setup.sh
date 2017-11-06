@@ -143,6 +143,12 @@ installZSH ()
     if [ ! -e $MIN_PATH/zsh/custom/themes/powerlevel9k ]; then
         git clone https://github.com/bhilburn/powerlevel9k.git $MIN_PATH/zsh/custom/themes/powerlevel9k
     fi
+    if [ ! -e $MIN_PATH/zsh/custom/plugins/zsh-autosuggestions ]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+    fi
+    if [ ! -e $MIN_PATH/zsh/custom/plugins/zsh-syntax-highlighting ]; then
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+    fi
 
     touch ~/.aliases.local > /dev/null 2>&1
     echo ""

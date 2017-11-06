@@ -1,58 +1,58 @@
 # ENV
-#export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.local/bin:/usr/sbin:/sbin:/usr/local/sbin"
-ZSH=$HOME/.oh-my-zsh
 MINIMICS=$HOME/.minimics
-POWERLINE=$HOME/.local/lib/python2.7/site-packages/powerline
+DEFAULT_USER="ypiolet"
+export EDITOR=vim
 
 # OH MY ZSH
-DEFAULT_USER="ypiolet"
+ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM="$MINIMICS/zsh/custom"
-# ZSH_THEME="agnoster"
 
+# VISUAL
 POWERLEVEL9K_MODE='awesome-fontconfig'
 ZSH_THEME="powerlevel9k/powerlevel9k"
+COMPLETION_WAITING_DOTS="true"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='bg=2'
+#ZSH_THEME="agnoster"
 #ZSH_THEME="jnrowe"
 #ZSH_THEME="gianu"
-COMPLETION_WAITING_DOTS="true"
+eval `dircolors ~/.minimics/dircolors/solarized/dircolors.256dark`
+export LESS_TERMCAP_mb=$(printf "\e[1;31m")
+export LESS_TERMCAP_md=$(printf "\e[1;31m")
+export LESS_TERMCAP_me=$(printf "\e[0m")
+export LESS_TERMCAP_se=$(printf "\e[0m")
+export LESS_TERMCAP_so=$(printf "\e[1;44;33m")
+export LESS_TERMCAP_ue=$(printf "\e[0m")
+export LESS_TERMCAP_us=$(printf "\e[1;32m")
+export ZSH_THEME_TERM_TAB_TITLE_IDLE="$HOSTNAME"
+export ZSH_THEME_TERM_TERM_TITLE_IDLE="$HOSTNAME"
+export ZSH_THEME_TERM_TITLE_IDLE="$HOSTNAME"
+
+# BEHAVIOR
 HIST_STAMPS="yyyy-mm-dd"
-# CASE_SENSITIVE="true"
+DISABLE_UPDATE_PROMPT="true"
 # DISABLE_AUTO_UPDATE="true"
 # DISABLE_CORRECTION="true"
+# CASE_SENSITIVE="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git vundle nmap screen theme taskwarrior cp lol sudo history systemd)
-
+plugins=(git vundle nmap screen theme taskwarrior cp lol sudo history systemd \
+         docker docker-compose iwhois git node npm z \
+         # zsh-autosuggestions \
+         zsh-syntax-highlighting \
+)
+export ZSH_AUTOSUGGEST_USE_ASY=asyncmode
 source $ZSH/oh-my-zsh.sh
+source $ZSH/plugins/z/z.sh
 
 # ALIASES
 source $MINIMICS/aliases/aliases
 source $HOME/.aliases.local
 
-# POWERLINE please comment this line if your don't have it installed
-#. $POWERLINE/bindings/zsh/powerline.zsh
-
-# COLORS
-#export TERM="xterm-256color"
-eval `dircolors ~/.minimics/dircolors/solarized/dircolors.256dark`
-export LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-	export LESS_TERMCAP_md=$(printf "\e[1;31m") \
-	export LESS_TERMCAP_me=$(printf "\e[0m") \
-	export LESS_TERMCAP_se=$(printf "\e[0m") \
-	export LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-	export LESS_TERMCAP_ue=$(printf "\e[0m") \
-	export LESS_TERMCAP_us=$(printf "\e[1;32m") \
-
-	# ZSH PACKS
+# ZSH PACKS
 autoload -U zmv
-
 case $TERM in
     xterm*)
         precmd () {print -Pn "\e]0;%n@%m: %~\a"}
         ;;
 esac
-export EDITOR=vim
 
-export ZSH_THEME_TERM_TAB_TITLE_IDLE="$HOSTNAME"
-export ZSH_THEME_TERM_TERM_TITLE_IDLE="$HOSTNAME"
-export ZSH_THEME_TERM_TITLE_IDLE="$HOSTNAME"

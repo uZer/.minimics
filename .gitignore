@@ -1,3 +1,5 @@
 .backup.*
 vim/bundle/*
 zsh/custom/themes/powerlevel9k/
+zsh/custom/plugins/zsh-autosuggestions/
+zsh/custom/plugins/zsh-syntax-highlighting/
