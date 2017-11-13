@@ -1,6 +1,7 @@
 #!/bin/sh
-intern=eDP-1
-extern=HDMI-2
+# Also edit /usr/share/sddm/scripts/Xsetup
+intern=eDP1
+extern=HDMI2
 
 if xrandr | grep "$extern disconnected"; then
     xrandr --output "$extern" --off --output "$intern" --auto
