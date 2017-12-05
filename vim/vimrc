@@ -40,6 +40,7 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'ryanoasis/vim-devicons'
 " Plugin 'tomasr/molokai'
 " Plugin 'nanotech/jellybeans.vim'
 
@@ -48,6 +49,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'Raimondi/delimitMate'
+Plugin 'godlygeek/tabular'
 " Plugin 'tpope/vim-fugitive'
 " Plugin 'tmhedberg/SimpylFold'
 " Plugin 'tpope/vim-surround'
@@ -63,10 +66,11 @@ Plugin 'shougo/neosnippet-snippets'
 
 " LANGUAGE SPECIFIC
 Plugin 'davidhalter/jedi-vim'
-Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'elixir-editors/vim-elixir'
 Plugin 'parkr/vim-jekyll'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'pearofducks/ansible-vim'
+Plugin 'ekalinin/Dockerfile.vim'
 " Plugin 'klen/python-mode'
 " Plugin 'chase/vim-ansible-yaml'
 " Plugin 'ClockworkNet/vim-junos-syntax'
@@ -158,12 +162,11 @@ let g:airline_skip_empty_sections = 1
 
 " Ansible-vim specific
 au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
-let g:ansible_unindent_after_newline = 0
 " yaml indentation
+let g:ansible_unindent_after_newline = 1
 let g:ansible_name_highlight = 'b'
 let g:ansible_attribute_highlight = "ob"
 
-let g:solarized_termtrans = 1
 " Colorscheme
 set background=dark
 
