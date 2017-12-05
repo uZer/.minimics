@@ -35,7 +35,7 @@ DISABLE_UPDATE_PROMPT="true"
 # CASE_SENSITIVE="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git vundle nmap screen theme taskwarrior cp lol sudo history systemd \
+plugins=(git vundle nmap screen theme taskwarrior cp sudo history systemd \
          docker docker-compose iwhois git node npm z \
          # zsh-autosuggestions \
          zsh-syntax-highlighting \
