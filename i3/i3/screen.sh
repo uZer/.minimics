@@ -8,7 +8,7 @@ if xrandr | grep "$extern disconnected"; then
     nitrogen --restore 2>&1 > /dev/null
     # killall synergyc
 else
-    xrandr --output "$intern" --auto --output "$extern" --auto --left-of "$intern"
+    xrandr --output "$intern" --auto --output "$extern" --auto --right-of "$intern"
     nitrogen --restore 2>&1 > /dev/null
     # synergyc -n ovoid synergyserver.local
 fi
