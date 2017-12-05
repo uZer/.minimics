@@ -163,7 +163,7 @@ let g:airline_skip_empty_sections = 1
 " Ansible-vim specific
 au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 " yaml indentation
-let g:ansible_unindent_after_newline = 1
+" let g:ansible_unindent_after_newline = 1
 let g:ansible_name_highlight = 'b'
 let g:ansible_attribute_highlight = "ob"
 
@@ -196,8 +196,8 @@ set expandtab
 set smarttab
 
 " 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 
 " Linebreak on 80 characters
 " set lbr
