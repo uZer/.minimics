@@ -13,3 +13,5 @@ else
     # synergyc -n ovoid synergyserver.local
 fi
 
+# Prepare lockscreen
+./lock2.sh -u wallpaper

@@ -41,7 +41,7 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+m exec /home/$USER/.i3/lock.sh
+bindsym $mod+m exec /home/$USER/.i3/lock2.sh -l blur
 # bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -218,10 +218,12 @@ client.background           #073642
 #client.placeholder      #000000 #0c0c0c #ffffff #002b36
 
 # Wallpaper
-#exec --no-startup-id feh --bg-fill ~/.minimics/i3/i3/wallpaper.png
+#exec --no-startup-id feh --bg-fill ~/.minimics/i3/i3/wallpaper
 exec compton -cb
 exec nitrogen --restore
-exec xautolock -time 15 -locker '~/.i3/lock.sh' &
+exec $HOME/.i3/lock2.sh -u $HOME/.i3/wallpaper
+exec xautolock -time 15 -locker '~/.i3/lock2.sh -l dimblur' &
+
 # exec slack
 exec dropbox
 # exec rocketchat
