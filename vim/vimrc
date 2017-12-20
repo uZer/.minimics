@@ -36,11 +36,11 @@ Plugin 'gmarik/Vundle.vim'
 """ Plugins """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " APPEARANCE PLUGINS
-Plugin 'chriskempson/base16-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ryanoasis/vim-devicons'
+" Plugin 'chriskempson/base16-vim'
 " Plugin 'tomasr/molokai'
 " Plugin 'nanotech/jellybeans.vim'
 
