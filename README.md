@@ -14,9 +14,9 @@ I recommend you not to use this repository, but to build your own fork with your
 settings. This repository is not maintained for stability but only to fulfill my
 needs at a specific moment.
 
-If you just plan to `git clone` and say yolo as many of my friends did these last
-years, please make sure to run setup.sh or replace manually my name in .gitconfig
-file...
+If you just plan to `git clone` and say yolo as many of my friends did over these
+last years, please make sure to run setup.sh or replace manually my name in
+.gitconfig file...
 
 ## Content
 
@@ -29,6 +29,7 @@ This bundle contains:
 + Solarized dircolors submodule (git submodule init / git submodule update)
 + i3 configuration files and other X and Archlinux related configuration files
 + Cygwin configuration files with solarized colorscheme
++ Other experimental stuff I use on my computers and servers
 
 Non-solarized terminal are supported with some minor changes in colorschemes.
 Non-powerline fonts are supported, but by default powerline chars are used in vim
@@ -56,14 +57,14 @@ just perform :
 A backup of your old configuration files is automatically made in your minimics
 folder.
 
-If you plan to use minimics for your desktop/i3 environment, you may have extra
-packages to compile/install
+If you plan to use minimics for your desktop/i3 environment, you will have extra
+packages to compile/install.
 
 ## Usage and configuration
 
 #### Vim
 
-There are plenty of usefull keyboard mapping in the vimrc configuration file.
+There are plenty of usefull keyboard mappings in the vimrc configuration file.
 
 My vim configuration will remove end-of-line trailing whitespaces each time you
 save a document. If you want to disable this feature, edit your .vimrc and
@@ -74,17 +75,20 @@ comment the line containing:
 Leader command is `<space>` by default.
 To update vundle plugins, you can just run `:PluginUpdate`
 
-Useful shorcuts:
+Useful shorcuts and various caveats:
 
+The `<leader>` key is `super` key on your keyboard (also known as `windows` key).
 To paste a block of text, use paste mode: `<leader>pp`
 To enable syntax check, please type `<leader>sc` out of edit mode.
 Tab management:    `<leader>tn` (tab new) and `<leader>tc` (tab close)
 Window management: `<leader>wn` (win new) and `<leader>wc` (win close)
 Move from tab to tab / window to window with `<leader>j or k, h, l`.
+Yes, this means if your using vim in a Windows environment (Cygwin...) you may
+lock yourself out trying to move to the window on the left.
 
 #### Bash
 
-Coming soon.
+I don't.
 
 #### ZSH
 
@@ -103,7 +107,6 @@ Please make sure you changed the name of your user in your gitrc file
 If you use solarized terminal configurations, you can enable solarized colors in
 the setup script (comment or uncomment the variables). At any time if your
 unhappy with some color configuration, you can edit the configuration.
-More info coming soon.
 
 ## Uninstall
 

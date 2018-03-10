@@ -1,8 +1,6 @@
 #!/bin/bash
-# Install dotfiles for current user
-#
-# Youenn Piolet 2013
-# <piolet.y@gmail.com>
+# Symlinks dotfiles for current user, creates backup of previous dotfiles.
+# This script is so 2005 and hates you as much as you do hate it.
 ###############################################################################
 # ENVIRONMENT
 
@@ -12,7 +10,7 @@ INST_GIT="true"     # Enable git Config install
 INST_VIM="true"     # Enable vim config install
 INST_ZSH="true"     # Enable zsh config install
 INST_HTOP="true"    # Enable htop config install
-INST_BASH="true"    # Enable bash config install
+INST_BASH="false"   # Enable bash config install
 INST_BSPWM="false"  # Enable Lemonbuddy config install
 # TODO Make params
 
@@ -141,13 +139,16 @@ installZSH ()
         git clone https://github.com/robbyrussell/oh-my-zsh.git $OHMY_PATH
     fi
     if [ ! -e $MIN_PATH/zsh/custom/themes/powerlevel9k ]; then
-        git clone https://github.com/bhilburn/powerlevel9k.git $MIN_PATH/zsh/custom/themes/powerlevel9k
+        git clone https://github.com/bhilburn/powerlevel9k.git \
+          $MIN_PATH/zsh/custom/themes/powerlevel9k
     fi
     if [ ! -e $MIN_PATH/zsh/custom/plugins/zsh-autosuggestions ]; then
-        git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+        git clone https://github.com/zsh-users/zsh-autosuggestions.git \
+          $ZSH_CUSTOM/plugins/zsh-autosuggestions
     fi
     if [ ! -e $MIN_PATH/zsh/custom/plugins/zsh-syntax-highlighting ]; then
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+          $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
     fi
 
     touch ~/.aliases.local > /dev/null 2>&1
