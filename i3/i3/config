@@ -17,7 +17,7 @@ font pango:roboto 10
 ###################
 ## WINDOW LAYOUT ##
 ###################
-workspace_layout tabbed
+# workspace_layout tabbed
 
 #################
 ## KEY BINDING ##
@@ -222,7 +222,7 @@ client.background           #073642
 exec compton -cb
 exec nitrogen --restore
 exec $HOME/.i3/lock2.sh -u $HOME/.i3/wallpaper
-exec xautolock -time 15 -locker '~/.i3/lock2.sh -l dimblur' &
+exec xautolock -time 95 -locker '~/.i3/lock2.sh -l dimblur' &
 
 # exec slack
 exec dropbox
