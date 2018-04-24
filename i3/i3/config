@@ -223,6 +223,7 @@ exec compton -cb
 exec nitrogen --restore
 exec $HOME/.i3/lock2.sh -u $HOME/.i3/wallpaper
 exec xautolock -time 95 -locker '~/.i3/lock2.sh -l dimblur' &
+exec nm-applet
 
 # exec slack
 exec dropbox
