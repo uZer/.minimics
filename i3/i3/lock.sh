@@ -1,10 +1,11 @@
 #!/bin/bash
 IMG=~/.lockbg.png
-if [ $# -eq 0 ];
-then MSG="youenn.piolet@osones.com\n+336 4926 4926"
-else MSG="$1"
+if [ $# -eq 0 ]; then
+  MSG="youenn.piolet@osones.com\n+336 4926 4926"
+else
+  MSG="$1"
 fi
-FONT='Roboto'
+FONT='RobotoMono'
 
 BLURTYPE="8x8"
 TEXTCOLOR=ffffff00

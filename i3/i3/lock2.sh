@@ -41,16 +41,19 @@ lock() {
 	background=00000000
 	foreground=ffffffff
 	i3lock \
-		-n -i "$1" \
-		--timepos="x-90:h-ch+30" \
-		--datepos="tx+24:ty+25" \
-		--clock --datestr "Type password to unlock..." \
+		-t -i "$1" \
+		# --timepos="x-90:h-ch+30" \
+		# --datepos="tx+24:ty+25" \
+    --timepos='110:h-70' \
+    --datepos='135:h-45' \
+		--clock --datestr "Cast a spell to unlock..." \
 		--insidecolor=$background --ringcolor=$foreground --line-uses-inside \
 		--keyhlcolor=$letterEnteredColor --bshlcolor=$letterRemovedColor --separatorcolor=$background \
 		--insidevercolor=$passwordCorrect --insidewrongcolor=$passwordIncorrect \
 		--ringvercolor=$foreground --ringwrongcolor=$foreground --indpos="x+280:h-70" \
 		--radius=20 --ring-width=4 --veriftext="" --wrongtext="" \
-		--textcolor="$foreground" --timecolor="$foreground" --datecolor="$foreground"
+		--verifcolor="$foreground" --timecolor="$foreground" --datecolor="$foreground" \
+    --noinputtext="" --force-clock
 }
 
 postlock() {
