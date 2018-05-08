@@ -53,30 +53,40 @@ alias chmog='chmod'
 
 wiki() { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
 
+# Please export these variables in ~/.aliases.local file
+# ROLESKEL_PATH: a path to an actual ansible role skel
+# GIT_EMAIL: your git email
+# GIT_USERNAME: your git username
+# GIT_SERVER: the remote of your ansible projects
+# GIT_SERVER_URL: the URL to create a repository for your projet
 export ROLESKEL="~/ansible/ansible-skel-role"
 mkrole() {
-    if [ $# -eq 1 ]; then
-        ansible-galaxy init --role-skeleton=$ROLESKEL $1
-        cd $1
-        git init
-    else
-        echo "Please just add a role name."
-    fi
+  if [ $# -eq 1 ]; then
+    ansible-galaxy init \
+      --role-skeleton=${ROLESKEL_PATH:-"~/.minimics/ansible/ansible-role-skel"} $1
+    cd $1
+    # rm -rf .git/
+    git init
+    git config user.email ${GIT_EMAIL}
+    git config user.name ${GIT_USERNAME}
+    git add *
+    git commit -am 'feat(template): add initial role files'
+    git remote
+    git remote add origin \
+      ${GIT_SSH_USERNAME:-git}@${GIT_SERVER:-github.com}:${GIT_USERNAME}/$1.git
+    echo "Please add $1 project here: ${GIT_SERVER_URL:-github.com}"
+    echo "When you're done, use 'git push'"
+  else
+    echo "Please add a role name."
+  fi
 }
 
 #echo "Usage: ando <inventory> '<commands>' <hostname>"
 ando() {
-    cd ~/cpt-ansible.sys
-    ansible -k --ask-sudo-pass -m shell -i inventories/${1} ${3} -m shell -a ${2}
+  cd ~/cpt-ansible.sys
+  ansible -k --ask-sudo-pass -m shell -i inventories/${1} ${3} -m shell -a ${2}
 }
 
 reverse() {
-    echo -e "IP ADDRESS  \tPING\tREVERSE"; for i in $(nmap -sL -n $1 | grep 'Nmap scan report for' | awk '{ print $5 }'); do echo -e "$i\t$(fping -c1 -t 100 $i > /dev/null 2>&1 && echo -e "\e[32mOK\e[39m" || echo -e "\e[31mKO\e[39m")\t$(dig +short +answer -x $i)"; done
-}
-
-latest() {
-    git push origin -d latest
-    git tag -d latest
-    git tag latest -am "Latest"
-    git push
+  echo -e "IP ADDRESS  \tPING\tREVERSE"; for i in $(nmap -sL -n $1 | grep 'Nmap scan report for' | awk '{ print $5 }'); do echo -e "$i\t$(fping -c1 -t 100 $i > /dev/null 2>&1 && echo -e "\e[32mOK\e[39m" || echo -e "\e[31mKO\e[39m")\t$(dig +short +answer -x $i)"; done
 }

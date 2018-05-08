@@ -82,6 +82,8 @@ installGit ()
         email       = $GIT_EMAIL  "
     git config --global user.name "$GIT_LOGIN"
     git config --global user.email "$GIT_EMAIL"
+    echo "export GIT_USERNAME=${GIT_LOGIN}" >> ~/.aliases.local
+    echo "export GIT_EMAIL=${GIT_EMAIL}" >> ~/.aliases.local
     echo ""
     return
 }
@@ -131,6 +133,7 @@ installI3 ()
 installZSH ()
 {
     echo "[ZSH]"
+    ZSH_CUSTOM=~/.oh-my-zsh/custom
 
     echo "  Linking zsh configuration files..."
     makelink $MIN_PATH/zsh/zshrc $HOME/.zshrc
