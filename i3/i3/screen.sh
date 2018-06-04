@@ -1,44 +1,98 @@
-# Also edit /usr/share/sddm/scripts/Xsetup
 #!/bin/sh
+# Also edit /usr/share/sddm/scripts/Xsetup
+# Type xrandr to get correct screen names
 intern=eDP1
 extern=HDMI2
-osones1=DP2-1
-osones2=DP2-2
+dockscreen1=DP2-1
+dockscreen2=DP2-2
+dockscreen3=DP2-3
+# Screen position on the desk, left to right:
+# HDMI: intern - extern - synergy server screen
+# DOCK: dockscreen2 - (dockscreen1 OR dockscreen3) - intern
+# It seems that dockscreen2 is always here and there is no 1 + 3 situation
 
+# HDMI #########################################################################
+# 2 screens, internal + HDMI
 if xrandr | grep "$extern connected"; then
     xrandr \
       --output "$intern" --auto \
       --output "$extern" --auto --right-of "$intern" \
-      --output "$osones1" --off \
-      --output "$osones2" --off
-elif xrandr | grep "$osones1 connected" && xrandr | grep "$osones2 disconnected"; then
-    xrandr \
-      --output "$intern" --auto \
-      --output "$extern" --off \
-      --output "$osones1" --auto --left-of "$intern" \
-      --output "$osones2" --off
+      --output "$dockscreen1" --off \
+      --output "$dockscreen2" --off \
+      --output "$dockscreen3" --off
+    killall synergyc > /dev/null 2>&1
+    synergyc -n ovoid synergyserver.local
 
-elif xrandr | grep "$osones2 connected" && xrandr | grep "$osones1 disconnected"; then
+# LENOVO DOCK ##################################################################
+# 2 screens, internal + DP2-1
+elif xrandr | grep "$dockscreen1 connected" \
+  && xrandr | grep "$dockscreen2 disconnected" \
+  && xrandr | grep "$dockscreen3 disconnected"; then
     xrandr \
       --output "$intern" --auto \
       --output "$extern" --off \
-      --output "$osones1" --off \
-      --output "$osones2" --auto --left-of "$intern"
-elif xrandr | grep "$osones1 connected" && xrandr | grep "$osones2 connected"; then
+      --output "$dockscreen1" --auto --left-of "$intern" \
+      --output "$dockscreen2" --off
+      --output "$dockscreen3" --off
+    killall synergyc > /dev/null 2>&1
+
+# 2 screens, internal + DP2-2
+elif xrandr | grep "$dockscreen1 disconnected" \
+  && xrandr | grep "$dockscreen2 connected" \
+  && xrandr | grep "$dockscreen3 disconnected"; then
     xrandr \
       --output "$intern" --auto \
       --output "$extern" --off \
-      --output "$osones1" --auto --left-of "$intern" \
-      --output "$osones2" --auto --left-of "$osones1"
+      --output "$dockscreen1" --off \
+      --output "$dockscreen2" --auto --left-of "$intern" \
+      --output "$dockscreen3" --off
+    killall synergyc > /dev/null 2>&1
+
+# 2 screens, internal + DP2-3
+elif xrandr | grep "$dockscreen1 disconnected" \
+  && xrandr | grep "$dockscreen2 disconnected" \
+  && xrandr | grep "$dockscreen3 connected"; then
+    xrandr \
+      --output "$intern" --auto \
+      --output "$extern" --off \
+      --output "$dockscreen1" --off \
+      --output "$dockscreen2" --off \
+      --output "$dockscreen3" --auto --left-of "$intern"
+    killall synergyc > /dev/null 2>&1
+
+# 3 screens, internal + DP2-1 + DP2-2
+elif xrandr | grep "$dockscreen1 connected" \
+  && xrandr | grep "$dockscreen2 connected" \
+  && xrandr | grep "$dockscreen3 disconnected"; then
+    xrandr \
+      --output "$intern" --auto \
+      --output "$extern" --off \
+      --output "$dockscreen1" --auto --left-of "$intern" \
+      --output "$dockscreen2" --auto --left-of "$dockscreen1" \
+      --output "$dockscreen3" --off
+    killall synergyc > /dev/null 2>&1
+
+# 3 screens, internal + DP2-2 + DP2-3
+elif xrandr | grep "$dockscreen1 disconnected" \
+  && xrandr | grep "$dockscreen2 connected" \
+  && xrandr | grep "$dockscreen3 connected"; then
+    xrandr \
+      --output "$intern" --auto \
+      --output "$extern" --off \
+      --output "$dockscreen1" --off \
+      --output "$dockscreen2" --auto --left-of "$dockscreen3" \
+      --output "$dockscreen3" --auto --left-of "$intern"
+    killall synergyc > /dev/null 2>&1
+
+# JUST LAPTOP ##################################################################
 else
     xrandr \
       --output "$intern" --auto \
       --output "$extern" --off \
-      --output "$osones1" --off \
-      --output "$osones2" --off
+      --output "$dockscreen1" --off \
+      --output "$dockscreen2" --off \
+      --output "$dockscreen3" --off
+    killall synergyc > /dev/null 2>&1
 fi
 
 nitrogen --restore 2>&1 > /dev/null
-
-# Prepare lockscreen
-# ./lock2.sh -u wallpaper
