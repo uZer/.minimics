@@ -131,12 +131,12 @@ for_window [class="^.*"] border pixel 0
 for_window [class="^Slack$"] 13:
 for_window [class="^Rocket$"] 13:
 for_window [class="^Atom$"] 12:
-for_window [class="Spotify"] 11:
+for_window [class="^Spotify$"] 11:
 for_window [class="feh"] floating enable
 assign [class="^Slack$"] 13:
 assign [class="^Rocket$"] 13:
 assign [class="^Atom$"] 12:
-assign [class="Spotify"] 11:
+assign [class="^spotify$"] 11:
 
 
 # reload the configuration file

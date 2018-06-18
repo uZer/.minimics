@@ -48,7 +48,7 @@ alias aloc='vim ~/.aliases.local'
 
 # YOLO AND STUFF FOR YOLO PEOPLE
 alias yolo='git commit -am "DEAL WITH IT" && git push origin master'
-alias stfu='sudo shutdown -h now'
+alias stfu='shutdown -h now'
 alias chmog='chmod'
 
 wiki() { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }

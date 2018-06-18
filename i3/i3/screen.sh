@@ -8,8 +8,7 @@ dockscreen2=DP2-2
 dockscreen3=DP2-3
 # Screen position on the desk, left to right:
 # HDMI: intern - extern - synergy server screen
-# DOCK: dockscreen2 - (dockscreen1 OR dockscreen3) - intern
-# It seems that dockscreen2 is always here and there is no 1 + 3 situation
+# DOCK: dockscreen1 - dockscreen2 - dockscreen3 - intern
 
 # HDMI #########################################################################
 # 2 screens, internal + HDMI
@@ -64,6 +63,7 @@ elif xrandr | grep "$dockscreen1 disconnected" \
 elif xrandr | grep "$dockscreen1 connected" \
   && xrandr | grep "$dockscreen2 connected" \
   && xrandr | grep "$dockscreen3 disconnected"; then
+    echo "3 screens, internal + DP2-1 + DP2-2"
     xrandr \
       --output "$intern" --auto \
       --output "$extern" --off \
@@ -76,12 +76,26 @@ elif xrandr | grep "$dockscreen1 connected" \
 elif xrandr | grep "$dockscreen1 disconnected" \
   && xrandr | grep "$dockscreen2 connected" \
   && xrandr | grep "$dockscreen3 connected"; then
+    echo "3 screens, internal + DP2-2 + DP2-3"
     xrandr \
       --output "$intern" --auto \
       --output "$extern" --off \
       --output "$dockscreen1" --off \
       --output "$dockscreen2" --auto --left-of "$dockscreen3" \
       --output "$dockscreen3" --auto --left-of "$intern"
+    killall synergyc > /dev/null 2>&1
+
+# 3 screens, internal + DP2-1 + DP2-3
+elif xrandr | grep "$dockscreen1 connected" \
+  && xrandr | grep "$dockscreen2 disconnected" \
+  && xrandr | grep "$dockscreen3 connected"; then
+    echo "3 screens, internal + DP2-1 + DP2-3"
+    xrandr \
+      --output "$intern" --auto \
+      --output "$extern" --off \
+      --output "$dockscreen3" --auto --left-of "$intern" \
+      --output "$dockscreen1" --auto --left-of "$dockscreen3" \
+      --output "$dockscreen2" --off
     killall synergyc > /dev/null 2>&1
 
 # JUST LAPTOP ##################################################################
