@@ -73,8 +73,8 @@ mkrole() {
     git commit -am 'feat(template): add initial role files'
     git remote
     git remote add origin \
-      ${GIT_SSH_USERNAME:-git}@${GIT_SERVER:-github.com}:${GIT_USERNAME}/$1.git
-    echo "Please add $1 project here: ${GIT_SERVER_URL:-github.com}"
+      ${GIT_SSH_USERNAME:-git}@${GIT_SERVER:-github.com}:${GIT_USERNAME}/ansible-role-$1.git
+    echo "Please add $1 project here: ${GIT_SERVER_URL:-https://github.com/new}"
     echo "When you're done, use 'git push'"
   else
     echo "Please add a role name."
