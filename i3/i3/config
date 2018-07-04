@@ -13,6 +13,7 @@ floating_modifier $mod
 # Font
 # font pango:pragmataproforpowerline 9
 font pango:roboto 10
+# font pango:hurmitnerdfontmedium 9
 
 ###################
 ## WINDOW LAYOUT ##
@@ -140,14 +141,13 @@ assign [class="^Rocket$"] 13:
 assign [class="^Atom$"] 12:
 assign [class="^spotify$"] 11:
 
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec pkill i3
+bindsym $mod+Shift+e exec i3-msg exit
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
@@ -221,7 +221,7 @@ client.focused_inactive     #101010     #002b36     #586e75    #586e75
 client.unfocused            #101010     #002b36     #586e75    #586e75
 client.urgent               #cd989a     #cb4b16     #586e75    #586e75
 client.background           #073642
-#client.placeholder      #000000 #0c0c0c #ffffff #002b36
+# client.placeholder      #000000 #0c0c0c #ffffff #002b36
 
 # Wallpaper
 #exec --no-startup-id feh --bg-fill ~/.minimics/i3/i3/wallpaper
