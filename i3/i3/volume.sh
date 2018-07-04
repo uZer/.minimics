@@ -15,9 +15,8 @@ function is_mute {
 
 function send_notification {
   volume=`get_volume`
-  # bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
-  bar=$(seq -s "█" $(($volume / 5)) | sed 's/[0-9]//g')█
-  dunstify -i notification-audio-volume-high -r 2593 -a Volume "$volume $bar"
+  bar="$(seq -s "█" 0 $(($volume / 10)) | sed 's/[0-9]//g')"
+  dunstify -i notification-audio-volume-high -r 2593 -a Volume "$volume   $bar"
 }
 
 case $1 in
@@ -37,7 +36,7 @@ case $1 in
     # amixer -D pulse set Master 1+ toggle > /dev/null
     pactl set-sink-mute 0 toggle
     if is_mute ; then
-      dunstify -i notification-audio-volume-muted -r 2593 -a Volume-mute "volume.mute()"
+      dunstify -i notification-audio-volume-muted -r 2593 -a Volume-mute "mute  "
     else
       send_notification
     fi

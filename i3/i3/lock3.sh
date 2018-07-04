@@ -26,7 +26,7 @@ while true ; do
         -h|--help)
             printf "Usage: $(basename $0) [options]\n\n$OPTIONS\n\n" ; exit 1 ;;
         -g|--greyscale) HUE=(-level 0%,100%,0.6 -set colorspace Gray -separate -average) ; shift ;;
-        -p|--pixelate) EFFECT=(-scale 10% -scale 1000%) ; shift ;;
+        -p|--pixelate) EFFECT=(-scale 1% -scale 10000%) ; shift ;;
         -f|--font)
             case "$2" in
                 "") shift 2 ;;

@@ -1,5 +1,6 @@
 [global]
     alignment = right
+    shrink = true
     markup = full
     plain_text = no
     bounce_freq = 0
@@ -88,11 +89,12 @@
 [Volume]
     appname = Volume
     timeout = 2
-    foreground = "#859900"
-    format = "<b><i><tt>%s</tt></i></b>"
+    #foreground = "#859900"
+    foreground = "#ffffff"
+    format = "<b><i><tt><span font="Roboto 12">%s </span></tt></i></b>"
 
 [Volume-mute]
     appname = Volume-mute
     timeout = 2
     foreground = "#586e75"
-    format = "<b><i><tt>%s</tt></i></b>"
+    format = "<b><i><tt><span font="Roboto 12">%s </span></tt></i></b>"
