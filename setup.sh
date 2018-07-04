@@ -122,6 +122,7 @@ installI3 ()
     makelink $MIN_PATH/i3/i3/ $HOME/.i3
     makelink $MIN_PATH/i3/i3status.conf $HOME/.i3status.conf
     makelink $MIN_PATH/Xresources/Xresources $HOME/.Xresources
+    makelink $MIN_PATH/compton/compton.conf $HOME/.config/compton.conf
 
     echo ""
     return
