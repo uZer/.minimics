@@ -51,7 +51,9 @@ alias yolo='git commit -am "DEAL WITH IT" && git push origin master'
 alias stfu='shutdown -h now'
 alias chmog='chmod'
 
-wiki() { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
+wiki()  { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
+weather() { curl "wttr.in/${1:-paris}?0pq&lang=fr" }
+alias meteo=weather
 
 # Please export these variables in ~/.aliases.local file
 # ROLESKEL_PATH: a path to an actual ansible role skel

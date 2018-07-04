@@ -37,7 +37,6 @@ bindsym $mod+d          exec --no-startup-id dmenu_run         -p '>' -fn 'robot
 bindsym $mod+BackSpace  exec --no-startup-id passmenu   --type -p '#' -fn 'roboto-mono-12' -i -sb '#b58900' -nb '#002b36' -sf '#002b36' -nf '#b58900' -x 900 -y 150 -w 400 -l 20 -dim 0.6
 bindsym Print           exec --no-startup-id deepin-screenshot
 bindsym $mod+Tab        exec --no-startup-id rofi -show
-# bindsym $mod+Tab exec rofi -now
 
 # change focus
 bindsym $mod+h focus left
