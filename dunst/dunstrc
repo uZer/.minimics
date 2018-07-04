@@ -84,3 +84,15 @@
     foreground = "#6c71c4"
     format = "<b><i><tt>%s</tt></i></b>\n<span foreground='#fdf6e3'>%b</span>"
     timeout = 6
+
+[Volume]
+    appname = Volume
+    timeout = 1
+    foreground = "#859900"
+    format = "<b><i><tt>%s</tt></i></b>"
+
+[Volume-mute]
+    appname = Volume-mute
+    timeout = 1
+    foreground = "#586e75"
+    format = "<b><i><tt>%s</tt></i></b>"
