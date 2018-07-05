@@ -55,6 +55,7 @@ wiki()  { if [ "${1}" ]; then dig +short "${1}".wp.dg.cx TXT; fi }
 weather() { curl "wttr.in/${1:-paris}?0pq&lang=fr" }
 alias meteo=weather
 
+getcert() { echo | openssl s_client -showcerts -servername ${1} -connect ${1}:443 2>/dev/null | openssl x509 -inform pem -noout -text }
 # Please export these variables in ~/.aliases.local file
 # ROLESKEL_PATH: a path to an actual ansible role skel
 # GIT_EMAIL: your git email
@@ -82,7 +83,6 @@ mkrole() {
     echo "Please add a role name."
   fi
 }
-
 #echo "Usage: ando <inventory> '<commands>' <hostname>"
 ando() {
   cd ~/cpt-ansible.sys
