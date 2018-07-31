@@ -8,7 +8,7 @@
     dmenu = /usr/bin/dmenu -p dunst
     follow = mouse
     font = roboto 10
-    format = "<b><i><tt><span foreground='#6c71c4'>%s</span></tt></i></b>\n%b"
+    format = <b><i><tt><span foreground="#6c71c4">%s</span></tt></i></b>\n%b
     frame_width = 3
     frame_color = "#002b36"
     geometry = "320x10-6-6"
@@ -54,12 +54,12 @@
 
 [Discord]
     appname = Discord Canary
-    format = "<b>%s</b>\n%b"
+    format = <b>%s</b>\n%b
     new_icon = Discord
 
 [Spotify]
     appname = Spotify
-    format = "<b><i><tt>spotify.nowPlaying()</tt></i></b>\n<span foreground='#fdf6e3'>%s</span>, by\n<span foreground='#fdf6e3'>%b</span>"
+    format = <b><i><tt>spotify.nowPlaying()</tt></i></b>\n<span foreground="#fdf6e3">%s</span>, by\n<span foreground="#fdf6e3">%b</span>
     timeout = 10
     background = "#002b36"
     foreground = "#859900"
@@ -67,7 +67,7 @@
 [Slack]
     appname = Slack
     new_icon = slack
-    format = "<b><i><tt>slack.newMessage()</tt></i></b>\n<span foreground='#fdf6e3'>%s</span>"
+    format = <b><i><tt>slack.newMessage()</tt></i></b>\n<span foreground="#fdf6e3">%s</span>
     timeout = 0
     background = "#002b36"
     foreground = "#6c71c4"
@@ -76,14 +76,14 @@
     body = "*Picture has*"
     new_icon = media-floppy
     background = "#268bd2"
-    format = "<b><i><tt>gotcha!</tt></i></b>\n<span foreground='#fdf6e3'>%b</span>"
+    format = <b><i><tt>gotcha!</tt></i></b>\n<span foreground="#fdf6e3">%b</span>
     timeout = 6
 
 [Wi-Fi]
     body = "*Wi-Fi*"
     new_icon = network-wireless
     foreground = "#6c71c4"
-    format = "<b><i><tt>%s</tt></i></b>\n<span foreground='#fdf6e3'>%b</span>"
+    format = <b><i><tt>%s</tt></i></b>\n<span foreground="#fdf6e3">%b</span>
     timeout = 6
 
 [Volume]
@@ -91,10 +91,10 @@
     timeout = 2
     #foreground = "#859900"
     foreground = "#ffffff"
-    format = "<b><i><tt><span font="Roboto 12">%s </span></tt></i></b>"
+    format = <b><i><tt><span font="Roboto 12">%s </span></tt></i></b>
 
 [Volume-mute]
     appname = Volume-mute
     timeout = 2
     foreground = "#586e75"
-    format = "<b><i><tt><span font="Roboto 12">%s </span></tt></i></b>"
+    format = <b><i><tt><span font="Roboto 12">%s </span></tt></i></b>

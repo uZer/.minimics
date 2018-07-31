@@ -87,7 +87,8 @@
     fsckobjects = true
 
 [user]
-	name = uZer
-	email = piolet.y@gmail.com
+	name = Youenn Piolet
+  email = youenn.piolet@osones.com
+
 [gpg]
 	program = /usr/bin/gpg
