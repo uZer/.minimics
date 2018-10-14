@@ -12,7 +12,7 @@ POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(\
-  status background_jobs rbenv virtualenv nvm rvm dir_writable root_indicator)
+  status background_jobs rbenv kubecontext virtualenv nvm rvm dir_writable root_indicator)
 POWERLEVEL9K_STATUS_ERROR_BACKGROUND="black"
 POWERLEVEL9K_STATUS_ERROR_FOREGROUND="red"
 POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="clear"
@@ -48,9 +48,15 @@ DISABLE_UPDATE_PROMPT="true"
 # DISABLE_CORRECTION="true"
 # CASE_SENSITIVE="true"
 
+# ALIASES
+export PATH="$HOME/bin:$PATH"
+
+source $MINIMICS/aliases/aliases
+source $HOME/.aliases.local
+
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(vundle nmap screen theme taskwarrior cp sudo history systemd \
-         docker docker-compose iwhois git node npm z kubectl helm terraform \
+         docker docker-compose iwhois git node npm z helm kubectl terraform \
          ssh-agent \
          # zsh-autosuggestions \
          zsh-syntax-highlighting \
@@ -58,10 +64,6 @@ plugins=(vundle nmap screen theme taskwarrior cp sudo history systemd \
 export ZSH_AUTOSUGGEST_USE_ASY=asyncmode
 source $ZSH/oh-my-zsh.sh
 source $ZSH/plugins/z/z.sh
-
-# ALIASES
-source $MINIMICS/aliases/aliases
-source $HOME/.aliases.local
 
 # ZSH PACKS
 autoload -U zmv
@@ -71,4 +73,3 @@ case $TERM in
         ;;
 esac
 
-export PATH="$HOME/bin:$PATH"

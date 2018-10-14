@@ -29,8 +29,8 @@ alias .8='cd ../../../../../../../../'
 
 # DU
 alias ducks='du -ckhs * | sort -hr'
-alias coin='du -cks * | sort -rn'
-alias coincoin='du -ckhs * | sort -hr'
+alias coin='du -cks *  | sort -rn | head -n 10'
+alias coincoin='du -ckhs *  | sort -hr | head -n 10'
 alias mmv='noglob zmv -W'
 
 # NETWORK
@@ -117,4 +117,12 @@ green     #859900  green      64 #5f8700  60 -20  65   133 153   0    68 100  60
 
 EOF
 
+}
+
+envtosecret() {
+  grep -e '^[_a-zA-Z]\+=.\+$' $1 | awk -F '=' '{ "echo -n '\''"$2"'\'' | base64 -w0 | xargs" | getline var1 ; print $1": "var1 }'
+}
+
+secrettoenv() {
+  grep -e '^ *[_a-zA-Z]\+: [=0-9A-Za-z]\+$' $1 | awk '{ "echo -n "$2" | base64 -d" | getline var1; print substr($1, 1, length($1)-1)"="var1 }'
 }

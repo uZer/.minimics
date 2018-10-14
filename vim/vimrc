@@ -40,6 +40,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'Yggdroot/indentLine'
 " Plugin 'chriskempson/base16-vim'
 " Plugin 'tomasr/molokai'
 " Plugin 'nanotech/jellybeans.vim'
@@ -72,6 +73,7 @@ Plugin 'pearofducks/ansible-vim'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'cespare/vim-toml'
 Plugin 'hashivim/vim-terraform'
+Plugin 'PProvost/vim-ps1'
 " Plugin 'hashivim/vim-consul'
 " Plugin 'hashivim/vim-nomadproject'
 " Plugin 'hashivim/vim-ottoproject'
@@ -101,6 +103,8 @@ if has_vundle == 0
     :qa
 endif
 
+" let g:indentLine_char = ''
+let g:indentLine_char = '▏'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors, terminal & Visual

@@ -15,12 +15,12 @@ dockscreen3=DP2-3
 if xrandr | grep "$extern connected"; then
     xrandr \
       --output "$intern" --auto \
-      --output "$extern" --auto --left-of "$intern" \
+      --output "$extern" --auto --left-of "$intern"  \
       --output "$dockscreen1" --off \
       --output "$dockscreen2" --off \
       --output "$dockscreen3" --off
-    killall synergyc > /dev/null 2>&1
-    synergyc -n ovoid synergyserver.local
+    # killall synergyc > /dev/null 2>&1
+    # synergyc -n ovoid synergyserver.local
 
 # LENOVO DOCK ##################################################################
 # 2 screens, internal + DP2-1
@@ -33,7 +33,7 @@ elif xrandr | grep "$dockscreen1 connected" \
       --output "$dockscreen1" --auto --left-of "$intern" \
       --output "$dockscreen2" --off
       --output "$dockscreen3" --off
-    killall synergyc > /dev/null 2>&1
+    # killall synergyc > /dev/null 2>&1
 
 # 2 screens, internal + DP2-2
 elif xrandr | grep "$dockscreen1 disconnected" \
@@ -45,7 +45,7 @@ elif xrandr | grep "$dockscreen1 disconnected" \
       --output "$dockscreen1" --off \
       --output "$dockscreen2" --auto --left-of "$intern" \
       --output "$dockscreen3" --off
-    killall synergyc > /dev/null 2>&1
+    # killall synergyc > /dev/null 2>&1
 
 # 2 screens, internal + DP2-3
 elif xrandr | grep "$dockscreen1 disconnected" \
@@ -57,7 +57,7 @@ elif xrandr | grep "$dockscreen1 disconnected" \
       --output "$dockscreen1" --off \
       --output "$dockscreen2" --off \
       --output "$dockscreen3" --auto --left-of "$intern"
-    killall synergyc > /dev/null 2>&1
+    # killall synergyc > /dev/null 2>&1
 
 # 3 screens, internal + DP2-1 + DP2-2
 elif xrandr | grep "$dockscreen1 connected" \
@@ -70,7 +70,7 @@ elif xrandr | grep "$dockscreen1 connected" \
       --output "$dockscreen1" --auto --left-of "$intern" \
       --output "$dockscreen2" --auto --left-of "$dockscreen1" \
       --output "$dockscreen3" --off
-    killall synergyc > /dev/null 2>&1
+    # killall synergyc > /dev/null 2>&1
 
 # 3 screens, internal + DP2-2 + DP2-3
 elif xrandr | grep "$dockscreen1 disconnected" \
@@ -83,7 +83,7 @@ elif xrandr | grep "$dockscreen1 disconnected" \
       --output "$dockscreen1" --off \
       --output "$dockscreen2" --auto --left-of "$dockscreen3" \
       --output "$dockscreen3" --auto --left-of "$intern"
-    killall synergyc > /dev/null 2>&1
+    # killall synergyc > /dev/null 2>&1
 
 # 3 screens, internal + DP2-1 + DP2-3
 elif xrandr | grep "$dockscreen1 connected" \
@@ -96,7 +96,7 @@ elif xrandr | grep "$dockscreen1 connected" \
       --output "$dockscreen3" --auto --left-of "$intern" \
       --output "$dockscreen1" --auto --left-of "$dockscreen3" \
       --output "$dockscreen2" --off
-    killall synergyc > /dev/null 2>&1
+    # killall synergyc > /dev/null 2>&1
 
 # JUST LAPTOP ##################################################################
 else
@@ -106,7 +106,7 @@ else
       --output "$dockscreen1" --off \
       --output "$dockscreen2" --off \
       --output "$dockscreen3" --off
-    killall synergyc > /dev/null 2>&1
+    # killall synergyc > /dev/null 2>&1
 fi
 
 nitrogen --restore 2>&1 > /dev/null
