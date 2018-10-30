@@ -60,16 +60,20 @@ plugins=(vundle nmap screen theme taskwarrior cp sudo history systemd \
          ssh-agent \
          # zsh-autosuggestions \
          zsh-syntax-highlighting \
+         # zsh-navigation-tools \
 )
-export ZSH_AUTOSUGGEST_USE_ASY=asyncmode
+# export ZSH_AUTOSUGGEST_USE_ASY=asyncmode
+# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+# bindkey '^ ' autosuggest-accept
+
 source $ZSH/oh-my-zsh.sh
 source $ZSH/plugins/z/z.sh
 
 # ZSH PACKS
 autoload -U zmv
-case $TERM in
-    xterm*)
-        precmd () {print -Pn "\e]0;%n@%m: %~\a"}
-        ;;
-esac
-
+#case $TERM in
+#    xterm*)
+#        precmd () {print -Pn "\e]0;%n@%m: %~\a"}
+#        ;;
+#esac
+# bindkey '^i' autosuggest-toggle
