@@ -199,7 +199,7 @@ bar {
     position top
     workspace_buttons yes
 
-    status_command i3status | ~/ypi.scripts/show_argent.sh | ~/ypi.scripts/pystatus.py
+    status_command i3status -t | ~/ypi.scripts/show_argent.sh | ~/ypi.scripts/pystatus.py
     separator_symbol "  "
     colors {
       background          #002b36
