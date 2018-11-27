@@ -83,9 +83,10 @@
 [transfert]
     fsckobjects = true
 [user]
-    name = Youenn Piolet
-    email = youenn.piolet@osones.com
     signingkey = 0BB86EA4B04B1A568DD15FBC6534FBBC86B7DB4D
+	  name = uZer
+    email = piolet.y@gmail.com
+
 [gpg]
     program = /usr/bin/gpg
 [commit]
