@@ -71,6 +71,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'parkr/vim-jekyll'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'pearofducks/ansible-vim'
+Plugin 'rodjek/vim-puppet'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'cespare/vim-toml'
 Plugin 'hashivim/vim-terraform'
@@ -110,8 +111,6 @@ let g:indentLine_char = '▏'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors, terminal & Visual
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable mouse support
-" set mouse=a
 syn on
 if (&term =~ "xterm") || (&term =~ "screen")
     set t_Co=256
@@ -390,6 +389,12 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
+" Turn on/off mouse
+" Enable mouse support
+" Enable mouse support
+" Enable mouse support
+map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=nv"<CR>
+
 " VIM GREP
 " When you press gv you vimgrep after the selected text
 vnoremap <silent> gv :call VisualSelection('gv')<CR>
@@ -403,7 +408,7 @@ map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+noremap <Leader>M mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scripbble
 map <leader>q :e ~/buffer<cr>
