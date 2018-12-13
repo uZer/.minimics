@@ -15,7 +15,7 @@ dockscreen3=DP2-3
 if xrandr | grep "$extern connected"; then
     xrandr \
       --output "$intern" --auto \
-      --output "$extern" --auto --left-of "$intern"  \
+      --output "$extern" --auto --above "$intern"  \
       --output "$dockscreen1" --off \
       --output "$dockscreen2" --off \
       --output "$dockscreen3" --off

@@ -24,13 +24,13 @@ case $1 in
     # amixer -D pulse set Master on > /dev/null
     # amixer -D pulse sset Master 5%+ > /dev/null
     pactl set-sink-volume 0 +5%
-    # send_notification
+    send_notification
     ;;
   down)
     # amixer -D pulse set Master on > /dev/null
     # amixer -D pulse sset Master 5%- > /dev/null
     pactl set-sink-volume 0 -5%
-    # send_notification
+    send_notification
     ;;
   mute)
     # amixer -D pulse set Master 1+ toggle > /dev/null

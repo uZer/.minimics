@@ -173,14 +173,14 @@ bindsym XF86Display exec ~/.i3/screen.sh
 # Pulse Audio controls
 # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 # bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+# bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute 0 toggle
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.i3/volume.sh up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.i3/volume.sh down
-bindsym XF86AudioMute exec --no-startup-id ~/.i3/volume.sh mute
+bindsym XF86AudioMute        exec --no-startup-id ~/.i3/volume.sh mute
 
-bindsym XF86AudioPrev exec --no-startup-id sp prev
-bindsym XF86AudioNext exec --no-startup-id sp next
-bindsym XF86AudioPlay exec --no-startup-id sp play
+bindsym XF86AudioPrev        exec --no-startup-id sp prev
+bindsym XF86AudioNext        exec --no-startup-id sp next
+bindsym XF86AudioPlay        exec --no-startup-id sp play
 
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -195,22 +195,25 @@ bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 bar {
     mode dock
     strip_workspace_numbers yes
+    tray_output primary
+    tray_padding 2
 
     position top
     workspace_buttons yes
 
-    status_command i3status -t | ~/ypi.scripts/show_argent.sh | ~/ypi.scripts/pystatus.py
+    i3bar_command i3bar
+    status_command i3status | ~/ypi.scripts/show_argent.sh | ~/ypi.scripts/pystatus.py
     separator_symbol "  "
     colors {
       background          #002b36
-      statusline          #ffffff
+      statusline          #fdf6e3
       separator           #586e75
 
       #type              border      background  text
-      focused_workspace  #859900     #859900     #ffffff
-      active_workspace   #002b36     #002b36     #ffffff
-      inactive_workspace #002b36     #002b36     #ffffff
-      urgent_workspace   #002b36     #002b36     #ffffff
+      focused_workspace  #859900     #859900     #fdf6e3
+      active_workspace   #002b36     #002b36     #fdf6e3
+      inactive_workspace #002b36     #002b36     #fdf6e3
+      urgent_workspace   #002b36     #002b36     #fdf6e3
   }
 }
 
@@ -230,11 +233,12 @@ exec --no-startup-id nitrogen --restore
 exec --no-startup-id xautolock -time 95 -locker '$HOME/.i3/lock3.sh' -f Roboto-Mono-Light -g &
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift-gtk
-exec --no-startup-id blueman-applet
+exec --no-startup-id blueberry-tray
 exec --no-startup-id pasystray
 exec --no-startup-id volctl
 exec --no-startup-id dropbox
 exec --no-startup-id xfce4-clipman
+exec --no-startup-id davmail
 
-gaps outer 2
+gaps outer 8
 gaps inner 4

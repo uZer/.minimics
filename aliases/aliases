@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+# GIT
+br()  { git checkout -b ${1} && git branch --set-upstream-to=origin/${1} ${1} }
+gdd() { git --no-pager diff --stat ${1} }
+
 # GREP and FIND
 alias y='grep -Ri'
 alias n='grep -Rvi'
