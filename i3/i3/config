@@ -33,7 +33,7 @@ bindsym $mod+n exec nautilus -w
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d          exec --no-startup-id dmenu_run         -p '>' -fn 'roboto-mono-12' -i -sb '#2aa198' -nb '#073642' -sf '#073642' -nf '#2aa198'
+bindsym $mod+d          exec --no-startup-id dmenu_run         -p '>' -fn 'roboto-mono-12' -i -sb '#2aa198' -nb '#073642' -sf '#073642' -nf '#2aa198' -dim 0.2
 bindsym $mod+BackSpace  exec --no-startup-id passmenu   --type -p '#' -fn 'roboto-mono-12' -i -sb '#b58900' -nb '#002b36' -sf '#002b36' -nf '#b58900' -x 900 -y 150 -w 400 -l 20 -dim 0.6
 bindsym Print           exec --no-startup-id deepin-screenshot
 bindsym $mod+Tab        exec --no-startup-id rofi -show
@@ -136,6 +136,7 @@ for_window [class="^Atom$"] 12:
 for_window [class="^Spotify$"] 11:
 for_window [class="feh"] floating enable
 for_window [class="Nautilus"] floating enable
+for_window [class="qjackctl"] floating enable
 assign [class="^Slack$"] 13:
 assign [class="^Rocket$"] 13:
 assign [class="^Atom$"] 12:
@@ -201,11 +202,12 @@ bar {
     position top
     workspace_buttons yes
 
-    i3bar_command i3bar
+    i3bar_command i3bar -t
+    # height 22
     status_command i3status | ~/ypi.scripts/show_argent.sh | ~/ypi.scripts/pystatus.py
     separator_symbol "  "
     colors {
-      background          #002b36
+      background          #002b36e0
       statusline          #fdf6e3
       separator           #586e75
 
@@ -240,5 +242,6 @@ exec --no-startup-id dropbox
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id davmail
 
-gaps outer 8
-gaps inner 4
+gaps outer 2
+gaps inner 5
+new_window 1pixel
