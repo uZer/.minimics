@@ -84,10 +84,11 @@
     fsckobjects = true
 [user]
     signingkey = 0BB86EA4B04B1A568DD15FBC6534FBBC86B7DB4D
-	  name = uZer
+    name = uZer
     email = piolet.y@gmail.com
 
 [gpg]
     program = /usr/bin/gpg
-[commit]
-    gpgsign = true
+
+# [commit]
+#     gpgsign = true
