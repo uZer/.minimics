@@ -6,6 +6,10 @@ extern=HDMI2
 dockscreen1=DP2-1
 dockscreen2=DP2-2
 dockscreen3=DP2-3
+mode=split
+splitresolution="1366x768"
+# mode=clone
+
 # Screen position on the desk, left to right:
 # HDMI: intern - extern - synergy server screen
 # DOCK: dockscreen1 - dockscreen2 - dockscreen3 - intern
@@ -13,14 +17,24 @@ dockscreen3=DP2-3
 # HDMI #########################################################################
 # 2 screens, internal + HDMI
 if xrandr | grep "$extern connected"; then
+  if [ ${mode} == "clone" ]; then
     xrandr \
       --output "$intern" --auto \
-      --output "$extern" --auto --above "$intern"  \
+      --output "$extern" --auto --left-of "$intern" --same-as "$intern" --mode ${splitresolution} \
       --output "$dockscreen1" --off \
       --output "$dockscreen2" --off \
       --output "$dockscreen3" --off
+  else
+    xrandr \
+      --output "$intern" --auto \
+      --output "$extern" --auto --above "$intern" \
+      --output "$dockscreen1" --off \
+      --output "$dockscreen2" --off \
+      --output "$dockscreen3" --off
+  fi
     # killall synergyc > /dev/null 2>&1
     # synergyc -n ovoid synergyserver.local
+      # --output "$extern" --auto --left-of "$intern" --same-as "$intern" --mode 1920x1080 \
 
 # LENOVO DOCK ##################################################################
 # 2 screens, internal + DP2-1
