@@ -2,70 +2,70 @@
 # Scyn <remi.chaintron@gmail.com>
 # http://github.com/scyn-conf/zsh
 [core]
-    editor      = vim
+  editor      = vim
 
 [color]
-    ui          = true
-    branch      = auto
-    diff        = auto
-    status      = auto
+  ui          = true
+  branch      = auto
+  diff        = auto
+  status      = auto
 
 [color "branch"]
-    current     = blue reverse
-    local       = green
-    remote      = yellow
+  current     = blue reverse
+  local       = green
+  remote      = yellow
 [color "diff"]
-    meta        = blue
-    frag        = yellow
-    old         = red
-    new         = green
+  meta        = blue
+  frag        = yellow
+  old         = red
+  new         = green
 [color "status"]
-    added       = green
-    changed     = yellow
-    untracked   = red
+  added       = green
+  changed     = yellow
+  untracked   = red
 
 [alias]
-    prune       = fetch --prune
-    undo        = reset --soft HEAD^
+  prune       = fetch --prune
+  undo        = reset --soft HEAD^
 
-# Very useful
-    po          = push origin master
-    mr          = merge remotes/origin/master
-    cl          = clean --force -d
-    lgs         = log --stat --graph
-# status
-    st          = status
-# commit
-    ci          = commit --all
-# branch
-    b           = branch
-    bt          = branch --track
-    ba          = branch --all
-# checkout
-    co          = checkout
-    cob         = checkout -b
-    cobt        = checkout -b --track
-# diff
-    d           = diff
-# log
-    l           = log
-    lp          = log --patch
-    ls          = log --stat
-    lr          = log --raw
-    lg          = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-    lo          = log --pretty=oneline
-# fetch
-    f           = fetch
-# remote
-    r           = remote
-    rs          = remote show
-    ra          = remote add
-    rd          = remote del
-# misc
-    lsf         = ls-files
-    m           = merge
-    t           = tag
-    ui          = update-index
+  # Very useful
+  po          = push origin master
+  mr          = merge remotes/origin/master
+  cl          = clean --force -d
+  lgs         = log --stat --graph
+  # status
+  st          = status
+  # commit
+  ci          = commit --all
+  # branch
+  b           = branch
+  bt          = branch --track
+  ba          = branch --all
+  # checkout
+  co          = checkout
+  cob         = checkout -b
+  cobt        = checkout -b --track
+  # diff
+  d = difftool
+  # log
+  l           = log
+  lp          = log --patch
+  ls          = log --stat
+  lr          = log --raw
+  lg          = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  lo          = log --pretty=oneline
+  # fetch
+  f           = fetch
+  # remote
+  r           = remote
+  rs          = remote show
+  ra          = remote add
+  rd          = remote del
+  # misc
+  lsf         = ls-files
+  m           = merge
+  t           = tag
+  ui          = update-index
 
 # Default behavior for git push
 #    nothing - do not push anything.
@@ -74,21 +74,25 @@
 #    simple - like upstream, but refuses to push if the upstream branch’s name is different from the local one.
 #    current - push the current branch to a branch of the same name.
 [merge]
-    conflictstyle = diff3
+  conflictstyle = diff3
 [push]
-    default = current
-    followTags = true
+  default = current
+  followTags = true
 [status]
-    showUntrackedFiles = all
+  showUntrackedFiles = all
 [transfert]
-    fsckobjects = true
+  fsckobjects = true
 [user]
-    signingkey = 0BB86EA4B04B1A568DD15FBC6534FBBC86B7DB4D
-    name = Youenn Piolet
-    email = piolet.y@gmail.com
+  signingkey = 0BB86EA4B04B1A568DD15FBC6534FBBC86B7DB4D
+  name = Youenn Piolet
+  email = piolet.y@gmail.com
 
 [gpg]
-    program = /usr/bin/gpg
+  program = /usr/bin/gpg
 
 # [commit]
 #     gpgsign = true
+[diff]
+  tool = vimdiff
+[difftool]
+  prompt = false
