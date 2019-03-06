@@ -68,12 +68,12 @@ else
 endif
 Plugin 'shougo/neosnippet'
 Plugin 'shougo/neosnippet-snippets'
-" Plugin 'wellle/tmux-complete.vim'
-" Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'honza/vim-snippets'
 " Plugin 'SirVer/ultisnips'
-" Plugin 'honza/vim-snippets'
+" Plugin 'shougo/context_filetype.vim'
 
 " LANGUAGE SPECIFIC
+Plugin 'robbles/logstash.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'parkr/vim-jekyll'
 Plugin 'Glench/Vim-Jinja2-Syntax'
@@ -86,7 +86,10 @@ Plugin 'PProvost/vim-ps1'
 Plugin 'elzr/vim-json'
 Plugin 'google/vim-jsonnet'
 Plugin 'Shougo/neco-vim'
+Plugin 'davidgranstrom/scnvim'
+" Plugin 'supercollider/scvim'
 " Plugin 'hashivim/vim-consul'
+" Plugin 'mustache/vim-mustache-handlebars'
 " Plugin 'hashivim/vim-nomadproject'
 " Plugin 'hashivim/vim-ottoproject'
 " Plugin 'hashivim/vim-packer'
@@ -120,6 +123,8 @@ augroup FileTypeRules
   autocmd BufNewFile,BufRead *.jsonnet      set ft=jsonnet
   autocmd BufNewFile,BufRead *.libjsonnet   set ft=jsonnet
 augroup END
+
+let g:jsonnet_fmt_on_save = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors, terminal & Visual
@@ -348,8 +353,7 @@ map j gj
 map k gk
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
+" map <space> /
 
 " Smart way to move between windows
 map <leader>wj <C-w>j
@@ -400,9 +404,11 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Turn on/off mouse
 " Enable mouse support
-" Enable mouse support
-" Enable mouse support
 map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=nv"<CR>
+
+" Resize vim windows
+map <leader>l 85<c-w>\|
+map <leader>L 87<c-w>\|
 
 " VIM GREP
 " When you press gv you vimgrep after the selected text
@@ -548,14 +554,39 @@ silent! nmap <F6> :lprevious<CR>
 silent! nmap <F7> :lnext<CR>
 silent! nmap <leader>sc :SyntasticCheck<CR>
 
-" DEOPLETE
-" deoplete + neosnippet + autopairs changes
-" let g:AutoPairsMapCR=0
+" DEOPLETE + NEOSNIPPET or ULTISNIPS
 let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
-imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets, ~/.vim/bundle/scnvim/scnvim-data'
+let g:neosnippet#enable_completed_snippet = 1
+
+" neosnippet expand
+imap <C-space>     <Plug>(neosnippet_expand_or_jump)
+smap <C-space>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-space>     <Plug>(neosnippet_expand_target)
+
+" Ultisnip paths and shorcuts
+" let g:UltiSnipsSnippetDirectories=$HOME.'/.vim/bundle/vim-snippets/UltiSnips'
+" let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'scnvim-data']
+" let g:UltiSnipsExpandTrigger = "<C-space>"
+" let g:UltiSnipsListSnippets = "<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<space><tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<space><s-tab>"
+" inoremap <c-x><c-k> <c-x><c-k>
+
+" deoplete + neosnippet + autopairs changes
+" let g:AutoPairsMapCR=0
+" imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
+" imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 " imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
-imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 " let g:AutoPairsFlyMode = 1
+
+" SUPERCOLLIDER
+let g:scnvim_postwin_size = 62
+let g:scnvim_postwin_auto_toggle = 1
