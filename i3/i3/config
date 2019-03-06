@@ -23,7 +23,8 @@ font pango:roboto 10
 ## KEY BINDING ##
 #################
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+# bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec terminator
 
 # start a browser
 bindsym $mod+n exec nautilus -w
@@ -153,7 +154,7 @@ for_window [class="^.*"] tiling enable
 for_window [class="^.*"] border pixel 0
 for_window [class="^Slack$"] $workspace13
 for_window [class="^Rocketchat"] $workspace11
-for_window [class="^Thunderbird"] $workspace11
+for_window [class="^Thunderbird"] $workspace10
 for_window [class="^Atom$"] $workspace12
 for_window [class="^Spotify$"] $workspace11
 for_window [class="feh"] floating enable
@@ -161,7 +162,7 @@ for_window [class="Nautilus"] floating enable
 for_window [class="qjackctl"] floating enable
 assign [class="^Slack$"] $workspace13
 assign [class="^Rocketchat$"] $workspace13
-assign [class="^Thunderbird$"] $workspace13
+assign [class="^Thunderbird$"] $workspace10
 assign [class="^Atom$"] $workspace12
 assign [class="^spotify$"] $workspace11
 
