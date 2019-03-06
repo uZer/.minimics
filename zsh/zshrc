@@ -51,12 +51,6 @@ DISABLE_UPDATE_PROMPT="true"
 # DISABLE_CORRECTION="true"
 # CASE_SENSITIVE="true"
 
-# ALIASES
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-
-source $MINIMICS/aliases/aliases
-source $HOME/.aliases.local
-
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(vundle nmap screen theme taskwarrior cp sudo history systemd \
          aws docker docker-compose iwhois git node npm z helm kubectl terraform \
@@ -71,6 +65,12 @@ plugins=(vundle nmap screen theme taskwarrior cp sudo history systemd \
 
 source $ZSH/oh-my-zsh.sh
 source $ZSH/plugins/z/z.sh
+
+# ALIASES
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+source $MINIMICS/aliases/aliases
+source $HOME/.aliases.local
+
 
 # ZSH PACKS
 autoload -U zmv

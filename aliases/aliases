@@ -13,12 +13,12 @@ alias n='grep -Rvi'
 alias bigrep="find -type f | xargs grep -in --color=always "
 
 # LS
-alias l='ls -lAh --color'
-alias ll='ls -l --color'
-alias ls='ls --color'
-alias al='ls -lhA --color'
-alias la='ls -lhA --color'
-alias lad="ls -lApF --group-directories-first --color"
+alias ls='ls --color --group-directories-first'
+alias l='ls -lAh'
+alias ll='ls -l'
+alias llh='ls -lh'
+alias la='ls -lA'
+alias lah='ls -lAh'
 
 # CD
 alias cd..='cd ..'
