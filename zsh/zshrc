@@ -52,7 +52,7 @@ DISABLE_UPDATE_PROMPT="true"
 # CASE_SENSITIVE="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(vundle nmap screen theme taskwarrior cp sudo history systemd \
+plugins=(vundle nmap screen taskwarrior cp sudo history systemd \
          aws docker docker-compose iwhois git node npm z helm kubectl terraform \
          ssh-agent \
          # zsh-autosuggestions \
