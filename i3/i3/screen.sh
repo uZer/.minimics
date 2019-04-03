@@ -6,9 +6,9 @@ extern=HDMI2
 dockscreen1=DP2-1
 dockscreen2=DP2-2
 dockscreen3=DP2-3
-mode=split
+# code=split
+mode=clone
 splitresolution="1366x768"
-# mode=clone
 
 # Screen position on the desk, left to right:
 # HDMI: intern - extern - synergy server screen

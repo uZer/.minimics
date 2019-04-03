@@ -96,12 +96,13 @@ bindsym $mod+space focus mode_toggle
 # Workspace management
 
 ## Naming
-set $workspace10 "10:"
-set $workspace11 "11:"
-set $workspace12 "12:"
-set $workspace13 "13:"
-set $workspace14 "14:"
-set $workspace15 "15:"
+set $workspace10 "10:"
+set $workspace11 "11:"
+set $workspace12 "12:"
+set $workspace13 "13:"
+set $workspace14 "14:"
+set $workspace15 "15:"
+set $workspace16 "16:"
 set $workspace101 "101:⒈"
 set $workspace102 "102:⒉"
 set $workspace103 "103:⒊"
@@ -111,15 +112,15 @@ set $workspace106 "106:⒍"
 set $workspace107 "107:⒎"
 set $workspace108 "108:⒏"
 set $workspace109 "109:⒐"
-set $workspace110 "110:"
 
 ## Switch to workspace
-bindsym $mod+t workspace $workspace10
-bindsym $mod+y workspace $workspace11
-bindsym $mod+u workspace $workspace12
-bindsym $mod+i workspace $workspace13
-bindsym $mod+o workspace $workspace14
-bindsym $mod+p workspace $workspace15
+bindsym $mod+0 workspace $workspace10
+bindsym $mod+t workspace $workspace11
+bindsym $mod+y workspace $workspace12
+bindsym $mod+u workspace $workspace13
+bindsym $mod+i workspace $workspace14
+bindsym $mod+o workspace $workspace15
+bindsym $mod+p workspace $workspace16
 bindsym $mod+1 workspace $workspace101
 bindsym $mod+2 workspace $workspace102
 bindsym $mod+3 workspace $workspace103
@@ -129,15 +130,15 @@ bindsym $mod+6 workspace $workspace106
 bindsym $mod+7 workspace $workspace107
 bindsym $mod+8 workspace $workspace108
 bindsym $mod+9 workspace $workspace109
-bindsym $mod+0 workspace $workspace110
 
 # move focused container to workspace
-bindsym $mod+Shift+t move container to workspace $workspace10
-bindsym $mod+Shift+y move container to workspace $workspace11
-bindsym $mod+Shift+u move container to workspace $workspace12
-bindsym $mod+Shift+i move container to workspace $workspace13
-bindsym $mod+Shift+o move container to workspace $workspace14
-bindsym $mod+Shift+p move container to workspace $workspace15
+bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+t move container to workspace $workspace11
+bindsym $mod+Shift+y move container to workspace $workspace12
+bindsym $mod+Shift+u move container to workspace $workspace13
+bindsym $mod+Shift+i move container to workspace $workspace14
+bindsym $mod+Shift+o move container to workspace $workspace15
+bindsym $mod+Shift+p move container to workspace $workspace16
 bindsym $mod+Shift+1 move container to workspace $workspace101
 bindsym $mod+Shift+2 move container to workspace $workspace102
 bindsym $mod+Shift+3 move container to workspace $workspace103
@@ -147,24 +148,23 @@ bindsym $mod+Shift+6 move container to workspace $workspace106
 bindsym $mod+Shift+7 move container to workspace $workspace107
 bindsym $mod+Shift+8 move container to workspace $workspace108
 bindsym $mod+Shift+9 move container to workspace $workspace109
-bindsym $mod+Shift+0 move container to workspace $workspace110
 
 # Program specific
-for_window [class="^.*"] tiling enable
-for_window [class="^.*"] border pixel 0
-for_window [class="^Slack$"] $workspace13
-for_window [class="^Rocketchat"] $workspace11
-for_window [class="^Thunderbird"] $workspace10
-for_window [class="^Atom$"] $workspace12
-for_window [class="^Spotify$"] $workspace11
-for_window [class="feh"] floating enable
-for_window [class="Nautilus"] floating enable
-for_window [class="qjackctl"] floating enable
-assign [class="^Slack$"] $workspace13
-assign [class="^Rocketchat$"] $workspace13
-assign [class="^Thunderbird$"] $workspace10
-assign [class="^Atom$"] $workspace12
-assign [class="^spotify$"] $workspace11
+for_window [class="^.*"]          tiling enable
+for_window [class="^.*"]          border pixel 0
+for_window [class="feh"]          floating enable
+for_window [class="Nautilus"]     floating enable
+for_window [class="qjackctl"]     floating enable
+for_window [class="^Atom$"]       $workspace10
+for_window [class="^Thunderbird"] $workspace11
+for_window [class="^Rocketchat"]  $workspace12
+for_window [class="^Spotify$"]    $workspace13
+for_window [class="^Slack$"]      $workspace14
+assign [class="^Atom$"]         $workspace10
+assign [class="^Thunderbird$"]  $workspace11
+assign [class="^Rocketchat$"]   $workspace12
+assign [class="^spotify$"]      $workspace13
+assign [class="^Slack$"]        $workspace14
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
