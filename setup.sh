@@ -12,6 +12,7 @@ INST_ZSH="true"     # Enable zsh config install
 INST_HTOP="true"    # Enable htop config install
 INST_BASH="false"   # Enable bash config install
 INST_BSPWM="false"  # Enable Lemonbuddy config install
+INST_DUNST="true"   # Enable Dunst config
 # TODO Make params
 
 # Dotfiles path
@@ -61,6 +62,17 @@ makelink ()
     # Make the new link
     ln -s $_SOURCE $_DEST
     return 0
+}
+
+# [DUNST]
+# Linking needed files
+installDunst ()
+{
+    echo "[DUNST]"
+    echo "  Linking dunst configuration files..."
+    makelink "$MIN_PATH/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
+    echo ""
+    return
 }
 
 # [GIT]
@@ -226,7 +238,8 @@ MY_DIR=`pwd`
 [ "$INST_HTOP" == "true" ] && installHtop
 [ "$INST_BASH" == "true" ] && installBash
 [ "$INST_I3" == "true" ] && installI3
-[ "$INST_BSPWM" == "true" ] && installBspwm; installSxhkd; installLemon;
+[ "$INST_BSPWM" == "true" ] && installBspwm && installSxhkd && installLemon
+[ "$INST_DUNST" == "true" ] && installDunst
 
 # Update submodules
 cd $MIN_PATH
