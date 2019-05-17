@@ -32,11 +32,19 @@ bindsym $mod+n exec nautilus -w
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Tab scratchpad show
+bindsym $mod+Shift+Tab move scratchpad
+# set $i3t_alt_tab        ~/.i3/i3t.py n
+# set $i3t_alt_shift_tab  ~/.i3/i3t.py p
+
 # start dmenu (a program launcher)
-bindsym $mod+d          exec --no-startup-id dmenu_run         -p '>' -fn 'roboto-mono-12' -i -sb '#2aa198' -nb '#073642' -sf '#073642' -nf '#2aa198' -dim 0.2
-bindsym $mod+BackSpace  exec --no-startup-id passmenu   --type -p '#' -fn 'roboto-mono-12' -i -sb '#b58900' -nb '#002b36' -sf '#002b36' -nf '#b58900' -x 900 -y 150 -w 400 -l 20 -dim 0.6
+bindsym $mod+d          exec --no-startup-id dmenu_run         -p '>' -fn 'roboto-mono-12' -i -sb '#2aa198' -nb '#073642' -sf '#073642' -nf '#2aa198' -dim 0.5
+bindsym $mod+BackSpace  exec --no-startup-id passmenu   --type -p '#' -fn 'roboto-mono-12' -i -sb '#6c71c4' -nb '#002b36' -sf '#002b36' -nf '#586e75' -x 50% -y 50% -w 500 -l 200 -dim 0.8
 bindsym Print           exec --no-startup-id deepin-screenshot
-bindsym $mod+Tab        exec --no-startup-id rofi -show
+# bindsym $mod+Tab        exec --no-startup-id rofi -show
 
 # change focus
 bindsym $mod+h focus left
@@ -182,10 +190,10 @@ mode "resize" {
     bindsym j resize grow height 5 px or 5 ppt
     bindsym k resize shrink height 5 px or 5 ppt
     bindsym l resize grow width 5 px or 5 ppt
-    bindsym Left resize shrink width 5 px or 5 ppt
-    bindsym Down resize grow height 5 px or 5 ppt
-    bindsym Up resize shrink height 5 px or 5 ppt
-    bindsym Right resize grow width 5 px or 5 ppt
+    bindsym Left resize shrink width 25 px or 25 ppt
+    bindsym Down resize grow height  25 px or 25 ppt
+    bindsym Up resize shrink height  25 px or 25 ppt
+    bindsym Right resize grow width  25 px or 25 ppt
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -227,12 +235,16 @@ bar {
     position top
     workspace_buttons yes
 
-    i3bar_command i3bar -t
+    i3bar_command i3bar
+    # i3bar_command i3bar -t
+
     # height 22
     status_command i3status | ~/ypi.scripts/show_argent.sh | ~/ypi.scripts/pystatus.py
+    # status_command i3status | ~/ypi.scripts/pystatus.py
     separator_symbol "  "
     colors {
-      background          #002b36e0
+      # background          #002b36
+      background          #002b36ff
       statusline          #fdf6e3
       separator           #586e75
 
@@ -267,7 +279,7 @@ exec --no-startup-id xfce4-clipman
 exec --no-startup-id davmail
 exec --no-startup-id compton -cb
 
-gaps outer 2
+gaps outer 10
 gaps inner 5
 new_window 1pixel
 
