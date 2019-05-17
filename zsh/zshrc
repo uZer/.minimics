@@ -53,7 +53,7 @@ DISABLE_UPDATE_PROMPT="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(vundle nmap screen taskwarrior cp sudo history systemd \
-         aws docker docker-compose iwhois git node npm z helm kubectl terraform \
+         aws docker docker-compose git node npm z helm kubectl terraform \
          ssh-agent \
          # zsh-autosuggestions \
          zsh-syntax-highlighting \
