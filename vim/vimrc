@@ -23,7 +23,7 @@ if !filereadable($HOME."/.vim/bundle/Vundle.vim/README.md")
     echo "Installing Vundle..."
     echo ""
     silent !mkdir -p $HOME/.vim/bundle
-    silent !git clone https://github.com/gmarik/Vundle.vim $HOME/.vim/bundle/Vundle.vim
+    silent !git clone https://github.com/VundleVim/Vundle.vim $HOME/.vim/bundle/Vundle.vim
     let has_vundle=0
 endif
 
@@ -31,7 +31,7 @@ filetype off                                " required to init
 set rtp+=$HOME/.vim/bundle/Vundle.vim       " include vundle
 call vundle#begin()                         " init vundle
 
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 """ Plugins """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -87,6 +87,8 @@ Plugin 'elzr/vim-json'
 Plugin 'google/vim-jsonnet'
 Plugin 'Shougo/neco-vim'
 Plugin 'davidgranstrom/scnvim'
+Plugin 'fatih/vim-go'
+
 " Plugin 'supercollider/scvim'
 " Plugin 'hashivim/vim-consul'
 " Plugin 'mustache/vim-mustache-handlebars'
@@ -558,6 +560,7 @@ silent! nmap <leader>sc :SyntasticCheck<CR>
 let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
