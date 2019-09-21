@@ -13,6 +13,7 @@ INST_HTOP="true"    # Enable htop config install
 INST_BASH="false"   # Enable bash config install
 INST_BSPWM="false"  # Enable Lemonbuddy config install
 INST_DUNST="true"   # Enable Dunst config
+INST_TW="true"      # Enable Taskwarrior config
 # TODO Make params
 
 # Dotfiles path
@@ -70,7 +71,19 @@ installDunst ()
 {
     echo "[DUNST]"
     echo "  Linking dunst configuration files..."
+    mkdir -p "$HOME/.config/dunst"
     makelink "$MIN_PATH/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
+    echo ""
+    return
+}
+
+# [TASKWARRIOR]
+# Linking needed files
+installTW ()
+{
+    echo "[TASKWARRIOR]"
+    echo "  Linking taskwarrior configuration files..."
+    makelink "$MIN_PATH/taskwarrior/taskrc" "$HOME/.taskrc"
     echo ""
     return
 }
@@ -240,6 +253,7 @@ MY_DIR=`pwd`
 [ "$INST_I3" == "true" ] && installI3
 [ "$INST_BSPWM" == "true" ] && installBspwm && installSxhkd && installLemon
 [ "$INST_DUNST" == "true" ] && installDunst
+[ "$INST_TW" == "true" ] && installTW
 
 # Update submodules
 cd $MIN_PATH
