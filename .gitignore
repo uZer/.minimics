@@ -1,3 +1,5 @@
 .backup.*
 vim/bundle/*
 i3/i3/wallpaper.sh
+zsh/custom/themes/powerlevel9k
+zsh/custom/themes/powerlevel10k

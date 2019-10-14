@@ -168,9 +168,9 @@ installZSH ()
     if [ ! -e $OHMY_PATH ]; then
         git clone https://github.com/robbyrussell/oh-my-zsh.git $OHMY_PATH
     fi
-    if [ ! -e $MIN_PATH/zsh/custom/themes/powerlevel9k ]; then
-        git clone https://github.com/bhilburn/powerlevel9k.git \
-          $MIN_PATH/zsh/custom/themes/powerlevel9k
+    if [ ! -e $MIN_PATH/zsh/custom/themes/powerlevel10k ]; then
+        git clone https://github.com/romkatv/powerlevel10k.git \
+          $MIN_PATH/zsh/custom/themes/powerlevel10k
     fi
     if [ ! -e $MIN_PATH/zsh/custom/plugins/zsh-autosuggestions ]; then
         git clone https://github.com/zsh-users/zsh-autosuggestions.git \
