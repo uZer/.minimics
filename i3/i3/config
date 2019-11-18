@@ -243,8 +243,8 @@ bar {
     # status_command i3status | ~/ypi.scripts/pystatus.py
     separator_symbol "  "
     colors {
-      # background          #002b36
-      background          #002b36ff
+      # background          #001b26ff
+      background          #002530ff
       statusline          #fdf6e3
       separator           #586e75
 
@@ -277,7 +277,7 @@ client.placeholder      #000000 #0c0c0c #ffffff #002b36
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id xautolock -time 95 -locker '$HOME/.i3/corrupt.sh' &
 exec --no-startup-id nm-applet
-exec --no-startup-id redshift-gtk
+# exec --no-startup-id redshift-gtk
 exec --no-startup-id blueberry-tray
 exec --no-startup-id pasystray
 exec --no-startup-id volctl
@@ -285,7 +285,7 @@ exec --no-startup-id dropbox
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id compton -cb
 
-gaps outer 15
+gaps outer 5
 gaps inner 8
 new_window 1pixel
 
