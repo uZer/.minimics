@@ -6,11 +6,13 @@
 # $./volume.sh mute
 
 function get_volume {
-  amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+  # amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+  pamixer --get-volume
 }
 
 function is_mute {
-  amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+  # amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+  pamixer --get-mute
 }
 
 function send_notification {
