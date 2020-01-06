@@ -86,12 +86,8 @@
   signingkey = 0BB86EA4B04B1A568DD15FBC6534FBBC86B7DB4D
   name = Youenn Piolet
   email = piolet.y@gmail.com
-
 [gpg]
-  program = /usr/bin/gpg
-
-# [commit]
-#     gpgsign = true
+  program = gpg2
 [diff]
   tool = vimdiff
 [difftool]

@@ -50,7 +50,7 @@ case "$LANG" in
 esac
 
 scrot -z "$IMAGE"
-ICON="$SCRIPTPATH/OSONES_PICTO.png"
+ICON="$SCRIPTPATH/radio-france.svg"
 PARAM=(--insidecolor=ffffff1c --ringcolor=ffffff3e \
        --linecolor=ffffff00 --keyhlcolor=00000080 --ringvercolor=00000000 \
        --separatorcolor=22222260 --insidevercolor=0000001c \
@@ -75,7 +75,7 @@ do
         # LOCK+=(-font $FONT -pointsize 14 -fill white \
         #        -annotate +$MIDXt+$MIDYt "$TEXT" \
         #        -fill lightgrey -annotate +$MIDXt+$MIDYt "$TEXT" \
-        #        $ICON -geometry +$MIDXi+$MIDYi -composite)
+        #       $ICON -geometry +$MIDXi+$MIDYi -composite)
     fi
 done <<<"$(xrandr)"
 
