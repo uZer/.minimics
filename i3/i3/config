@@ -243,7 +243,6 @@ bindsym XF86AudioPlay        exec --no-startup-id playerctl play-pause
 bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 
-
 ##############
 ## i3status ##
 ##############
