@@ -158,11 +158,14 @@ bindsym $mod+Shift+8 move container to workspace $workspace108
 bindsym $mod+Shift+9 move container to workspace $workspace109
 
 # Program specific
-for_window [class="^.*"]          tiling enable
-for_window [class="^.*"]          border pixel 0
-for_window [class="feh"]          floating enable
-for_window [class="Nautilus"]     floating enable
-for_window [class="qjackctl"]     floating enable
+for_window [class=".*"]              tiling enable
+for_window [class=".*"]              border pixel 0
+for_window [class="feh"]             floating enable
+for_window [class="Nautilus"]        floating enable
+for_window [class="^.*ctl"]          floating enable
+for_window [class="^.*control"]      floating enable
+for_window [title="^.*Preferences$"] floating enable
+
 for_window [class="^Atom$"]       $workspace10
 for_window [class="^Thunderbird"] $workspace11
 for_window [class="^Rocketchat"]  $workspace12
@@ -199,9 +202,6 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
-# Screenshot with scrot
-bindsym 0xff61 exec scrot ~/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png
 bindsym XF86Display exec ~/.i3/screen.sh
 
 ###########
