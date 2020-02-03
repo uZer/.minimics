@@ -51,7 +51,7 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+m exec /home/$USER/.i3/corrupt.sh
+bindsym $mod+m exec /home/$USER/.i3/lock.sh
 # bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -204,17 +204,38 @@ bindsym $mod+r mode "resize"
 bindsym 0xff61 exec scrot ~/screenshots/screenshot_%Y_%m_%d_%H_%M_%S.png
 bindsym XF86Display exec ~/.i3/screen.sh
 
-# Pulse Audio controls
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-# bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute 0 toggle
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.i3/volume.sh up
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.i3/volume.sh down
-bindsym XF86AudioMute        exec --no-startup-id ~/.i3/volume.sh mute
+###########
+## Audio ##
+###########
 
-bindsym XF86AudioPrev        exec --no-startup-id sp prev
-bindsym XF86AudioNext        exec --no-startup-id sp next
-bindsym XF86AudioPlay        exec --no-startup-id sp play
+set $volumepath ~/.i3/volume.sh
+set $statuscmd i3status
+
+# Signal used to update the status line
+#   i3blocks uses SIGRTMIN+10 by default
+#   i3status uses SIGUSR1 by default
+set $statussig SIGUSR1
+
+# Amount to increase/decrease volume as a percentage
+set $volumestep 5
+
+# Symbolic name for sink (numeric index not supported)
+#   Recommended: comment out this setting and omit the -s option to use default sink
+#   List sink names: pacmd list-sinks | awk -F "[<>]" '/^\s+name: <.*>/{print $2}'
+#set $sinkname alsa_output.pci-0000_00_1b.0.analog-stereo
+
+# Using pulseaudio-utils (append "-s $sinkname" without quotes to override default sink)
+bindsym XF86AudioRaiseVolume exec $volumepath -np -i $volumestep -t $statuscmd -u $statussig
+bindsym XF86AudioLowerVolume exec $volumepath -np -d $volumestep -t $statuscmd -u $statussig
+bindsym XF86AudioMute        exec $volumepath -mn -t $statuscmd -u $statussig
+
+bindsym XF86AudioPrev        exec --no-startup-id playerctl previous
+bindsym XF86AudioNext        exec --no-startup-id playerctl next
+bindsym XF86AudioPlay        exec --no-startup-id playerctl play-pause
+
+################
+## Brightness ##
+################
 
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -275,7 +296,7 @@ client.placeholder      #000000 #0c0c0c #ffffff #002b36
 # Wallpaper
 #exec --no-startup-id feh --bg-fill ~/.minimics/i3/i3/wallpaper
 exec --no-startup-id nitrogen --restore
-exec --no-startup-id xautolock -time 95 -locker '$HOME/.i3/corrupt.sh' &
+exec --no-startup-id xautolock -time 95 -locker '$HOME/.i3/lock.sh' &
 exec --no-startup-id nm-applet
 # exec --no-startup-id redshift-gtk
 exec --no-startup-id blueberry-tray
