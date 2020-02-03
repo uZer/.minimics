@@ -1,14 +1,15 @@
 #!/bin/sh
 # Also edit /usr/share/sddm/scripts/Xsetup
 # Type xrandr to get correct screen names
-intern=eDP1
+intern=DVI-I-1
 extern=HDMI2
 dockscreen1=DP2-1
 dockscreen2=DP2-2
 dockscreen3=DP2-3
-# code=split
-mode=clone
-splitresolution="1366x768"
+mode=split
+splitresolution="1600x900"
+testresolution="2560x1440"
+# mode=clone
 
 # Screen position on the desk, left to right:
 # HDMI: intern - extern - synergy server screen
@@ -113,9 +114,10 @@ elif xrandr | grep "$dockscreen1 connected" \
     # killall synergyc > /dev/null 2>&1
 
 # JUST LAPTOP ##################################################################
+      # --output "$intern" --auto \
 else
     xrandr \
-      --output "$intern" --auto \
+      --output "$intern" --auto --mode ${testresolution}\
       --output "$extern" --off \
       --output "$dockscreen1" --off \
       --output "$dockscreen2" --off \
