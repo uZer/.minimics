@@ -164,6 +164,7 @@ for_window [class="feh"]             floating enable
 for_window [class="Nautilus"]        floating enable
 for_window [class="^.*ctl"]          floating enable
 for_window [class="^.*control"]      floating enable
+for_window [class="^.*statistics"]   floating enable
 for_window [title="^.*Preferences$"] floating enable
 
 for_window [class="^Atom$"]       $workspace10
