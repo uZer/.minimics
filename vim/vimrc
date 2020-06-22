@@ -85,7 +85,8 @@ Plugin 'hashivim/vim-terraform'
 Plugin 'PProvost/vim-ps1'
 Plugin 'elzr/vim-json'
 Plugin 'google/vim-jsonnet'
-Plugin 'Shougo/neco-vim'
+" Plugin 'Shougo/neco-vim'
+" Plugin 'supercollider/scvim'
 Plugin 'davidgranstrom/scnvim'
 Plugin 'fatih/vim-go'
 
@@ -557,10 +558,10 @@ silent! nmap <F7> :lnext<CR>
 silent! nmap <leader>sc :SyntasticCheck<CR>
 
 " DEOPLETE + NEOSNIPPET or ULTISNIPS
-let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
 call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+call deoplete#custom#option('smart_case', v:true)
+call deoplete#custom#option('min_pattern_length', 1)
 
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -591,5 +592,14 @@ xmap <C-space>     <Plug>(neosnippet_expand_target)
 " let g:AutoPairsFlyMode = 1
 
 " SUPERCOLLIDER
-let g:scnvim_postwin_size = 62
+" let g:scFlash = 1
+" let g:sclangTerm = "gnome-terminal -x $SHELL -ic"
+let g:scnvim_postwin_size = 80
 let g:scnvim_postwin_auto_toggle = 1
+let g:scnvim_scdoc = 1
+" let g:scnvim_no_mappings = 1
+let g:scnvim_statusline_interval = 2
+let g:scnvim_eval_flash_repeats = 1
+let g:scnvim_eval_flash_duration = 150
+highlight SCNvimEval guifg=black guibg=grey ctermfg=black ctermbg=grey
+nmap <S-space> <C-e>
