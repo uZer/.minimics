@@ -11,7 +11,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM="$MINIMICS/zsh/custom"
 plugins=(vundle nmap screen taskwarrior cp sudo history systemd \
          aws docker docker-compose git node npm z helm kubectl terraform \
-         ssh-agent go zsh-syntax-highlighting)
+         ssh-agent golang zsh-syntax-highlighting)
 
 # VISUAL
 #ZSH_THEME="agnoster"
