@@ -98,3 +98,5 @@
   prompt = false
 [url "git@gitlab.dnm.radiofrance.fr:"]
 	insteadOf = https://gitlab.dnm.radiofrance.fr/
+[pull]
+  rebase = true
