@@ -51,7 +51,7 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 bindsym $mod+m exec /home/$USER/.i3/lock.sh
-# bindsym $mod+semicolon focus right
+bindsym Shift+XF86HomePage exec /home/$USER/.i3/lock.sh
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -165,6 +165,7 @@ for_window [class="^.*ctl"]          floating enable
 for_window [class="^.*control"]      floating enable
 for_window [class="^.*statistics"]   floating enable
 for_window [title="^.*Preferences$"] floating enable
+for_window [title="^.*Synergy.*$"] floating enable
 
 for_window [class="^Atom$"]       $workspace10
 for_window [class="^Thunderbird"] $workspace11
