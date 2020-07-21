@@ -157,7 +157,6 @@ bindsym $mod+Shift+8 move container to workspace $workspace108
 bindsym $mod+Shift+9 move container to workspace $workspace109
 
 # Program specific
-for_window [class=".*"]              tiling enable
 for_window [class=".*"]              border pixel 0
 for_window [class="feh"]             floating enable
 for_window [class="Nautilus"]        floating enable
@@ -185,7 +184,6 @@ bindsym $mod+Shift+r exec "killall picom ; picom -b --config ~/.config/picom/pic
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec i3-msg exit
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

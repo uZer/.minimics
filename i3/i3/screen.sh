@@ -6,7 +6,7 @@ extern=DP-2-1
 # extern=DP-2
 mode=split
 # mode=clone
-extresolution="1920x1080"
+# mainresolution="1920x1080"
 # extresolutiondouble="2880x1620+0+0" # extresolution * scale
 extresolutiondouble="3072x1728+0+0" # extresolution * scale
 mainresolution="3200x1800"
@@ -15,11 +15,11 @@ mainresolution="3200x1800"
 # 2 screens, internal + HDMI on dock
 if xrandr | grep "$extern connected"; then
   if [ ""${mode} == "clone" ]; then
-    xrandr --dpi 192 \
+    xrandr \
       --output "$intern" --auto \
       --output "$extern" --auto --same-as "$intern" --mode ${mainresolution}
   else
-    xrandr --dpi 192 \
+    xrandr \
       --output "$intern" --mode ${mainresolution} --pos 0x1728 \
       --output "$extern" --scale 1.6x1.6 --pos 0x0 --panning ${extresolutiondouble}
       # --output "$extern" --auto --above "$intern"
