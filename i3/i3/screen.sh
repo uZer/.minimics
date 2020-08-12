@@ -2,7 +2,7 @@
 # Also edit /usr/share/sddm/scripts/Xsetup
 # Type xrandr to get correct screen names
 intern=eDP-1
-extern=DP-2-1
+extern=DP-2-2-1
 # extern=DP-2
 mode=split
 # mode=clone
