@@ -100,3 +100,5 @@
 	insteadOf = https://gitlab.dnm.radiofrance.fr/
 [pull]
   rebase = true
+[rebase]
+  instructionFormat = (%an <%ae>) %s
