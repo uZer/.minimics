@@ -181,7 +181,7 @@ assign [class="^Slack$"]        $workspace14
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r exec "killall picom ; picom -b" ; restart
+bindsym $mod+Shift+r exec "killall picom ; picom -b --config ~/.minimics/picom/picom.conf" ; restart
 # bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
@@ -305,7 +305,7 @@ exec --no-startup-id pasystray
 exec --no-startup-id volctl
 exec --no-startup-id dropbox
 exec --no-startup-id xfce4-clipman
-exec --no-startup-id picom -b
+exec --no-startup-id picom --config $HOME/.minimics/picom/picom.conf
 
 gaps outer 5
 gaps inner 8
