@@ -145,10 +145,13 @@ installI3 ()
     echo "[I3]"
 
     echo "  Linking i3 configuration files..."
+    mkdir -p $HOME/.config/rofi > /dev/null 2>&1
+    mkdir -p $HOME/.config/picom > /dev/null 2>&1
     makelink $MIN_PATH/i3/i3/ $HOME/.i3
     makelink $MIN_PATH/i3/i3status.conf $HOME/.i3status.conf
     makelink $MIN_PATH/Xresources/Xresources $HOME/.Xresources
-    makelink $MIN_PATH/compton/compton.conf $HOME/.config/compton.conf
+    makelink $MIN_PATH/picom/picom.conf $HOME/.config/picom/picom.conf
+    makelink $MIN_PATH/rofi/config $HOME/.config/rofi/config
 
     echo ""
     return

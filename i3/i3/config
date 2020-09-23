@@ -41,10 +41,9 @@ bindsym $mod+Shift+Tab move scratchpad
 # set $i3t_alt_shift_tab  ~/.i3/i3t.py p
 
 # start dmenu (a program launcher)
-bindsym $mod+d          exec --no-startup-id dmenu_run         -p '>' -fn 'roboto-mono-12' -i -sb '#2aa198' -nb '#073642' -sf '#073642' -nf '#2aa198' -dim 0.5
+bindsym $mod+d          exec --no-startup-id rofi -show run -lines 3 -eh 2 -bw 0 -width 100 -padding 400 -fullscreen
 bindsym $mod+BackSpace  exec --no-startup-id passmenu   --type -p '#' -fn 'roboto-mono-12' -i -sb '#6c71c4' -nb '#002b36' -sf '#002b36' -nf '#586e75' -x 50% -y 50% -w 500 -l 200 -dim 0.8
 bindsym Print           exec --no-startup-id deepin-screenshot
-# bindsym $mod+Tab        exec --no-startup-id rofi -show
 
 # change focus
 bindsym $mod+h focus left
@@ -181,7 +180,7 @@ assign [class="^Slack$"]        $workspace14
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r exec "killall picom ; picom -b --config ~/.minimics/picom/picom.conf" ; restart
+bindsym $mod+Shift+r exec "killall picom ; picom -b --config ~/.config/picom/picom.conf" ; restart
 # bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
@@ -305,7 +304,7 @@ exec --no-startup-id pasystray
 exec --no-startup-id volctl
 exec --no-startup-id dropbox
 exec --no-startup-id xfce4-clipman
-exec --no-startup-id picom --config $HOME/.minimics/picom/picom.conf
+exec --no-startup-id picom --config $HOME/.config/picom/picom.conf
 
 gaps outer 5
 gaps inner 8
