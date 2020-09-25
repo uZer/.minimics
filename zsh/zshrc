@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # ENV
 export DEFAULT_USER=ypiolet
 export MINIMICS=$HOME/.minimics
@@ -22,19 +29,40 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
 # POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
 # POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$'\uE0BE'
+# POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=$'\uE0B0'
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(\
-  status background_jobs aws kubecontext \
-  virtualenv rbenv nvm rvm dir_writable root_indicator)
+  aws kubecontext \
+  dir_writable root_indicator background_jobs status)
 POWERLEVEL9K_STATUS_ERROR_BACKGROUND="black"
 POWERLEVEL9K_STATUS_ERROR_FOREGROUND="red"
 POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="clear"
 POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="red"
 POWERLEVEL9K_COLOR_SCHEME='dark'
-POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=$'\uE0B0'
+POWERLEVEL9K_AWS_BACKGROUND="009"
+POWERLEVEL9K_KUBECONTEXT_BACKGROUND="006"
 COMPLETION_WAITING_DOTS="true"
+# Separator between same-color segments on the left.
+typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\u2502'
+# Separator between same-color segments on the right.
+typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='\u2502'
+# Separator between different-color segments on the left.
+typeset -g POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
+# Separator between different-color segments on the right.
+typeset -g POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+# The right end of left prompt.
+typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B0'
+# The left end of right prompt.
+typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='\uE0B2'
+# The left end of left prompt.
+typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
+# The right end of right prompt.
+typeset -g POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
+# Left prompt terminator for lines without any segments.
+typeset -g POWERLEVEL9K_EMPTY_LINE_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
+export ZLE_RPROMPT_INDENT=0
 
 eval `dircolors ~/.minimics/dircolors/solarized/dircolors.256dark`
 
