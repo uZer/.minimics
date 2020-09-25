@@ -151,7 +151,7 @@ installI3 ()
     makelink $MIN_PATH/i3/i3status.conf $HOME/.i3status.conf
     makelink $MIN_PATH/Xresources/Xresources $HOME/.Xresources
     makelink $MIN_PATH/picom/picom.conf $HOME/.config/picom/picom.conf
-    makelink $MIN_PATH/rofi/config $HOME/.config/rofi/config
+    makelink $MIN_PATH/rofi/config.rasi $HOME/.config/rofi/config.rasi
 
     echo ""
     return

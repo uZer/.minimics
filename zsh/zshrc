@@ -2,7 +2,6 @@
 export DEFAULT_USER=ypiolet
 export MINIMICS=$HOME/.minimics
 export EDITOR=vim
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/.go"
 
 # OH MY ZSH
