@@ -41,7 +41,7 @@ bindsym $mod+Shift+Tab move scratchpad
 # set $i3t_alt_shift_tab  ~/.i3/i3t.py p
 
 # start dmenu (a program launcher)
-bindsym $mod+d          exec --no-startup-id rofi -show run -lines 3 -eh 2 -bw 0 -width 100 -padding 400 -fullscreen
+bindsym $mod+d          exec --no-startup-id rofi -show run -lines 3 -eh 2 -bw 0 -width 100 -padding 400
 bindsym $mod+BackSpace  exec --no-startup-id passmenu   --type -p '#' -fn 'roboto-mono-12' -i -sb '#6c71c4' -nb '#002b36' -sf '#002b36' -nf '#586e75' -x 50% -y 50% -w 500 -l 200 -dim 0.8
 bindsym Print           exec --no-startup-id deepin-screenshot
 
