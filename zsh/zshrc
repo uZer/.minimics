@@ -6,6 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # ENV
+export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
 export DEFAULT_USER=ypiolet
 export MINIMICS=$HOME/.minimics
 export EDITOR=vim
