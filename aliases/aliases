@@ -144,3 +144,5 @@ alias vim=nvim
 
 alias ssd='systemctl --user stop syncthing.service ; systemctl --user status syncthing.service | cat'
 alias sse='systemctl --user start syncthing.service ; systemctl --user status syncthing.service | cat'
+
+alias track='vim ~/ypi.projects/horizon/$(date +%Gw%V) -o ~/ypi.projects/horizon/$(date +%Gw%V --date="last week")'
