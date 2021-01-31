@@ -41,21 +41,16 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'Yggdroot/indentLine'
-" Plugin 'chriskempson/base16-vim'
-" Plugin 'tomasr/molokai'
-" Plugin 'nanotech/jellybeans.vim'
 
 " TOOLS
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'airblade/vim-gitgutter'
-" Plugin 'jiangmiao/auto-pairs'
 Plugin 'godlygeek/tabular'
 Plugin 'Raimondi/delimitMate'
-" Plugin 'tpope/vim-fugitive'
-" Plugin 'tmhedberg/SimpylFold'
-" Plugin 'tpope/vim-surround'
+Plugin 'preservim/tagbar'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " SYNTAX CHECK AND COMPLETION
 Plugin 'scrooloose/syntastic'
@@ -69,8 +64,6 @@ endif
 Plugin 'shougo/neosnippet'
 Plugin 'shougo/neosnippet-snippets'
 Plugin 'honza/vim-snippets'
-" Plugin 'SirVer/ultisnips'
-" Plugin 'shougo/context_filetype.vim'
 
 " LANGUAGE SPECIFIC
 Plugin 'robbles/logstash.vim'
@@ -85,12 +78,10 @@ Plugin 'hashivim/vim-terraform'
 Plugin 'PProvost/vim-ps1'
 Plugin 'elzr/vim-json'
 Plugin 'google/vim-jsonnet'
-" Plugin 'Shougo/neco-vim'
-" Plugin 'supercollider/scvim'
 Plugin 'davidgranstrom/scnvim'
 Plugin 'fatih/vim-go'
 
-" Plugin 'supercollider/scvim'
+
 " Plugin 'hashivim/vim-consul'
 " Plugin 'mustache/vim-mustache-handlebars'
 " Plugin 'hashivim/vim-nomadproject'
@@ -604,3 +595,10 @@ let g:scnvim_eval_flash_repeats = 1
 let g:scnvim_eval_flash_duration = 150
 highlight SCNvimEval guifg=black guibg=grey ctermfg=black ctermbg=grey
 nmap <S-space> <C-e>
+
+" TAGBAR
+map <F8> :TagbarToggle<CR>
+
+" VIMGO
+let g:go_def_reuse_buffer = 1
+let g:go_metalinter_autosave = 1
