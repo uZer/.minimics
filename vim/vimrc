@@ -1,3 +1,5 @@
+"" Uncomment if you want to use your BASE16 theme
+"" Uncomment if you want to use your BASE16 theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Global
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -46,7 +48,8 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'airblade/vim-gitgutter'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'mhinz/vim-signify'
 Plugin 'godlygeek/tabular'
 Plugin 'Raimondi/delimitMate'
 Plugin 'preservim/tagbar'
@@ -150,7 +153,7 @@ set tm=500
 set nofoldenable
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-highlight ExtraWhitespace   ctermbg=1 guibg=#382424
+" highlight ExtraWhitespace   ctermbg=1 guibg=#382424
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=1 guibg=red
 
 "highlight ErrorMsg         ctermbg=darkred guibg=#382424
@@ -191,21 +194,19 @@ let g:ansible_unindent_after_newline = 1
 " Colorscheme
 set background=dark
 
-"" Uncomment if you have no taste or no time to spend on your color
-"" configuration. (No Solarized, no base16)
-" let g:airline_theme='jellybeans'
-" colorscheme jellybeans
-
 "" Uncomment if you have a solarized terminal
 "" (eg: solarized for putty, gnome terminal solarized colors...)
 "let g:airline_theme='powerlineish'
 let g:airline_theme='solarized'
 let g:solarized_termtrans='1'
 
-"" Uncomment if you want to use your BASE16 theme
-" let g:airline_theme='base16'
-" colorscheme base16-default
-colorscheme solarized
+" colorscheme solarized
+colorscheme default
+if &diff
+  colorscheme darkblue
+endif
+
+highlight SignColumn ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related
@@ -226,7 +227,7 @@ set tabstop=2
 set ai "Auto indent
 set si "Smart indent
 "set wrap "Wrap lines
-set colorcolumn=81
+" set colorcolumn=81
 set showmatch
 set incsearch
 set ignorecase
@@ -431,7 +432,7 @@ map <F4> :setlocal paste!<cr>
 map <leader>hs :set hlsearch!<cr>
 
 " NERDtree
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggleVCS<CR>
 map <F5>      <plug>NERDTreeSteppedOpen<CR>
 
 " NERDcommenter
@@ -521,10 +522,14 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " NERDTree specific
-"let g:nerdtree_tabs_autofind=1
-"let g:nerdtree_tabs_open_on_console_startup=1 " Launch at start
-"let g:nerdtree_tabs_no_startup_for_diff=1
+let g:nerdtree_tabs_autofind=1
+" let g:nerdtree_tabs_open_on_console_startup=1 " Launch at start
+" let g:nerdtree_tabs_no_startup_for_diff=1
 let g:NERDTreeWinPos = "left"
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeHighlightCursorline = 0
+let NERDTreeDirArrowExpandable=""
+let NERDTreeDirArrowCollapsible=""
 
 " For conceal markers.
 " if has('conceal')
@@ -602,3 +607,11 @@ map <F8> :TagbarToggle<CR>
 " VIMGO
 let g:go_def_reuse_buffer = 1
 let g:go_metalinter_autosave = 1
+
+"" ADD ASYNC UPDATES
+set updatetime=100
+
+highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE
+" Prevent other buffers to replace nerdtree
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
