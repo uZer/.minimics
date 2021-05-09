@@ -224,10 +224,10 @@ client.background       #073642
 client.placeholder      #000000 #0c0c0c #ffffff #002b36
 
 # Wallpaper
-exec --no-startup-id $HOME/.minimics/polybar/launch.sh
+exec --no-startup-id $HOME/.minimics/bin/polybar.sh
 exec --no-startup-id picom --config $HOME/.config/picom/picom.conf
-exec --no-startup-id $HOME/.minimics/i3/i3/colors.sh restore
-exec --no-startup-id xautolock -time 95 -locker '$HOME/.i3/lock.sh' &
+exec --no-startup-id $HOME/.minimics/bin/pywal.sh restore
+exec --no-startup-id xautolock -time 95 -locker '$HOME/.minimics/bin/lock.sh' &
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
