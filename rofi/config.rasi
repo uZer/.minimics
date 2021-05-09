@@ -1,6 +1,4 @@
 configuration {
-	font: "MonacoB 12";
-	hide-scrollbar: true;
-	color-normal: "argb:00000000, argb:FFfdf6e3, argb:00859900, argb:ff2aa198, argb:fffdf6e3";
-	color-window: "argb:E4002b36, argb:D0002b36, argb:00fdf6e3";
+
 }
+@import "~/.cache/wal/colors-rofi-dark"

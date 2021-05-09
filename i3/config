@@ -10,20 +10,12 @@ set $mod Mod4
 floating_modifier $mod
 
 # Font
-# font pango:pragmataproforpowerline 9
 font pango:roboto 10
-# font pango:hurmitnerdfontmedium 9
-
-###################
-## WINDOW LAYOUT ##
-###################
-# workspace_layout tabbed
 
 #################
 ## KEY BINDING ##
 #################
 # start a terminal
-# bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+Return exec terminator
 
 # start a browser
@@ -37,11 +29,9 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Tab scratchpad show
 bindsym $mod+Shift+Tab move scratchpad
-# set $i3t_alt_tab        ~/.i3/i3t.py n
-# set $i3t_alt_shift_tab  ~/.i3/i3t.py p
 
 # start dmenu (a program launcher)
-bindsym $mod+d          exec --no-startup-id rofi -show run -lines 3 -eh 2 -bw 0 -width 100 -padding 400
+bindsym $mod+d          exec --no-startup-id rofi -show run -lines 3 -eh 2 -bw 0 -width 400 -padding 400
 bindsym $mod+BackSpace  exec --no-startup-id passmenu   --type -p '#' -fn 'roboto-mono-12' -i -sb '#6c71c4' -nb '#002b36' -sf '#002b36' -nf '#586e75' -x 50% -y 50% -w 500 -l 200 -dim 0.8
 bindsym Print           exec --no-startup-id deepin-screenshot
 
@@ -50,7 +40,7 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+m exec /home/$USER/.i3/lock.sh
+bindsym $mod+m exec /home/$USER/.minimics/bin/lock.sh
 # bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -97,15 +87,12 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
-# bindsym $mod+a focus parent
-
 # Workspace management
 
 ## Naming
-set $workspace10 "10:"
-set $workspace11 "11:"
-set $workspace12 "12:"
+set $workspace10 "10:"
+set $workspace11 "11:"
+set $workspace12 "12:ﭮ"
 set $workspace13 "13:"
 set $workspace14 "14:"
 set $workspace15 "15:"
@@ -166,16 +153,12 @@ for_window [class="^.*control"]      floating enable
 for_window [class="^.*statistics"]   floating enable
 for_window [title="^.*Preferences$"] floating enable
 
-for_window [class="^Atom$"]       $workspace10
-for_window [class="^Thunderbird"] $workspace11
-for_window [class="^Rocketchat"]  $workspace12
-for_window [class="^Spotify$"]    $workspace13
-for_window [class="^Slack$"]      $workspace14
-assign [class="^Atom$"]         $workspace10
-assign [class="^Thunderbird$"]  $workspace11
-assign [class="^Rocketchat$"]   $workspace12
-assign [class="^spotify$"]      $workspace13
-assign [class="^Slack$"]        $workspace14
+for_window [class="^discord"]   move to workspace $workspace12
+for_window [class="^Spotify$"]  move to workspace $workspace13
+for_window [class="^Slack$"]    move to workspace $workspace14
+assign     [class="^discord$"]  $workspace12
+assign     [class="^Spotify$"]  $workspace13
+assign     [class="^Slack$"]    $workspace14
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -202,27 +185,15 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-bindsym XF86Display exec ~/.i3/screen.sh
+bindsym XF86Display exec ~/.minimics/bin/screen.sh
 
 ###########
 ## Audio ##
 ###########
 
-set $volumepath ~/.i3/volume.sh
-set $statuscmd i3status
-
-# Signal used to update the status line
-#   i3blocks uses SIGRTMIN+10 by default
-#   i3status uses SIGUSR1 by default
-set $statussig SIGUSR1
-
 # Amount to increase/decrease volume as a percentage
+set $volumepath ~/.minimics/bin/volume.sh
 set $volumestep 5
-
-# Symbolic name for sink (numeric index not supported)
-#   Recommended: comment out this setting and omit the -s option to use default sink
-#   List sink names: pacmd list-sinks | awk -F "[<>]" '/^\s+name: <.*>/{print $2}'
-#set $sinkname alsa_output.pci-0000_00_1b.0.analog-stereo
 
 # Using pulseaudio-utils (append "-s $sinkname" without quotes to override default sink)
 bindsym XF86AudioRaiseVolume exec $volumepath -np -i $volumestep -t $statuscmd -u $statussig
@@ -242,41 +213,6 @@ bindsym XF86AudioPlay        exec --no-startup-id playerctl play-pause
 # bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
-
-
-##############
-## i3status ##
-##############
-bar {
-    mode dock
-    strip_workspace_numbers yes
-    tray_output primary
-    tray_padding 2
-
-    position top
-    workspace_buttons yes
-
-    i3bar_command i3bar
-    # i3bar_command i3bar -t
-
-    # height 22
-    status_command i3status | ~/ypi.scripts/show_argent.sh | ~/ypi.scripts/pystatus.py
-    # status_command i3status | ~/ypi.scripts/pystatus.py
-    separator_symbol "  "
-    colors {
-      # background          #001b26ff
-      background          #002530ff
-      statusline          #fdf6e3
-      separator           #586e75
-
-      #type              border      background  text
-      focused_workspace  #859900     #859900     #fdf6e3
-      active_workspace   #002b36     #002b36     #fdf6e3
-      inactive_workspace #002b36     #002b36     #fdf6e3
-      urgent_workspace   #002b36     #002b36     #fdf6e3
-  }
-}
-
 hide_edge_borders both
 
 # class                  border  backgr. text    indicator child_border
@@ -287,24 +223,21 @@ client.urgent           #cd989a #cb4b16 #586e75 #586e75
 client.background       #073642
 client.placeholder      #000000 #0c0c0c #ffffff #002b36
 
-# client.focused          #028163 #028163 #028163 #028163 #028163
-# client.focused_inactive #ebedf8 #ebedf8 #ebedf8 #ebedf8 #ebedf8
-# client.unfocused        #ebedf8 #ebedf8 #ebedf8 #ebedf8 #ebedf8
-# client.urgent           #c7a46d #c7a46d #c7a46d #c7a46d #c7a46d
-# client.placeholder      #000000 #000000 #000000 #000000 #000000
-
 # Wallpaper
-#exec --no-startup-id feh --bg-fill ~/.minimics/i3/i3/wallpaper
-exec --no-startup-id nitrogen --restore
-exec --no-startup-id xautolock -time 95 -locker '$HOME/.i3/lock.sh' &
-exec --no-startup-id nm-applet
-# exec --no-startup-id redshift-gtk
-exec --no-startup-id blueberry-tray
-exec --no-startup-id pasystray
-exec --no-startup-id volctl
-exec --no-startup-id dropbox
-exec --no-startup-id xfce4-clipman
+exec --no-startup-id $HOME/.minimics/polybar/launch.sh
 exec --no-startup-id picom --config $HOME/.config/picom/picom.conf
+exec --no-startup-id $HOME/.minimics/i3/i3/colors.sh restore
+exec --no-startup-id xautolock -time 95 -locker '$HOME/.i3/lock.sh' &
+exec --no-startup-id xfce4-clipman
+exec --no-startup-id nm-applet
+exec --no-startup-id dropbox
+exec --no-startup-id xset r rate 170 55
+#exec --no-startup-id feh --bg-fill ~/.minimics/i3/i3/wallpaper
+# exec --no-startup-id nitrogen --restore
+# exec --no-startup-id pasystray
+# exec --no-startup-id volctl
+# exec --no-startup-id blueberry-tray
+# exec --no-startup-id redshift-gtk
 
 # gaps outer 5
 # gaps inner 8

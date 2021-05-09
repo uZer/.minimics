@@ -1,3 +1,8 @@
+## PYWAL
+(cat ~/.cache/wal/sequences &)
+source ~/.cache/wal/colors-tty.sh
+source ~/.cache/wal/colors.sh
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,27 +10,26 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# ENV
+## ENV
 export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
 export DEFAULT_USER=ypiolet
 export MINIMICS=$HOME/.minimics
 export EDITOR=vim
 export GOPATH="$HOME/.go"
 
-# OH MY ZSH
+## OH MY ZSH
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM="$MINIMICS/zsh/custom"
 plugins=(vundle nmap screen taskwarrior cp fzf sudo history systemd \
          aws docker docker-compose git node npm z helm kubectl terraform \
          ssh-agent golang zsh-syntax-highlighting)
-
-# VISUAL
-#ZSH_THEME="agnoster"
-#ZSH_THEME="jnrowe"
-#ZSH_THEME="gianu"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+DISABLE_UPDATE_PROMPT="true"
+source $ZSH/oh-my-zsh.sh
+source $ZSH/plugins/z/z.sh
 
+## Powerlevel10k
 # POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
 # POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
 # POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
@@ -68,40 +72,26 @@ typeset -g POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
 typeset -g POWERLEVEL9K_EMPTY_LINE_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
 export ZLE_RPROMPT_INDENT=0
 
-eval `dircolors ~/.minimics/dircolors/solarized/dircolors.256dark`
+# export LESS_TERMCAP_mb=$(printf "\e[1;31m")
+# export LESS_TERMCAP_md=$(printf "\e[1;31m")
+# export LESS_TERMCAP_me=$(printf "\e[0m")
+# export LESS_TERMCAP_se=$(printf "\e[0m")
+# export LESS_TERMCAP_so=$(printf "\e[1;44;33m")
+# export LESS_TERMCAP_ue=$(printf "\e[0m")
+# export LESS_TERMCAP_us=$(printf "\e[1;32m")
+# export ZSH_THEME_TERM_TAB_TITLE_IDLE="$HOSTNAME"
+# export ZSH_THEME_TERM_TERM_TITLE_IDLE="$HOSTNAME"
+# export ZSH_THEME_TERM_TITLE_IDLE="$HOSTNAME"
 
-export LESS_TERMCAP_mb=$(printf "\e[1;31m")
-export LESS_TERMCAP_md=$(printf "\e[1;31m")
-export LESS_TERMCAP_me=$(printf "\e[0m")
-export LESS_TERMCAP_se=$(printf "\e[0m")
-export LESS_TERMCAP_so=$(printf "\e[1;44;33m")
-export LESS_TERMCAP_ue=$(printf "\e[0m")
-export LESS_TERMCAP_us=$(printf "\e[1;32m")
-export ZSH_THEME_TERM_TAB_TITLE_IDLE="$HOSTNAME"
-export ZSH_THEME_TERM_TERM_TITLE_IDLE="$HOSTNAME"
-export ZSH_THEME_TERM_TITLE_IDLE="$HOSTNAME"
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
- --color=fg:#586e75,bg:-1,hl:#859900
- --color=fg+:#93a1a1,bg+:#073642,hl+:#859900
- --color=info:#073642,prompt:#2aa198,pointer:#002b36
- --color=marker:#d33682,spinner:#2aa198,header:#93a1a1'
-
-# BEHAVIOR
-# DISABLE_AUTO_UPDATE="true"
-# DISABLE_CORRECTION="true"
-# CASE_SENSITIVE="true"
+# History
 HIST_STAMPS="yyyy-mm-dd"
 SAVEHIST=10000000
-DISABLE_UPDATE_PROMPT="true"
 
-source $ZSH/oh-my-zsh.sh
-source $ZSH/plugins/z/z.sh
-
-# SPICING THINGS UP WITH ALIASES
+# Aliases
 source $MINIMICS/aliases/aliases
 source $HOME/.aliases.local
 
-# SPICING THINGS UP WITH PACKS
+# Autocompletion
 autoload -U zmv
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /home/ypiolet/.bin/mc mc
