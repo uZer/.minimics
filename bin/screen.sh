@@ -1,126 +1,150 @@
 #!/bin/sh
-# Also edit /usr/share/sddm/scripts/Xsetup
+#
+# Manage screens
 # Type xrandr to get correct screen names
-intern=eDP1
-extern=HDMI2
-dockscreen1=DP2-1
-dockscreen2=DP2-2
-dockscreen3=DP2-3
-# code=split
-mode=clone
-splitresolution="1366x768"
 
-# Screen position on the desk, left to right:
-# HDMI: intern - extern - synergy server screen
-# DOCK: dockscreen1 - dockscreen2 - dockscreen3 - intern
+set -eu
+. "${HOME}"/.minimicsrc
 
-# HDMI #########################################################################
-# 2 screens, internal + HDMI
-if xrandr | grep "$extern connected"; then
-  if [ ${mode} == "clone" ]; then
-    xrandr \
-      --output "$intern" --auto \
-      --output "$extern" --auto --left-of "$intern" --same-as "$intern" --mode ${splitresolution} \
-      --output "$dockscreen1" --off \
-      --output "$dockscreen2" --off \
-      --output "$dockscreen3" --off
-  else
-    xrandr \
-      --output "$intern" --auto \
-      --output "$extern" --auto --above "$intern" \
-      --output "$dockscreen1" --off \
-      --output "$dockscreen2" --off \
-      --output "$dockscreen3" --off
-  fi
-    # killall synergyc > /dev/null 2>&1
-    # synergyc -n ovoid synergyserver.local
-      # --output "$extern" --auto --left-of "$intern" --same-as "$intern" --mode 1920x1080 \
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
 
-# LENOVO DOCK ##################################################################
-# 2 screens, internal + DP2-1
-elif xrandr | grep "$dockscreen1 connected" \
-  && xrandr | grep "$dockscreen2 disconnected" \
-  && xrandr | grep "$dockscreen3 disconnected"; then
-    xrandr \
-      --output "$intern" --auto \
-      --output "$extern" --off \
-      --output "$dockscreen1" --auto --left-of "$intern" \
-      --output "$dockscreen2" --off
-      --output "$dockscreen3" --off
-    # killall synergyc > /dev/null 2>&1
+###################
+## CONFIGURATION ##
+###################
 
-# 2 screens, internal + DP2-2
-elif xrandr | grep "$dockscreen1 disconnected" \
-  && xrandr | grep "$dockscreen2 connected" \
-  && xrandr | grep "$dockscreen3 disconnected"; then
-    xrandr \
-      --output "$intern" --auto \
-      --output "$extern" --off \
-      --output "$dockscreen1" --off \
-      --output "$dockscreen2" --auto --left-of "$intern" \
-      --output "$dockscreen3" --off
-    # killall synergyc > /dev/null 2>&1
+# Configure screens
+screen1_name="${MINIMICS_SCREEN1_NAME:-eDP1}"
+screen1_resolution="${MINIMICS_SCREEN1_RESOLUTION:-1366x768}"
+screen2_name="${MINIMICS_SCREEN2_NAME:-HDMI2}"
+screen2_resolution="${MINIMICS_SCREEN2_RESOLUTION:-1920x1080}"
 
-# 2 screens, internal + DP2-3
-elif xrandr | grep "$dockscreen1 disconnected" \
-  && xrandr | grep "$dockscreen2 disconnected" \
-  && xrandr | grep "$dockscreen3 connected"; then
-    xrandr \
-      --output "$intern" --auto \
-      --output "$extern" --off \
-      --output "$dockscreen1" --off \
-      --output "$dockscreen2" --off \
-      --output "$dockscreen3" --auto --left-of "$intern"
-    # killall synergyc > /dev/null 2>&1
+# Position: left-of, right-of, above, below
+screen2_position="${MINIMICS_SCREEN2_POSITION:-left-of}"
 
-# 3 screens, internal + DP2-1 + DP2-2
-elif xrandr | grep "$dockscreen1 connected" \
-  && xrandr | grep "$dockscreen2 connected" \
-  && xrandr | grep "$dockscreen3 disconnected"; then
-    echo "3 screens, internal + DP2-1 + DP2-2"
-    xrandr \
-      --output "$intern" --auto \
-      --output "$extern" --off \
-      --output "$dockscreen1" --auto --left-of "$intern" \
-      --output "$dockscreen2" --auto --left-of "$dockscreen1" \
-      --output "$dockscreen3" --off
-    # killall synergyc > /dev/null 2>&1
+# Split or clone by default
+mode=${1:-dual_split}
 
-# 3 screens, internal + DP2-2 + DP2-3
-elif xrandr | grep "$dockscreen1 disconnected" \
-  && xrandr | grep "$dockscreen2 connected" \
-  && xrandr | grep "$dockscreen3 connected"; then
-    echo "3 screens, internal + DP2-2 + DP2-3"
-    xrandr \
-      --output "$intern" --auto \
-      --output "$extern" --off \
-      --output "$dockscreen1" --off \
-      --output "$dockscreen2" --auto --left-of "$dockscreen3" \
-      --output "$dockscreen3" --auto --left-of "$intern"
-    # killall synergyc > /dev/null 2>&1
+# Halp
+display_help () {
+  cat << EOF
+Configure displays with xrandr.
 
-# 3 screens, internal + DP2-1 + DP2-3
-elif xrandr | grep "$dockscreen1 connected" \
-  && xrandr | grep "$dockscreen2 disconnected" \
-  && xrandr | grep "$dockscreen3 connected"; then
-    echo "3 screens, internal + DP2-1 + DP2-3"
-    xrandr \
-      --output "$intern" --auto \
-      --output "$extern" --off \
-      --output "$dockscreen3" --auto --left-of "$intern" \
-      --output "$dockscreen1" --auto --left-of "$dockscreen3" \
-      --output "$dockscreen2" --off
-    # killall synergyc > /dev/null 2>&1
+If only one screen is connected, this script will disable other screens and
+set the resolution specified in the configuration.
 
-# JUST LAPTOP ##################################################################
-else
-    xrandr \
-      --output "$intern" --auto \
-      --output "$extern" --off \
-      --output "$dockscreen1" --off \
-      --output "$dockscreen2" --off \
-      --output "$dockscreen3" --off
-    # killall synergyc > /dev/null 2>&1
+Otherwise, you can choose a display mode:
+
+ single_screen1,
+ single_screen2,
+ dual_split,
+ dual_clone
+
+Example:
+
+$0 dual_split
+EOF
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+
+#################
+## SCREEN MODS ##
+#################
+
+# Disable screen 2, only use screen 1
+single_screen1 () {
+  xrandr \
+    --output "${screen1_name}" --auto \
+      --mode ${screen1_resolution} \
+      --primary \
+    --output "${screen2_name}" --auto \
+      --mode ${screen2_resolution} \
+    > /dev/null 2>&1
+  exit 0
+}
+
+# Disable screen 1, only use screen 2
+single_screen2 () {
+  xrandr \
+    --output "${screen1_name}" --off \
+    --output "${screen2_name}" --auto \
+      --mode ${screen2_resolution} \
+      --primary \
+    > /dev/null 2>&1
+  exit 0
+}
+
+# Copy screen1 on screen2, using screen1 resolution
+dual_clone () {
+  xrandr \
+    --output "${screen1_name}" --auto \
+      --mode ${screen1_resolution} \
+      --primary \
+    --output "${screen2_name}" --auto \
+      --mode ${screen1_resolution} \
+      --same-as "${screen1_name}" \
+      --${screen2_position} "${screen1_name}" \
+    > /dev/null 2>&1
+  exit 0
+}
+
+# Use two independent screens
+dual_split () {
+  xrandr \
+    --output "${screen1_name}" --auto \
+      --mode ${screen1_resolution} \
+      --primary \
+    --output "${screen2_name}" --auto \
+      --mode ${screen2_resolution} \
+      --${screen2_position} "${screen1_name}" \
+    > /dev/null 2>&1
+  exit 0
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+
+################
+## ACTIVATION ##
+################
+
+if [ "${mode}" = "help" ] || [ "${mode}" = "-h" ] || [ "${mode}" = "--help" ]; then
+  display_help
+  exit 4
 fi
 
-nitrogen --restore 2>&1 > /dev/null
+# Detect screens and force a mode if only one screen is connected
+detect=$(xrandr)
+if true \
+  && echo "${detect}" | grep "${screen1_name} connected" > /dev/null 2>&1 \
+  && echo "${detect}" | grep "${screen2_name} disconnected" > /dev/null 2>&1; then
+  single_screen1
+elif true \
+  && echo "${detect}" | grep "${screen1_name} disconnected" > /dev/null 2>&1 \
+  && echo "${detect}" | grep "${screen2_name} connected" > /dev/null 2>&1; then
+  single_screen2
+fi
+
+# Otherwise, let the user choose
+case ${mode} in
+
+  dual_clone)
+    dual_clone
+    ;;
+
+  dual_split)
+    dual_split
+    ;;
+
+  single_screen1)
+    single_screen1
+    ;;
+
+  single_screen2)
+    single_screen2
+    ;;
+
+  *)
+    echo "ERROR: unknown mode ${mode}"
+    exit 2
+    ;;
+esac
