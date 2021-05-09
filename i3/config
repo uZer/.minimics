@@ -231,7 +231,7 @@ exec --no-startup-id xautolock -time 95 -locker '$HOME/.minimics/bin/lock.sh' &
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
-exec --no-startup-id xset r rate 170 55
+exec --no-startup-id xset r rate 180 55
 #exec --no-startup-id feh --bg-fill ~/.minimics/i3/i3/wallpaper
 # exec --no-startup-id nitrogen --restore
 # exec --no-startup-id pasystray
