@@ -1,5 +1,3 @@
-"" Uncomment if you want to use your BASE16 theme
-"" Uncomment if you want to use your BASE16 theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Global
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -40,9 +38,10 @@ Plugin 'VundleVim/Vundle.vim'
 " APPEARANCE PLUGINS
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'Yggdroot/indentLine'
+" Plugin 'dylanaraps/wal.vim'
+" Plugin 'altercation/vim-colors-solarized'
 
 " TOOLS
 Plugin 'scrooloose/nerdtree'
@@ -84,7 +83,6 @@ Plugin 'elzr/vim-json'
 Plugin 'google/vim-jsonnet'
 Plugin 'davidgranstrom/scnvim'
 Plugin 'fatih/vim-go'
-
 
 " Plugin 'hashivim/vim-consul'
 " Plugin 'mustache/vim-mustache-handlebars'
@@ -150,16 +148,8 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Disable folding
 set nofoldenable
-
-" Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-" highlight ExtraWhitespace   ctermbg=1 guibg=#382424
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=1 guibg=red
-
-"highlight ErrorMsg         ctermbg=darkred guibg=#382424
-"match ErrorMsg '\%>80v.\+'
-" autocmd ColorScheme * highlight ErrorMsg        ctermbg=red guibg=red
+set foldcolumn=1
 
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
@@ -192,22 +182,30 @@ let g:ansible_name_highlight = 'b'
 let g:ansible_attribute_highlight = "ob"
 let g:ansible_unindent_after_newline = 1
 
-" Colorscheme
-set background=dark
-
-"" Uncomment if you have a solarized terminal
-"" (eg: solarized for putty, gnome terminal solarized colors...)
-"let g:airline_theme='powerlineish'
-let g:airline_theme='solarized'
-let g:solarized_termtrans='1'
-
+"" COLORSCHEME
+" set background=dark
+" let g:solarized_termtrans='1'
 " colorscheme solarized
+" colorscheme wal
 colorscheme default
 if &diff
-  colorscheme darkblue
+  colorscheme default
 endif
 
-highlight SignColumn ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
+"" AIRLINE COLORSCHEME
+let g:airline_theme='solarized'
+
+"" COLORSCHEME FIX
+hi ColorColumn      ctermbg=0    ctermfg=6    cterm=NONE guibg=0    guifg=6   gui=NONE
+hi DiffAdd          ctermbg=2    ctermfg=0
+hi DiffChange       ctermbg=0    ctermfg=8
+hi DiffDelete       ctermbg=6    ctermfg=0
+hi DiffText         ctermbg=2    ctermfg=0
+hi ExtraWhitespace  ctermbg=6                            guibg=6
+hi FoldColumn       ctermbg=NONE ctermfg=15   cterm=NONE guibg=NONE guifg=15   gui=NONE
+hi Folded           ctermbg=NONE ctermfg=15
+hi SignColumn       ctermbg=NONE              cterm=NONE guibg=NONE            gui=NONE
+hi VertSplit        ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related
@@ -227,8 +225,8 @@ set tabstop=2
 " set tw=79
 set ai "Auto indent
 set si "Smart indent
-"set wrap "Wrap lines
-" set colorcolumn=81
+set wrap
+set colorcolumn=81
 set showmatch
 set incsearch
 set ignorecase
@@ -612,7 +610,6 @@ let g:go_metalinter_autosave = 1
 "" ADD ASYNC UPDATES
 set updatetime=100
 
-highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE
 " Prevent other buffers to replace nerdtree
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
