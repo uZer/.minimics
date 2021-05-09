@@ -90,6 +90,8 @@ export ZLE_RPROMPT_INDENT=0
 HIST_STAMPS="yyyy-mm-dd"
 SAVEHIST=10000000
 
+# FZF
+export FZF_CTRL_T_OPTS="--select-1 --exit-0"
 # Aliases
 source $MINIMICS/aliases/aliases
 source $HOME/.aliases.local
