@@ -31,8 +31,8 @@ bindsym $mod+Tab scratchpad show
 bindsym $mod+Shift+Tab move scratchpad
 
 # start dmenu (a program launcher)
-bindsym $mod+d          exec --no-startup-id rofi -show run -lines 3 -eh 2 -bw 0 -width 400 -padding 400
-bindsym $mod+BackSpace  exec --no-startup-id passmenu   --type -p '#' -fn 'roboto-mono-12' -i -sb '#6c71c4' -nb '#002b36' -sf '#002b36' -nf '#586e75' -x 50% -y 50% -w 500 -l 200 -dim 0.8
+bindsym $mod+d          exec --no-startup-id ~/.minimics/bin/rofi_apps.sh
+bindsym $mod+BackSpace  exec --no-startup-id ~/.minimics/bin/rofi_pass.sh
 bindsym Print           exec --no-startup-id deepin-screenshot
 
 # change focus
@@ -41,7 +41,6 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 bindsym $mod+m exec /home/$USER/.minimics/bin/lock.sh
-# bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -224,15 +223,14 @@ client.background       #073642
 client.placeholder      #000000 #0c0c0c #ffffff #002b36
 
 # Wallpaper
-exec --no-startup-id $HOME/.minimics/bin/polybar.sh
-exec --no-startup-id picom --config $HOME/.config/picom/picom.conf
-exec --no-startup-id $HOME/.minimics/bin/pywal.sh restore
-exec --no-startup-id xautolock -time 95 -locker '$HOME/.minimics/bin/lock.sh' &
+exec --no-startup-id ~/.minimics/bin/polybar.sh
+exec --no-startup-id ~/.minimics/bin/pywal.sh restore
+exec --no-startup-id picom
+exec --no-startup-id xautolock -time 95 -locker '~/.minimics/bin/lock.sh' &
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
 exec --no-startup-id xset r rate 180 55
-#exec --no-startup-id feh --bg-fill ~/.minimics/i3/i3/wallpaper
 # exec --no-startup-id nitrogen --restore
 # exec --no-startup-id pasystray
 # exec --no-startup-id volctl

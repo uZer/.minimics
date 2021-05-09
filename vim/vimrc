@@ -44,8 +44,8 @@ Plugin 'Yggdroot/indentLine'
 " Plugin 'altercation/vim-colors-solarized'
 
 " TOOLS
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'preservim/nerdtree'
+Plugin 'preservim/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'mhinz/vim-signify'
@@ -54,6 +54,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'Raimondi/delimitMate'
 Plugin 'preservim/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'moll/vim-bbye'
+Plugin 'aymericbeaumet/vim-symlink'
 
 " SYNTAX CHECK AND COMPLETION
 Plugin 'scrooloose/syntastic'
@@ -206,6 +208,8 @@ hi FoldColumn       ctermbg=NONE ctermfg=15   cterm=NONE guibg=NONE guifg=15   g
 hi Folded           ctermbg=NONE ctermfg=15
 hi SignColumn       ctermbg=NONE              cterm=NONE guibg=NONE            gui=NONE
 hi VertSplit        ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
+hi NERDTreeDir      ctermbg=NONE ctermfg=1    cterm=bold guibg=NONE guifg=1    gui=NONE
+hi NERDTreeExecFile                           cterm=bold
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related

@@ -1,10 +1,23 @@
+## minimics .zshrc
+##
+## Uses oh-my-zsh, powerlevel10k, z, aliases, pywal, custom env vars, fzf,
+## autocompletion and custom aliases
+
 ## PYWAL
-# only use pywal when X exists
+# only trigger pywal when X exists
+# FIXME: support wayland
 if xhost >& /dev/null ; then
   (cat ~/.cache/wal/sequences &)
   source ~/.cache/wal/colors-tty.sh
   source ~/.cache/wal/colors.sh
 fi
+
+## ENV
+export DEFAULT_USER=ypiolet
+export EDITOR=nvim
+export MINIMICS=$HOME/.minimics
+export PATH="$HOME/.local/bin:$PATH"
+export GOPATH="$HOME/.go"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -13,14 +26,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-## ENV
-export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
-export DEFAULT_USER=ypiolet
-export MINIMICS=$HOME/.minimics
-export EDITOR=nvim
-export GOPATH="$HOME/.go"
-
-## OH MY ZSH
+## OH-MY-ZSH
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM="$MINIMICS/zsh/custom"
@@ -28,16 +34,12 @@ plugins=(vundle nmap screen taskwarrior cp fzf sudo history systemd \
          aws docker docker-compose git node npm z helm kubectl terraform \
          ssh-agent golang zsh-syntax-highlighting)
 ZSH_THEME="powerlevel10k/powerlevel10k"
-DISABLE_UPDATE_PROMPT="true"
+
+## Z
 source $ZSH/oh-my-zsh.sh
 source $ZSH/plugins/z/z.sh
 
-## Powerlevel10k
-# POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
-# POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
-# POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$'\uE0BE'
-# POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=$'\uE0B0'
+## POWERLEVEL10K
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
@@ -74,29 +76,22 @@ typeset -g POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
 # Left prompt terminator for lines without any segments.
 typeset -g POWERLEVEL9K_EMPTY_LINE_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
 export ZLE_RPROMPT_INDENT=0
+DISABLE_UPDATE_PROMPT="true"
 
-# export LESS_TERMCAP_mb=$(printf "\e[1;31m")
-# export LESS_TERMCAP_md=$(printf "\e[1;31m")
-# export LESS_TERMCAP_me=$(printf "\e[0m")
-# export LESS_TERMCAP_se=$(printf "\e[0m")
-# export LESS_TERMCAP_so=$(printf "\e[1;44;33m")
-# export LESS_TERMCAP_ue=$(printf "\e[0m")
-# export LESS_TERMCAP_us=$(printf "\e[1;32m")
-# export ZSH_THEME_TERM_TAB_TITLE_IDLE="$HOSTNAME"
-# export ZSH_THEME_TERM_TERM_TITLE_IDLE="$HOSTNAME"
-# export ZSH_THEME_TERM_TITLE_IDLE="$HOSTNAME"
-
-# History
+## HISTORY
 HIST_STAMPS="yyyy-mm-dd"
 SAVEHIST=10000000
 
-# FZF
+## FZF
 export FZF_CTRL_T_OPTS="--select-1 --exit-0"
-# Aliases
+
+## ALIASES
 source $MINIMICS/aliases/aliases
 source $HOME/.aliases.local
 
-# Autocompletion
+## AUTOCOMPLETION
+# main
 autoload -U zmv
 autoload -U +X bashcompinit && bashcompinit
+# minio
 complete -o nospace -C /home/ypiolet/.bin/mc mc
