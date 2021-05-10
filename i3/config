@@ -96,15 +96,15 @@ set $workspace13 "13:"
 set $workspace14 "14:"
 set $workspace15 "15:"
 set $workspace16 "16:"
-set $workspace101 "101:⒈"
-set $workspace102 "102:⒉"
-set $workspace103 "103:⒊"
-set $workspace104 "104:⒋"
-set $workspace105 "105:⒌"
-set $workspace106 "106:⒍"
-set $workspace107 "107:⒎"
-set $workspace108 "108:⒏"
-set $workspace109 "109:⒐"
+set $workspace101 "101:1"
+set $workspace102 "102:2"
+set $workspace103 "103:3"
+set $workspace104 "104:4"
+set $workspace105 "105:5"
+set $workspace106 "106:6"
+set $workspace107 "107:7"
+set $workspace108 "108:8"
+set $workspace109 "109:9"
 
 ## Switch to workspace
 bindsym $mod+0 workspace $workspace10
@@ -229,7 +229,7 @@ exec --no-startup-id xautolock -time 95 -locker '~/.minimics/bin/lock.sh' &
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
-exec --no-startup-id xset r rate 180 55
+exec --no-startup-id xset r rate 190 55
 # exec --no-startup-id nitrogen --restore
 # exec --no-startup-id pasystray
 # exec --no-startup-id volctl
