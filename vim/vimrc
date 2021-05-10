@@ -37,10 +37,10 @@ Plugin 'VundleVim/Vundle.vim'
 
 " APPEARANCE PLUGINS
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'Yggdroot/indentLine'
 Plugin 'dylanaraps/wal.vim'
+" Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'altercation/vim-colors-solarized'
 
 " TOOLS
@@ -195,7 +195,7 @@ colorscheme wal
 " endif
 
 "" AIRLINE COLORSCHEME
-let g:airline_theme='solarized'
+let g:airline_theme='wal'
 
 "" COLORSCHEME FIX
 hi ColorColumn      ctermbg=0    ctermfg=6    cterm=NONE guibg=0    guifg=6   gui=NONE
