@@ -25,8 +25,12 @@ else
     exit 1
   fi
 
-  # Run pywal
-  wal -q -i "${MINIMICS_WALLS}"
+  # Use first argument as theme if provided
+  if [ ${mode} != "normal" ]; then
+    wal -q -f "${1}"
+  else
+    wal -q -i "${MINIMICS_WALLS}" --saturate 0.35
+  fi
 
 fi
 
