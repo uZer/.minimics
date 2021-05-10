@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+. "${HOME}"/.minimicsrc
+
 dir="$HOME/.config/polybar"
 style="advancedblocks"
 

@@ -40,7 +40,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'Yggdroot/indentLine'
-" Plugin 'dylanaraps/wal.vim'
+Plugin 'dylanaraps/wal.vim'
 " Plugin 'altercation/vim-colors-solarized'
 
 " TOOLS
@@ -189,10 +189,10 @@ let g:ansible_unindent_after_newline = 1
 " let g:solarized_termtrans='1'
 " colorscheme solarized
 " colorscheme wal
-colorscheme default
-if &diff
-  colorscheme default
-endif
+colorscheme wal
+" if &diff
+"   colorscheme default
+" endif
 
 "" AIRLINE COLORSCHEME
 let g:airline_theme='solarized'
