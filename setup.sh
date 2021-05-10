@@ -13,7 +13,6 @@ INST_HTOP="true"    # Enable htop config install
 INST_BASH="false"   # Enable bash config install
 INST_DUNST="true"   # Enable Dunst config install
 INST_TW="true"      # Enable Taskwarrior config install
-# TODO Make params
 
 # Dotfiles path
 MIN_PATH="$HOME/.minimics"
@@ -218,6 +217,11 @@ mkdir -p $HOME/.config > /dev/null 2>&1
 cd $MIN_PATH
 git submodule init
 git submodule update
+
+# Copy configuration template if needed
+if [ ! -f $HOME/.minimicsrc ]; then
+  cp minimicsrc.dist $HOME/.minimicsrc
+fi
 
 # Install other vim bundles
 # vim +BundleInstall +qall

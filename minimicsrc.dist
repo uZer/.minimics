@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# Minimics configuration file. Values here are used by default
+# You should copy this file to your home directory
+
+# Folder containing your wallpapers, or single wallpaper file PATH
+export MINIMICS_WALLS=~/path/to/your/wallpapers
+
+# Screen configuration. Obtain screen names and resolutions with xrandr
+export MINIMICS_SCREEN1_NAME=eDP1
+export MINIMICS_SCREEN1_RESOLUTION=1920x1080
+export MINIMICS_SCREEN2_NAME=
+export MINIMICS_SCREEN2_RESOLUTION=
+
+# Position of screen2 next to screen1. One of left-of, right-of, above, below
+export MINIMICS_SCREEN2_POSITION=above
+
+# Hardware identifiers / network interfaces names
+export MINIMICS_NET_WIRED_INTERFACE=eth0
+export MINIMICS_NET_WIRELESS_INTERFACE=wlan0
+export MINIMICS_BATTERY_NAME=BAT0
+
+# Polybar customization
+export MINIMICS_POLYBAR_FONT1="roboto:pixelsize=10;2"
+export MINIMICS_POLYBAR_FONT2="Iosevka Nerd Font:size=10;2"
+export MINIMICS_POLYBAR_HEIGHT=21
