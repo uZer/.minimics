@@ -20,6 +20,8 @@ last years, please make sure to run setup.sh or replace manually my name in
 
 ## Content
 
+WIP
+
 This bundle contains:
 
 + Git dotfile model (you should customize it with setup script or edit the file)
