@@ -140,7 +140,8 @@ jl() {
   find ${1:-.} -name "*jsonnet" -print0 | xargs -0 -n1 -I % sh -c 'jsonnetfmt --test % || (echo Failed \($?\): % && exit 1)'
 }
 
-alias vim=nvim
+alias vim="nvim"
+alias vimdiff="nvim -d"
 
 alias ssd='systemctl --user stop syncthing.service ; systemctl --user status syncthing.service | cat'
 alias sse='systemctl --user start syncthing.service ; systemctl --user status syncthing.service | cat'
