@@ -75,7 +75,6 @@ Plugin 'robbles/logstash.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'parkr/vim-jekyll'
 Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'pearofducks/ansible-vim'
 Plugin 'rodjek/vim-puppet'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'cespare/vim-toml'
@@ -85,7 +84,7 @@ Plugin 'elzr/vim-json'
 Plugin 'google/vim-jsonnet'
 Plugin 'davidgranstrom/scnvim'
 Plugin 'fatih/vim-go'
-
+" Plugin 'pearofducks/ansible-vim'
 " Plugin 'hashivim/vim-consul'
 " Plugin 'mustache/vim-mustache-handlebars'
 " Plugin 'hashivim/vim-nomadproject'
@@ -400,6 +399,14 @@ inoremap <C-j> <Esc>:m .+1<CR>==gi
 inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" You don't have escape key on my keyboard? No problem
+" Will map double backtick as escape press
+nnoremap `` <ESC>
+vnoremap `` <ESC>gV
+onoremap `` <ESC>
+cnoremap `` <C-C><ESC>
+inoremap `` <ESC>`^
 
 " Turn on/off mouse
 " Enable mouse support
