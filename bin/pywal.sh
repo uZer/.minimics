@@ -29,7 +29,7 @@ else
   if [ ${mode} != "normal" ]; then
     wal -q -f "${1}"
   else
-    wal -q -i "${MINIMICS_WALLS}" --saturate 0.38
+    wal -q -i "${MINIMICS_WALLS}" --iterative --saturate 0.38
   fi
 
 fi

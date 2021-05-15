@@ -3,9 +3,8 @@
 . "${HOME}"/.minimicsrc
 
 dir="$HOME/.config/polybar"
-style="advancedblocks"
 
-launch_bar() {
+launch_bars() {
 	# Terminate already running bar instances
 	killall -q polybar
 
@@ -13,7 +12,8 @@ launch_bar() {
 	while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 	# Launch the bar
-	polybar -q main -c "$dir/$style/config.ini" &
+	polybar -q main -c "$dir/advancedblocks/config.ini" &
+	polybar -q main -c "$dir/advancedblocks/tray.ini" &
 }
 
-launch_bar
+launch_bars

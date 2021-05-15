@@ -24,3 +24,6 @@ export MINIMICS_BATTERY_NAME=BAT0
 export MINIMICS_POLYBAR_FONT1="roboto:pixelsize=10;2"
 export MINIMICS_POLYBAR_FONT2="Iosevka Nerd Font:size=10;2"
 export MINIMICS_POLYBAR_HEIGHT=21
+
+# Weather
+export MINIMICS_CITY=
