@@ -533,13 +533,14 @@ endfunction
 
 " NERDTree specific
 let g:nerdtree_tabs_autofind=1
-" let g:nerdtree_tabs_open_on_console_startup=1 " Launch at start
-" let g:nerdtree_tabs_no_startup_for_diff=1
 let g:NERDTreeWinPos = "left"
 let g:NERDTreeMinimalUI = 1
+let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 let g:NERDTreeHighlightCursorline = 0
 let NERDTreeDirArrowExpandable=""
 let NERDTreeDirArrowCollapsible=""
+" let g:nerdtree_tabs_open_on_console_startup=1 " Launch at start
+" let g:nerdtree_tabs_no_startup_for_diff=1
 
 " For conceal markers.
 " if has('conceal')
@@ -624,3 +625,4 @@ set updatetime=100
 " Prevent other buffers to replace nerdtree
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
