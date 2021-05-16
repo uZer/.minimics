@@ -45,6 +45,20 @@ $0 dual_split
 EOF
 }
 
+# Display available options for rofi applets
+options () {
+  single_screen1=" ;single_screen1"
+  single_screen2=" ;single_screen2"
+  dual_split=" ;dual_split"
+  dual_clone=" ;dual_clone"
+  echo "${single_screen1}\n${single_screen2}\n${dual_split}\n${dual_clone}"
+}
+
+# Reload bars
+reload_bars () {
+  ~/.minimics/bin/polybar.sh
+}
+
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 #################
@@ -94,28 +108,11 @@ dual_split () {
     > /dev/null 2>&1
 }
 
-# Reload bars
-reload_bars () {
-  ~/.minimics/bin/polybar.sh
-}
-
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 ################
 ## ACTIVATION ##
 ################
-
-# Detect screens and force a mode if only one screen is connected
-detect=$(xrandr)
-if true \
-  && echo "${detect}" | grep "${screen1_name} connected" > /dev/null 2>&1 \
-  && echo "${detect}" | grep "${screen2_name} disconnected" > /dev/null 2>&1; then
-  single_screen1
-elif true \
-  && echo "${detect}" | grep "${screen1_name} disconnected" > /dev/null 2>&1 \
-  && echo "${detect}" | grep "${screen2_name} connected" > /dev/null 2>&1; then
-  single_screen2
-fi
 
 # Otherwise, let the user choose
 case ${mode} in
@@ -141,6 +138,11 @@ case ${mode} in
   single_screen2)
     single_screen2
     reload_bars
+    exit 0
+    ;;
+
+  options)
+    options
     exit 0
     ;;
 

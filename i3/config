@@ -183,7 +183,7 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-bindsym XF86Display exec ~/.minimics/bin/screen.sh
+bindsym XF86Display exec ~/.minimics/bin/rofi_screen.sh
 
 ###########
 ## Audio ##
