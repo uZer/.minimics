@@ -229,7 +229,7 @@ exec --no-startup-id picom
 exec --no-startup-id xautolock -time 95 -locker '~/.minimics/bin/lock.sh' &
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
-exec --no-startup-id xset r rate 190 55
+# exec --no-startup-id xset r rate 210 55
 # exec --no-startup-id dropbox-cli start
 # exec --no-startup-id nitrogen --restore
 # exec --no-startup-id pasystray

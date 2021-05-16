@@ -54,11 +54,10 @@ EOF
 # Disable screen 2, only use screen 1
 single_screen1 () {
   xrandr \
+    --output "${screen2_name}" --off \
     --output "${screen1_name}" --auto \
-      --mode ${screen1_resolution} \
       --primary \
-    --output "${screen2_name}" --auto \
-      --mode ${screen2_resolution} \
+      --mode ${screen1_resolution} \
     > /dev/null 2>&1
   exit 0
 }
@@ -68,8 +67,8 @@ single_screen2 () {
   xrandr \
     --output "${screen1_name}" --off \
     --output "${screen2_name}" --auto \
-      --mode ${screen2_resolution} \
       --primary \
+      --mode ${screen2_resolution} \
     > /dev/null 2>&1
   exit 0
 }
@@ -78,12 +77,10 @@ single_screen2 () {
 dual_clone () {
   xrandr \
     --output "${screen1_name}" --auto \
-      --mode ${screen1_resolution} \
       --primary \
-    --output "${screen2_name}" --auto \
       --mode ${screen1_resolution} \
+    --output "${screen2_name}" --auto \
       --same-as "${screen1_name}" \
-      --${screen2_position} "${screen1_name}" \
     > /dev/null 2>&1
   exit 0
 }
@@ -92,8 +89,8 @@ dual_clone () {
 dual_split () {
   xrandr \
     --output "${screen1_name}" --auto \
-      --mode ${screen1_resolution} \
       --primary \
+      --mode ${screen1_resolution} \
     --output "${screen2_name}" --auto \
       --mode ${screen2_resolution} \
       --${screen2_position} "${screen1_name}" \
