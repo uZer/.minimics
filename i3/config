@@ -237,8 +237,8 @@ exec --no-startup-id xset r rate 190 55
 # exec --no-startup-id blueberry-tray
 # exec --no-startup-id redshift-gtk
 
-# gaps outer 5
-# gaps inner 8
+gaps outer 0
+gaps inner 10
 new_window 1pixel
 
 # Focus

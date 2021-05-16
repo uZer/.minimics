@@ -1,49 +1,38 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Global
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" VIM CONFIGURATION ""
 
-" Leader Key
+"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-
+
+" Leader Key is set to space
 let mapleader = " "
-set nocompatible               " be iMproved
 
-" Python path
+" Use python3
 let g:UltiSnipsUsePythonVersion = 3
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:pymode_python = 'python3'
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle Config
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-
 
-""" Vundle plugin manager {{{
-""" Automatically setting up Vundle, taken from
-""" http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc
+"""""""""""""""""""""""
+"" PLUGIN MANAGEMENT ""
+"""""""""""""""""""""""
+
+"" Install Vundle if needed
 let has_vundle=1
 if !filereadable($HOME."/.vim/bundle/Vundle.vim/README.md")
-    echo "Installing Vundle..."
-    echo ""
-    silent !mkdir -p $HOME/.vim/bundle
-    silent !git clone https://github.com/VundleVim/Vundle.vim $HOME/.vim/bundle/Vundle.vim
-    let has_vundle=0
+  echo "Installing Vundle..."
+  echo ""
+  silent !mkdir -p $HOME/.vim/bundle
+  silent !git clone https://github.com/VundleVim/Vundle.vim $HOME/.vim/bundle/Vundle.vim
+  let has_vundle=0
 endif
 
+"" Bootstrap Vundle
 filetype off                                " required to init
 set rtp+=$HOME/.vim/bundle/Vundle.vim       " include vundle
 call vundle#begin()                         " init vundle
-
 Plugin 'VundleVim/Vundle.vim'
 
-""" Plugins """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" APPEARANCE PLUGINS
-Plugin 'vim-airline/vim-airline'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'Yggdroot/indentLine'
-Plugin 'dylanaraps/wal.vim'
-" Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'altercation/vim-colors-solarized'
-
-" TOOLS
+"" Tools
 Plugin 'preservim/nerdtree'
 Plugin 'preservim/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -57,7 +46,15 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'moll/vim-bbye'
 Plugin 'aymericbeaumet/vim-symlink'
 
-" SYNTAX CHECK AND COMPLETION
+"" Appearance
+Plugin 'vim-airline/vim-airline'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'Yggdroot/indentLine'
+Plugin 'dylanaraps/wal.vim'
+" Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'altercation/vim-colors-solarized'
+
+"" Syntax checking and completion
 Plugin 'scrooloose/syntastic'
 if has('nvim')
   Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -70,7 +67,7 @@ Plugin 'shougo/neosnippet'
 Plugin 'shougo/neosnippet-snippets'
 Plugin 'honza/vim-snippets'
 
-" LANGUAGE SPECIFIC
+"" Language specific
 Plugin 'robbles/logstash.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'parkr/vim-jekyll'
@@ -85,6 +82,7 @@ Plugin 'google/vim-jsonnet'
 Plugin 'davidgranstrom/scnvim'
 Plugin 'fatih/vim-go'
 " Plugin 'pearofducks/ansible-vim'
+" Plugin 'chase/vim-ansible-yaml'
 " Plugin 'hashivim/vim-consul'
 " Plugin 'mustache/vim-mustache-handlebars'
 " Plugin 'hashivim/vim-nomadproject'
@@ -94,69 +92,95 @@ Plugin 'fatih/vim-go'
 " Plugin 'hashivim/vim-vaultproject'
 " Plugin 'elixir-editors/vim-elixir'
 " Plugin 'klen/python-mode'
-" Plugin 'chase/vim-ansible-yaml'
 " Plugin 'ClockworkNet/vim-junos-syntax'
 
 call vundle#end()
 
-" Installing plugins the first time, quits when done {{{
+"" Installing plugins the first time, quits when done
 if has_vundle == 0
-    :silent! PluginInstall
-    :qa
+  :silent! PluginInstall
+  :qa
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FileTypes
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-
 
-" Automatic syntax highlighting for files
-filetype plugin indent on
-augroup FileTypeRules
-  autocmd!
-  autocmd BufNewFile,BufRead *.md           set ft=markdown
-  autocmd BufNewFile,BufRead *.tex          set ft=tex
-  autocmd BufNewFile,BufRead *.txt          set ft=sh
-  autocmd BufNewFile,BufRead *.bash*        set ft=sh
-  autocmd BufNewFile,BufRead *.jsonnet      set ft=jsonnet
-  autocmd BufNewFile,BufRead *.libjsonnet   set ft=jsonnet
-augroup END
+""""""""""""
+"" VISUAL ""
+""""""""""""
 
-let g:jsonnet_fmt_on_save = 1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colors, terminal & Visual
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" let g:indentLine_char = ''
-let g:indentLine_char = '▏'
-
-syn on
-if (&term =~ "xterm") || (&term =~ "screen")
-    set t_Co=256
-endif
-" set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-let base16colorspace=256 " Access colors present in 256 colorspace
-" set t_ut= " Redraw background correctly
+"" Encoding
 set encoding=utf-8
 set fileencodings=utf-8,latin2
 
-" How many tenths of a second to blink when matching brackets
+"" Show indentation marks
+let g:indentLine_char = '▏'
+
+"" How many tenths of a second to blink when matching brackets
 set mat=2
 
-" No annoying sound on errors
+"" No annoying sound on errors
 set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
 
+"" Disable folding
 set nofoldenable
-set foldcolumn=1
+set foldcolumn=0
 
+"" Highlight unwanted spaces
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
-" Airline bar
+"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-
+
+""""""""""""
+"" COLORS ""
+""""""""""""
+
+"" COLORSPACE
+syn on
+if (&term =~ "xterm") || (&term =~ "screen")
+  set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+endif
+let base16colorspace=256 " Access colors present in 256 colorspace
+set t_ut= " Redraw background correctly
+
+"" COLORSCHEME
+colorscheme wal
+
+"" AIRLINE COLORSCHEME
+let g:airline_theme='wal'
+
+"" SOLARIZED THEME
+"" This colorscheme is disabled.
+"" You will also have to enable the plugin if you want to use this
+" set background=dark
+" let g:solarized_termtrans='1'
+" colorscheme solarized
+
+"" EXTRA COLORSCHEME HIGHLIGHT FIXES
+hi ColorColumn      ctermbg=0    ctermfg=6    cterm=NONE guibg=0    guifg=6   gui=NONE
+hi DiffAdd          ctermbg=2    ctermfg=0
+hi DiffChange       ctermbg=0    ctermfg=8
+hi DiffDelete       ctermbg=6    ctermfg=0
+hi DiffText         ctermbg=2    ctermfg=0
+hi ExtraWhitespace  ctermbg=6                            guibg=6
+hi FoldColumn       ctermbg=NONE ctermfg=15   cterm=NONE guibg=NONE guifg=15   gui=NONE
+hi Folded           ctermbg=NONE ctermfg=15
+hi SignColumn       ctermbg=NONE              cterm=NONE guibg=NONE            gui=NONE
+hi VertSplit        ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
+hi NERDTreeDir      ctermbg=NONE ctermfg=1    cterm=bold guibg=NONE guifg=1    gui=NONE
+hi NERDTreeExecFile                           cterm=bold
+
+"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-
+
+"""""""""""""""""""""""""""""""""""
+"" PLUGIN SPECIFIC CONFIGURATION ""
+"""""""""""""""""""""""""""""""""""
+
+"" PLUGIN: airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_inactive_collapse=1
 let g:airline_mode_map = {
@@ -170,45 +194,75 @@ let g:airline_mode_map = {
       \ 's'  : 'S',
       \ 'S'  : 'S',
       \ }
-
-" Use Powerline Symbols if your fonts are patched
 let g:airline_powerline_fonts = 1
 let g:airline_skip_empty_sections = 1
 
-" yaml indentation
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab foldmethod=indent
 
-" let g:ansible_unindent_after_newline = 1
+"" PLUGIN: ansible
 let g:ansible_name_highlight = 'b'
 let g:ansible_attribute_highlight = "ob"
 let g:ansible_unindent_after_newline = 1
 
-"" COLORSCHEME
-" set background=dark
-" let g:solarized_termtrans='1'
-" colorscheme solarized
-" colorscheme wal
-colorscheme wal
-" if &diff
-"   colorscheme default
-" endif
 
-"" AIRLINE COLORSCHEME
-let g:airline_theme='wal'
+"" PLUGIN: NERDcommenter
+"" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
 
-"" COLORSCHEME FIX
-hi ColorColumn      ctermbg=0    ctermfg=6    cterm=NONE guibg=0    guifg=6   gui=NONE
-hi DiffAdd          ctermbg=2    ctermfg=0
-hi DiffChange       ctermbg=0    ctermfg=8
-hi DiffDelete       ctermbg=6    ctermfg=0
-hi DiffText         ctermbg=2    ctermfg=0
-hi ExtraWhitespace  ctermbg=6                            guibg=6
-hi FoldColumn       ctermbg=NONE ctermfg=15   cterm=NONE guibg=NONE guifg=15   gui=NONE
-hi Folded           ctermbg=NONE ctermfg=15
-hi SignColumn       ctermbg=NONE              cterm=NONE guibg=NONE            gui=NONE
-hi VertSplit        ctermbg=NONE ctermfg=NONE cterm=NONE guibg=NONE guifg=NONE gui=NONE
-hi NERDTreeDir      ctermbg=NONE ctermfg=1    cterm=bold guibg=NONE guifg=1    gui=NONE
-hi NERDTreeExecFile                           cterm=bold
+"" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+"" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+"" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+"" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+"" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+"" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+
+"" PLUGIN: NERDTree
+let g:nerdtree_tabs_autofind=1
+let g:NERDTreeWinPos = "left"
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
+let g:NERDTreeHighlightCursorline = 0
+let NERDTreeDirArrowExpandable=""
+let NERDTreeDirArrowCollapsible=""
+" let g:nerdtree_tabs_open_on_console_startup=1 " Launch at start
+" let g:nerdtree_tabs_no_startup_for_diff=1
+
+"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-
+
+"""""""""""""""
+"" FileTypes ""
+"""""""""""""""
+
+" Automatic syntax highlighting for files
+filetype plugin indent on
+augroup FileTypeRules
+  autocmd!
+  autocmd BufNewFile,BufRead *.md           set ft=markdown
+  autocmd BufNewFile,BufRead *.tex          set ft=tex
+  autocmd BufNewFile,BufRead *.txt          set ft=sh
+  autocmd BufNewFile,BufRead *.bash*        set ft=sh
+  autocmd BufNewFile,BufRead *.jsonnet      set ft=jsonnet
+  autocmd BufNewFile,BufRead *.libjsonnet   set ft=jsonnet
+augroup END
+
+"" YAML
+"" Configure indentation of YAML files
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab foldmethod=indent
+
+"" JSONNET
+"" Automatic fmt on jsonnet
+let g:jsonnet_fmt_on_save = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related
@@ -445,28 +499,6 @@ map <leader>hs :set hlsearch!<cr>
 map <Leader>n <plug>NERDTreeTabsToggleVCS<CR>
 map <F5>      <plug>NERDTreeSteppedOpen<CR>
 
-" NERDcommenter
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
-
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -530,17 +562,6 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" NERDTree specific
-let g:nerdtree_tabs_autofind=1
-let g:NERDTreeWinPos = "left"
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
-let g:NERDTreeHighlightCursorline = 0
-let NERDTreeDirArrowExpandable=""
-let NERDTreeDirArrowCollapsible=""
-" let g:nerdtree_tabs_open_on_console_startup=1 " Launch at start
-" let g:nerdtree_tabs_no_startup_for_diff=1
 
 " For conceal markers.
 " if has('conceal')
