@@ -16,9 +16,7 @@ window {
   transparency:                   "real";
   border-radius:                  0px;
   location:                       center;
-  width:                          650px;
-  /* x-offset:                       -15px; */
-  /* y-offset:                       -45px; */
+  width:                          550px;
 }
 
 prompt {
@@ -56,7 +54,7 @@ inputbar {
 listview {
   columns:                        4;
   lines:                          1;
-  spacing:                        12px;
+  spacing:                        10px;
   cycle:                          true;
   dynamic:                        true;
   layout:                         vertical;
@@ -81,7 +79,7 @@ element-text {
   expand:                         true;
   horizontal-align:               0.5;
   vertical-align:                 0;
-  margin:                         5px 10px 30px 10px;
+  margin:                         5px 10px 35px 10px;
 }
 
 element normal.urgent,

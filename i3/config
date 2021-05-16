@@ -40,7 +40,7 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+m exec /home/$USER/.minimics/bin/lock.sh
+bindsym $mod+m exec /home/$USER/.minimics/bin/lock.sh -l dim
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -226,9 +226,10 @@ exec --no-startup-id ~/.minimics/bin/polybar.sh
 exec --no-startup-id ~/.minimics/bin/tray.sh
 exec --no-startup-id ~/.minimics/bin/pywal.sh restore
 exec --no-startup-id picom
-exec --no-startup-id xautolock -time 95 -locker '~/.minimics/bin/lock.sh' &
+exec --no-startup-id xautolock -time 95 -locker '~/.minimics/bin/lock.sh -l dim' &
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
+exec --no-startup-id ~/.minimics/bin/lock.sh -u $(cat ~/.cache/wal/wal)
 # exec --no-startup-id xset r rate 210 55
 # exec --no-startup-id dropbox-cli start
 # exec --no-startup-id nitrogen --restore
