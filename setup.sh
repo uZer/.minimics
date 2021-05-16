@@ -163,6 +163,7 @@ installI3 ()
   makelink $MIN_PATH/picom "${HOME}"/.config/picom
   makelink $MIN_PATH/polybar "${HOME}"/.config/polybar
   makelink $MIN_PATH/rofi "${HOME}"/.config/rofi
+  makelink $MIN_PATH/rofi-pass "${HOME}"/.config/rofi-pass
 
   echo ""
   return
