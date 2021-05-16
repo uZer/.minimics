@@ -27,3 +27,8 @@ export MINIMICS_POLYBAR_HEIGHT=21
 
 # Weather
 export MINIMICS_CITY=
+
+# Gitlab
+export MINIMICS_GITLAB_API_URL=https://gitlab.com/api/v4
+export MINIMICS_GITLAB_PROJECT=example/example
+export MINIMICS_GITLAB_PRIVATE_TOKEN=yoursecrettoken
