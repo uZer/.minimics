@@ -11,9 +11,16 @@ launch_bars() {
 	# Wait until the processes have been shut down
 	while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-	# Launch the bar
-	polybar -q main -c "$dir/advancedblocks/config.ini" &
-	polybar -q main -c "$dir/advancedblocks/tray.ini" &
+  # Detect connected screens
+  outputs=$(xrandr --query | grep " connected" | cut -d" " -f1)
+
+	# Launch the bar on each screen
+  for screen in $outputs; do
+	  MONITOR=$screen polybar -q main -r -c "$dir/advancedblocks/config.ini" &
+  done
+
+  # Only launch tray on primary screen
+	polybar -q main -r -c "$dir/advancedblocks/tray.ini" &
 }
 
 launch_bars

@@ -6,7 +6,7 @@
 set -eu
 . "${HOME}"/.minimicsrc
 
-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 ###################
 ## CONFIGURATION ##
@@ -45,7 +45,7 @@ $0 dual_split
 EOF
 }
 
-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 #################
 ## SCREEN MODS ##
@@ -59,7 +59,6 @@ single_screen1 () {
       --primary \
       --mode ${screen1_resolution} \
     > /dev/null 2>&1
-  exit 0
 }
 
 # Disable screen 1, only use screen 2
@@ -70,7 +69,6 @@ single_screen2 () {
       --primary \
       --mode ${screen2_resolution} \
     > /dev/null 2>&1
-  exit 0
 }
 
 # Copy screen1 on screen2, using screen1 resolution
@@ -82,7 +80,6 @@ dual_clone () {
     --output "${screen2_name}" --auto \
       --same-as "${screen1_name}" \
     > /dev/null 2>&1
-  exit 0
 }
 
 # Use two independent screens
@@ -95,19 +92,18 @@ dual_split () {
       --mode ${screen2_resolution} \
       --${screen2_position} "${screen1_name}" \
     > /dev/null 2>&1
-  exit 0
 }
 
-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+# Reload bars
+reload_bars () {
+  ~/.minimics/bin/polybar.sh
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 ################
 ## ACTIVATION ##
 ################
-
-if [ "${mode}" = "help" ] || [ "${mode}" = "-h" ] || [ "${mode}" = "--help" ]; then
-  display_help
-  exit 4
-fi
 
 # Detect screens and force a mode if only one screen is connected
 detect=$(xrandr)
@@ -126,22 +122,31 @@ case ${mode} in
 
   dual_clone)
     dual_clone
+    reload_bars
+    exit 0
     ;;
 
   dual_split)
     dual_split
+    reload_bars
+    exit 0
     ;;
 
   single_screen1)
     single_screen1
+    reload_bars
+    exit 0
     ;;
 
   single_screen2)
     single_screen2
+    reload_bars
+    exit 0
     ;;
 
   *)
     echo "ERROR: unknown mode ${mode}"
+    display_help
     exit 2
     ;;
 esac
