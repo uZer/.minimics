@@ -1,12 +1,12 @@
 .minimics
 =========
 
-> Use at your own risk
-> The bundle is not complete
+![img](https://raw.githubusercontent.com/uZer/.minimics/master/preview.png)
 
-Minimalistic dotfiles for linux environment.
-Easy to use, trying to avoid overkill plugins I'll never find the usage more than
-one time in a year.
+
+A pywal based desktop environment
+
+> Use at your own risk
 
 ## How to use this and not to use this
 
