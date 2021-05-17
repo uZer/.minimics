@@ -6,6 +6,9 @@
 # Folder containing your wallpapers, or single wallpaper file PATH
 export MINIMICS_WALLS=~/path/to/your/wallpapers
 
+# Folder container dwall git project
+export MINIMICS_DWALL=~/path/to/dynamic-wallpaper
+
 # Screen configuration. Obtain screen names and resolutions with xrandr
 export MINIMICS_SCREEN1_NAME=eDP1
 export MINIMICS_SCREEN1_RESOLUTION=1920x1080
