@@ -238,8 +238,8 @@ exec --no-startup-id ~/.minimics/bin/lock.sh -u $(cat ~/.cache/wal/wal)
 # exec --no-startup-id blueberry-tray
 # exec --no-startup-id redshift-gtk
 
-gaps outer 0
-gaps inner 10
+# gaps outer 0
+# gaps inner 10
 new_window 1pixel
 
 # Focus
