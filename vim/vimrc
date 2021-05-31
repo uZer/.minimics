@@ -79,6 +79,7 @@ Plugin 'hashivim/vim-terraform'
 Plugin 'PProvost/vim-ps1'
 Plugin 'elzr/vim-json'
 Plugin 'google/vim-jsonnet'
+Plugin 'mogelbrod/vim-jsonpath'
 Plugin 'davidgranstrom/scnvim'
 Plugin 'fatih/vim-go'
 " Plugin 'pearofducks/ansible-vim'
@@ -197,12 +198,10 @@ let g:airline_mode_map = {
 let g:airline_powerline_fonts = 1
 let g:airline_skip_empty_sections = 1
 
-
 "" PLUGIN: ansible
 let g:ansible_name_highlight = 'b'
 let g:ansible_attribute_highlight = "ob"
 let g:ansible_unindent_after_newline = 1
-
 
 "" PLUGIN: NERDcommenter
 "" Add spaces after comment delimiters by default
@@ -244,7 +243,7 @@ let NERDTreeDirArrowCollapsible=""
 "" FileTypes ""
 """""""""""""""
 
-" Automatic syntax highlighting for files
+"" Automatic syntax highlighting for files
 filetype plugin indent on
 augroup FileTypeRules
   autocmd!
@@ -263,6 +262,14 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab foldmethod=indent
 "" JSONNET
 "" Automatic fmt on jsonnet
 let g:jsonnet_fmt_on_save = 1
+
+"" JSON
+"" Optionally copy path to a named register (* in this case) when calling :JsonPath
+let g:jsonpath_register = '*'
+
+"" Define mappings for json buffers
+au FileType json noremap <buffer> <silent> <leader>d :call jsonpath#echo()<CR>
+au FileType json noremap <buffer> <silent> <leader>g :call jsonpath#goto()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text, columns, tab and indent related
