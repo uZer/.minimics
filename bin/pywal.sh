@@ -5,14 +5,16 @@
 # export MINIMICS_WALLS=<path to wallpaper directory or file>
 
 set -eu
-. "${HOME}"/.minimicsrc
+. "${HOME}/.minimicsrc"
+
+# wal settings
+wal=/bin/wal
+backend=colorz
 
 # Mode is defined in first argument.
 # Defaults to wall folder classic rotation.
 mode=${1:-folder}
 
-# Saturation settings
-saturate=0.38
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
@@ -46,7 +48,7 @@ check_dwall_folder () {
 
 # Restore previous wal colors
 wal_restore () {
-  wal -q -R
+  ${wal} -q -R
 }
 
 # Refresh discord theme
@@ -60,7 +62,7 @@ wal_discord () {
 # Use predefined colorscheme
 # $1 is the colorscheme name
 wal_colorscheme () {
-  wal -q -f "$1"
+  ${wal} -q -f "$1"
   return
 }
 
@@ -68,13 +70,14 @@ wal_colorscheme () {
 # $1 is the name of the theme to use
 wal_time () {
   hour=$(date +%-H)
-  wal -q -i "${MINIMICS_DWALL}/images/$1/${hour}.jpg"
+  ${wal} -q -i "${MINIMICS_DWALL}/images/$1/${hour}.jpg"
   return
 }
 
 # Classic pywal
 wal_folder () {
-  wal -q -i "${MINIMICS_WALLS}" --iterative --saturate "${saturate}"
+  # ${wal} -q -i "${MINIMICS_WALLS}" --iterative
+  ${wal} -q -i "${MINIMICS_WALLS}" --iterative --backend ${backend} -b 001019
   return
 }
 
