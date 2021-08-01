@@ -10,7 +10,7 @@
 ###################
 
 INST_I3="true"      # Enable i3 Config install
-INST_GIT="false"    # Enable git Config install
+INST_GIT="true"     # Enable git Config install
 INST_VIM="true"     # Enable vim config install
 INST_ZSH="true"     # Enable zsh config install
 INST_HTOP="true"    # Enable htop config install

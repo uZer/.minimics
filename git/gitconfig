@@ -86,10 +86,8 @@
   signingkey = 0BB86EA4B04B1A568DD15FBC6534FBBC86B7DB4D
   name = Youenn Piolet
   email = piolet.y@gmail.com
-
 [gpg]
   program = /usr/bin/gpg
-
 # [commit]
 #     gpgsign = true
 [diff]
@@ -97,7 +95,7 @@
 [difftool]
   prompt = false
 [url "git@gitlab.dnm.radiofrance.fr:"]
-	insteadOf = https://gitlab.dnm.radiofrance.fr/
+  insteadOf = https://gitlab.dnm.radiofrance.fr/
 [pull]
   rebase = true
 [rebase]
