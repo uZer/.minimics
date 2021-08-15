@@ -108,17 +108,18 @@ installGit ()
   echo "[GIT]"
   echo "  Linking git configuration files..."
   makelink $MIN_PATH/git/gitconfig "${HOME}"/.gitconfig
-  echo "  What is your github login? [Default: uZer]"
+  echo "  What is your github login? [Default: Youenn Piolet]"
   read GIT_LOGIN
   echo "  What is your github email? [Default: piolet.y@gmail.com]"
   read GIT_EMAIL
-  GIT_LOGIN=${GIT_LOGIN:-uZer}
+  GIT_LOGIN=${GIT_LOGIN:-Youenn Piolet}
   GIT_EMAIL=${GIT_EMAIL:-piolet.y@gmail.com}
-  echo "  [user]"
-  echo "    name  = $GIT_LOGIN"
-  echo "    email = $GIT_EMAIL"
+  echo "[user]"
+  echo "  name  = $GIT_LOGIN"
+  echo "  email = $GIT_EMAIL"
   git config --global user.name "$GIT_LOGIN"
   git config --global user.email "$GIT_EMAIL"
+  sed -i 's/\t/  /g' $MIN_PATH/git/gitconfig
   echo "export GIT_USERNAME=${GIT_LOGIN}" >> ~/.aliases.local
   echo "export GIT_EMAIL=${GIT_EMAIL}" >> ~/.aliases.local
   echo ""
