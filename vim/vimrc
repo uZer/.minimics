@@ -266,6 +266,7 @@ let g:jsonnet_fmt_on_save = 1
 "" JSON
 "" Optionally copy path to a named register (* in this case) when calling :JsonPath
 let g:jsonpath_register = '*'
+autocmd FileType json setlocal foldmethod=syntax
 
 "" Define mappings for json buffers
 au FileType json noremap <buffer> <silent> <leader>d :call jsonpath#echo()<CR>
