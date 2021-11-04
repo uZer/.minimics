@@ -8,7 +8,7 @@ set -eu
 . "${HOME}/.minimicsrc"
 
 # wal settings
-wal=/bin/wal
+wal=$(which wal)
 backend=colorz
 
 # Mode is defined in first argument.
