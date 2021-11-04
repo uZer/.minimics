@@ -180,6 +180,7 @@ installZSH ()
 
   echo "  Linking zsh configuration files..."
   makelink $MIN_PATH/zsh/zshrc "${HOME}"/.zshrc
+  makelink $MIN_PATH/zsh/p10k.zsh "${HOME}"/.p10k.zsh
 
   if [ ! -e $OHMY_PATH ]; then
     git clone https://github.com/robbyrussell/oh-my-zsh.git $OHMY_PATH
