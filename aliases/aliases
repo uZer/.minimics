@@ -5,29 +5,25 @@ br()  { git checkout -b ${1} && git branch --set-upstream-to=origin/${1} ${1} }
 gdd()  { git --no-pager diff --stat ${1} }
 gdff() { git --no-pager diff --stat ${1} }
 gfr() {
-  for i in $(find . -mindepth 2 -type d -name .git | xargs dirname); do
-    cd $i ;
-    pwd ;
-    git fetch -p ;
-    popd -q ;
-  done
-}
-gfrp() {
-  for i in $(find . -mindepth 2 -type d -name .git | xargs dirname); do
-    cd $i ;
-    pwd ;
-    git fetch -p ;
-    branch=$(git branch --show-current)
-    if [ "${branch}" = "master" ] || [ "${branch}" = "main" ]; then
-      if [ -z "$(git status --porcelain)" ]; then
-        git pull
-      else
-        echo " There are new commits but uncommited local changes."
-        echo " Won't do anything."
-      fi
-    fi
-    popd -q ;
-  done
+  _purge() {
+    folder=$1; branch=$(git branch --show-current); git fetch -p;
+    [ $pull = true ] \
+      && [ -z "$(git status --porcelain)" ] \
+      && ([ "${branch}" = "master" ] || [ "${branch}" = "main" ]) \
+      && git pull
+    [ $clean = true ] \
+      && git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D 2>/dev/null
+  }
+
+  if read -q "REPLY?Pull from remote? [y/n] "; then pull=true; else pull=false; fi; echo
+  if read -q "REPLY?Cleanup local branches not on remote? [y/n] "; then clean=true; else clean=false; fi; echo
+  if [ $# -eq 1 ]; then
+    _purge $1;
+  else
+    for i in $(find . -mindepth 2 -type d -name .git | xargs dirname); do
+      cd $i; pwd; _purge $i; popd -q;
+    done
+  fi
 }
 
 # GREP and FIND
