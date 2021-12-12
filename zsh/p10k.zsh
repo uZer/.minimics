@@ -216,7 +216,7 @@
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
-  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=19
+  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=0
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=0
@@ -260,13 +260,13 @@
   # respectively.
   typeset -g POWERLEVEL9K_DIR_TRUNCATE_BEFORE_MARKER=false
   # Don't shorten this many last directory segments. They are anchors.
-  typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+  typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
   # Shorten directory if it's longer than this even if there is space for it. The value can
   # be either absolute (e.g., '80') or a percentage of terminal width (e.g, '50%'). If empty,
   # directory will be shortened only when prompt doesn't fit or when other parameters demand it
   # (see POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS and POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT below).
   # If set to `0`, directory will always be shortened to its minimum length.
-  typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=80
+  typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=60%
   # When `dir` segment is on the last prompt line, try to shorten it enough to leave at least this
   # many columns for typing commands.
   typeset -g POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS=40
@@ -277,7 +277,7 @@
   # opening a directory in the file manager simply by clicking the link.
   # Can also be handy when the directory is shortened, as it allows you to see
   # the full directory that was used in previous commands.
-  typeset -g POWERLEVEL9K_DIR_HYPERLINK=false
+  typeset -g POWERLEVEL9K_DIR_HYPERLINK=true
 
   # Enable special styling for non-writable and non-existent directories. See POWERLEVEL9K_LOCK_ICON
   # and POWERLEVEL9K_DIR_CLASSES below.
