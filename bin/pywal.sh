@@ -9,7 +9,7 @@ set -eu
 
 # wal settings
 wal=$(which wal)
-backend=colorz
+backend=fast_colorthief
 
 # Mode is defined in first argument.
 # Defaults to wall folder classic rotation.
@@ -77,7 +77,7 @@ wal_time () {
 # Classic pywal
 wal_folder () {
   # ${wal} -q -i "${MINIMICS_WALLS}" --iterative
-  ${wal} -q -i "${MINIMICS_WALLS}" --iterative --backend ${backend} -b 001019
+  ${wal} -q -i "${MINIMICS_WALLS}" --iterative --backend ${backend} # -b 001019
   return
 }
 
