@@ -54,11 +54,10 @@ alias .7='cd ../../../../../../../'
 alias .8='cd ../../../../../../../../'
 
 # DU
-alias ducks='du -ckhs * | sort -hr'
-alias coin='du -cks *  | sort -rn | head -n 10'
-alias coincoin='du -ckhs *  | sort -hr | head -n 10'
-alias mmv='noglob zmv -W'
+coincoin() { du -akhd1 ${@:-.} | sort -hr | head -n 20 }
+coin() { du -akd1 ${@:-.} | sort -hr | head -n 20 }
 
+alias mmv='noglob zmv -W'
 alias watch='watch -c '
 
 # SPY
