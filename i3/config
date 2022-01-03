@@ -89,6 +89,15 @@ bindsym $mod+space focus mode_toggle
 # Workspace management
 
 ## Naming
+set $workspace1 "1:1"
+set $workspace2 "2:2"
+set $workspace3 "3:3"
+set $workspace4 "4:4"
+set $workspace5 "5:5"
+set $workspace6 "6:6"
+set $workspace7 "7:7"
+set $workspace8 "8:8"
+set $workspace9 "9:9"
 set $workspace10 "10:"
 set $workspace11 "11:"
 set $workspace12 "12:ﭮ"
@@ -96,17 +105,17 @@ set $workspace13 "13:"
 set $workspace14 "14:"
 set $workspace15 "15:"
 set $workspace16 "16:"
-set $workspace101 "101:1"
-set $workspace102 "102:2"
-set $workspace103 "103:3"
-set $workspace104 "104:4"
-set $workspace105 "105:5"
-set $workspace106 "106:6"
-set $workspace107 "107:7"
-set $workspace108 "108:8"
-set $workspace109 "109:9"
 
 ## Switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
 bindsym $mod+t workspace $workspace11
 bindsym $mod+y workspace $workspace12
@@ -114,17 +123,17 @@ bindsym $mod+u workspace $workspace13
 bindsym $mod+i workspace $workspace14
 bindsym $mod+o workspace $workspace15
 bindsym $mod+p workspace $workspace16
-bindsym $mod+1 workspace $workspace101
-bindsym $mod+2 workspace $workspace102
-bindsym $mod+3 workspace $workspace103
-bindsym $mod+4 workspace $workspace104
-bindsym $mod+5 workspace $workspace105
-bindsym $mod+6 workspace $workspace106
-bindsym $mod+7 workspace $workspace107
-bindsym $mod+8 workspace $workspace108
-bindsym $mod+9 workspace $workspace109
 
 # move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 bindsym $mod+Shift+t move container to workspace $workspace11
 bindsym $mod+Shift+y move container to workspace $workspace12
@@ -132,15 +141,6 @@ bindsym $mod+Shift+u move container to workspace $workspace13
 bindsym $mod+Shift+i move container to workspace $workspace14
 bindsym $mod+Shift+o move container to workspace $workspace15
 bindsym $mod+Shift+p move container to workspace $workspace16
-bindsym $mod+Shift+1 move container to workspace $workspace101
-bindsym $mod+Shift+2 move container to workspace $workspace102
-bindsym $mod+Shift+3 move container to workspace $workspace103
-bindsym $mod+Shift+4 move container to workspace $workspace104
-bindsym $mod+Shift+5 move container to workspace $workspace105
-bindsym $mod+Shift+6 move container to workspace $workspace106
-bindsym $mod+Shift+7 move container to workspace $workspace107
-bindsym $mod+Shift+8 move container to workspace $workspace108
-bindsym $mod+Shift+9 move container to workspace $workspace109
 
 # Program specific
 for_window [class=".*"]              tiling enable
