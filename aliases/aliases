@@ -41,6 +41,10 @@ alias llh='ls -lh'
 alias la='ls -lA'
 alias lah='ls -lAh'
 
+# FIND
+(( $+commands[fd] )) || alias fd='find . -type d -name'
+alias ff='find . -type f -name'
+
 # CD
 alias cd..='cd ..'
 alias ..='cd ..'
