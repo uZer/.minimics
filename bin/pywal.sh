@@ -59,6 +59,14 @@ wal_discord () {
   return
 }
 
+# Refresh firefox theme
+wal_discord () {
+  if which pywalfox > /dev/null 2>&1; then
+    pywalfox update
+  fi
+  return
+}
+
 # Use predefined colorscheme
 # $1 is the colorscheme name
 wal_colorscheme () {
