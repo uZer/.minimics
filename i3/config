@@ -40,7 +40,7 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+m exec /home/$USER/.minimics/bin/lock.sh -l dim
+bindsym $mod+m exec /home/$USER/.minimics/bin/lock.sh
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
