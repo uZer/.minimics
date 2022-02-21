@@ -1,3 +1,2 @@
 #!/bin/sh
-betterlockscreen -l \
-  --text "$(hostname -s) is locked"
+betterlockscreen -l dim --text "$(hostname -s) is locked"
