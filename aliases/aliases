@@ -172,3 +172,14 @@ alias sse='systemctl --user start syncthing.service ; systemctl --user status sy
 
 alias track='vim ~/ypi.projects/horizon/$(date +%Gw%V) -o ~/ypi.projects/horizon/$(date +%Gw%V --date="last week")'
 alias journal='vim ~/ypi.projects/horizon/journal -O ~/ypi.projects/horizon/collections'
+
+instastory() {
+  # Convert vertical video to Instagram story format.
+  # Add black borders to ensure format.
+  ffmpeg \
+    -i $1 \
+    -c:v libx264 -b:v 2333k \
+    -vf "scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2,setsar=1" \
+    -pix_fmt yuv420p -c:a aac \
+    $1.instastory.mp4
+}
