@@ -54,7 +54,7 @@ Plugin 'dylanaraps/wal.vim'
 Plugin 'ap/vim-css-color'
 
 " Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 
 "" Syntax checking and completion
 Plugin 'scrooloose/syntastic'
@@ -658,3 +658,5 @@ set updatetime=100
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
+" Disable neovim version warning for neovim < 0.4.0
+let g:go_version_warning = 0
