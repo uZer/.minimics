@@ -29,8 +29,8 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM="$MINIMICS/zsh/custom"
 plugins=(copyfile copypath cp sudo history systemd ssh-agent \
          taskwarrior nmap screen fzf vundle git \
-         aws docker docker-compose golang node npm z helm kubectl terraform \
-         zsh-syntax-highlighting zsh-autosuggestions)
+         aws docker docker-compose golang node npm z helm kubectl terraform)
+         # zsh-syntax-highlighting zsh-autosuggestions)
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Source
