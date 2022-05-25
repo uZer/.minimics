@@ -18,9 +18,6 @@ launch_bars() {
   for screen in $outputs; do
 	  MONITOR=$screen polybar -q main -c "$dir/advancedblocks/config.ini" &
   done
-
-  # Only launch tray on primary screen
-	polybar -q main -c "$dir/advancedblocks/tray.ini" &
 }
 
 launch_bars

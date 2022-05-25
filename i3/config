@@ -225,25 +225,23 @@ client.placeholder      #000000 #0c0c0c #ffffff #002b36
 
 # Wallpaper
 exec --no-startup-id ~/.minimics/bin/polybar.sh
-exec --no-startup-id ~/.minimics/bin/tray.sh
 exec --no-startup-id ~/.minimics/bin/pywal.sh restore
 exec --no-startup-id picom
-# exec --no-startup-id ~/.minimics/bin/screen.sh single_screen1
 # exec --no-startup-id ~/.minimics/bin/lock_update.sh
 exec --no-startup-id xautolock -time 60 -locker '~/.minimics/bin/lock.sh' &
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
-# exec --no-startup-id xset r rate 210 55
+exec --no-startup-id xset r rate 210 55
 # exec --no-startup-id dropbox-cli start
-# exec --no-startup-id nitrogen --restore
 # exec --no-startup-id pasystray
 # exec --no-startup-id volctl
 # exec --no-startup-id blueberry-tray
 # exec --no-startup-id redshift-gtk
 
+# this value should fit $MINIMICS_POLYBAR_HEIGHT
+gaps top 25
 # gaps outer 0
 # gaps inner 10
-new_window 1pixel
 
 # Focus
 focus_follows_mouse yes
