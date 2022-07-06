@@ -650,6 +650,7 @@ map <F8> :TagbarToggle<CR>
 " VIMGO
 let g:go_def_reuse_buffer = 1
 let g:go_metalinter_autosave = 1
+let g:go_gopls_gofumpt = 1
 
 "" ADD ASYNC UPDATES
 set updatetime=100
