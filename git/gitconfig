@@ -39,6 +39,7 @@
   ci          = commit --all
   # branch
   b           = branch
+  br          = branch
   bt          = branch --track
   ba          = branch --all
   # checkout
@@ -67,16 +68,25 @@
   t           = tag
   ui          = update-index
 
+[merge]
+	tool = fugitive
+[mergetool]
+	keepBackup = false
+[mergetool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
+[mergetool "fugitive"]
+	cmd = nvim -f -u $HOME/.vimrc -c \"Gvdiffsplit!\" \"$MERGED\"
+
+[checkout]
+  defaultRemote = origin
 # Default behavior for git push
 #    nothing - do not push anything.
 #    matching - push all branches having the same name in both ends.
 #    upstream - push the current branch to its upstream branch.
 #    simple - like upstream, but refuses to push if the upstream branch’s name is different from the local one.
 #    current - push the current branch to a branch of the same name.
-[merge]
-  conflictstyle = diff3
 [push]
-  default = current
+  default = upstream
   followTags = true
 [status]
   showUntrackedFiles = all
@@ -88,12 +98,12 @@
   email = piolet.y@gmail.com
 [gpg]
   program = /usr/bin/gpg
-# [commit]
-#     gpgsign = true
 [diff]
   tool = nvimdiff
 [difftool]
   prompt = false
+[difftool "nvimdiff"]
+  cmd = nvim -d -u $HOME/.vimrc \"$LOCAL\" \"$REMOTE\"
 [url "git@gitlab.dnm.radiofrance.fr:"]
   insteadOf = https://gitlab.dnm.radiofrance.fr/
 [pull]
