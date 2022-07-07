@@ -644,6 +644,9 @@ let g:scnvim_eval_flash_duration = 150
 highlight SCNvimEval guifg=black guibg=grey ctermfg=black ctermbg=grey
 nmap <S-space> <C-e>
 
+" TERRAFORM
+let g:terraform_fmt_on_save=1
+
 " TAGBAR
 map <F8> :TagbarToggle<CR>
 
