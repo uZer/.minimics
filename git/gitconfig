@@ -86,7 +86,7 @@
 #    simple - like upstream, but refuses to push if the upstream branch’s name is different from the local one.
 #    current - push the current branch to a branch of the same name.
 [push]
-  default = upstream
+  default = current
   followTags = true
   autoSetupRemote = true
 [status]
