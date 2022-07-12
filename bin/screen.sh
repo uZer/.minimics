@@ -61,6 +61,17 @@ reload_bars () {
   ~/.minimics/bin/polybar.sh
 }
 
+# Disable allscreens but the ones listed
+cleanup_but () {
+  keep=$1
+  xrandr --listmonitors | \
+    grep -v Monitors | \
+    awk '{ print $4 }' | \
+    egrep -v "^${keep}$" | \
+    echo xargs -n 1 xrandr --output "$1" --off \
+    > /dev/null 2>&1
+}
+
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 #################
@@ -70,52 +81,48 @@ reload_bars () {
 # Disable screen 2 and 3, only use screen 1
 single_screen1 () {
   xrandr \
-    --output "${screen3_name}" --off \
-    --output "${screen2_name}" --off \
     --output "${screen1_name}" --auto \
       --primary \
       --mode ${screen1_resolution} \
     > /dev/null 2>&1
+  cleanup_but ${screen1_name}
 }
 
 # Disable screen 1 and 3, only use screen 2
 single_screen2 () {
   xrandr \
-    --output "${screen3_name}" --off \
-    --output "${screen1_name}" --off \
     --output "${screen2_name}" --auto \
       --primary \
       --mode ${screen2_resolution} \
     > /dev/null 2>&1
+  cleanup_but ${screen2_name}
 }
 
 # Disable screen 1 and 2, only use screen 3
 single_screen3 () {
   xrandr \
-    --output "${screen2_name}" --off \
-    --output "${screen1_name}" --off \
     --output "${screen3_name}" --auto \
       --primary \
       --mode ${screen3_resolution} \
     > /dev/null 2>&1
+  cleanup_but ${screen3_name}
 }
 
 # Copy screen1 on screen2, using screen1 resolution
 dual_clone () {
   xrandr \
-    --output "${screen3_name}" --off \
     --output "${screen1_name}" --auto \
       --primary \
       --mode ${screen1_resolution} \
     --output "${screen2_name}" --auto \
       --same-as "${screen1_name}" \
     > /dev/null 2>&1
+  cleanup_but "${screen1_name}\|${screen2_name}"
 }
 
 # Use two independent screens
 dual_split () {
   xrandr \
-    --output "${screen3_name}" --off \
     --output "${screen1_name}" --auto \
       --primary \
       --mode ${screen1_resolution} \
@@ -123,16 +130,12 @@ dual_split () {
       --mode ${screen2_resolution} \
       --${screen2_position} "${screen1_name}" \
     > /dev/null 2>&1
+  cleanup_but "${screen1_name}\|${screen2_name}"
 }
 
 # Yolo
 rf () {
   xrandr \
-    --output DP-2-2 --off \
-    --output DP-2-2-2 --off \
-    --output DP-1 --off \
-    --output DP-2 --off \
-    --output DP-3 --off \
     --output "${screen1_name}" --auto \
       --primary \
       --mode ${screen1_resolution} \
@@ -147,6 +150,7 @@ rf () {
       --pos 0x0 \
       --rotate normal \
     > /dev/null 2>&1
+  cleanup_but "${screen1_name}\|${screen2_name}\|${screen3_name}"
 }
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-

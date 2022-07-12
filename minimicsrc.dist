@@ -14,9 +14,12 @@ export MINIMICS_SCREEN1_NAME=eDP1
 export MINIMICS_SCREEN1_RESOLUTION=1920x1080
 export MINIMICS_SCREEN2_NAME=
 export MINIMICS_SCREEN2_RESOLUTION=
+export MINIMICS_SCREEN3_NAME=
+export MINIMICS_SCREEN3_RESOLUTION=
 
 # Position of screen2 next to screen1. One of left-of, right-of, above, below
 export MINIMICS_SCREEN2_POSITION=above
+export MINIMICS_SCREEN3_POSITION=left-of
 
 # Hardware identifiers / network interfaces names
 export MINIMICS_NET_WIRED_INTERFACE=eth0
