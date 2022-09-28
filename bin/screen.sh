@@ -186,8 +186,8 @@ case ${mode} in
     exit 0
     ;;
 
-  besteffort)
-    besteffort
+  rf)
+    rf
     reload_bars
     exit 0
     ;;
