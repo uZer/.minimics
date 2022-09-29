@@ -67,7 +67,7 @@ cleanup_but () {
   xrandr --listmonitors | \
     grep -v Monitors | \
     awk '{ print $4 }' | \
-    egrep -v "^${keep}$" | \
+    grep -E -v "^${keep}$" | \
     echo xargs -n 1 xrandr --output "$1" --off \
     > /dev/null 2>&1
 }
