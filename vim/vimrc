@@ -52,6 +52,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'Yggdroot/indentLine'
 Plugin 'dylanaraps/wal.vim'
 Plugin 'ap/vim-css-color'
+Plugin 'APZelos/blamer.nvim'
 
 " Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'altercation/vim-colors-solarized'
@@ -661,4 +662,9 @@ set updatetime=100
 " Prevent other buffers to replace nerdtree
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+" BLAMER
+let g:blamer_enabled = 1
+let g:blamer_show_in_insert_modes = 0
+let g:blamer_prefix = '  '
 
