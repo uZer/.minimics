@@ -580,7 +580,7 @@ endfunction
 "   set conceallevel=2
 "   set concealcursor=nvi
 " endif
-let g:indentLine_concealcursor = 0
+let g:indentLine_concealcursor = 'nc'
 let g:vim_json_syntax_conceal = 0
 
 " SYNTASTIC
@@ -667,4 +667,3 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
 let g:blamer_enabled = 1
 let g:blamer_show_in_insert_modes = 0
 let g:blamer_prefix = '  '
-
