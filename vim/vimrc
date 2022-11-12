@@ -86,6 +86,7 @@ Plugin 'mogelbrod/vim-jsonpath'
 Plugin 'davidgranstrom/scnvim'
 Plugin 'fatih/vim-go'
 Plugin 'petrbroz/vim-glsl'
+Plugin 'iamcco/markdown-preview.nvim'
 " Plugin 'pearofducks/ansible-vim'
 " Plugin 'chase/vim-ansible-yaml'
 " Plugin 'hashivim/vim-consul'
@@ -667,3 +668,11 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
 let g:blamer_enabled = 1
 let g:blamer_show_in_insert_modes = 0
 let g:blamer_prefix = '  '
+
+" MARKDOWNPREVIEW
+let g:mkdp_theme = 'dark'
+
+function OpenMarkdownPreview (url)
+  execute "silent ! google-chrome-stable --app=" . a:url
+endfunction
+let g:mkdp_browserfunc = 'OpenMarkdownPreview'
