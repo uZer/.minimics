@@ -477,7 +477,7 @@ inoremap `` <ESC>`^
 
 " Turn on/off mouse
 " Enable mouse support
-map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=nv"<CR>
+map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=v"<CR>
 
 " Resize vim windows
 map <leader>l 85<c-w>\|
