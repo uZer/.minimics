@@ -48,7 +48,7 @@ check_dwall_folder () {
 
 # Restore previous wal colors
 wal_restore () {
-  ${wal} -q -R
+  ${wal} -R
 }
 
 # Refresh discord theme
@@ -70,7 +70,7 @@ wal_discord () {
 # Use predefined colorscheme
 # $1 is the colorscheme name
 wal_colorscheme () {
-  ${wal} -q -f "$1"
+  ${wal} -f "$1" --cols16
   return
 }
 
@@ -78,14 +78,14 @@ wal_colorscheme () {
 # $1 is the name of the theme to use
 wal_time () {
   hour=$(date +%-H)
-  ${wal} -q -i "${MINIMICS_DWALL}/images/$1/${hour}.jpg"
+  ${wal} -i "${MINIMICS_DWALL}/images/$1/${hour}.jpg" --cols16
   return
 }
 
 # Classic pywal
 wal_folder () {
-  # ${wal} -q -i "${MINIMICS_WALLS}" --iterative
-  ${wal} -q -i "${MINIMICS_WALLS}" --iterative --backend ${backend} # -b 001019
+  ${wal} -i "${MINIMICS_WALLS}" --cols16 --iterative
+  # ${wal} -i "${MINIMICS_WALLS}" --iterative --backend ${backend} # -b 001019
   return
 }
 
