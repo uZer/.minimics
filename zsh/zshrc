@@ -17,6 +17,8 @@ if xhost >& /dev/null ; then
   (cat ~/.cache/wal/sequences &)
   source ~/.cache/wal/colors-tty.sh
   source ~/.cache/wal/colors.sh
+elif [[ "$(uname)" == "Darwin" ]]; then
+  (cat ~/.cache/wal/sequences &)
 fi
 
 # Env
