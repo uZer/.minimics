@@ -9,7 +9,7 @@ set -eu
 
 # wal settings
 wal=$(which wal)
-backend=fast_colorthief
+backend=colorthief
 
 # Mode is defined in first argument.
 # Defaults to wall folder classic rotation.
