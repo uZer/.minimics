@@ -462,8 +462,8 @@ map 0 ^
 
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
+" inoremap <C-j> <Esc>:m .+1<CR>==gi
+" inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
@@ -510,7 +510,7 @@ map <leader>hs :set hlsearch!<cr>
 
 " NERDtree
 map <Leader>n <plug>NERDTreeTabsToggleVCS<CR>
-map <F5>      <plug>NERDTreeSteppedOpen<CR>
+map <F5>      <plug>NERDTreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -634,6 +634,40 @@ xmap <C-space>     <Plug>(neosnippet_expand_target)
 " let g:AutoPairsFlyMode = 1
 
 " SUPERCOLLIDER
+lua << EOF
+local scnvim = require 'scnvim'
+local map = scnvim.map
+local map_expr = scnvim.map_expr
+scnvim.setup {
+  keymaps = {
+    ['<S-CR>'] = map('editor.send_line', {'i', 'n'}),
+    ['<C-CR>'] = {
+      map('editor.send_block', {'i', 'n'}),
+      map('editor.send_selection', 'x'),
+    },
+    ['<leader>b'] = map('postwin.toggle'),
+    ['<M-b>'] = map('postwin.toggle', 'i'),
+    ['<C-l>'] = map('postwin.clear', 'i'),
+    ['<C-k>'] = map('signature.show', 'i'),
+    ['<C-.>'] = map('sclang.hard_stop', {'n', 'x', 'i'}),
+    ['<leader>st'] = map('sclang.start'),
+    ['<leader>sk'] = map('sclang.recompile'),
+    ['<C-B>'] = map_expr('s.boot'),
+    ['<F10>'] = map_expr('s.meter'),
+  },
+  editor = {
+    highlight = {
+      color = 'IncSearch',
+    },
+  },
+  postwin = {
+    float = {
+      enabled = true,
+    },
+  },
+}
+EOF
+
 " let g:scFlash = 1
 " let g:sclangTerm = "gnome-terminal -x $SHELL -ic"
 let g:scnvim_postwin_size = 80
@@ -651,6 +685,36 @@ let g:terraform_fmt_on_save=1
 
 " TAGBAR
 map <F8> :TagbarToggle<CR>
+
+" Tags for ansible
+let g:tagbar_type_ansible = {
+	\ 'ctagstype' : 'ansible',
+	\ 'kinds' : [
+		\ 't:tasks'
+	\ ],
+	\ 'sort' : 0
+\ }
+" Tags for terraform
+let g:tagbar_type_tf = {
+  \ 'ctagstype': 'tf',
+  \ 'kinds': [
+    \ 'r:Resource',
+    \ 'R:Resource',
+    \ 'd:Data',
+    \ 'D:Data',
+    \ 'v:Variable',
+    \ 'V:Variable',
+    \ 'p:Provider',
+    \ 'P:Provider',
+    \ 'm:Module',
+    \ 'M:Module',
+    \ 'o:Output',
+    \ 'O:Output',
+    \ 'f:TFVar',
+    \ 'F:TFVar'
+  \ ]
+\ }
+
 
 " VIMGO
 let g:go_def_reuse_buffer = 1
