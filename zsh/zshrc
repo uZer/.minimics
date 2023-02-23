@@ -39,8 +39,6 @@ source $HOME/.p10k.zsh
 source $MINIMICS/aliases/aliases
 source $HOME/.aliases.local
 
-py
-
 # Autocompletion
 autoload -U zmv
 autoload -U +X bashcompinit && bashcompinit
