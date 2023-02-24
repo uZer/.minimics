@@ -55,3 +55,5 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZLE_RPROMPT_INDENT=0
 bindkey '^ ' autosuggest-accept
+
+export GPG_TTY=$(tty)
