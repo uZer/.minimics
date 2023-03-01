@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Wrapper to launch pywal
 # You must configure the following variable to your .minimicsrc:
@@ -8,13 +8,14 @@ set -eu
 . "${HOME}/.minimicsrc"
 
 # wal settings
-wal=$(which wal)
-backend=colorthief
+# wal="exec $(which wal) --cols16 -b 0A0A0A"
+wal="exec $(which wal) --cols16 -b 0A0F14"
+# wal="exec $(which wal) --cols16"
+backend=fast-colorthief
 
 # Mode is defined in first argument.
-# Defaults to wall folder classic rotation.
-mode=${1:-folder}
-
+# Defaults to wall restore
+mode=${1:-restore}
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
@@ -60,7 +61,7 @@ wal_discord () {
 }
 
 # Refresh firefox theme
-wal_discord () {
+wal_fox () {
   if which pywalfox > /dev/null 2>&1; then
     pywalfox update
   fi
@@ -70,7 +71,7 @@ wal_discord () {
 # Use predefined colorscheme
 # $1 is the colorscheme name
 wal_colorscheme () {
-  ${wal} -f "$1" --cols16
+  ${wal} --cols16 -f "${@}"
   return
 }
 
@@ -78,28 +79,27 @@ wal_colorscheme () {
 # $1 is the name of the theme to use
 wal_time () {
   hour=$(date +%-H)
-  ${wal} -i "${MINIMICS_DWALL}/images/$1/${hour}.jpg" --cols16
+  ${wal} -i "${MINIMICS_DWALL}/images/$1/${hour}.jpg" "${@:2}"
   return
 }
 
 # Classic pywal
 wal_folder () {
-  ${wal} -i "${MINIMICS_WALLS}" --cols16 --iterative
-  # ${wal} -i "${MINIMICS_WALLS}" --iterative --backend ${backend} # -b 001019
+  ${wal} -i "${MINIMICS_WALLS}" --iterative --backend "${backend}" "${@:1}"
   return
 }
 
 # Halp
 display_help () {
   cat << EOF
-A small wrapper to apply a colorscheme with pywal or restore pywal configuration
+A small wrapper to apply or restore a colorscheme with pywal.
+Requires configuration in ~/.minimicsrc.
 
 Usage:
 
-  # Restore previous pywal settings
+  # Restore previous pywal settings and display current colors
 
-    $0 restore
-    $0 -r
+    $0
 
   # Use a predefined colorscheme
 
@@ -111,13 +111,12 @@ Usage:
     $0 time <theme>
     $0 -t   <theme>
 
-  # Generate a colorscheme from a folder
+  # Generate a colorscheme from a folder defined in ~/.minimicsrc
 
     $0 folder
-    $0 -f
 
 List of available dwall themes:
-$(ls -1 ${MINIMICS_DWALL}/images | xargs)
+$(find "${MINIMICS_DWALL}/images" -mindepth 1 -maxdepth 1 -type d -printf %f\\n | sort | xargs)
 EOF
 }
 
@@ -135,14 +134,16 @@ case "${mode}" in
   restore|-r|-R)
     wal_restore
     wal_discord
+    wal_fox
     exit 0
     ;;
 
   # Generate a colorscheme from a random wallpaper in the folder or filelist
   folder|-f)
     check_wall_folder
-    wal_folder
+    wal_folder "${@:2}"
     wal_discord
+    wal_fox
     exit 0
     ;;
 
@@ -150,15 +151,16 @@ case "${mode}" in
   time|-t)
     shift
     check_dwall_folder
-    wal_time "${1:-lakeside}"
-    wal_discord
+    wal_time "${2:-lakeside}" "${@:3}"
+    wal_fox
     exit 0
     ;;
 
   # Use a predefined colorscheme
   *)
-    wal_colorscheme "${mode}"
+    wal_colorscheme "${mode}" "${@:2}"
     wal_discord
+    wal_fox
     exit 0
     ;;
 
