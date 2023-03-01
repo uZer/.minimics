@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Manage screens
 # Type xrandr to get correct screen names
 
 set -eu
-. "${HOME}"/.minimicsrc
+. "${HOME}/.minimicsrc"
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
@@ -25,7 +25,7 @@ screen2_position="${MINIMICS_SCREEN2_POSITION:-left-of}"
 screen3_position="${MINIMICS_SCREEN3_POSITION:-left-of}"
 
 # List of available modes
-modelist=(single_screen1 single_screen2 dual_split dual_clone rf)
+modelist=(single_screen1 single_screen2 single_screen3 dual_split dual_clone rf)
 
 # Split or clone by default
 mode=${1:-single_screen1}
@@ -42,7 +42,7 @@ Otherwise, you can choose a display mode:
   $(echo ${modelist[@]} | sed 's/ /\n  /g')
 
 Example:
-  $ $(basename $0) dual_split
+  $ $(basename "$0") dual_split
 
 EOF
 }
@@ -51,9 +51,15 @@ EOF
 options () {
   single_screen1=" ;single_screen1"
   single_screen2=" ;single_screen2"
+  single_screen3=" ;single_screen3"
   dual_split=" ;dual_split"
   dual_clone=" ;dual_clone"
-  echo "${single_screen1}\n${single_screen2}\n${dual_split}\n${dual_clone}"
+  printf '%s\n%s\n%s\n%s\n%s\n' \
+    "${single_screen1}" \
+    "${single_screen2}" \
+    "${single_screen3}" \
+    "${dual_split}" \
+    "${dual_clone}"
 }
 
 # Reload bars
@@ -68,7 +74,7 @@ cleanup_but () {
     grep -v Monitors | \
     awk '{ print $4 }' | \
     grep -E -v "^${keep}$" | \
-    echo xargs -n 1 xrandr --output "$1" --off \
+     xargs -n 1 xrandr --output "$1" --off \
     > /dev/null 2>&1
 }
 
@@ -83,9 +89,9 @@ single_screen1 () {
   xrandr \
     --output "${screen1_name}" --auto \
       --primary \
-      --mode ${screen1_resolution} \
+      --mode "${screen1_resolution}" \
     > /dev/null 2>&1
-  cleanup_but ${screen1_name}
+  cleanup_but "${screen1_name}"
 }
 
 # Disable screen 1 and 3, only use screen 2
@@ -93,9 +99,9 @@ single_screen2 () {
   xrandr \
     --output "${screen2_name}" --auto \
       --primary \
-      --mode ${screen2_resolution} \
+      --mode "${screen2_resolution}" \
     > /dev/null 2>&1
-  cleanup_but ${screen2_name}
+  cleanup_but "${screen2_name}"
 }
 
 # Disable screen 1 and 2, only use screen 3
@@ -103,9 +109,9 @@ single_screen3 () {
   xrandr \
     --output "${screen3_name}" --auto \
       --primary \
-      --mode ${screen3_resolution} \
+      --mode "${screen3_resolution}" \
     > /dev/null 2>&1
-  cleanup_but ${screen3_name}
+  cleanup_but "${screen3_name}"
 }
 
 # Copy screen1 on screen2, using screen1 resolution
@@ -113,7 +119,7 @@ dual_clone () {
   xrandr \
     --output "${screen1_name}" --auto \
       --primary \
-      --mode ${screen1_resolution} \
+      --mode "${screen1_resolution}" \
     --output "${screen2_name}" --auto \
       --same-as "${screen1_name}" \
     > /dev/null 2>&1
@@ -125,10 +131,10 @@ dual_split () {
   xrandr \
     --output "${screen1_name}" --auto \
       --primary \
-      --mode ${screen1_resolution} \
+      --mode "${screen1_resolution}" \
     --output "${screen2_name}" --auto \
-      --mode ${screen2_resolution} \
-      --${screen2_position} "${screen1_name}" \
+      --mode "${screen2_resolution}" \
+      --"${screen2_position}" "${screen1_name}" \
     > /dev/null 2>&1
   cleanup_but "${screen1_name}\|${screen2_name}"
 }
@@ -138,7 +144,7 @@ rf () {
   xrandr \
     --output "${screen1_name}" --auto \
       --primary \
-      --mode ${screen1_resolution} \
+      --mode "${screen1_resolution}" \
       --pos 940x1190 \
       --rotate normal \
     --output "${screen2_name}" \
@@ -182,6 +188,12 @@ case ${mode} in
 
   single_screen2)
     single_screen2
+    reload_bars
+    exit 0
+    ;;
+
+  single_screen3)
+    single_screen3
     reload_bars
     exit 0
     ;;
