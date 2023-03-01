@@ -20,7 +20,6 @@ local ensure_packer = function()
   end
   return false
 end
-
 local packer_bootstrap = ensure_packer()
 
 -- Import associated plugin configuration
@@ -191,8 +190,8 @@ return require('packer').startup(function(use)
   --
   -- Colorschemes
   --
-  use 'uZer/pywal.nvim'
-  -- use '~/ypi.projects/pywal.nvim'
+  -- use 'uZer/pywal.nvim'
+  use '~/ypi.projects/pywal.nvim'
   use {
     'NvChad/nvim-colorizer.lua',
     config = get_config('colorizer'),
