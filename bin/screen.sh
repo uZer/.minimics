@@ -47,6 +47,11 @@ Example:
 EOF
 }
 
+if [ $# -eq 1 ] && [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; then
+  display_help
+  exit 1
+fi
+
 # Display available options for rofi applets
 options () {
   single_screen1=" ;single_screen1"
