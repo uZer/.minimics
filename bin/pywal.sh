@@ -10,7 +10,7 @@ set -eu
 # wal settings
 # wal="exec $(which wal) --cols16 -b 0A0A0A"
 # wal="exec $(which wal) --cols16 -b 0A0F14"
-wal="exec $(which wal) --cols16"
+wal="$(which wal) --cols16"
 backend=fast-colorthief
 
 # Mode is defined in first argument.
@@ -57,7 +57,6 @@ wal_discord () {
   if which pywal-discord > /dev/null 2>&1; then
     pywal-discord
   fi
-  return
 }
 
 # Refresh firefox theme
@@ -65,14 +64,12 @@ wal_fox () {
   if which pywalfox > /dev/null 2>&1; then
     pywalfox update
   fi
-  return
 }
 
 # Use predefined colorscheme
 # $1 is the colorscheme name
 wal_colorscheme () {
   ${wal} -f "${@}"
-  return
 }
 
 # Use dwall based on current time
@@ -80,13 +77,11 @@ wal_colorscheme () {
 wal_time () {
   hour=$(date +%-H)
   ${wal} -i "${MINIMICS_DWALL}/images/$1/${hour}.jpg" "${@:2}"
-  return
 }
 
 # Classic pywal
 wal_folder () {
   ${wal} -i "${MINIMICS_WALLS}" --iterative --backend "${backend}" "${@:1}"
-  return
 }
 
 # Halp
@@ -127,7 +122,6 @@ case "${mode}" in
   # Display help
   help|--help|-h)
     display_help
-    exit 0
     ;;
 
   # Restore current configuration (useful for remote shells)
@@ -135,7 +129,6 @@ case "${mode}" in
     wal_restore
     wal_discord
     wal_fox
-    exit 0
     ;;
 
   # Generate a colorscheme from a random wallpaper in the folder or filelist
@@ -144,7 +137,6 @@ case "${mode}" in
     wal_folder "${@:2}"
     wal_discord
     wal_fox
-    exit 0
     ;;
 
   # Use a dwall theme
@@ -153,7 +145,6 @@ case "${mode}" in
     check_dwall_folder
     wal_time "${2:-lakeside}" "${@:3}"
     wal_fox
-    exit 0
     ;;
 
   # Use a predefined colorscheme
@@ -161,7 +152,6 @@ case "${mode}" in
     wal_colorscheme "${mode}" "${@:2}"
     wal_discord
     wal_fox
-    exit 0
     ;;
 
 esac
