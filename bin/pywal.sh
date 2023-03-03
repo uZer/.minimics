@@ -9,8 +9,8 @@ set -eu
 
 # wal settings
 # wal="exec $(which wal) --cols16 -b 0A0A0A"
-wal="exec $(which wal) --cols16 -b 0A0F14"
-# wal="exec $(which wal) --cols16"
+# wal="exec $(which wal) --cols16 -b 0A0F14"
+wal="exec $(which wal) --cols16"
 backend=fast-colorthief
 
 # Mode is defined in first argument.
@@ -71,7 +71,7 @@ wal_fox () {
 # Use predefined colorscheme
 # $1 is the colorscheme name
 wal_colorscheme () {
-  ${wal} --cols16 -f "${@}"
+  ${wal} -f "${@}"
   return
 }
 
