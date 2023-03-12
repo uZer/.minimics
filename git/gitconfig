@@ -1,29 +1,3 @@
-# Inspired by Scyn-conf
-# Scyn <remi.chaintron@gmail.com>
-# http://github.com/scyn-conf/zsh
-[core]
-  editor      = nvim
-
-[color]
-  ui          = true
-  branch      = auto
-  diff        = auto
-  status      = auto
-
-[color "branch"]
-  current     = blue reverse
-  local       = green
-  remote      = yellow
-[color "diff"]
-  meta        = blue
-  frag        = yellow
-  old         = red
-  new         = green
-[color "status"]
-  added       = green
-  changed     = yellow
-  untracked   = red
-
 [alias]
   prune       = fetch --prune
   undo        = reset --soft HEAD^
@@ -68,46 +42,77 @@
   t           = tag
   ui          = update-index
 
-[merge]
-	tool = fugitive
-[mergetool]
-	keepBackup = false
-[mergetool "nvimdiff"]
-	cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
-[mergetool "fugitive"]
-	cmd = nvim -f -u $HOME/.vimrc -c \"Gvdiffsplit!\" \"$MERGED\"
 
 [checkout]
   defaultRemote = origin
-# Default behavior for git push
-#    nothing - do not push anything.
-#    matching - push all branches having the same name in both ends.
-#    upstream - push the current branch to its upstream branch.
-#    simple - like upstream, but refuses to push if the upstream branch’s name is different from the local one.
-#    current - push the current branch to a branch of the same name.
-[push]
-  default = current
-  followTags = true
-  autoSetupRemote = true
-[status]
-  showUntrackedFiles = all
-[transfert]
-  fsckobjects = true
-[user]
-  signingkey = 0BB86EA4B04B1A568DD15FBC6534FBBC86B7DB4D
-  name = Youenn Piolet
-  email = piolet.y@gmail.com
-[gpg]
-  program = /usr/bin/gpg
+
+[color]
+  ui          = true
+  branch      = auto
+  diff        = auto
+  status      = auto
+[color "branch"]
+  current     = blue reverse
+  local       = green
+  remote      = yellow
+[color "diff"]
+  meta        = blue
+  frag        = yellow
+  old         = red
+  new         = green
+[color "status"]
+  added       = green
+  changed     = yellow
+  untracked   = red
+
+[core]
+  editor      = nvim
+
 [diff]
   tool = nvimdiff
 [difftool]
   prompt = false
 [difftool "nvimdiff"]
-  cmd = nvim -d -u $HOME/.vimrc \"$LOCAL\" \"$REMOTE\"
-[url "git@gitlab.dnm.radiofrance.fr:"]
-  insteadOf = https://gitlab.dnm.radiofrance.fr/
+  cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+
+[gpg]
+  program = /usr/bin/gpg
+
+[merge]
+  tool = nvimdiff
+[mergetool]
+  keepBackup = false
+[mergetool "nvimdiff"]
+  cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
+[mergetool "fugitive"]
+  cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+
 [pull]
   rebase = true
+[push]
+  # Default behavior for git push
+  #  nothing - do not push anything.
+  #  matching - push all branches having the same name in both ends.
+  #  upstream - push the current branch to its upstream branch.
+  #  simple - like upstream, but refuses to push if the upstream branch’s name is different from the local one.
+  #  current - push the current branch to a branch of the same name.
+  default = current
+  followTags = true
+  autoSetupRemote = true
+
 [rebase]
   instructionFormat = (%an <%ae>) %s
+
+[status]
+  showUntrackedFiles = all
+
+[transfert]
+  fsckobjects = true
+
+[url "git@gitlab.dnm.radiofrance.fr:"]
+  insteadOf = https://gitlab.dnm.radiofrance.fr/
+
+[user]
+  signingkey = 0BB86EA4B04B1A568DD15FBC6534FBBC86B7DB4D
+  name = Youenn Piolet
+  email = piolet.y@gmail.com

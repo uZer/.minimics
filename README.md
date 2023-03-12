@@ -8,44 +8,43 @@ A pywal based desktop environment
 
 > Use at your own risk
 
-## How to use this and not to use this
+## How to use and not to use this repository
 
-I recommend you not to use this repository, but to build your own fork with your
-settings. This repository is not maintained for stability but only to fulfill my
-needs at a specific moment.
+I recommend you NOT to use this repository, but to build your own fork with your
+own settings. This repository is not maintained for stability but only to
+fulfill my needs at a specific moment, on various computers. My current
+computers where I use .minimics are:
 
-If you just plan to `git clone` and say yolo as many of my friends did over these
-last years, please make sure to run setup.sh or replace manually my name in
-.gitconfig file...
+- a Ubuntu WSL2 on Windows 11
+- Multiple Archlinux, graphic and non graphic
+- Raspberry Pi with multiple distros
+- MacOSX High Sierra
+- A phone with Termux
+
+If you just plan to `git clone` and say yolo as many of my friends did over
+these last 10 years, please make sure to run setup.sh or replace manually my
+name in .gitconfig file... :)
 
 ## Content
-
-WIP
 
 This bundle contains:
 
 + Git dotfile model (you should customize it with setup script or edit the file)
-+ Vim configuration with vundle, neocomplete and syntastic (disabled by default)
++ NeoVim configuration with a lot of useful plugins.
 + ZSH configuration files with oh-my-zsh autoinstall
-+ Custom aliases
-+ Solarized dircolors submodule (git submodule init / git submodule update)
-+ i3 configuration files and other X and Archlinux related configuration files
-+ Cygwin configuration files with solarized colorscheme
-+ Other experimental stuff I use on my computers and servers
++ Custom aliases and local aliases support in `~/.aliases.local`
++ i3 configuration files
++ other X and Archlinux related configuration
+  + a custom lockscreen
+  + ctags
+  + dunst
+  + picom
+  + polybar
+  + rofi
+  + some usefull scripts in `bin/`
++ pywal16 wrapper and custom colorschemes
 
-Non-solarized terminal are supported with some minor changes in colorschemes.
-Non-powerline fonts are supported, but by default powerline chars are used in vim
-and zsh. You can ajust this according to your needs.
-
-This bundle uses:
-+ Sexy visual bar for vim [vim-airline](https://github.com/bling/vim-airline)
-+ Bundle management solution for vim [vundle](https://github.com/gmarik/vundle)
-+ gitconfig from [scyn-conf](https://github.com/scyn-conf/conf)
-
-This bundle can include:
-+  solarize dircolors for [solarized terminals]() (facultative)
-+ [powerline](https://github.com/Lokaltog/powerline) fonts (facultative)
-
+Everything is built around pywal or pywal16 for color selection.
 
 ## Installation
 
@@ -59,38 +58,25 @@ just perform :
 A backup of your old configuration files is automatically made in your minimics
 folder.
 
-If you plan to use minimics for your desktop/i3 environment, you will have extra
-packages to compile/install.
+If you plan to use minimics for neovim or a desktop/i3 environment, you will
+have extra packages to compile/install. (TODO: a list of dependencies)
 
 ## Usage and configuration
 
-#### Vim
+#### pywal16
 
-There are plenty of usefull keyboard mappings in the vimrc configuration file.
+I recommend you to use the pywal16 fork.
 
-My vim configuration will remove end-of-line trailing whitespaces each time you
-save a document. If you want to disable this feature, edit your .vimrc and
-comment the line containing:
+#### NeoVim
 
-    autocmd BufWrite * :call DeleteTrailingWS()
+See init.nvim.
 
-Leader command is `<space>` by default.
-To update vundle plugins, you can just run `:PluginUpdate`
-
-Useful shorcuts and various caveats:
-
-The `<leader>` key is `super` key on your keyboard (also known as `windows` key).
-To paste a block of text, use paste mode: `<leader>pp`
-To enable syntax check, please type `<leader>sc` out of edit mode.
-Tab management:    `<leader>tn` (tab new) and `<leader>tc` (tab close)
-Window management: `<leader>wn` (win new) and `<leader>wc` (win close)
-Move from tab to tab / window to window with `<leader>j or k, h, l`.
-Yes, this means if your using vim in a Windows environment (Cygwin...) you may
-lock yourself out trying to move to the window on the left.
+The lua configuration is splitted, you may find useful information in various
+files. Install dependencies with `:PackerSync` and `:MasonInstallAll`
 
 #### Bash
 
-I don't.
+I don't use bash except for copy pasting stuff, so my bashrc is minimal.
 
 #### ZSH
 
@@ -116,4 +102,3 @@ If for any reason you want to uninstall .minimics partially or completely, you
 just have to unlink the unwanted configuration files in your home directory.
 
     unlink ~/.bashrc
-
