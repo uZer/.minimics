@@ -6,7 +6,7 @@ local options = {
       "_.*",
     },
     globalstatus = true,
-    theme = 'pywal-nvim',
+    theme = 'pywal16-nvim',
   },
   sections = {
     lualine_c = {

@@ -12,7 +12,7 @@
 
   Requirements (NewGame+):
   - A patched Nerd Font for your terminal or ginit.vim
-  - [plugin: pywal.nvim] python wal, pywal, pywal16, or variants
+  - [plugin: pywal16.nvim] python wal, pywal, pywal16, or variants
   - [plugin: mason.nvim] https://github.com/williamboman/mason.nvim#requirements
 
   This thing has been splitted into files with comments, can you believe it?
@@ -76,7 +76,7 @@ require("mnmx")      -- extra config
   NerdFonts for your terminal
     https://www.nerdfonts.com/
 
-  Pywal for your colors
+  Pywal or Pywal16 to generate your colors
     https://github.com/dylanaraps/pywal or variants (pywal16...)
 
   If the sickness persists, I would suggest an alternative colorscheme

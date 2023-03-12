@@ -126,6 +126,9 @@ return require('packer').startup(function(use)
       {
         'hrsh7th/nvim-cmp',
         config = get_config('nvim-cmp'),
+        requires = {
+          'onsails/lspkind.nvim',
+        }
       },
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-buffer' },
@@ -190,8 +193,8 @@ return require('packer').startup(function(use)
   --
   -- Colorschemes
   --
-  -- use 'uZer/pywal.nvim'
-  use '~/ypi.projects/pywal.nvim'
+  -- use 'uZer/pywal16.nvim'
+  use '~/ypi.projects/pywal16.nvim'
   use {
     'NvChad/nvim-colorizer.lua',
     config = get_config('colorizer'),

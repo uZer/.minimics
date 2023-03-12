@@ -20,8 +20,8 @@ vim.opt.fillchars = {
 vim.opt.cmdheight = 1 -- command line height
 vim.opt.number = true -- display line numbers
 
--- [plugin: pywal.nvim] colorscheme
-vim.cmd.colorscheme("pywal")
+-- [plugin: pywal16.nvim] colorscheme
+vim.cmd.colorscheme("pywal16")
 
 -- [plugin: indentLine] conceal configuration
 vim.g.indentLine_concealcursor = 'c'
