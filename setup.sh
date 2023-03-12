@@ -1,26 +1,24 @@
 #!/bin/bash
-#
-# Symlinks dotfiles for current user, creates backup of previous dotfiles.
-# This script is so 2005 and hates you as much as you do hate it.
-
-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
-
 ###################
 ## FEATURE FLAGS ##
 ###################
 
-# Enable modules
-INST_BASH="true"
-INST_DUNST="true"
-INST_GIT="true"
-INST_GTK3="true"
-INST_HTOP="true"
-INST_I3="true"
-INST_MINIMICS="true"
-INST_NVIM="true"
-INST_TW="true"
-INST_VIM="false"
-INST_ZSH="true"
+# Available install modules:
+# bash ctags dunst git gtk3 htop i3 minimics nvim taskwarrior vim zsh
+
+# Special requirements:
+#   ctags:
+#     universal-ctags
+#   i3:
+#     i3blocks i3status i3lock-color picom polybar rofi rofi-pass
+#   nvim:
+#     neovim>=0.8.0 wget curl
+#     npm yarn ripgrep fd tree-sitter
+#     luarocks python-pynvim
+#     pywal16
+
+# Install selected modules:
+modules=(bash zsh ctags dunst git gtk3 htop i3 minimics nvim taskwarrior)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -29,13 +27,15 @@ OHMY_PATH="${HOME}/.oh-my-zsh"
 # Backup dir in ~/.minimics/.backup.<timestamp>
 _BACKUPDIR="${MIN_PATH}/.backup.$(date +%s)"
 
+echo "You will find backups in ${_BACKUPDIR}."
+echo
+
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 ###########
 ## TOOLS ##
 ###########
 
-## [MAKELINK]
 # Configuration file linking method, taking care of old conf if necessary
 # backing it up in a new directory : $_BACKUPDIR
 makelink () {
@@ -84,36 +84,40 @@ makelink () {
 ## INSTALLATION SCRIPTS ##
 ##########################
 
-## [BASH]
-installBash () {
-  echo "[BASH]"
+_bash () {
+  echo "[bash]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/bash/bashrc" "${HOME}/.bashrc"
   echo
   return
 }
 
-# [DUNST]
-installDunst () {
-  echo "[DUNST]"
+_ctags () {
+  echo "[ctags]"
+  echo "  Linking Universal Ctags configuration files..."
+  makelink "${MIN_PATH}/ctags" "${HOME}/.ctags.d"
+  echo
+  return
+}
+
+_dunst () {
+  echo "[dunst]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/dunst" "${HOME}/.config/dunst"
   echo
   return
 }
 
-# [TASKWARRIOR]
-installTW () {
-  echo "[TASKWARRIOR]"
+_taskwarrior () {
+  echo "[taskwarrior]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/taskwarrior/taskrc" "${HOME}/.taskrc"
   echo
   return
 }
 
-## [GIT]
-installGit () {
-  echo "[GIT]"
+_git () {
+  echo "[git]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/git/gitconfig" "${HOME}/.gitconfig"
   echo "  What is your github login? [Default: Youenn Piolet]"
@@ -134,9 +138,8 @@ installGit () {
   return
 }
 
-## [VIM]
-installVim () {
-  echo "[VIM]"
+_vim () {
+  echo "[vim]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/vim/vimrc"  "${HOME}/.vimrc"
   makelink "${MIN_PATH}/vim"        "${HOME}/.vim"
@@ -145,9 +148,8 @@ installVim () {
   return
 }
 
-## [NVIM]
-installNVim () {
-  echo "[NVIM]"
+_nvim () {
+  echo "[nvim]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/nvim"       "${HOME}/.config/nvim"
   if [ ! -f "${HOME}/.cache/wal/colors-wal.vim" ]; then
@@ -159,18 +161,16 @@ installNVim () {
   return
 }
 
-## [HTOP]
-installHtop () {
-  echo "[HTOP]"
+_htop () {
+  echo "[htop]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/htop/htoprc" "${HOME}/.config/htop/htoprc"
   echo
   return
 }
 
-## [I3]
-installI3 () {
-  echo "[I3]"
+_i3 () {
+  echo "[i3]"
   echo "  Linking i3, picom, polybar, rofi, rofi-pass configuration files..."
   makelink "${MIN_PATH}/i3"         "${HOME}/.config/i3"
   makelink "${MIN_PATH}/picom"      "${HOME}/.config/picom"
@@ -181,10 +181,8 @@ installI3 () {
   return
 }
 
-## [ZSH]
-installZSH ()
-{
-  echo "[ZSH]"
+_zsh () {
+  echo "[zsh]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/zsh/zshrc"    "${HOME}/.zshrc"
   makelink "${MIN_PATH}/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
@@ -198,20 +196,17 @@ installZSH ()
   return
 }
 
-## [GTK-3.0]
-# Useful for terminator configuration
-installGTK3 ()
-{
-  echo "[GTK3]"
+_gtk3 () {
+  # Useful for terminator configuration
+  echo "[gtk3]"
   echo "  Linking GTK3 configuration files..."
   makelink "${MIN_PATH}/gtk-3.0/gtk.css" "${HOME}/.config/gtk-3.0/gtk.css"
   echo ""
   return
 }
 
-## [MINIMICS]
-installMINIMICS () {
-  echo "[MINIMICS]"
+_minimics () {
+  echo "[minimics]"
   echo "  Creating ${HOME}/.config if needed..."
   mkdir -p "${HOME}/.config" 2>/dev/null
 
@@ -235,20 +230,6 @@ installMINIMICS () {
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
-echo "You will find backups in ${_BACKUPDIR}."
-echo
-# Install configuration symlinks
-# ZSH comes first
-[ "$INST_MINIMICS" == "true" ]   && installMINIMICS
-
-[ "$INST_ZSH" == "true" ]   && installZSH
-[ "$INST_GIT" == "true" ]   && installGit
-
-[ "$INST_BASH" == "true" ]  && installBash
-[ "$INST_DUNST" == "true" ] && installDunst
-[ "$INST_GTK3" == "true" ]  && installGTK3
-[ "$INST_HTOP" == "true" ]  && installHtop
-[ "$INST_I3" == "true" ]    && installI3
-[ "$INST_NVIM" == "true" ]  && installNVim
-[ "$INST_TW" == "true" ]    && installTW
-[ "$INST_VIM" == "true" ]   && installVim
+for module in "${modules[@]}"; do
+  eval "_${module}"
+done

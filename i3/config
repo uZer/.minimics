@@ -1,20 +1,36 @@
-#######################################
 # i3 configuration file
-#
-# DEPENDS: artwiz-font dmenu i3lock feh
-# pragmatapro
-#######################################
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+##############
+# Workspaces #
+##############
+
+set $workspace1 "1:1"
+set $workspace2 "2:2"
+set $workspace3 "3:3"
+set $workspace4 "4:4"
+set $workspace5 "5:5"
+set $workspace6 "6:6"
+set $workspace7 "7:7"
+set $workspace8 "8:8"
+set $workspace9 "9:9"
+set $workspace10 "10:"
+set $workspace11 "11:"
+set $workspace12 "12:ﭮ"
+set $workspace13 "13:"
+set $workspace14 "14:"
+set $workspace15 "15:"
+set $workspace16 "16:"
+
+#################
+## KEY BINDING ##
+#################
 
 # Modifier: Windows key
 set $mod Mod4
 floating_modifier $mod
 
-# Font
-font pango:roboto 10
-
-#################
-## KEY BINDING ##
-#################
 # start a terminal
 bindsym $mod+Return exec terminator
 
@@ -86,27 +102,7 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# Workspace management
-
-## Naming
-set $workspace1 "1:1"
-set $workspace2 "2:2"
-set $workspace3 "3:3"
-set $workspace4 "4:4"
-set $workspace5 "5:5"
-set $workspace6 "6:6"
-set $workspace7 "7:7"
-set $workspace8 "8:8"
-set $workspace9 "9:9"
-set $workspace10 "10:"
-set $workspace11 "11:"
-set $workspace12 "12:ﭮ"
-set $workspace13 "13:"
-set $workspace14 "14:"
-set $workspace15 "15:"
-set $workspace16 "16:"
-
-## Switch to workspace
+# Switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
@@ -142,6 +138,90 @@ bindsym $mod+Shift+i move container to workspace $workspace14
 bindsym $mod+Shift+o move container to workspace $workspace15
 bindsym $mod+Shift+p move container to workspace $workspace16
 
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r exec "killall picom ; picom -b --config ~/.config/picom/picom.conf ; ~/.minimics/bin/polybar.sh" ; restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec i3-msg exit
+
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+  bindsym h resize shrink width 5 px or 5 ppt
+  bindsym j resize grow height 5 px or 5 ppt
+  bindsym k resize shrink height 5 px or 5 ppt
+  bindsym l resize grow width 5 px or 5 ppt
+  bindsym Left resize shrink width 25 px or 25 ppt
+  bindsym Down resize grow height  25 px or 25 ppt
+  bindsym Up resize shrink height  25 px or 25 ppt
+  bindsym Right resize grow width  25 px or 25 ppt
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+bindsym XF86Display exec ~/.minimics/bin/rofi_screen.sh
+
+###########
+## Audio ##
+###########
+
+# Amount to increase/decrease volume as a percentage
+set $volumepath ~/.minimics/bin/volume.sh
+set $volumestep 5
+
+# Using pulseaudio-utils (append "-s $sinkname" without quotes to override default sink)
+bindsym XF86AudioRaiseVolume exec $volumepath -np -i $volumestep -t $statuscmd -u $statussig
+bindsym XF86AudioLowerVolume exec $volumepath -np -d $volumestep -t $statuscmd -u $statussig
+bindsym XF86AudioMute        exec $volumepath -mn                -t $statuscmd -u $statussig
+
+bindsym XF86AudioPrev        exec --no-startup-id playerctl previous
+bindsym XF86AudioNext        exec --no-startup-id playerctl next
+bindsym XF86AudioPlay        exec --no-startup-id playerctl play-pause
+
+################
+## Brightness ##
+################
+
+# Sreen brightness controls
+# bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp   exec light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+
+################
+## Appearance ##
+################
+
+# Font
+font pango:roboto 10
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #121212 #073642 #93a1a1 #073642
+client.focused_inactive #101010 #002b36 #586e75 #586e75
+client.unfocused        #101010 #002b36 #586e75 #586e75
+client.urgent           #cd989a #cb4b16 #586e75 #586e75
+client.background       #073642
+client.placeholder      #000000 #0c0c0c #ffffff #002b36
+
+# this value should fit $MINIMICS_POLYBAR_HEIGHT
+gaps top 25
+hide_edge_borders both
+# gaps outer 0
+# gaps inner 10
+
+############
+# Behavior #
+############
+
+# Focus
+focus_follows_mouse yes
+mouse_warping none
+
 # Program specific
 for_window [class=".*"]              tiling enable
 for_window [class=".*"]              border pixel 0
@@ -161,88 +241,20 @@ assign     [class="^discord$"]  $workspace12
 assign     [class="^Spotify$"]  $workspace13
 assign     [class="^Slack$"]    $workspace14
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r exec "killall picom ; picom -b --config ~/.config/picom/picom.conf ; ~/.minimics/bin/polybar.sh" ; restart
+#############
+## Startup ##
+#############
 
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec i3-msg exit
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# resize window (you can also use the mouse for that)
-mode "resize" {
-    bindsym h resize shrink width 5 px or 5 ppt
-    bindsym j resize grow height 5 px or 5 ppt
-    bindsym k resize shrink height 5 px or 5 ppt
-    bindsym l resize grow width 5 px or 5 ppt
-    bindsym Left resize shrink width 25 px or 25 ppt
-    bindsym Down resize grow height  25 px or 25 ppt
-    bindsym Up resize shrink height  25 px or 25 ppt
-    bindsym Right resize grow width  25 px or 25 ppt
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+r mode "resize"
-bindsym XF86Display exec ~/.minimics/bin/rofi_screen.sh
-
-###########
-## Audio ##
-###########
-
-# Amount to increase/decrease volume as a percentage
-set $volumepath ~/.minimics/bin/volume.sh
-set $volumestep 5
-
-# Using pulseaudio-utils (append "-s $sinkname" without quotes to override default sink)
-bindsym XF86AudioRaiseVolume exec $volumepath -np -i $volumestep -t $statuscmd -u $statussig
-bindsym XF86AudioLowerVolume exec $volumepath -np -d $volumestep -t $statuscmd -u $statussig
-bindsym XF86AudioMute        exec $volumepath -mn -t $statuscmd -u $statussig
-
-bindsym XF86AudioPrev        exec --no-startup-id playerctl previous
-bindsym XF86AudioNext        exec --no-startup-id playerctl next
-bindsym XF86AudioPlay        exec --no-startup-id playerctl play-pause
-
-################
-## Brightness ##
-################
-
-# Sreen brightness controls
-# bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-# bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
-hide_edge_borders both
-
-# class                  border  backgr. text    indicator child_border
-client.focused          #121212 #073642 #93a1a1 #073642
-client.focused_inactive #101010 #002b36 #586e75 #586e75
-client.unfocused        #101010 #002b36 #586e75 #586e75
-client.urgent           #cd989a #cb4b16 #586e75 #586e75
-client.background       #073642
-client.placeholder      #000000 #0c0c0c #ffffff #002b36
-
-# Wallpaper
 exec --no-startup-id xset r rate 210 55
 exec --no-startup-id xautolock -time 60 -locker '~/.minimics/bin/lock.sh' &
-exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
-exec --no-startup-id ~/.minimics/bin/pywal.sh restore
-exec --no-startup-id ~/.minimics/bin/polybar.sh
+exec --no-startup-id xfce4-clipman
 exec --no-startup-id picom
+exec --no-startup-id ~/.minimics/bin/polybar.sh
+exec --no-startup-id ~/.minimics/bin/pywal.sh
 # exec --no-startup-id ~/.minimics/bin/lock_update.sh
 # exec --no-startup-id dropbox-cli start
 # exec --no-startup-id pasystray
 # exec --no-startup-id volctl
 # exec --no-startup-id blueberry-tray
 # exec --no-startup-id redshift-gtk
-
-# this value should fit $MINIMICS_POLYBAR_HEIGHT
-gaps top 25
-# gaps outer 0
-# gaps inner 10
-
-# Focus
-focus_follows_mouse yes
-mouse_warping none
