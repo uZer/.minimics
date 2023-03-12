@@ -19,7 +19,7 @@
 
 ]] -----------------------------------------------------------------------------
 
--- require("impatient") -- cache
+require("impatient") -- cache
 require("plugins")   -- plugins
 require("mnmx")      -- extra config
 
