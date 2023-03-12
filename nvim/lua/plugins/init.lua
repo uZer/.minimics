@@ -193,8 +193,8 @@ return require('packer').startup(function(use)
   --
   -- Colorschemes
   --
-  -- use 'uZer/pywal16.nvim'
-  use '~/ypi.projects/pywal16.nvim'
+  use 'uZer/pywal16.nvim'
+  -- use '~/ypi.projects/pywal16.nvim'
   use {
     'NvChad/nvim-colorizer.lua',
     config = get_config('colorizer'),
