@@ -251,7 +251,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id picom
 exec --no-startup-id ~/.minimics/bin/polybar.sh
-exec --no-startup-id ~/.minimics/bin/pywal.sh
+exec --no-startup-id ~/.minimics/bin/pywal.sh -f
+exec --no-startup-id ~/.minimics/bin/pywal.sh ~/.minimics/pywal16themes/sw16-sixteal-soft-darker.json
 # exec --no-startup-id ~/.minimics/bin/lock_update.sh
 # exec --no-startup-id dropbox-cli start
 # exec --no-startup-id pasystray
