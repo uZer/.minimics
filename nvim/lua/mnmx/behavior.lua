@@ -48,6 +48,13 @@ autocmd('Filetype', {
   command = 'setlocal shiftwidth=2 tabstop=2 expandtab'
 })
 
+autocmd({'BufRead','BufNewFile'}, {
+  pattern = {
+    '*.liq',
+  },
+  command = 'set filetype=liquidsoap',
+})
+
 -- Return to last edit position when opening files
 vim.cmd([[
 autocmd BufReadPost *
@@ -55,9 +62,3 @@ autocmd BufReadPost *
   \   exe "normal! g`\"" |
   \ endif
 ]])
-
--- Grey zone: "I'm sorry, but we've always done it this way" (#IHNIWID)
--- <empty>
-
--- Grey zone: "Let's comment this for a while and see if someone's complaining"
--- vim.opt.fileencodings = { "utf-8", "latin2" }

@@ -159,6 +159,10 @@ return require('packer').startup(function(use)
     config = get_config('mini-surround'),
   }
   use {
+    'echasnovski/mini.splitjoin',
+    config = get_config('mini-splitjoin'),
+  }
+  use {
     -- Supercollider
     'davidgranstrom/scnvim',
     config = get_config('scnvim'),
@@ -174,6 +178,7 @@ return require('packer').startup(function(use)
     'google/vim-jsonnet',
     ft = "jsonnet",
   }
+  use 'mcfiredrill/vim-liquidsoap'
   -- use 'robbles/logstash.vim'
   -- use 'davidhalter/jedi-vim'
   -- use 'parkr/vim-jekyll'
