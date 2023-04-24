@@ -174,6 +174,13 @@ return require('packer').startup(function(use)
     config = get_config("glow"),
     ft = "markdown",
   }
+  use({
+    -- Markdown preview in browser
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" },
+  })
   use {
     'google/vim-jsonnet',
     ft = "jsonnet",

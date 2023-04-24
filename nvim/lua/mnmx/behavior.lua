@@ -10,7 +10,7 @@ vim.opt.autoindent = true  -- keep current indentation after pressing <cr>
 vim.opt.smartindent = true -- indent accordingly to the syntax
 vim.opt.smarttab = true    -- indent by shiftwidth spaces when pressing tab
 
--- Folding
+-- Folding and Conceal
 vim.opt.foldenable = false -- disable folding by default
 
 -- Search
