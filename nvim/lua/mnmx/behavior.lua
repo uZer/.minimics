@@ -55,6 +55,32 @@ autocmd({'BufRead','BufNewFile'}, {
   command = 'set filetype=liquidsoap',
 })
 
+autocmd({'BufRead','BufNewFile'}, {
+  pattern = {
+    '*.tf',
+    '*.tfvars',
+  },
+  command = 'set filetype=terraform',
+})
+
+autocmd({'BufRead','BufNewFile'}, {
+  pattern = {
+    '*.hcl',
+    '.terraformrc',
+    '.terraform.rc',
+  },
+  command = 'set filetype=hcl',
+})
+
+autocmd({'BufRead','BufNewFile'}, {
+  pattern = {
+    '*.tfstate',
+    '*.tfstate.backup',
+  },
+  command = 'set filetype=json',
+})
+
+
 -- Return to last edit position when opening files
 vim.cmd([[
 autocmd BufReadPost *

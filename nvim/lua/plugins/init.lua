@@ -179,6 +179,12 @@ return require('packer').startup(function(use)
     ft = "jsonnet",
   }
   use 'mcfiredrill/vim-liquidsoap'
+
+  use {
+    'hashivim/vim-terraform',
+    config = get_config("vim-terraform"),
+    ft = "terraform",
+  }
   -- use 'robbles/logstash.vim'
   -- use 'davidhalter/jedi-vim'
   -- use 'parkr/vim-jekyll'
