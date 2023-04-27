@@ -23,6 +23,7 @@ local options = {
     "luaformatter",
     "markdownlint",
     "marksman",
+    "pyright",
     "shellcheck",
     "spectral-language-server",
     "svelte-language-server",
