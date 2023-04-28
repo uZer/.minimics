@@ -1,6 +1,5 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
-local lspconfig = require("lspconfig")
 local luasnip = require("luasnip")
 
 table.unpack = table.unpack or unpack -- Lua 5.1 compatibility
@@ -16,6 +15,7 @@ local options = {
     completeopt = 'menu,menuone,noinsert',
     default_behavior = cmp.ConfirmBehavior.Replace,
   },
+
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol_text',
@@ -26,11 +26,22 @@ local options = {
       end
     })
   },
+
+  sources = {
+    { name = 'buffer', keyword_length = 3 },
+    { name = 'luasnip', keyword_length = 2 },
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'nvim_lua' },
+    { name = 'path' },
+  },
+
   window = {
     completion = {
       scrollbar = false,
     }
   },
+
   mapping = {
     ['<C-D>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
