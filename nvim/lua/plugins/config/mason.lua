@@ -3,6 +3,7 @@ local options = {
     "ansible-language-server",
     "ansible-lint",
     "bash-language-server",
+    "clangd",
     "css-lsp",
     "docker-compose-language-service",
     "dockerfile-language-server",

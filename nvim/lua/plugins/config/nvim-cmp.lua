@@ -1,26 +1,64 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
+local lspconfig = require("lspconfig")
 local luasnip = require("luasnip")
 
+table.unpack = table.unpack or unpack -- Lua 5.1 compatibility
+
 local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local options = {
-  confirmation = { completeopt = 'menu,menuone,noinsert,noselect' },
+  confirmation = {
+    -- completeopt = 'menu,menuone,noinsert,noselect',
+    completeopt = 'menu,menuone,noinsert',
+    default_behavior = cmp.ConfirmBehavior.Replace,
+  },
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol_text',
       maxwidth = 50,
       ellipsis_char = '...',
-      before = function (entry, vim_item)
+      before = function(_, vim_item)
         return vim_item
       end
     })
   },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-Space>'] = cmp.mapping.confirm({ select = true }),
+  window = {
+    completion = {
+      scrollbar = false,
+    }
+  },
+  mapping = {
+    ['<C-D>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.scroll_docs(-2)
+      else
+        fallback()
+      end
+    end, {"i", "s"}),
+
+    ['<C-F>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.scroll_docs(2)
+      else
+        fallback()
+      end
+    end, {"i", "s"}),
+
+    ['<C-Space>'] = cmp.mapping(function(_)
+      if cmp.visible() then
+        cmp.confirm({
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        })
+      else
+        cmp.complete()
+      end
+    end, { "i", "s" }),
+
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -29,7 +67,7 @@ local options = {
       elseif has_words_before() then
         cmp.complete()
       else
-        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+        fallback()
       end
     end, { "i", "s" }),
 
@@ -43,9 +81,44 @@ local options = {
       end
     end, { "i", "s" }),
 
+    ["<C-J>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    ["<C-K>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
     -- Remove mapping of <CR>
     ['<CR>'] = function(fallback) fallback() end
-  }),
+  },
 }
 
+-- `/` global setup.
 cmp.setup(options)
+
+-- `/` cmdline setup.
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- `:` cmdline setup.
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})

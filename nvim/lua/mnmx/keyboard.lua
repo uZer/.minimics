@@ -1,8 +1,6 @@
 --
 -- Keyboard options 
 --
--- INFO:
--- Tabulations are configured with indentation in behavior.lua
 
 -- create a local map function to ease key mapping declarations
 local function map(mode, lhs, rhs, opts)
@@ -31,6 +29,10 @@ map('', '<leader>wJ', '<C-w>J') -- move window...
 map('', '<leader>wK', '<C-w>K')
 map('', '<leader>wH', '<C-w>H')
 map('', '<leader>wL', '<C-w>L')
+
+-- press tab to autoindent
+map('n', '<TAB>', '==')
+map('v', '<TAB>', '=')
 
 -- movements
 map('', '<C-h>', 'b')
