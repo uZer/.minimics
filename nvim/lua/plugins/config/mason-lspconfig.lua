@@ -9,23 +9,25 @@ require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
   -- a dedicated handler.
-  function(server_name)  -- default handler (optional)
+  function(server_name) -- default handler (optional)
     require("lspconfig")[server_name].setup {}
   end,
-  ["yamlls"] = function(server_name)
-    require("lspconfig")[server_name].setup {
+  ["yamlls"] = function()
+    require("lspconfig").yamlls.setup {
       settings = {
         redhat = {
           telemetry = { enabled = false },
         },
         yaml = {
-          keyOrdering = false,
+          completion = true,
+          hover = true,
+          -- keyOrdering = true,
         }
       }
     }
   end,
-  ["lua_ls"] = function(server_name)
-    require("lspconfig")[server_name].setup {
+  ["lua_ls"] = function()
+    require("lspconfig").lua_ls.setup {
       settings = {
         Lua = {
           diagnostics = {
@@ -35,8 +37,8 @@ require("mason-lspconfig").setup_handlers({
       }
     }
   end,
-  ["gopls"] = function(server_name)
-    require("lspconfig")[server_name].setup {
+  ["gopls"] = function()
+    require("lspconfig").gopls.setup {
       settings = {
         gopls = {
           analyses = {

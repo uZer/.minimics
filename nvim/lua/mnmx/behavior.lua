@@ -80,6 +80,13 @@ autocmd({ 'BufRead', 'BufNewFile' }, {
   command = 'set filetype=json',
 })
 
+autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = {
+    '*.libjsonnet',
+  },
+  command = 'set filetype=jsonnet',
+})
+
 autocmd({ 'BufWritePre' }, {
   pattern = { '*' },
   command = 'lua vim.lsp.buf.format()',
