@@ -34,5 +34,21 @@ require("mason-lspconfig").setup_handlers({
         }
       }
     }
-  end
+  end,
+  ["gopls"] = function(server_name)
+    require("lspconfig")[server_name].setup {
+      settings = {
+        gopls = {
+          analyses = {
+            nilness = true,
+            unusedparams = true,
+            unusedwrite = true,
+            useany = true
+          },
+          gofumpt = true,
+          staticcheck = true,
+        }
+      }
+    }
+  end,
 })
