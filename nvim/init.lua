@@ -17,13 +17,10 @@
 
   This thing has been splitted into files with comments, can you believe it?
 
-]] -----------------------------------------------------------------------------
-
+]]
 require("impatient") -- cache
 require("plugins")   -- plugins
 require("mnmx")      -- extra config
-
-
 
 -- Aaaand that's all. Time for some jokes!
 

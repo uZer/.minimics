@@ -5,8 +5,8 @@
 
 require("mnmx.behavior") -- how neovim behaves
 require("mnmx.keyboard") -- key mappings
-require("mnmx.theme") -- cosmetics
-require("mnmx.lsp") -- init lsp
+require("mnmx.theme")    -- cosmetics
+require("mnmx.lsp")      -- init lsp
 
 -- Uncomment the following block to include your ~/.vimrc configuration file
 -- when neovim starts, it will change the runtimepath to vim's one. Useful

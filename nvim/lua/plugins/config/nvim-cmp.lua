@@ -28,8 +28,8 @@ local options = {
   },
 
   sources = {
-    { name = 'buffer', keyword_length = 3 },
-    { name = 'luasnip', keyword_length = 2 },
+    { name = 'buffer',                 keyword_length = 3 },
+    { name = 'luasnip',                keyword_length = 2 },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lua' },
@@ -49,7 +49,7 @@ local options = {
       else
         fallback()
       end
-    end, {"i", "s"}),
+    end, { "i", "s" }),
 
     ['<C-F>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -57,7 +57,7 @@ local options = {
       else
         fallback()
       end
-    end, {"i", "s"}),
+    end, { "i", "s" }),
 
     ['<C-Space>'] = cmp.mapping(function(_)
       if cmp.visible() then
@@ -85,8 +85,8 @@ local options = {
     ["<S-Tab>"] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable( -1) then
-        luasnip.jump( -1)
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       elseif has_words_before() then
         cmp.complete()
       end

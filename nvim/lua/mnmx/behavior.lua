@@ -48,14 +48,14 @@ autocmd('Filetype', {
   command = 'setlocal shiftwidth=2 tabstop=2 expandtab'
 })
 
-autocmd({'BufRead','BufNewFile'}, {
+autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = {
     '*.liq',
   },
   command = 'set filetype=liquidsoap',
 })
 
-autocmd({'BufRead','BufNewFile'}, {
+autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = {
     '*.tf',
     '*.tfvars',
@@ -63,7 +63,7 @@ autocmd({'BufRead','BufNewFile'}, {
   command = 'set filetype=terraform',
 })
 
-autocmd({'BufRead','BufNewFile'}, {
+autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = {
     '*.hcl',
     '.terraformrc',
@@ -72,7 +72,7 @@ autocmd({'BufRead','BufNewFile'}, {
   command = 'set filetype=hcl',
 })
 
-autocmd({'BufRead','BufNewFile'}, {
+autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = {
     '*.tfstate',
     '*.tfstate.backup',
@@ -80,6 +80,10 @@ autocmd({'BufRead','BufNewFile'}, {
   command = 'set filetype=json',
 })
 
+autocmd({ 'BufWritePre' }, {
+  pattern = { '*' },
+  command = 'lua vim.lsp.buf.format()',
+})
 
 -- Return to last edit position when opening files
 vim.cmd([[

@@ -7,7 +7,7 @@
 local ensure_packer = function()
   local fn = vim.fn
   local install_path =
-    fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+      fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({
       'git', 'clone',
@@ -65,7 +65,7 @@ return require('packer').startup(function(use)
   }
   use {
     'notjedi/nvim-rooter.lua',
-    config = function() require'nvim-rooter'.setup() end
+    config = function() require 'nvim-rooter'.setup() end
   }
 
   --
@@ -152,7 +152,7 @@ return require('packer').startup(function(use)
     config = get_config('treesitter'),
     run = function()
       local ts_update =
-        require('nvim-treesitter.install').update({ with_sync = true })
+          require('nvim-treesitter.install').update({ with_sync = true })
       ts_update()
     end,
   }

@@ -8,7 +8,7 @@ local options = {
     gitsigns = true,
   },
   handle = {
-    color_nr = "NONE", -- disable cterm
+    color_nr = "NONE",             -- disable cterm
     highlight = "ScrollbarHandle", -- dedicated color instead of CursorColumn...
   },
 }
