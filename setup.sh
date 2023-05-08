@@ -187,7 +187,7 @@ _zsh () {
   makelink "${MIN_PATH}/zsh/zshrc"    "${HOME}/.zshrc"
   makelink "${MIN_PATH}/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
   if [ ! -e "${OHMY_PATH}" ]; then
-  echo "  Downloading oh-my-zsh..."
+    echo "  Downloading oh-my-zsh..."
     git clone https://github.com/robbyrussell/oh-my-zsh.git "${OHMY_PATH}"
   fi
   echo "  Creating custom aliases file in ~/.aliases.local ..."
