@@ -61,6 +61,12 @@ map('', '<C-f>', ':lua require("telescope.builtin").live_grep({grep_open_files=t
 map('', '<C-g>', ':lua require("telescope.builtin").live_grep({grep_open_files=false})<CR>')
 map('', '<C-p>', ':Telescope<CR>')
 
+-- [plugin: aerial] toogle
+map('', '<F6>', ':AerialNavToggle<CR>')
+map('', '<F7>', ':AerialToggle<CR>')
+map('', '<leader>f', ':AerialNavToggle<cr>')
+map('', '<leader>m', ':AerialToggle<cr>')
+
 -- [plugin: tagbar] toogle
 map('', '<F8>', ':TagbarToggle<CR>')
 
@@ -78,4 +84,4 @@ map('', '<leader>j', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 map('', '<leader>l', '<cmd>lua vim.diagnostic.open_float()<cr>')
 map('', 'gj', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
 map('', 'gk', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-map('', '<leader>f', ':LspZeroFormat<cr>')
+-- map('', '<leader>f', ':LspZeroFormat<cr>')

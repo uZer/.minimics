@@ -44,12 +44,6 @@ return require('packer').startup(function(use)
       'moll/vim-bbye',
     }
   }
-  use {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
-    config = get_config('telescope'),
-    requires = { { 'nvim-lua/plenary.nvim' } }
-  }
   use 'ojroques/nvim-bufdel'
   use {
     'numToStr/Comment.nvim',
@@ -71,6 +65,18 @@ return require('packer').startup(function(use)
   --
   -- Text Enrichment & Interface
   --
+  use {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.2',
+    config = get_config('telescope'),
+    requires = {
+      'nvim-lua/plenary.nvim',
+      {
+        'stevearc/aerial.nvim',
+        config = get_config('aerial'),
+      }
+    }
+  }
   use {
     'Yggdroot/indentLine',
     config = get_config('indentline')
