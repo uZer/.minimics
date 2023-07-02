@@ -19,6 +19,9 @@ vim.opt.incsearch = true  -- go to matchs when searching
 vim.opt.ignorecase = true -- ignore case in search pattern
 vim.opt.smartcase = true  -- check case if the pattern contains uppercase chars
 
+-- Copy / Paste settings
+vim.api.nvim_set_option("clipboard", "unnamed") -- Copy to system clipboard
+
 -- Other
 vim.opt.fileformats = { "unix", "dos", "mac" }         -- use unix first
 vim.opt.textwidth = 80                                 -- for `gq` and linebreak text at 80 columns when typing
