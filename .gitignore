@@ -1,3 +1,4 @@
 .backup.*
 vim/bundle/*
 i3/i3/wallpaper.sh
+nvim/spell/*.add.spl

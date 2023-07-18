@@ -11,7 +11,7 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- leader is spacebar
+-- leader is <space> bar
 vim.g.mapleader = ' '
 
 -- switch CWD to the directory of the open buffer
@@ -54,6 +54,9 @@ map('i', '<C-k>', '<Esc>:m .-2<CR>==gi')
 
 -- remove the Windows ^M when the encodings gets messed up
 map('n', '<Leader>M', "mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm")
+
+-- spell check
+map('', '<leader>ss', ':set invspell<CR>')
 
 -- [plugin: telescope] find stuff
 map('', '<C-o>', ':Telescope find_files<CR>')
