@@ -1,8 +1,8 @@
 local options = {
   mappings = {
     toggle = 'gS',
-    split = '',
-    join = '',
+    split = 'gJ',
+    join = 'gK',
   },
 }
 
