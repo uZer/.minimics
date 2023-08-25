@@ -30,7 +30,6 @@ local options = {
     "markuplint",
     "prettierd",
     "pyright",
-    "rome",
     "shellcheck",
     "spectral-language-server",
     "sqlls",
