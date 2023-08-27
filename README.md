@@ -1,8 +1,8 @@
 .minimics
 =========
 
-![img](https://raw.githubusercontent.com/uZer/.minimics/master/preview.png)
-
+![preview1](https://raw.githubusercontent.com/uZer/.minimics/master/preview1.png)
+![preview2](https://raw.githubusercontent.com/uZer/.minimics/master/preview2.png)
 
 A pywal based desktop environment
 

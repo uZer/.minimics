@@ -3,9 +3,6 @@
 ## FEATURE FLAGS ##
 ###################
 
-# Available install modules:
-# bash ctags dunst git gtk3 htop i3 minimics nvim taskwarrior vim zsh
-
 # Special requirements:
 #   ctags:
 #     universal-ctags
@@ -17,12 +14,14 @@
 #     luarocks python-pynvim
 #     pywal16
 
+# Available modules:
+# bash ctags dunst git gtk3 htop i3 minimics nvim taskwarrior vim zsh
 # Install selected modules:
 modules=(bash zsh ctags dunst git gtk3 htop i3 minimics nvim taskwarrior)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
-OHMY_PATH="${HOME}/.oh-my-zsh"
+OHMYZSH_PATH="${HOME}/.oh-my-zsh"
 
 # Backup dir in ~/.minimics/.backup.<timestamp>
 _BACKUPDIR="${MIN_PATH}/.backup.$(date +%s)"
@@ -186,9 +185,9 @@ _zsh () {
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/zsh/zshrc"    "${HOME}/.zshrc"
   makelink "${MIN_PATH}/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
-  if [ ! -e "${OHMY_PATH}" ]; then
+  if [ ! -e "${OHMYZSH_PATH}" ]; then
     echo "  Downloading oh-my-zsh..."
-    git clone https://github.com/robbyrussell/oh-my-zsh.git "${OHMY_PATH}"
+    git clone https://github.com/robbyrussell/oh-my-zsh.git "${OHMYZSH_PATH}"
   fi
   echo "  Creating custom aliases file in ~/.aliases.local ..."
   touch ~/.aliases.local > /dev/null 2>&1
