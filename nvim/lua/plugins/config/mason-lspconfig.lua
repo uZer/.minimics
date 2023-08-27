@@ -53,4 +53,17 @@ require("mason-lspconfig").setup_handlers({
       }
     }
   end,
+  ["dockerls"] = function()
+    require("lspconfig").dockerls.setup {
+      settings = {
+        docker = {
+          languageserver = {
+            formatter = {
+              ignoreMultilineInstructions = true,
+            }
+          }
+        }
+      }
+    }
+  end,
 })
