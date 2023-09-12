@@ -62,7 +62,10 @@ coincoin() { du -akhd1 ${@:-.} | sort -hr | head -n 20 }
 coin() { du -akd1 ${@:-.} | sort -hr | head -n 20 }
 
 alias mmv='noglob zmv -W'
-alias watch='watch -c '
+watch() {
+  /bin/watch -ctn1 ${@} ;
+  cat ~/.cache/wal/sequences 2>/dev/null
+}
 
 # SPY
 # returns list of open internet sockets, optionally filter (via grep) for
