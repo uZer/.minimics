@@ -142,7 +142,8 @@ bindsym $mod+Shift+p move container to workspace $workspace16
 bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r exec "killall picom ; picom -b --config ~/.config/picom/picom.conf ; ~/.minimics/bin/polybar.sh" ; restart
+# bindsym $mod+Shift+r exec "killall picom ; picom -b --config ~/.config/picom/picom.conf ; ~/.minimics/bin/polybar.sh" ; restart"
+bindsym $mod+Shift+r exec "i3-msg restart ; /home/$USER/.minimics/bin/i3-start.sh"
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec i3-msg exit
@@ -223,7 +224,7 @@ focus_follows_mouse yes
 mouse_warping none
 
 # Program specific
-for_window [class=".*"]              tiling enable
+for_window [class=".*"]              floating disable
 for_window [class=".*"]              border pixel 0
 for_window [class="feh"]             floating enable
 for_window [class="Nautilus"]        floating enable
@@ -245,14 +246,10 @@ assign     [class="^Slack$"]    $workspace14
 ## Startup ##
 #############
 
-exec --no-startup-id xset r rate 210 55
 exec --no-startup-id xautolock -time 60 -locker '~/.minimics/bin/lock.sh' &
-exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-clipman
-exec --no-startup-id picom
-exec --no-startup-id ~/.minimics/bin/polybar.sh
-exec --no-startup-id ~/.minimics/bin/pywal.sh -f
-exec --no-startup-id ~/.minimics/bin/pywal.sh ~/.minimics/pywal16themes/sw16-sixteal-soft-darker.json
+exec --no-startup-id nm-applet
+exec --no-startup-id /home/$USER/.minimics/bin/i3-start.sh
 # exec --no-startup-id ~/.minimics/bin/lock_update.sh
 # exec --no-startup-id dropbox-cli start
 # exec --no-startup-id pasystray

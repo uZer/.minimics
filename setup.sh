@@ -170,12 +170,13 @@ _htop () {
 
 _i3 () {
   echo "[i3]"
-  echo "  Linking i3, picom, polybar, rofi, rofi-pass configuration files..."
-  makelink "${MIN_PATH}/i3"         "${HOME}/.config/i3"
-  makelink "${MIN_PATH}/picom"      "${HOME}/.config/picom"
-  makelink "${MIN_PATH}/polybar"    "${HOME}/.config/polybar"
-  makelink "${MIN_PATH}/rofi"       "${HOME}/.config/rofi"
-  makelink "${MIN_PATH}/rofi-pass"  "${HOME}/.config/rofi-pass"
+  echo "  Linking i3, picom, polybar, rofi, rofi-pass and xprofile configuration files..."
+  makelink "${MIN_PATH}/i3"                 "${HOME}/.config/i3"
+  makelink "${MIN_PATH}/picom"              "${HOME}/.config/picom"
+  makelink "${MIN_PATH}/polybar"            "${HOME}/.config/polybar"
+  makelink "${MIN_PATH}/rofi"               "${HOME}/.config/rofi"
+  makelink "${MIN_PATH}/rofi-pass"          "${HOME}/.config/rofi-pass"
+  makelink "${MIN_PATH}/xprofile/xprofile"  "${HOME}/.xprofile"
   echo
   return
 }

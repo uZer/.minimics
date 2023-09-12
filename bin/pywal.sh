@@ -4,7 +4,8 @@
 # You must configure the following variable to your .minimicsrc:
 # export MINIMICS_WALLS=<path to wallpaper directory or file>
 
-set -eu
+set -eux
+
 . "${HOME}/.minimicsrc"
 
 # wal settings
@@ -81,7 +82,7 @@ wal_time () {
 
 # Classic pywal
 wal_folder () {
-  ${wal} -i "${MINIMICS_WALLS}" --iterative --backend "${backend}" "${@:1}"
+  ${wal} -i "${MINIMICS_WALLS}" --iterative --backend "${backend}" "${@}"
 }
 
 # Halp
