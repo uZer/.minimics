@@ -4,7 +4,7 @@
 # You must configure the following variable to your .minimicsrc:
 # export MINIMICS_WALLS=<path to wallpaper directory or file>
 
-set -eux
+set -eu
 
 # shellcheck source=../minimicsrc.dist
 . "${HOME}/.minimicsrc"
