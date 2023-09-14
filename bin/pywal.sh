@@ -6,6 +6,7 @@
 
 set -eux
 
+# shellcheck source=../minimicsrc.dist
 . "${HOME}/.minimicsrc"
 
 # wal settings

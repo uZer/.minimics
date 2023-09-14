@@ -1,10 +1,11 @@
 configuration {
-  font:                           "Comfortaa 12";
+  font:                           "Roboto 12";
   disable-history:                false;
   fullscreen:                     false;
   hide-scrollbar:                 true;
   sidebar-mode:                   false;
 }
+@import "~/.cache/wal/colors-rofi-light.rasi"
 
 * {
   background-color:               @background;
@@ -52,9 +53,9 @@ inputbar {
 }
 
 listview {
-  columns:                        4;
-  lines:                          1;
-  spacing:                        10px;
+  columns:                        2;
+  lines:                          3;
+  spacing:                        4px;
   cycle:                          true;
   dynamic:                        true;
   layout:                         vertical;
@@ -75,11 +76,11 @@ element {
 }
 
 element-text {
-  font:                           "Comfortaa 30";
+  font:                           "Roboto 25";
   expand:                         true;
-  horizontal-align:               0.5;
+  horizontal-align:               0;
   vertical-align:                 0;
-  margin:                         5px 10px 35px 10px;
+  margin:                         5px 5px 5px 5px;
 }
 
 element normal.urgent,

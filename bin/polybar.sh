@@ -2,6 +2,7 @@
 
 set -u
 
+# shellcheck source=../minimicsrc.dist
 . "${HOME}"/.minimicsrc
 
 dir="$HOME/.config/polybar"

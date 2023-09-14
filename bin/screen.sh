@@ -4,6 +4,8 @@
 # Type xrandr to get correct screen names
 
 set -eu
+
+# shellcheck source=../minimicsrc.dist
 . "${HOME}/.minimicsrc"
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
@@ -39,7 +41,7 @@ If only one screen is connected, this script will disable other screens and
 set the resolution specified in the configuration.
 
 Otherwise, you can choose a display mode:
-  $(echo ${modelist[@]} | sed 's/ /\n  /g')
+$(printf "  %s\n" "${modelist[@]}")
 
 Example:
   $ $(basename "$0") dual_split
@@ -47,24 +49,26 @@ Example:
 EOF
 }
 
-if [ $# -eq 1 ] && [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; then
+if [ $# -eq 0 ] || { [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; }; then
   display_help
   exit 1
 fi
 
 # Display available options for rofi applets
 options () {
-  single_screen1=" ;single_screen1"
-  single_screen2=" ;single_screen2"
-  single_screen3=" ;single_screen3"
-  dual_split=" ;dual_split"
-  dual_clone=" ;dual_clone"
-  printf '%s\n%s\n%s\n%s\n%s\n' \
+  single_screen1=" 󰬺;single_screen1"
+  single_screen2=" 󰬻;single_screen2"
+  single_screen3=" 󰬼;single_screen3"
+  dual_clone=" 󰬺-󰬺;dual_clone"
+  dual_split=" 󰬺-󰬻;dual_split"
+  triple_split=" 󰬺-󰬻-󰬼;triple_split"
+  printf '%s\n%s\n%s\n%s\n%s\n%s\n' \
     "${single_screen1}" \
     "${single_screen2}" \
     "${single_screen3}" \
+    "${dual_clone}" \
     "${dual_split}" \
-    "${dual_clone}"
+    "${triple_split}"
 }
 
 # Reload bars
@@ -75,11 +79,11 @@ reload_bars () {
 # Disable allscreens but the ones listed
 cleanup_but () {
   keep=$1
-  xrandr --listmonitors | \
-    grep -v Monitors | \
-    awk '{ print $4 }' | \
+  xrandr | \
+    cut -d ' ' -f1 | \
+    grep "\S" | \
     grep -E -v "^${keep}$" | \
-     xargs -n 1 xrandr --output "$1" --off \
+    xargs -n 1 xrandr --output "$1" --off \
     > /dev/null 2>&1
 }
 
@@ -144,6 +148,24 @@ dual_split () {
   cleanup_but "${screen1_name}\|${screen2_name}"
 }
 
+triple_split () {
+  xrandr \
+    --output "${screen1_name}" --auto \
+      --primary \
+      --mode "${screen1_resolution}" \
+      --rotate normal \
+    --output "${screen2_name}" \
+      --mode "${screen2_resolution}" \
+      --rotate normal \
+      --"${screen2_position}" "${screen1_name}" \
+    --output "${screen3_name}" \
+      --mode "${screen3_resolution}" \
+      --rotate normal \
+      --"${screen3_position}" "${screen2_name}" \
+    > /dev/null 2>&1
+  cleanup_but "${screen1_name}\|${screen2_name}\|${screen3_name}"
+}
+
 # Yolo
 rf () {
   xrandr \
@@ -181,6 +203,12 @@ case ${mode} in
 
   dual_split)
     dual_split
+    reload_bars
+    exit 0
+    ;;
+
+  triple_split)
+    triple_split
     reload_bars
     exit 0
     ;;

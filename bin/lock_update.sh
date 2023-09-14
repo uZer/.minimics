@@ -2,6 +2,7 @@
 #
 # Generate lockscreen
 
+# shellcheck source=../minimicsrc.dist
 . "${HOME}"/.minimicsrc
 
 betterlockscreen \
