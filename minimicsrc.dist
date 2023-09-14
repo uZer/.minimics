@@ -16,10 +16,13 @@ export MINIMICS_SCREEN2_NAME=
 export MINIMICS_SCREEN2_RESOLUTION=
 export MINIMICS_SCREEN3_NAME=
 export MINIMICS_SCREEN3_RESOLUTION=
-
 # Position of screen2 next to screen1. One of left-of, right-of, above, below
 export MINIMICS_SCREEN2_POSITION=above
+# Position of screen3 next to screen2. One of left-of, right-of, above, below
 export MINIMICS_SCREEN3_POSITION=left-of
+
+# Layout to use in xprofile at startup of the wm session
+export MINIMICS_SCREEN_LAYOUT=single_screen1
 
 # Hardware identifiers / network interfaces names
 export MINIMICS_NET_WIRED_INTERFACE=eth0
