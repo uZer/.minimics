@@ -78,8 +78,9 @@ return require('packer').startup(function(use)
     }
   }
   use {
-    'Yggdroot/indentLine',
-    config = get_config('indentline')
+    -- 'Yggdroot/indentLine',
+    'lukas-reineke/indent-blankline.nvim',
+    config = get_config('indent-blankline')
   }
   use {
     'lewis6991/gitsigns.nvim',

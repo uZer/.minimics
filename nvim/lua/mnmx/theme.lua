@@ -22,7 +22,3 @@ vim.opt.number = true -- display line numbers
 
 -- [plugin: pywal16.nvim] colorscheme
 vim.cmd.colorscheme("pywal16")
-
--- [plugin: indentLine] conceal configuration
-vim.g.indentLine_concealcursor = 'c'
-vim.g.vim_json_syntax_conceal = 0
