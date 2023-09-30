@@ -80,6 +80,7 @@ return require('packer').startup(function(use)
   use {
     -- 'Yggdroot/indentLine',
     'lukas-reineke/indent-blankline.nvim',
+    main = "ibl",
     config = get_config('indent-blankline')
   }
   use {
