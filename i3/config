@@ -224,23 +224,28 @@ focus_follows_mouse yes
 mouse_warping none
 
 # Program specific
-for_window [class=".*"]              floating disable
-for_window [class=".*"]              border pixel 0
-for_window [class="feh"]             floating enable
-for_window [class="Nautilus"]        floating enable
-for_window [class="^.*ctl"]          floating enable
-for_window [class="^.*control"]      floating enable
-for_window [class="^.*statistics"]   floating enable
-for_window [title="^.*Preferences$"] floating enable
-for_window [class="^SuperCollider$"] floating enable
-for_window [title="^Quarks$"]        floating enable
+for_window [class=".*"]                               floating disable
+for_window [class=".*"]                               border pixel 0
 
-for_window [class="^discord"]   move to workspace $workspace12
-for_window [class="^Spotify$"]  move to workspace $workspace13
-for_window [class="^Slack$"]    move to workspace $workspace14
+for_window [class="feh"]                              floating enable
+for_window [class="Nautilus"]                         floating enable
+for_window [class="^.*ctl"]                           floating enable
+for_window [class="^.*control"]                       floating enable
+for_window [class="^.*statistics"]                    floating enable
+for_window [title="^.*Preferences$"]                  floating enable
+for_window [class="^SuperCollider$"]                  floating enable
+for_window [title="^Quarks$"]                         floating enable
+for_window [title="^Microsoft Teams Notification$"]   floating enable
+
+for_window [class="^discord"]                    move to workspace $workspace12
+for_window [class="^Spotify$"]                   move to workspace $workspace13
+for_window [class="^Slack$"]                     move to workspace $workspace14
+for_window [title="^.*Microsoft Teams Classic$"] move to workspace $workspace9
+
 assign     [class="^discord$"]  $workspace12
 assign     [class="^Spotify$"]  $workspace13
 assign     [class="^Slack$"]    $workspace14
+assign     [title="^.*Microsoft Teams Classic$"] $workspace9
 
 #############
 ## Startup ##
