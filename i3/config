@@ -49,7 +49,7 @@ bindsym $mod+Shift+Tab move scratchpad
 # start dmenu (a program launcher)
 bindsym $mod+d          exec --no-startup-id ~/.minimics/bin/rofi_apps.sh
 bindsym $mod+BackSpace  exec --no-startup-id ~/.minimics/bin/rofi_pass.sh
-bindsym Print           exec --no-startup-id deepin-screenshot
+bindsym Print           exec --no-startup-id deepin-screen-recorder
 
 # change focus
 bindsym $mod+h focus left
@@ -176,9 +176,14 @@ set $volumepath ~/.minimics/bin/volume.sh
 set $volumestep 5
 
 # Using pulseaudio-utils (append "-s $sinkname" without quotes to override default sink)
-bindsym XF86AudioRaiseVolume exec $volumepath -np -i $volumestep -t $statuscmd -u $statussig
-bindsym XF86AudioLowerVolume exec $volumepath -np -d $volumestep -t $statuscmd -u $statussig
-bindsym XF86AudioMute        exec $volumepath -mn                -t $statuscmd -u $statussig
+# bindsym XF86AudioRaiseVolume exec $volumepath -np -i $volumestep -t $statuscmd -u $statussig
+# bindsym XF86AudioLowerVolume exec $volumepath -np -d $volumestep -t $statuscmd -u $statussig
+# bindsym XF86AudioMute        exec $volumepath -mn                -t $statuscmd -u $statussig
+
+# Using pipewire/wireplumber/wpctl
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-
+bindsym XF86AudioMute        exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
 bindsym XF86AudioPrev        exec --no-startup-id playerctl previous
 bindsym XF86AudioNext        exec --no-startup-id playerctl next
