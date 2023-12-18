@@ -243,6 +243,7 @@ for_window [title="^Quarks$"]                         floating enable
 for_window [title="^Microsoft Teams Notification$"]   floating enable
 for_window [title="^Loading Microsoft Teams$"]        floating enable
 for_window [window_type="dialog|utility|toolbar|splash|menu|dropdown_menu|popup_menu|tooltip|notification"] floating enable
+for_window [title="^.*onfiguration.*"] floating enable
 
 for_window [class="^discord"]                    move to workspace $workspace12
 for_window [class="^Spotify$"]                   move to workspace $workspace13
