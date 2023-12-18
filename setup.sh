@@ -17,7 +17,7 @@
 # Available modules:
 # bash ctags dunst git gtk3 htop i3 minimics nvim taskwarrior vim zsh
 # Install selected modules:
-modules=(bash zsh ctags dunst git gtk3 htop i3 minimics nvim taskwarrior)
+modules=(bash zsh ctags dunst git gtk3 htop i3 minimics nvim scide taskwarrior)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -201,6 +201,16 @@ _gtk3 () {
   echo "[gtk3]"
   echo "  Linking GTK3 configuration files..."
   makelink "${MIN_PATH}/gtk-3.0/gtk.css" "${HOME}/.config/gtk-3.0/gtk.css"
+  echo ""
+  return
+}
+
+_scide () {
+  echo "[Supercollider IDE]"
+  echo "  Linking sc configuration files..."
+  makelink "${MIN_PATH}/supercollider/sc_ide_conf.yaml" "${HOME}/.config/SuperCollider/sc_ide_conf.yaml"
+  makelink "${MIN_PATH}/supercollider/sclang_conf.yaml" "${HOME}/.config/SuperCollider/sclang_conf.yaml"
+  makelink "${MIN_PATH}/supercollider/startup.scd"      "${HOME}/.config/SuperCollider/startup.scd"
   echo ""
   return
 }

@@ -1,0 +1,7 @@
+includePaths:
+  -   /home/ypiolet/.local/share/SuperCollider/downloaded-quarks/Bjorklund
+  -   /home/ypiolet/.local/share/SuperCollider/downloaded-quarks/Feedback
+  -   /home/ypiolet/.local/share/SuperCollider/downloaded-quarks/AlgaLib
+excludePaths: []
+postInlineWarnings: false
+excludeDefaultPaths: false

@@ -1,0 +1,37 @@
+IDE:
+  editor:
+    blinkDuration: 600
+    disableBlinkingCursor: false
+    font:
+      antialias: 2
+      family: JetbrainsMonoNL Nerd Font Mono Regular
+      size: 11
+    highlightBracketContents: true
+    highlightCurrentLine: false
+    inactiveEditorFadeAlpha: 64
+    indentWidth: 2
+    insertMatchingTokens: false
+    lineWrap: true
+    showLinenumber: true
+    showWhitespace: false
+    spaceIndent: true
+    stepForwardEvaluation: false
+    theme: solarizedDark
+    useComboBox: false
+    useComboBoxWhenSplitting: false
+  interpreter:
+    autoStart: true
+    configFile: ~/.config/SuperCollider/sclang_conf.yaml
+    runtimeDir: ""
+    standalone: false
+  mainWindow:
+    detached: !QVariantMap
+      documents-dock: ""
+      help-dock: AAHZ0MsAAwAAAAACqgAAABkAAAVTAAAC/gAAAqoAAAAZAAAFUwAAAv4AAAAAAAAAAAVUAAACqgAAABkAAAVTAAAC/g==
+      post-dock: ""
+    geometry: AdnQywADAAAAAAAAAAAAGQAAAqkAAAL+AAAAAAAAABkAAAKpAAAC/gAAAAAAAAAABVQAAAAAAAAAGQAAAqkAAAL+
+    state: AAAA/wAAAAD9AAAAAgAAAAAAAADIAAACrvwCAAAAAfsAAAAcAGQAbwBjAHUAbQBlAG4AdABzAC0AZABvAGMAawAAAAAUAAACrgAAAF8A////AAAAAQAAAioAAAK0/AIAAAAC+wAAABIAaABlAGwAcAAtAGQAbwBjAGsAAAAAFAAAAOgAAAATAP////sAAAASAHAAbwBzAHQALQBkAG8AYwBrAQAAABYAAAK0AAAATQD///8AAAB/AAACtAAAAAEAAAACAAAAAQAAAAL8AAAAAA==
+  postWindow:
+    lineWrap: true
+    scrollback: 10000
+  startWithSession: last
