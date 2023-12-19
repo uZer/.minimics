@@ -19,3 +19,7 @@ s.ping;
 s.serverRunning;
 s.options.safetyClipThreshold = 1;
 s.options.recHeaderFormat = "wav";
+
+// Clock
+~tempo = 132/60;
+TempoClock.default.tempo = ~tempo;
