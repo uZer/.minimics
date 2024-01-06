@@ -41,3 +41,6 @@ export MINIMICS_CITY=
 export MINIMICS_GITLAB_API_URL=https://gitlab.com/api/v4
 export MINIMICS_GITLAB_PROJECT=example/example
 export MINIMICS_GITLAB_PRIVATE_TOKEN=yoursecrettoken
+
+# QT5/QT6
+export QT_QPA_PLATFORMTHEME=qt6ct

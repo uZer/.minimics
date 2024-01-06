@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ###################
 ## FEATURE FLAGS ##
 ###################
@@ -6,18 +7,23 @@
 # Special requirements:
 #   ctags:
 #     universal-ctags
+#   hyprland:
+#     xdg-desktop-portal-hyprland wofi
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass
 #   nvim:
 #     neovim>=0.8.0 wget curl
 #     npm yarn ripgrep fd tree-sitter
 #     luarocks python-pynvim
-#     pywal16
+#   pywal16:
+#     pywal-16-colors
 
 # Available modules:
-# bash ctags dunst git gtk3 htop i3 minimics nvim taskwarrior vim zsh
-# Install selected modules:
-modules=(bash zsh ctags dunst git gtk3 htop i3 minimics nvim scide taskwarrior)
+# bash ctags dunst git gtk3 htop hyprland i3 minimics nvim pywal16 scide taskwarrior vim zsh
+
+# By default, install selected modules:
+modules=(bash zsh ctags dunst git gtk3 htop hyprland \
+         minimics nvim pywal16 scide taskwarrior)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -154,7 +160,7 @@ _nvim () {
   if [ ! -f "${HOME}/.cache/wal/colors-wal.vim" ]; then
     echo "  Cheating the absence of pywal for the colorscheme..."
     mkdir -p "${HOME}/.cache/wal" 2>/dev/null
-    cp "${MIN_PATH}/.walcachefornvim" "${HOME}/.cache/wal/colors-wal.vim"
+    cp "${MIN_PATH}/pywal16/.walcachefornvim" "${HOME}/.cache/wal/colors-wal.vim"
   fi
   echo
   return
@@ -178,6 +184,30 @@ _i3 () {
   makelink "${MIN_PATH}/rofi-pass"          "${HOME}/.config/rofi-pass"
   makelink "${MIN_PATH}/xprofile/xprofile"  "${HOME}/.xprofile"
   echo
+  return
+}
+
+_hyprland () {
+  echo "[hyprland]"
+  echo "  Linking hyprland, wofi, wofipass and xprofile configuration files..."
+  makelink "${MIN_PATH}/hyprland"           "${HOME}/.config/hypr"
+  makelink "${MIN_PATH}/wofi"               "${HOME}/.config/wofi"
+  makelink "${MIN_PATH}/wofi-pass"          "${HOME}/.config/wofi-pass"
+  makelink "${MIN_PATH}/xprofile/xprofile"  "${HOME}/.xprofile"
+  if [ ! -f "${HOME}/.cache/wal/colors-hyprland.conf" ]; then
+    echo "  Cheating the absence of pywal for the colorscheme..."
+    mkdir -p "${HOME}/.cache/wal" 2>/dev/null
+    cp "${MIN_PATH}/pywal16/.walcacheforhyprland" "${HOME}/.cache/wal/colors-hyprland.conf"
+  fi
+  echo
+  return
+}
+
+_pywal16() {
+  echo "[pywal16]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/pywal16"    "${HOME}/.config/wal"
+  echo ""
   return
 }
 
@@ -240,6 +270,15 @@ _minimics () {
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
-for module in "${modules[@]}"; do
-  eval "_${module}"
-done
+if [ $# -gt 0 ]; then
+  # Install modules in arguments
+  while (($#)); do
+    eval "_${1}"
+    shift
+  done
+else
+  # Install default modules
+  for module in "${modules[@]}"; do
+    eval "_${module}"
+  done
+fi
