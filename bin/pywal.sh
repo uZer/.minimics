@@ -4,7 +4,7 @@
 # You must configure the following variable to your .minimicsrc:
 # export MINIMICS_WALLS=<path to wallpaper directory or file>
 
-set -eu
+set -u
 
 # shellcheck source=../minimicsrc.dist
 . "${HOME}/.minimicsrc"
@@ -12,6 +12,7 @@ set -eu
 # wal settings
 # wal="exec $(which wal) --cols16 -b 0A0A0A"
 # wal="exec $(which wal) --cols16 -b 0A0F14"
+
 wal="$(which wal) --cols16"
 backend=fast-colorthief
 
@@ -83,7 +84,7 @@ wal_time () {
 
 # Classic pywal
 wal_folder () {
-  ${wal} -i "${MINIMICS_WALLS}" --iterative --backend "${backend}" "${@}"
+  ${wal} -i "${MINIMICS_WALLS}" --backend "${backend}" "${@}"
 }
 
 # Halp
@@ -117,6 +118,11 @@ $(find "${MINIMICS_DWALL}/images" -mindepth 1 -maxdepth 1 -type d -printf %f\\n 
 EOF
 }
 
+reloader () {
+  killall swaybg 2>/dev/null
+  swaybg -m fill -i "$(cat ~/.cache/wal/wal)" 2>/dev/null &
+}
+
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 case "${mode}" in
@@ -131,6 +137,7 @@ case "${mode}" in
     wal_restore
     wal_discord
     wal_fox
+    reloader
     ;;
 
   # Generate a colorscheme from a random wallpaper in the folder or filelist
@@ -139,6 +146,7 @@ case "${mode}" in
     wal_folder "${@:2}"
     wal_discord
     wal_fox
+    reloader
     ;;
 
   # Use a dwall theme
@@ -147,6 +155,7 @@ case "${mode}" in
     check_dwall_folder
     wal_time "${2:-lakeside}" "${@:3}"
     wal_fox
+    reloader
     ;;
 
   # Use a predefined colorscheme
@@ -154,6 +163,7 @@ case "${mode}" in
     wal_colorscheme "${mode}" "${@:2}"
     wal_discord
     wal_fox
+    reloader
     ;;
 
 esac
