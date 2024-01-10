@@ -1,0 +1,110 @@
+@import url("/home/ypiolet/.cache/wal/colors-waybar");
+
+* {
+  border: none;
+  border-radius: 0;
+  color: @foreground;
+  font-family: Symbols Nerd Font, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  min-height: 0;
+}
+
+window#waybar {
+  background: @backgroundAlpha;
+  /* border-bottom: .1rem solid @background; */
+}
+
+#workspaces button {
+  padding: .25rem;
+  background: transparent;
+  border-bottom: .1rem solid transparent;
+}
+
+/* Removes Strange Hover effect */
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+}
+
+#workspaces button.focused,
+#mode {
+  background: @foreground;
+  /* border-bottom: .1rem solid @foreground; */
+}
+
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#disk,
+#memory,
+#mode,
+#network,
+#tray,
+#wireplumber {
+  padding: .25rem .5rem;
+  margin: 0;
+  border-bottom: .0rem solid @color0Alpha;
+}
+
+#battery {
+  background-color: @color1;
+}
+
+#battery.charging {
+  background-color: @color3;
+}
+
+#battery.plugged {
+  background-color: @color2;
+}
+
+#battery.warning:not(.charging) {
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#bluetooth {
+  background-color: @color12;
+}
+
+#clock {
+  background-color: @color0;
+}
+
+#cpu {
+  background-color: @color2;
+}
+
+#disk {
+  background-color: @color3;
+}
+
+#memory {
+  background-color: @color6;
+}
+
+#network {
+  background-color: @color4;
+}
+
+#network.disconnected {
+  background: @color2;
+}
+
+#tray {
+  background: @color0;
+}
+
+#wireplumber {
+  background-color: @color5;
+}
+
+@keyframes blink {
+  to {
+    background-color: @color9;
+  }
+}

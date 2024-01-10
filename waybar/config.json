@@ -1,0 +1,94 @@
+{
+  "layer": "top",
+  "height": 22,
+  "margin-top": 0,
+  "margin-left": 0,
+  "margin-bottom": 0,
+  "margin-right": 0,
+  "spacing": 0,
+  "modules-left": [
+    "tray",
+    "hyprland/workspaces"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "bluetooth",
+    "network",
+    "wireplumber",
+    "cpu",
+    "memory",
+    "disk",
+    "battery",
+    "clock"
+  ],
+  "hyprland/workspaces": {
+    "all-outputs": false,
+    "active-only": "false",
+    "on-click": "activate",
+    "format": "{icon}",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1"
+  },
+  "battery": {
+    "interval": 1,
+    "bat": "BAT1",
+    "format": "{icon} {capacity}%",
+    "format-charging": "{icon} {capacity}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "bluetooth": {
+    "interval": 1,
+    "format-on": "󰂯 {controller_alias}",
+    "format-connected": "󰂯 {device_alias}",
+    "format-off": "󰂲",
+    "format-disabled": ""
+  },
+  "clock": {
+    "interval": 1,
+    "format": " {:%Y-%m-%d  %R:%S}",
+    "format-alt": "{:%a %d %b %Y}"
+  },
+  "cpu": {
+    "interval": 1,
+    "format": " {}%",
+    "tooltip": false
+  },
+  "disk": {
+    "interval": 30,
+    "format": "󰋊 {free}",
+    "path": "/"
+  },
+  "memory": {
+    "interval": 5,
+    "format": "󰍛 {used}G",
+    "tooltip": false
+  },
+  "network": {
+    "interval": 2,
+    "format-wifi": " {essid} {ipaddr}",
+    "format-ethernet": " {ipaddr}",
+    "format-disconnected": "",
+    "format-linked": "",
+    "tooltip": false
+  },
+  "tray": {
+    "icon-size": 20,
+    "spacing": 8
+  },
+  "wireplumber": {
+    "interval": 1,
+    "format": "{icon} {volume}%",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
+    "format-muted": ""
+  }
+}
