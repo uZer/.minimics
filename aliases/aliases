@@ -170,14 +170,20 @@ jl() {
   find ${1:-.} -name "*jsonnet" -print0 | xargs -0 -n1 -I % sh -c 'jsonnetfmt --test % || (echo Failed \($?\): % && exit 1)'
 }
 
-alias vim="nvim"
-alias vimdiff="nvim -d"
+alias nvim="nvim --listen $(mktemp -q -p ~/.cache/nvim/).pipe"
+alias vim="nvim --listen $(mktemp -q -p ~/.cache/nvim/).pipe"
+alias vimdiff="nvim --listen $(mktemp -q -p ~/.cache/nvim/).pipe -d"
 
 alias ssd='systemctl --user stop syncthing.service ; systemctl --user status syncthing.service | cat'
 alias sse='systemctl --user start syncthing.service ; systemctl --user status syncthing.service | cat'
 
 alias track='vim ~/ypi.projects/horizon/$(date +%Gw%V) -o ~/ypi.projects/horizon/$(date +%Gw%V --date="last week")'
 alias journal='vim ~/ypi.projects/horizon/journal -O ~/ypi.projects/horizon/collections'
+
+# alias feh='. ~/.cache/wal/colors.sh &> /dev/null; feh -B ${background:-'black'} "$@"'
+alias feh='pqiv -ci "$@" &>/dev/null'
+alias qiv='pqiv -ci "$@" &>/dev/null'
+alias pqiv='pqiv -ci "$@" &>/dev/null'
 
 instastory() {
   # Convert vertical video to Instagram story format.
