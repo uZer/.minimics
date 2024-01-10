@@ -8,7 +8,7 @@
 #   ctags:
 #     universal-ctags
 #   hyprland:
-#     xdg-desktop-portal-hyprland wofi
+#     xdg-desktop-portal-hyprland wofi swaylock-effects
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass
 #   nvim:
@@ -19,11 +19,12 @@
 #     pywal-16-colors
 
 # Available modules:
-# bash ctags dunst git gtk3 htop hyprland i3 minimics nvim pywal16 scide taskwarrior vim zsh
+# bash ctags dunst git gnuplot gtk3 htop hyprland i3 minimics nvim
+# pywal16 scide taskwarrior vim waybar zsh
 
 # By default, install selected modules:
-modules=(bash zsh ctags dunst git gtk3 htop hyprland \
-         minimics nvim pywal16 scide taskwarrior)
+modules=(bash zsh ctags dunst git gtk3 htop hyprland gnuplot \
+         minimics nvim pywal16 waybar scide taskwarrior)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -143,6 +144,14 @@ _git () {
   return
 }
 
+_gnuplot () {
+  echo "[gnuplot]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/gnuplot/gnuplot"  "${HOME}/.gnuplot"
+  echo
+  return
+}
+
 _vim () {
   echo "[vim]"
   echo "  Linking configuration files..."
@@ -203,10 +212,18 @@ _hyprland () {
   return
 }
 
-_pywal16() {
+_pywal16 () {
   echo "[pywal16]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/pywal16"    "${HOME}/.config/wal"
+  echo ""
+  return
+}
+
+_waybar () {
+  echo "[pywal16]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/waybar"    "${HOME}/.config/waybar"
   echo ""
   return
 }
