@@ -173,9 +173,8 @@ bindsym XF86Display exec ~/.minimics/bin/rofi_screen.sh
 ###########
 
 # Amount to increase/decrease volume as a percentage
-set $volumepath ~/.minimics/bin/volume.sh
-set $volumestep 5
-
+# set $volumepath ~/.minimics/bin/volume.sh
+# set $volumestep 5
 # Using pulseaudio-utils (append "-s $sinkname" without quotes to override default sink)
 # bindsym XF86AudioRaiseVolume exec $volumepath -np -i $volumestep -t $statuscmd -u $statussig
 # bindsym XF86AudioLowerVolume exec $volumepath -np -d $volumestep -t $statuscmd -u $statussig
@@ -195,10 +194,8 @@ bindsym XF86AudioPlay        exec --no-startup-id playerctl play-pause
 ################
 
 # Sreen brightness controls
-# bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-# bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-bindsym XF86MonBrightnessUp   exec light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 ################
 ## Appearance ##

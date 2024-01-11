@@ -9,9 +9,12 @@
 #     universal-ctags
 #   hyprland:
 #     xdg-desktop-portal-hyprland wofi swaylock-effects swaybg slurp grim
-#     wdisplays kanshi
+#     wireplumber pipewire pipewire-pulse
+#     wdisplays kanshi playerctl brightnessctl
 #   i3:
-#     i3blocks i3status i3lock-color picom polybar rofi rofi-pass
+#     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
+#     wireplumber pipewire pipewire-pulse
+#     brightnessctl
 #   nvim:
 #     neovim>=0.8.0 wget curl
 #     npm yarn ripgrep fd tree-sitter
