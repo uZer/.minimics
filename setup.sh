@@ -9,12 +9,11 @@
 #     universal-ctags
 #   hyprland:
 #     xdg-desktop-portal-hyprland wofi swaylock-effects swaybg slurp grim
-#     wireplumber pipewire pipewire-pulse
-#     wdisplays kanshi playerctl brightnessctl hyprpicker
+#     wl-clipboard wireplumber pipewire pipewire-pulse wdisplays kanshi
+#     playerctl brightnessctl hyprpicker
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
-#     wireplumber pipewire pipewire-pulse
-#     brightnessctl
+#     wireplumber pipewire pipewire-pulse brightnessctl
 #   nvim:
 #     neovim>=0.8.0 wget curl
 #     npm yarn ripgrep fd tree-sitter
@@ -119,8 +118,9 @@ _dunst () {
 }
 
 _env () {
-  echo "[dunst]"
+  echo "[env]"
   echo "  Linking configuration files..."
+  mkdir -p "${HOME}/.config/environment.d"
   makelink "${MIN_PATH}/environment.d/minimics.path.conf" "${HOME}/.config/environment.d/minimics.path.conf"
   echo
   return
@@ -144,7 +144,6 @@ _git () {
   read -r GIT_EMAIL
   GIT_LOGIN="${GIT_LOGIN:-Youenn Piolet}"
   GIT_EMAIL="${GIT_EMAIL:-piolet.y@gmail.com}"
-  echo "[user]"
   echo "  name  = ${GIT_LOGIN}"
   echo "  email = ${GIT_EMAIL}"
   git config --global user.name  "${GIT_LOGIN}"
