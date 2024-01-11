@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+#################
+## ENVIRONMENT ##
+#################
+
+TOOLS_REQUIRED=(kapitan terraform ansible vault kubectl helm)
+TOOLS_SUGGESTED=(kubectx kubens argo gcloud aws stern \
+  shellcheck flake8 jsonnetfmt)
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+get_usage () {
+  cat << EOF
+usage:
+  $COMMAND --help, -h
+  $COMMAND show
+
+arguments:
+  -h, --help   display this message
+  show         display current minimics environment values
+
+Print current environment variables related to minimics.
+Perform various checks to ensure environment is configured.
+
+EOF
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+display_env () {
+  set +u
+  echo "Displaying current environment..."
+  echo
+  rflog debug "[MINIMICSRC]"
+  rflog kv TODO "${TODO}"
+  echo
+  rflog debug "[PATHS]"
+  rflog kv PATH "${PATH}"
+  echo
+  set -u
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+[ $# -lt 1 ] && get_usage && exit 0
+
+while [ "$#" -ne 0 ]; do
+  key="$1"
+  case "$key" in
+    show)
+      display_env
+      exit 0
+      ;;
+
+    *)
+      get_usage
+      exit 0
+      ;;
+  esac
+  shift
+done

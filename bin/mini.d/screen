@@ -1,0 +1,64 @@
+#!/bin/bash
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+#################
+## ENVIRONMENT ##
+#################
+
+# TODO
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+get_usage () {
+  cat << EOF
+usage:
+  $COMMAND --help, -h
+  $COMMAND conf >> ${MIN_PATH}/kanshi/config
+
+arguments:
+  -h, --help   display this message
+  conf         output a configuration block for kanshi
+
+EOF
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+# Export a configuration block that can be used in kanshi directly
+export_config () {
+  kanshi_config=$(hyprctl monitors -j | jq -r '.[] |
+    {make, model, serial, x, y, width, height, refreshRate, scale, transform} |
+      "  output \"\(.make) \(.model) \(.serial)\" position \(.x),\(.y) mode \(.width)x\(.height)@\(.refreshRate) scale \(.scale) transform normal enable"')
+  cat << EOF
+
+profile unnamedprofile {
+$kanshi_config
+}
+EOF
+
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+[ $# -lt 1 ] && get_usage && exit 0
+
+while [ "$#" -ne 0 ]; do
+  key="$1"
+  case "$key" in
+    conf)
+      export_config
+      ;;
+
+    *)
+      get_usage
+      exit 0
+      ;;
+  esac
+  shift
+done

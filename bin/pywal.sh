@@ -126,7 +126,7 @@ r_nvim () {
 }
 
 # Refresh sway theme
-r_sway () {
+r_swaybg () {
   if command -v swaybg &> /dev/null; then
     killall swaybg 2>/dev/null
     swaybg -m fill -i "$(cat ~/.cache/wal/wal)" 2>/dev/null &
@@ -142,9 +142,9 @@ r_waybar () {
 
 # Refresh all configurations
 reload () {
-  r_sway
-  r_waybar
   r_nvim
+  # r_swaybg
+  r_waybar
   r_discord
   r_fox
 }

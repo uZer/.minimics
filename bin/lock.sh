@@ -47,12 +47,12 @@ lock_wayland () {
   case "${1}" in
     native)
       # native blur and vignette
-      params="-S --effect-blur 5x2 --effect-vignette 0.2:1"
+      params="-S --effect-blur 7x2 --effect-vignette 0.2:1"
       ;;
 
     privacy)
       # only use pywal background and add intense blur + vignette
-      params="--image $(cat ~/.cache/wal/wal) --effect-blur 25x3 --effect-vignette 0:1"
+      params="--image $(cat ~/.cache/wal/wal) --effect-blur 25x3 --effect-vignette 0.2:1"
       ;;
 
     *)
