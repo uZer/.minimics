@@ -8,7 +8,8 @@
 #   ctags:
 #     universal-ctags
 #   hyprland:
-#     xdg-desktop-portal-hyprland wofi swaylock-effects
+#     xdg-desktop-portal-hyprland wofi swaylock-effects swaybg slurp grim
+#     wdisplays kanshi
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass
 #   nvim:
@@ -19,11 +20,11 @@
 #     pywal-16-colors
 
 # Available modules:
-# bash ctags dunst git gnuplot gtk3 htop hyprland i3 minimics nvim
+# bash ctags dunst env git gnuplot gtk3 htop hyprland i3 kanshi minimics nvim
 # pywal16 scide taskwarrior vim waybar zsh
 
 # By default, install selected modules:
-modules=(bash zsh ctags dunst git gtk3 htop hyprland gnuplot \
+modules=(bash zsh ctags dunst env git gtk3 htop hyprland gnuplot kanshi \
          minimics nvim pywal16 waybar scide taskwarrior)
 
 # Dotfiles path
@@ -110,6 +111,14 @@ _dunst () {
   echo "[dunst]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/dunst" "${HOME}/.config/dunst"
+  echo
+  return
+}
+
+_env () {
+  echo "[dunst]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/environment.d/minimics.path.conf" "${HOME}/.config/environment.d/minimics.path.conf"
   echo
   return
 }
@@ -224,6 +233,14 @@ _waybar () {
   echo "[pywal16]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/waybar"    "${HOME}/.config/waybar"
+  echo ""
+  return
+}
+
+_kanshi () {
+  echo "[kanshi]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/kanshi"    "${HOME}/.config/kanshi"
   echo ""
   return
 }
