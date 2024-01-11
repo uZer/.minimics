@@ -121,7 +121,8 @@ _env () {
   echo "[env]"
   echo "  Linking configuration files..."
   mkdir -p "${HOME}/.config/environment.d"
-  makelink "${MIN_PATH}/environment.d/minimics.path.conf" "${HOME}/.config/environment.d/minimics.path.conf"
+  makelink "${MIN_PATH}/environment.d/minimics.cedilla.conf"  "${HOME}/.config/environment.d/minimics.cedilla.conf"
+  makelink "${MIN_PATH}/environment.d/minimics.path.conf"     "${HOME}/.config/environment.d/minimics.path.conf"
   echo
   return
 }
