@@ -10,7 +10,7 @@
 #   hyprland:
 #     xdg-desktop-portal-hyprland wofi swaylock-effects swaybg slurp grim
 #     wireplumber pipewire pipewire-pulse
-#     wdisplays kanshi playerctl brightnessctl
+#     wdisplays kanshi playerctl brightnessctl hyprpicker
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
 #     wireplumber pipewire pipewire-pulse
