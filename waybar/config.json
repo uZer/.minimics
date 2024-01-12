@@ -8,7 +8,8 @@
   "spacing": 0,
   "modules-left": [
     "tray",
-    "hyprland/workspaces"
+    "hyprland/workspaces",
+    "custom/playerctl"
   ],
   "modules-center": [],
   "modules-right": [
@@ -21,6 +22,11 @@
     "battery",
     "clock"
   ],
+  "custom/playerctl": {
+    "exec": "mini nf player",
+    "interval": 5,
+    "on-click": "playerctl play-pause"
+  },
   "hyprland/workspaces": {
     "all-outputs": false,
     "active-only": "false",
@@ -51,7 +57,7 @@
   },
   "clock": {
     "interval": 1,
-    "format": " {:%Y-%m-%d  %R:%S}",
+    "format": " {:%Y-%m-%d   %R:%S}",
     "format-alt": "{:%a %d %b %Y}"
   },
   "cpu": {

@@ -3,7 +3,6 @@
 * {
   border: none;
   border-radius: 0;
-  color: @foreground;
   font-family: Symbols Nerd Font, Roboto, Helvetica, Arial, sans-serif;
   font-size: 0.8rem;
   min-height: 0;
@@ -11,10 +10,10 @@
 
 window#waybar {
   background: @backgroundAlpha;
-  /* border-bottom: .1rem solid @background; */
 }
 
 #workspaces button {
+  color: @foreground;
   padding: .25rem;
   background: transparent;
   border-bottom: .1rem solid transparent;
@@ -22,20 +21,24 @@ window#waybar {
 
 /* Removes Strange Hover effect */
 #workspaces button:hover {
+  color: @color5;
   box-shadow: inherit;
   text-shadow: inherit;
 }
 
-#workspaces button.focused,
-#mode {
-  background: @foreground;
-  /* border-bottom: .1rem solid @foreground; */
+#workspaces button.urgent {
+  background: @color1;
+}
+
+#workspaces button.active {
+  background: @color0;
 }
 
 #battery,
 #bluetooth,
 #clock,
 #cpu,
+#custom-playerctl,
 #disk,
 #memory,
 #mode,
@@ -79,6 +82,10 @@ window#waybar {
   background-color: @color2;
 }
 
+#custom-playerctl {
+  color: @color10;
+}
+
 #disk {
   background-color: @color3;
 }
@@ -96,7 +103,7 @@ window#waybar {
 }
 
 #tray {
-  background: @color0;
+  background: @background;
 }
 
 #wireplumber {

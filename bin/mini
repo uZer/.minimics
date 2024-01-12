@@ -25,7 +25,7 @@ common options are:
 
 available subcommands:
 EOF
-  find "${BASEDIR}" -mindepth 1 -maxdepth 1 | sed "s#${BASEDIR}/#  #g" | sed 's#/# #g' | sort
+  find "${BASEDIR}" -mindepth 1 -maxdepth 1 -executable | sed "s#${BASEDIR}/#  #g" | sed 's#/# #g' | sort
 }
 
 [ "$#" -eq 0 ] && get_usage && exit 0
