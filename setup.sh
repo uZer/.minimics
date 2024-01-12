@@ -275,6 +275,7 @@ _gtk3 () {
 _scide () {
   echo "[Supercollider IDE]"
   echo "  Linking sc configuration files..."
+  mkdir -p "${HOME}/.config/SuperCollider" 2>/dev/null
   makelink "${MIN_PATH}/supercollider/sc_ide_conf.yaml" "${HOME}/.config/SuperCollider/sc_ide_conf.yaml"
   makelink "${MIN_PATH}/supercollider/sclang_conf.yaml" "${HOME}/.config/SuperCollider/sclang_conf.yaml"
   makelink "${MIN_PATH}/supercollider/startup.scd"      "${HOME}/.config/SuperCollider/startup.scd"
