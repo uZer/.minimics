@@ -7,16 +7,6 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
-#################
-## ENVIRONMENT ##
-#################
-
-TOOLS_REQUIRED=(kapitan terraform ansible vault kubectl helm)
-TOOLS_SUGGESTED=(kubectx kubens argo gcloud aws stern \
-  shellcheck flake8 jsonnetfmt)
-
-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
-
 get_usage () {
   cat << EOF
 usage:
@@ -53,8 +43,7 @@ display_env () {
 [ $# -lt 1 ] && get_usage && exit 0
 
 while [ "$#" -ne 0 ]; do
-  key="$1"
-  case "$key" in
+  case "$1" in
     show)
       display_env
       exit 0

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -eu
 
 # Pretty print command name
@@ -49,8 +49,7 @@ EOF
 [ $# -lt 1 ] && get_usage && exit 0
 
 while [ "$#" -ne 0 ]; do
-  key="$1"
-  case "$key" in
+  case "$1" in
     conf)
       export_config
       ;;

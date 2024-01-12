@@ -38,10 +38,6 @@ while [ "$#" -ne 0 ]; do
       get_usage
       exit 0
       ;;
-    --struktur-path)
-      export STRUKTUR_PATH=$2
-      shift
-      ;;
     -*)
       echo "Error: bad option '$key'" >&2
       short_usage >&2

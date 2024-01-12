@@ -58,3 +58,6 @@ rflog () {
 
 export -f rflog
 export DEBUG
+
+# shellcheck source=../minimicsrc.dist
+. "${HOME}"/.minimicsrc
