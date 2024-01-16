@@ -15,15 +15,12 @@ window#waybar {
 #workspaces button {
   color: @foreground;
   padding: .25rem;
-  background: transparent;
-  border-bottom: .1rem solid transparent;
+  border-bottom: .2rem solid @color6;
 }
 
 /* Removes Strange Hover effect */
 #workspaces button:hover {
-  color: @color5;
-  box-shadow: inherit;
-  text-shadow: inherit;
+  background: @color5;
 }
 
 #workspaces button.urgent {
@@ -31,7 +28,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background: @color0;
+  background: @color6Alpha;
 }
 
 #battery,
@@ -48,19 +45,21 @@ window#waybar {
   color: @foreground;
   padding: .25rem .5rem;
   margin: 0;
-  border-bottom: .0rem solid @color0Alpha;
 }
 
 #battery {
   background-color: @color1;
+  border-bottom: .2rem solid @color1Alpha;
 }
 
 #battery.charging {
   background-color: @color3;
+  border-bottom: .2rem solid @color3Alpha;
 }
 
 #battery.plugged {
   background-color: @color2;
+  border-bottom: .2rem solid @color2Alpha;
 }
 
 #battery.warning:not(.charging) {
@@ -73,42 +72,53 @@ window#waybar {
 
 #bluetooth {
   background-color: @color12;
+  border-bottom: .2rem solid @color12Alpha;
 }
 
 #clock {
   background-color: @color0;
+  border-bottom: .2rem solid @color0Alpha;
 }
 
 #cpu {
   background-color: @color2;
+  border-bottom: .2rem solid @color2Alpha;
 }
 
 #custom-playerctl {
-  color: @color10;
+  /* color: @color10; */
+  background-color: @color2;
+  padding: .2rem .5rem;
+  border-bottom: .2rem solid @color2Alpha;
 }
 
 #disk {
   background-color: @color3;
+  border-bottom: .2rem solid @color3Alpha;
 }
 
 #memory {
   background-color: @color6;
+  border-bottom: .2rem solid @color6Alpha;
 }
 
 #network {
   background-color: @color4;
+  border-bottom: .2rem solid @color4Alpha;
 }
 
 #network.disconnected {
   background: @color2;
+  border-bottom: .2rem solid @color2Alpha;
 }
 
 #tray {
-  background: @background;
+  border-bottom: .2rem solid @color4;
 }
 
 #wireplumber {
   background-color: @color5;
+  border-bottom: .2rem solid @color5Alpha;
 }
 
 @keyframes blink {

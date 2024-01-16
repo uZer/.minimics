@@ -1,5 +1,5 @@
 @define-color background rgb({background.rgb});
-@define-color backgroundAlpha rgba({background.rgb},0.95);
+@define-color backgroundAlpha rgba({background.rgb},0.4);
 
 @define-color foreground rgb({foreground.rgb});
 @define-color foregroundAlpha rgba({foreground.rgb},0.5);
