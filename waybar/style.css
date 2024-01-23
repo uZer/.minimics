@@ -13,6 +13,7 @@ window#waybar {
 }
 
 #workspaces button {
+  background: @color0;
   color: @foreground;
   padding: .25rem;
   border-bottom: .2rem solid @color6;
@@ -28,7 +29,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background: @color6Alpha;
+  background: @color6;
 }
 
 #battery,
@@ -114,6 +115,7 @@ window#waybar {
 
 #tray {
   border-bottom: .2rem solid @color4;
+  background: @color0;
 }
 
 #wireplumber {

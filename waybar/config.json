@@ -23,7 +23,7 @@
   ],
   "custom/playerctl": {
     "exec": "mini nf player",
-    "interval": 5,
+    "interval": 3,
     "on-click": "playerctl play-pause"
   },
   "hyprland/workspaces": {
