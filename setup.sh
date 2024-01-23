@@ -23,11 +23,14 @@
 #     pywal-16-colors
 
 # Available modules:
-# bash ctags dunst env git gnuplot gtk3 htop hyprland i3 kanshi minimics nvim
-# pywal16 scide taskwarrior vim waybar zsh
+# bash        ctags     copyq     dunst
+# env         git       gnuplot   gtk3
+# htop        hyprland  i3        kanshi
+# minimics    nvim      pywal16   scide
+# taskwarrior vim       waybar    zsh
 
 # By default, install selected modules:
-modules=(bash zsh ctags dunst env git gtk3 htop hyprland gnuplot kanshi \
+modules=(bash zsh copyq ctags dunst env git gtk3 htop hyprland gnuplot kanshi \
          minimics nvim pywal16 waybar scide taskwarrior)
 
 # Dotfiles path
@@ -132,6 +135,16 @@ _taskwarrior () {
   echo "[taskwarrior]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/taskwarrior/taskrc" "${HOME}/.taskrc"
+  echo
+  return
+}
+
+_copyq () {
+  echo "[copyq]"
+  echo "  Linking configuration files..."
+  mkdir -p "${HOME}/.config/copyq/themes"
+  makelink "${MIN_PATH}/copyq/copyq.conf" "${HOME}/.config/copyq/copyq.conf"
+  makelink "${HOME}/.cache/wal/colors-copyq.css" "${HOME}/.config/copyq/themes/pywal.css"
   echo
   return
 }
