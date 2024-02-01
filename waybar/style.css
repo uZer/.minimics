@@ -29,7 +29,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background: @color6;
+  background: @color4
 }
 
 #battery,
