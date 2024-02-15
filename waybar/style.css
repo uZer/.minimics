@@ -37,6 +37,7 @@ window#waybar {
 #clock,
 #cpu,
 #custom-playerctl,
+#custom-notification,
 #disk,
 #memory,
 #mode,
@@ -91,6 +92,12 @@ window#waybar {
   background-color: @color2;
   padding: .2rem .5rem;
   border-bottom: .2rem solid @color2Alpha;
+}
+
+#custom-notification {
+  background-color: @color13;
+  padding: .2rem .5rem;
+  border-bottom: .2rem solid @color13Alpha;
 }
 
 #disk {
