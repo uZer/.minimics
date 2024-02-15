@@ -91,38 +91,6 @@ alias meteo=weather
 
 getcert() { echo | openssl s_client -showcerts -servername ${1} -connect ${1}:443 2>/dev/null | openssl x509 -inform pem -noout -text }
 
-# Please export these variables in ~/.aliases.local file
-# ROLESKEL_PATH: a path to an actual ansible role skel
-# GIT_EMAIL: your git email
-# GIT_USERNAME: your git username
-# GIT_SERVER: the remote of your ansible projects
-# GIT_SERVER_URL: the URL to create a repository for your projet
-mkrole() {
-  if [ $# -eq 1 ]; then
-    ansible-galaxy init \
-      --role-skeleton=${ROLESKEL_PATH:-"~/.minimics/ansible/ansible-role-skel"} $1
-    cd $1
-    # rm -rf .git/
-    git init
-    git config user.email ${GIT_EMAIL}
-    git config user.name ${GIT_USERNAME}
-    git add *
-    git commit -am 'feat(template): add initial role files'
-    git remote
-    git remote add origin \
-      ${GIT_SSH_USERNAME:-git}@${GIT_SERVER:-github.com}:${GIT_USERNAME}/ansible-role-$1.git
-    echo "Please add $1 project here: ${GIT_SERVER_URL:-https://github.com/new}"
-    echo "When you're done, use 'git push'"
-  else
-    echo "Please add a role name."
-  fi
-}
-#echo "Usage: ando <inventory> '<commands>' <hostname>"
-ando() {
-  cd ~/cpt-ansible.sys
-  ansible -m shell -i inventories/${1} ${3} -a ${2}
-}
-
 reverse() {
   echo -e "IP ADDRESS  \tPING\tREVERSE"; for i in $(nmap -sL -n $1 | grep 'Nmap scan report for' | awk '{ print $5 }'); do echo -e "$i\t$(fping -c1 -t 100 $i > /dev/null 2>&1 && echo -e "\e[32mOK\e[39m" || echo -e "\e[31mKO\e[39m")\t$(dig +short +answer -x $i)"; done
 }
@@ -164,8 +132,6 @@ secrettoenv() {
 alias x="kubectx"
 alias ns="kubens"
 
-alias yaourt='yay'
-
 jl() {
   find ${1:-.} -name "*jsonnet" -print0 | xargs -0 -n1 -I % sh -c 'jsonnetfmt --test % || (echo Failed \($?\): % && exit 1)'
 }
@@ -174,9 +140,6 @@ alias nvim="nvim --listen $(mktemp -q -p ~/.cache/nvim/).pipe"
 alias vim="nvim --listen $(mktemp -q -p ~/.cache/nvim/).pipe"
 alias vimdiff="nvim --listen $(mktemp -q -p ~/.cache/nvim/).pipe -d"
 
-alias ssd='systemctl --user stop syncthing.service ; systemctl --user status syncthing.service | cat'
-alias sse='systemctl --user start syncthing.service ; systemctl --user status syncthing.service | cat'
-
 alias track='vim ~/ypi.projects/horizon/$(date +%Gw%V) -o ~/ypi.projects/horizon/$(date +%Gw%V --date="last week")'
 alias journal='vim ~/ypi.projects/horizon/journal -O ~/ypi.projects/horizon/collections'
 
@@ -184,6 +147,7 @@ alias journal='vim ~/ypi.projects/horizon/journal -O ~/ypi.projects/horizon/coll
 alias feh='pqiv -ci "$@" &>/dev/null'
 alias qiv='pqiv -ci "$@" &>/dev/null'
 alias pqiv='pqiv -ci "$@" &>/dev/null'
+alias youtube-dl=yt-dlp
 
 instastory() {
   # Convert vertical video to Instagram story format.
