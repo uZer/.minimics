@@ -11,7 +11,8 @@
 #     xdg-desktop-portal-hyprland wofi rofi rofi-pass swaylock-effects swaybg
 #     slurp grim wl-clipboard wireplumber pipewire pipewire-pulse wdisplays
 #     kanshi playerctl brightnessctl hyprpicker xdg-utils copyq tessen wtype imv
-#     qt5ct qt6ct bc gtk-engines themix-theme-oomox-git swaync
+#     qt5ct qt6ct swaync nwg-look qogir-cursor-theme-git qogir-gtk-theme
+#     qogir-icon-theme
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
 #     wireplumber pipewire pipewire-pulse brightnessctl playerctl
@@ -309,7 +310,7 @@ _gtk3 () {
   # Useful for terminator configuration
   echo "[gtk3]"
   echo "  Linking GTK3 configuration files..."
-  makelink "${MIN_PATH}/gtk-3.0/gtk.css" "${HOME}/.config/gtk-3.0/gtk.css"
+  makelink "${MIN_PATH}/gtk-3.0" "${HOME}/.config/gtk-3.0"
   echo ""
   return
 }
