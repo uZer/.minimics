@@ -11,7 +11,7 @@
 #     xdg-desktop-portal-hyprland wofi swaylock-effects swaybg slurp grim
 #     wl-clipboard wireplumber pipewire pipewire-pulse wdisplays kanshi
 #     playerctl brightnessctl hyprpicker xdg-utils copyq tessen wtype
-#     imv qt5ct qt6ct bc gtk-engines themix-theme-oomox-git
+#     imv qt5ct qt6ct bc gtk-engines themix-theme-oomox-git swaync
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
 #     wireplumber pipewire pipewire-pulse brightnessctl playerctl
@@ -23,15 +23,31 @@
 #     pywal-16-colors
 
 # Available modules:
-# bash        ctags     copyq     dunst
-# env         git       gnuplot   gtk3
-# htop        hyprland  i3        kanshi
-# minimics    nvim      pywal16   scide
-# taskwarrior vim       waybar    zsh
+# bash
+# ctags
+# copyq
+# dunst
+# env
+# git
+# gnuplot
+# gtk3
+# htop
+# hyprland
+# i3
+# kanshi
+# minimics
+# nvim
+# pywal16
+# scide
+# swaync
+# taskwarrior
+# vim
+# waybar
+# zsh
 
 # By default, install selected modules:
-modules=(bash zsh copyq ctags dunst env git gtk3 htop hyprland gnuplot kanshi \
-         minimics nvim pywal16 waybar scide taskwarrior)
+modules=(bash zsh copyq ctags env git gtk3 htop hyprland gnuplot kanshi \
+         minimics nvim pywal16 waybar scide swaync taskwarrior)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -117,6 +133,14 @@ _dunst () {
   echo "[dunst]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/dunst" "${HOME}/.config/dunst"
+  echo
+  return
+}
+
+_swaync () {
+  echo "[swaync]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/swaync" "${HOME}/.config/swaync"
   echo
   return
 }
