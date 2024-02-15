@@ -36,7 +36,7 @@
   },
   "battery": {
     "interval": 1,
-    "bat": "BAT1",
+    "bat": "BAT0",
     "format": "{icon} {capacity}%",
     "format-charging": "{icon} {capacity}%",
     "format-icons": [
