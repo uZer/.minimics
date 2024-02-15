@@ -1,2 +1,2 @@
 #!/bin/sh
-mini run name: google-chrome-stable --profile-directory='chrp-ypi' # --force-device-scale-factor=1.25
+mini run name: google-chrome-stable --profile-directory='chrp-ypi' # --force-device-scale-factor=1.33
