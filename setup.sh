@@ -8,10 +8,10 @@
 #   ctags:
 #     universal-ctags
 #   hyprland:
-#     xdg-desktop-portal-hyprland wofi swaylock-effects swaybg slurp grim
-#     wl-clipboard wireplumber pipewire pipewire-pulse wdisplays kanshi
-#     playerctl brightnessctl hyprpicker xdg-utils copyq tessen wtype
-#     imv qt5ct qt6ct bc gtk-engines themix-theme-oomox-git swaync
+#     xdg-desktop-portal-hyprland wofi rofi rofi-pass swaylock-effects swaybg
+#     slurp grim wl-clipboard wireplumber pipewire pipewire-pulse wdisplays
+#     kanshi playerctl brightnessctl hyprpicker xdg-utils copyq tessen wtype imv
+#     qt5ct qt6ct bc gtk-engines themix-theme-oomox-git swaync
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
 #     wireplumber pipewire pipewire-pulse brightnessctl playerctl
@@ -38,6 +38,7 @@
 # minimics
 # nvim
 # pywal16
+# rofi
 # scide
 # swaync
 # taskwarrior
@@ -47,7 +48,7 @@
 
 # By default, install selected modules:
 modules=(bash zsh copyq ctags env git gtk3 htop hyprland gnuplot kanshi \
-         minimics nvim pywal16 waybar scide swaync taskwarrior)
+         minimics nvim pywal16 rofi waybar scide swaync taskwarrior)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -239,8 +240,6 @@ _i3 () {
   makelink "${MIN_PATH}/i3"                 "${HOME}/.config/i3"
   makelink "${MIN_PATH}/picom"              "${HOME}/.config/picom"
   makelink "${MIN_PATH}/polybar"            "${HOME}/.config/polybar"
-  makelink "${MIN_PATH}/rofi"               "${HOME}/.config/rofi"
-  makelink "${MIN_PATH}/rofi-pass"          "${HOME}/.config/rofi-pass"
   makelink "${MIN_PATH}/xprofile/xprofile"  "${HOME}/.xprofile"
   echo
   return
@@ -248,10 +247,8 @@ _i3 () {
 
 _hyprland () {
   echo "[hyprland]"
-  echo "  Linking hyprland, wofi, wofipass and xprofile configuration files..."
+  echo "  Linking hyprland and xprofile configuration files..."
   makelink "${MIN_PATH}/hyprland"           "${HOME}/.config/hypr"
-  makelink "${MIN_PATH}/wofi"               "${HOME}/.config/wofi"
-  makelink "${MIN_PATH}/wofi-pass"          "${HOME}/.config/wofi-pass"
   makelink "${MIN_PATH}/xprofile/xprofile"  "${HOME}/.xprofile"
   if [ ! -f "${HOME}/.cache/wal/colors-hyprland.conf" ]; then
     echo "  Cheating the absence of pywal for the colorscheme..."
@@ -260,6 +257,13 @@ _hyprland () {
   fi
   echo
   return
+}
+
+_rofi () {
+  echo "[rofi]"
+  echo "  Linking rofi/rofi-pass configuration"
+  makelink "${MIN_PATH}/rofi"               "${HOME}/.config/rofi"
+  makelink "${MIN_PATH}/rofi-pass"          "${HOME}/.config/rofi-pass"
 }
 
 _pywal16 () {

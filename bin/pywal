@@ -133,6 +133,14 @@ r_swaybg () {
   fi
 }
 
+# Refresh sway theme
+r_swaync () {
+  if command -v swaync-client &> /dev/null; then
+    swaync-client -R 2>/dev/null
+    swaync-client -rs 2>/dev/null
+  fi
+}
+
 # Refresh waybar
 r_waybar () {
   if command -v waybar &> /dev/null; then
@@ -144,6 +152,7 @@ r_waybar () {
 reload () {
   r_nvim
   # r_swaybg
+  r_swaync
   r_waybar
   r_discord
   r_fox
