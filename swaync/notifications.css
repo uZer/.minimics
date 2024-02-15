@@ -3,6 +3,7 @@
 /* } */
 
 /* applies only to floating block, not the notifications in control center */
+/*
 .floating-notifications .notification-row {
   padding: 0;
 }
@@ -11,7 +12,6 @@
   outline: none;
   margin: 0;
   padding: 0px;
-  /* BellotaText 13, Comfortaa 13, Jura 14, montserrat alternates 13 */
   font: 1em shantell sans;
 }
 
@@ -31,7 +31,6 @@
 .notification-group-icon {
   color: alpha(@color13, .7);
   margin-right: 8px;
-  /* border: 1px solid @color3 */
 }
 
 .notification-group-collapse-button {
@@ -66,7 +65,6 @@
   border: 1px solid @color13;
 }
 
-/* or color5 */
 .notification.critical {
   background: alpha(black, .89);
   border: 1px solid white;
@@ -80,14 +78,12 @@
   background: transparent;
 }
 
-/* no mouse, ty */
 .close-button,
 .close-button:hover {
   background: transparent;
   color: transparent;
 }
 
-/* yet another useless wrapper */
 .notification-default-action,
 .notification-action,
 .notification-default-action:hover,
@@ -130,3 +126,5 @@
   background: transparent;
   color: @foreground;
 }
+
+*/
