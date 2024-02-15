@@ -104,7 +104,7 @@
     "tooltip": false
   },
   "tray": {
-    "icon-size": 20,
+    "icon-size": 15,
     "spacing": 8
   },
   "wireplumber": {
