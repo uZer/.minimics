@@ -13,7 +13,7 @@
     cursor_fg_color = "#002b36"
     cursor_bg_color = "#839496"
     cursor_color_default = False
-    font = JetBrainsMono Nerd Font 10
+    font = JetBrainsMono Nerd Font 11.5
     foreground_color = "#839496"
     show_titlebar = False
     scrollbar_position = hidden
