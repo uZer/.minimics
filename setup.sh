@@ -32,7 +32,7 @@
 # env
 # git
 # gnuplot
-# gtk3
+# gtk
 # htop
 # hyprland
 # i3
@@ -50,7 +50,7 @@
 # zsh
 
 # By default, install selected modules:
-modules=(bash zsh terminator chrome copyq ctags env git gtk3 htop hyprland  \
+modules=(bash zsh terminator chrome copyq ctags env git gtk htop hyprland  \
          minimics nvim pywal16 rofi waybar scide swaync taskwarrior kanshi \
          gnuplot)
 
@@ -327,10 +327,12 @@ _zsh () {
   return
 }
 
-_gtk3 () {
+_gtk () {
   # Useful for terminator configuration
-  echo "[gtk3]"
-  echo "  Linking GTK3 configuration files..."
+  echo "[gtk]"
+  echo "  Linking GTK2/GTK3 configuration files..."
+  makelink "${MIN_PATH}/icons" "${HOME}/.config/icons"
+  makelink "${MIN_PATH}/gtk-2.0/gtkrc-2.0" "${HOME}/.gtkrc-2.0"
   makelink "${MIN_PATH}/gtk-3.0" "${HOME}/.config/gtk-3.0"
   makelink "${MIN_PATH}/xsettingsd" "${HOME}/.config/xsettingsd"
   echo ""
