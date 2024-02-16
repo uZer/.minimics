@@ -12,10 +12,10 @@
 #     slurp grim wl-clipboard wireplumber pipewire pipewire-pulse wdisplays
 #     kanshi playerctl brightnessctl hyprpicker xdg-utils copyq tessen wtype imv
 #     qt5ct qt6ct swaync nwg-look qogir-cursor-theme-git qogir-gtk-theme
-#     qogir-icon-theme
+#     qogir-icon-theme terminator
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
-#     wireplumber pipewire pipewire-pulse brightnessctl playerctl
+#     wireplumber pipewire pipewire-pulse brightnessctl playerctl terminator
 #   nvim:
 #     neovim>=0.8.0 wget curl
 #     npm yarn ripgrep fd tree-sitter
@@ -26,6 +26,7 @@
 # Available modules:
 # bash
 # ctags
+# chrome
 # copyq
 # dunst
 # env
@@ -43,13 +44,15 @@
 # scide
 # swaync
 # taskwarrior
+# terminator
 # vim
 # waybar
 # zsh
 
 # By default, install selected modules:
-modules=(bash zsh copyq ctags env git gtk3 htop hyprland gnuplot kanshi \
-         minimics nvim pywal16 rofi waybar scide swaync taskwarrior)
+modules=(bash zsh terminator chrome copyq ctags env git gtk3 htop hyprland  \
+         minimics nvim pywal16 rofi waybar scide swaync taskwarrior kanshi \
+         gnuplot)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -123,6 +126,14 @@ _bash () {
   return
 }
 
+_chrome () {
+  echo "[google-chrome]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/chrome/chrome-flags.conf" "${HOME}/.config/chrome-flags.conf"
+  echo
+  return
+}
+
 _ctags () {
   echo "[ctags]"
   echo "  Linking Universal Ctags configuration files..."
@@ -161,6 +172,14 @@ _taskwarrior () {
   echo "[taskwarrior]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/taskwarrior/taskrc" "${HOME}/.taskrc"
+  echo
+  return
+}
+
+_terminator () {
+  echo "[terminator]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/terminator" "${HOME}/.config/terminator"
   echo
   return
 }
@@ -265,6 +284,8 @@ _rofi () {
   echo "  Linking rofi/rofi-pass configuration"
   makelink "${MIN_PATH}/rofi"               "${HOME}/.config/rofi"
   makelink "${MIN_PATH}/rofi-pass"          "${HOME}/.config/rofi-pass"
+  echo
+  return
 }
 
 _pywal16 () {
@@ -311,6 +332,7 @@ _gtk3 () {
   echo "[gtk3]"
   echo "  Linking GTK3 configuration files..."
   makelink "${MIN_PATH}/gtk-3.0" "${HOME}/.config/gtk-3.0"
+  makelink "${MIN_PATH}/xsettingsd" "${HOME}/.config/xsettingsd"
   echo ""
   return
 }

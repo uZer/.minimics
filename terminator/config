@@ -1,0 +1,33 @@
+[global_config]
+  dbus = False
+  borderless = True
+  extra_styling = False
+  putty_paste_style_source_clipboard = True
+[keybindings]
+[profiles]
+  [[default]]
+    icon_bell = False
+    background_color = "#002b36"
+    background_darkness = 0.92
+    background_type = transparent
+    cursor_fg_color = "#002b36"
+    cursor_bg_color = "#839496"
+    cursor_color_default = False
+    font = JetBrainsMono Nerd Font 10
+    foreground_color = "#839496"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_infinite = True
+    disable_mousewheel_zoom = True
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    use_system_font = False
+    copy_on_selection = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
