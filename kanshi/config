@@ -9,11 +9,11 @@
 # }
 
 profile rfoid2 {
-  output eDP-1 position 0,0 mode 1920x1200@60.00100 scale 1.5 transform normal enable
+  output eDP-1 position 0,0 mode 1920x1200@60.00100 scale 1.333333 transform normal enable
 }
 
 profile rfoid2-rf {
-  output eDP-1 position 960,1080 mode 1920x1200@60.00100 scale 1.5 transform normal enable
+  output eDP-1 position 960,1080 mode 1920x1200@60.00100 scale 1.333333 transform normal enable
   output "BNQ BenQ BL2480 HCL0111301Q" position 1920,0 mode 1920x1080@60.00000 scale 1.00 transform normal enable
   output "BNQ BenQ BL2480 JBL0064101Q" position 0,0 mode 1920x1080@60.00000 scale 1.00 transform normal enable
 }
