@@ -23,6 +23,7 @@ usage:
   $COMMAND [--help, -h]
   $COMMAND search            # open a rofi search menu. will copy icon
   $COMMAND convert <string>  # output the matching icon
+  $COMMAND player            # return a string with nf icon for playerctl status
 
 arguments:
   -h, --help      display this message
@@ -39,7 +40,9 @@ case "${method}" in
   convert) grep "${1}" "${list}" | grep -v cod | head -n1 | cut -d ' ' -f1 ;;
   player)
     # This one is weird, I agree.
-    _cmd="echo $(playerctl metadata --format \
+    # Returns a string containing the player icon. We have to replace some of
+    # the player names to match the right nf icon.
+    _cmd="echo $(playerctl metadata --format 2>/dev/null \
       '%%{{lc(status)}}%% \ {{artist}}\ \ -\ \ {{title}} \ %%{{lc(playerName)}}%%' | \
       sed 's/%%plexamp%%/%%plex%%/g' | \
       sed 's/%%paused%%/%%pause%%/g' | \
