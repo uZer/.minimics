@@ -112,7 +112,7 @@ lock_wayland () {
     --ring-wrong-color "${color9}" \
     --ring-ver-color "${color2}" \
     --line-uses-inside \
-    --font 'NotoSans Nerd Font Mono:style=Thin,Regular 40' \
+    --font 'JetBrainsMono Nerd Font:style=Regular 40' \
     --text-color "${foreground}" \
     --text-clear-color "${color12}" \
     --text-wrong-color "${color9}" \
