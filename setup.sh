@@ -12,7 +12,7 @@
 #     slurp grim wl-clipboard wireplumber pipewire pipewire-pulse wdisplays
 #     kanshi playerctl brightnessctl hyprpicker xdg-utils copyq tessen wtype imv
 #     qt5ct qt6ct swaync nwg-look qogir-cursor-theme-git qogir-gtk-theme
-#     qogir-icon-theme terminator ttf-mulish polkit-kde-agent
+#     qogir-icon-theme terminator ttf-mulish polkit-kde-agent noto-fonts-emoji
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
 #     wireplumber pipewire pipewire-pulse brightnessctl playerctl terminator
