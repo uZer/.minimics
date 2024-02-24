@@ -25,7 +25,12 @@ common options are:
 
 available subcommands:
 EOF
-  find "${BASEDIR}" -mindepth 1 -maxdepth 1 -executable | sed "s#${BASEDIR}/#  #g" | sed 's#/# #g' | sort
+for execfile in $(
+  find "${BASEDIR}" -mindepth 1 -maxdepth 1 -executable | sort
+); do
+  info=$(head -n2 "${execfile}" | tail -n 1)
+  echo "${execfile};${info}" | sed "s#${BASEDIR}/#  #g" | sed 's#/# #g'
+done | column -t -s ';'
 }
 
 [ "$#" -eq 0 ] && get_usage && exit 0
@@ -54,7 +59,6 @@ short_usage_scoped () {
   BASE=$1
   cat << EOF
 usage: $(echo "$BASE" | sed "s#$BASEDIR/#mini #g" | sed 's#/# #g') subcommand [ specific_options ]
-
 available subcommands:
 EOF
   find "$BASE" -type f,l -executable | sed "s#$BASEDIR/#  mini #g" | sed 's#/# #g' | sort

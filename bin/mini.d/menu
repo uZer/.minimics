@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# launch a menu
+
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+get_usage () {
+  cat << EOF
+launch a menu suitting your needs
+
+usage:
+  $COMMAND --help, -h
+  $COMMAND <arg>
+
+arguments:
+  -h, --help   display this message
+  apps         launch apps menu
+  pass         launch pass menu
+  screen       launch an applet to choose display mode (xorg)
+
+EOF
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+_apps () {
+  rofi -show run -sort -eh 1 -bw 0 -width 400 -padding 400
+}
+
+_pass () {
+  case "${XDG_SESSION_TYPE:-null}" in
+    wayland) tessen --dmenu=rofi --action=autotype ;;
+    *)       rofi-pass ;;
+  esac
+}
+
+_screen () {
+  bin="${HOME}/.minimics/bin/screen.sh"
+  bin_message="XRANDR CONFIGURATION"
+  cmd="rofi -theme ${HOME}/.minimics/rofi/screen.rasi"
+  available_options=$("${bin}" options)
+
+  # Open rofi and fetch result
+  chosen=$(echo -e "${available_options}" | cut -d ';' -f 1 | ${cmd} -p "${bin_message}" -dmenu -selected-row 0)
+
+  # Run script if choice has been made in applet
+  if [ "${chosen}" != "" ]; then
+    "${bin}" "$(echo -e "${available_options}" | grep "${chosen}" | cut -d ';' -f 2)"
+  fi
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+[ ! $# -eq 1 ] || [ "$1" == "-h" ] || [ "$1" == "--help" ] && get_usage && exit 0
+
+while (($#)); do
+  eval "_${1}"
+  shift
+done

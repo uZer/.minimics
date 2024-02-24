@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Returns the matching nerdfont icon
+# search and select nerdfont icons
 
 set -euo pipefail
 

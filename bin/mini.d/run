@@ -1,19 +1,11 @@
 #!/usr/bin/env bash
-# Runs a program on a specified workspace
+# runs a program on a specified workspace
 
 set -euo pipefail
 
 # Pretty print command name
 COMMAND=${0//\// }
 COMMAND=${COMMAND/*mini.d/mini}
-
-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
-
-#################
-## ENVIRONMENT ##
-#################
-
-# TODO
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 

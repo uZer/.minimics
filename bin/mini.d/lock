@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-# Generate a custom lockscreen and effectively lock the screen
+# generate a custom lockscreen and effectively lock the screen
 # Requirements:
 # - wayland: swaylock-effects
 # - xorg: betterlockscreen

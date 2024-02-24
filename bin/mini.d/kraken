@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-
-# Kraken Rest API
+# kraken rest api
 # https://support.kraken.com/hc/fr/articles/360025180232-REST-API-command-line-client-Python-
 #
 # Usage: ./krakenapi.py endpoint [parameters] [-pretty]

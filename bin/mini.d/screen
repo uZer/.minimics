@@ -9,17 +9,9 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
-#################
-## ENVIRONMENT ##
-#################
-
-# TODO
-
-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
-
 get_usage () {
   cat << EOF
-manipulate screen settings.
+manipulate screen settings (wayland only)
 
 usage:
   $COMMAND --help, -h
@@ -27,7 +19,7 @@ usage:
 
 arguments:
   -h, --help   display this message
-  edit         edit configuration with wdisplay
+  edit         edit configuration with wdisplays
   conf         output a configuration block formatted for kanshi
 
 EOF
@@ -55,10 +47,8 @@ EOF
 
 while [ "$#" -ne 0 ]; do
   case "$1" in
-    conf)
-      export_config
-      ;;
-
+    conf) export_config ;;
+    edit) wdisplay ;;
     *)
       get_usage
       exit 0

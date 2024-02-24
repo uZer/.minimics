@@ -48,8 +48,8 @@ bindsym $mod+Tab scratchpad show
 bindsym $mod+Shift+Tab move scratchpad
 
 # start dmenu (a program launcher)
-bindsym $mod+d          exec --no-startup-id ~/.minimics/bin/rofi_apps.sh
-bindsym $mod+BackSpace  exec --no-startup-id ~/.minimics/bin/rofi_pass.sh
+bindsym $mod+d          exec --no-startup-id mini menu apps
+bindsym $mod+BackSpace  exec --no-startup-id mini menu pass
 bindsym Print           exec --no-startup-id deepin-screen-recorder
 
 # change focus
@@ -57,7 +57,7 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+m exec /home/$USER/.minimics/bin/lock.sh
+bindsym $mod+m exec mini lock
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
