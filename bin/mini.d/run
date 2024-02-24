@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Runs a program on a specified workspace
+
 set -euo pipefail
 
 # Pretty print command name
@@ -17,7 +19,7 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 get_usage () {
   cat << EOF
-Runs a command on the specified workspace depending on your window manager.
+Runs a program on the specified workspace depending on your window manager.
 If the process forks we can't be sure the right workspace will be used.
 
 usage:

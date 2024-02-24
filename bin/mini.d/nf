@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Returns the matching nerdfont icon
+
 set -euo pipefail
 
 # Pretty print command name

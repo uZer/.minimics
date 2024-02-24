@@ -144,7 +144,7 @@ bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 # bindsym $mod+Shift+r exec "killall picom ; picom -b --config ~/.config/picom/picom.conf ; ~/.minimics/bin/polybar.sh" ; restart"
-bindsym $mod+Shift+r exec "i3-msg restart ; /home/$USER/.minimics/bin/i3-start.sh"
+bindsym $mod+Shift+r exec "i3-msg restart"
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec i3-msg exit
@@ -265,10 +265,7 @@ assign     [title="^.*Microsoft Teams Classic$"] $workspace9
 #############
 
 exec --no-startup-id xautolock -time 60 -locker 'mini lock' &
-exec --no-startup-id xfce4-clipman
-exec --no-startup-id nm-applet
-exec --no-startup-id /home/$USER/.minimics/bin/i3-start.sh
-# exec --no-startup-id ~/.minimics/bin/lock_update.sh
+exec --no-startup-id mini startup
 # exec --no-startup-id dropbox-cli start
 # exec --no-startup-id pasystray
 # exec --no-startup-id volctl

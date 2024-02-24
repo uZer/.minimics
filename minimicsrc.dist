@@ -1,7 +1,14 @@
-#!/bin/sh
-#
+#!/usr/bin/env bash
+set -euo pipefail
+
 # Minimics configuration file. Values here are used by default
 # You should copy this file to your home directory
+
+# Launch the following programs when window manager starts
+minimics_startup_programs () {
+  # replace with programs you need to launch...
+  echo "done."
+}
 
 # Folder containing your wallpapers, or single wallpaper file PATH
 export MINIMICS_WALLS=~/path/to/your/wallpapers

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# shellcheck source=../../minimicsrc.dist
+. "${HOME}/.minimicsrc"
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+
+xorg () {
+  "${MINIMICS_PATH}/bin/lock_update.sh"
+  nm-applet &
+  xfce4-clipman &
+}
+
+wayland () {
+  return
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+
+case "${XDG_SESSION_TYPE:-null}" in
+  wayland)  wayland ;;
+  *)        xorg ;;
+esac
+
+# Always launch those programs
+minimics_startup_programs

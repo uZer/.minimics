@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# manipulate screen settings (wayland)
+
 set -eu
 
 # Pretty print command name
@@ -17,13 +19,16 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 get_usage () {
   cat << EOF
+manipulate screen settings.
+
 usage:
   $COMMAND --help, -h
   $COMMAND conf >> ${MIN_PATH}/kanshi/config
 
 arguments:
   -h, --help   display this message
-  conf         output a configuration block for kanshi
+  edit         edit configuration with wdisplay
+  conf         output a configuration block formatted for kanshi
 
 EOF
 }
