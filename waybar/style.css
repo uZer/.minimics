@@ -1,0 +1,137 @@
+@import url("/home/ypiolet/.cache/wal/colors-waybar");
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Symbols Nerd Font, JetBrainsMono Nerd Font, Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  min-height: 0;
+}
+
+window#waybar {
+  background: @backgroundAlpha;
+}
+
+#workspaces button {
+  background: @color0;
+  color: @foreground;
+  padding: .25rem;
+  border-bottom: .2rem solid @color6;
+}
+
+/* Removes Strange Hover effect */
+#workspaces button:hover {
+  background: @color5;
+}
+
+#workspaces button.urgent {
+  background: @color1;
+}
+
+#workspaces button.active {
+  background: @color4
+}
+
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#custom-playerctl,
+#custom-notification,
+#disk,
+#memory,
+#mode,
+#network,
+#tray,
+#wireplumber {
+  color: @foreground;
+  padding: .25rem .5rem;
+  margin: 0;
+}
+
+#battery {
+  background-color: @color1;
+  border-bottom: .2rem solid @color1Alpha;
+}
+
+#battery.charging {
+  background-color: @color3;
+  border-bottom: .2rem solid @color3Alpha;
+}
+
+#battery.plugged {
+  background-color: @color2;
+  border-bottom: .2rem solid @color2Alpha;
+}
+
+#battery.warning:not(.charging) {
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#bluetooth {
+  background-color: @color12;
+  border-bottom: .2rem solid @color12Alpha;
+}
+
+#clock {
+  background-color: @color0;
+  border-bottom: .2rem solid @color0Alpha;
+}
+
+#cpu {
+  background-color: @color2;
+  border-bottom: .2rem solid @color2Alpha;
+}
+
+#custom-playerctl {
+  /* color: @color10; */
+  background-color: @color2;
+  padding: .2rem .5rem;
+  border-bottom: .2rem solid @color2Alpha;
+}
+
+#custom-notification {
+  background-color: @color13;
+  padding: .2rem .5rem;
+  border-bottom: .2rem solid @color13Alpha;
+}
+
+#disk {
+  background-color: @color3;
+  border-bottom: .2rem solid @color3Alpha;
+}
+
+#memory {
+  background-color: @color6;
+  border-bottom: .2rem solid @color6Alpha;
+}
+
+#network {
+  background-color: @color4;
+  border-bottom: .2rem solid @color4Alpha;
+}
+
+#network.disconnected {
+  background: @color2;
+  border-bottom: .2rem solid @color2Alpha;
+}
+
+#tray {
+  border-bottom: .2rem solid @color4;
+  background: @color0;
+}
+
+#wireplumber {
+  background-color: @color5;
+  border-bottom: .2rem solid @color5Alpha;
+}
+
+@keyframes blink {
+  to {
+    background-color: @color9;
+  }
+}

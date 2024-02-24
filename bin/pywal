@@ -55,20 +55,6 @@ wal_restore () {
   ${wal} -R
 }
 
-# Refresh discord theme
-wal_discord () {
-  if which pywal-discord > /dev/null 2>&1; then
-    pywal-discord
-  fi
-}
-
-# Refresh firefox theme
-wal_fox () {
-  if which pywalfox > /dev/null 2>&1; then
-    pywalfox update
-  fi
-}
-
 # Use predefined colorscheme
 # $1 is the colorscheme name
 wal_colorscheme () {
@@ -118,9 +104,58 @@ $(find "${MINIMICS_DWALL}/images" -mindepth 1 -maxdepth 1 -type d -printf %f\\n 
 EOF
 }
 
-reloader () {
-  killall swaybg 2>/dev/null
-  swaybg -m fill -i "$(cat ~/.cache/wal/wal)" 2>/dev/null &
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+# Refresh discord theme
+r_discord () {
+  if command -v pywal-discord &> /dev/null; then
+    pywal-discord
+  fi
+}
+
+# Refresh firefox theme
+r_fox () {
+  if command -v pywalfox &> /dev/null; then
+    pywalfox update
+  fi
+}
+
+r_nvim () {
+  find ~/.cache/nvim/ -name '*.pipe' -exec \
+    nvim --server {} --remote-send ":colorscheme pywal16<CR>" \; &>/dev/null
+}
+
+# Refresh sway theme
+r_swaybg () {
+  if command -v swaybg &> /dev/null; then
+    killall swaybg 2>/dev/null
+    swaybg -m fill -i "$(cat ~/.cache/wal/wal)" 2>/dev/null &
+  fi
+}
+
+# Refresh sway theme
+r_swaync () {
+  if command -v swaync-client &> /dev/null; then
+    swaync-client -R 2>/dev/null
+    swaync-client -rs 2>/dev/null
+  fi
+}
+
+# Refresh waybar
+r_waybar () {
+  if command -v waybar &> /dev/null; then
+    killall -SIGUSR2 waybar
+  fi
+}
+
+# Refresh all configurations
+reload () {
+  r_nvim
+  # r_swaybg
+  r_swaync
+  r_waybar
+  r_discord
+  r_fox
 }
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
@@ -135,18 +170,14 @@ case "${mode}" in
   # Restore current configuration (useful for remote shells)
   restore|-r|-R)
     wal_restore
-    wal_discord
-    wal_fox
-    reloader
+    reload
     ;;
 
   # Generate a colorscheme from a random wallpaper in the folder or filelist
   folder|-f)
     check_wall_folder
     wal_folder "${@:2}"
-    wal_discord
-    wal_fox
-    reloader
+    reload
     ;;
 
   # Use a dwall theme
@@ -154,16 +185,13 @@ case "${mode}" in
     shift
     check_dwall_folder
     wal_time "${2:-lakeside}" "${@:3}"
-    wal_fox
-    reloader
+    reload
     ;;
 
   # Use a predefined colorscheme
   *)
     wal_colorscheme "${mode}" "${@:2}"
-    wal_discord
-    wal_fox
-    reloader
+    reload
     ;;
 
 esac

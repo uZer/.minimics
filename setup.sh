@@ -8,9 +8,14 @@
 #   ctags:
 #     universal-ctags
 #   hyprland:
-#     xdg-desktop-portal-hyprland wofi
+#     xdg-desktop-portal-hyprland wofi rofi rofi-pass swaylock-effects swaybg
+#     slurp grim wl-clipboard wireplumber pipewire pipewire-pulse wdisplays
+#     kanshi playerctl brightnessctl hyprpicker xdg-utils copyq tessen wtype imv
+#     qt5ct qt6ct swaync nwg-look qogir-cursor-theme-git qogir-gtk-theme
+#     qogir-icon-theme terminator ttf-mulish polkit-kde-agent noto-fonts-emoji
 #   i3:
-#     i3blocks i3status i3lock-color picom polybar rofi rofi-pass
+#     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
+#     wireplumber pipewire pipewire-pulse brightnessctl playerctl terminator
 #   nvim:
 #     neovim>=0.8.0 wget curl
 #     npm yarn ripgrep fd tree-sitter
@@ -19,11 +24,35 @@
 #     pywal-16-colors
 
 # Available modules:
-# bash ctags dunst git gtk3 htop hyprland i3 minimics nvim pywal16 scide taskwarrior vim zsh
+# bash
+# ctags
+# chrome
+# copyq
+# dunst
+# env
+# git
+# gnuplot
+# gtk
+# htop
+# hyprland
+# i3
+# kanshi
+# minimics
+# nvim
+# pywal16
+# rofi
+# scide
+# swaync
+# taskwarrior
+# terminator
+# vim
+# waybar
+# zsh
 
 # By default, install selected modules:
-modules=(bash zsh ctags dunst git gtk3 htop hyprland \
-         minimics nvim pywal16 scide taskwarrior)
+modules=(bash zsh terminator chrome copyq ctags env git gtk htop hyprland  \
+         minimics nvim pywal16 rofi waybar scide swaync taskwarrior kanshi \
+         gnuplot)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -97,6 +126,14 @@ _bash () {
   return
 }
 
+_chrome () {
+  echo "[google-chrome]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/chrome/chrome-flags.conf" "${HOME}/.config/chrome-flags.conf"
+  echo
+  return
+}
+
 _ctags () {
   echo "[ctags]"
   echo "  Linking Universal Ctags configuration files..."
@@ -113,10 +150,46 @@ _dunst () {
   return
 }
 
+_swaync () {
+  echo "[swaync]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/swaync" "${HOME}/.config/swaync"
+  echo
+  return
+}
+
+_env () {
+  echo "[env]"
+  echo "  Linking configuration files..."
+  mkdir -p "${HOME}/.config/environment.d"
+  makelink "${MIN_PATH}/environment.d/minimics.cedilla.conf"  "${HOME}/.config/environment.d/minimics.cedilla.conf"
+  makelink "${MIN_PATH}/environment.d/minimics.path.conf"     "${HOME}/.config/environment.d/minimics.path.conf"
+  echo
+  return
+}
+
 _taskwarrior () {
   echo "[taskwarrior]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/taskwarrior/taskrc" "${HOME}/.taskrc"
+  echo
+  return
+}
+
+_terminator () {
+  echo "[terminator]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/terminator" "${HOME}/.config/terminator"
+  echo
+  return
+}
+
+_copyq () {
+  echo "[copyq]"
+  echo "  Linking configuration files..."
+  mkdir -p "${HOME}/.config/copyq/themes"
+  makelink "${MIN_PATH}/copyq/copyq.conf" "${HOME}/.config/copyq/copyq.conf"
+  makelink "${HOME}/.cache/wal/colors-copyq.css" "${HOME}/.config/copyq/themes/pywal.css"
   echo
   return
 }
@@ -131,7 +204,6 @@ _git () {
   read -r GIT_EMAIL
   GIT_LOGIN="${GIT_LOGIN:-Youenn Piolet}"
   GIT_EMAIL="${GIT_EMAIL:-piolet.y@gmail.com}"
-  echo "[user]"
   echo "  name  = ${GIT_LOGIN}"
   echo "  email = ${GIT_EMAIL}"
   git config --global user.name  "${GIT_LOGIN}"
@@ -139,6 +211,14 @@ _git () {
   sed -i 's/^[\t]/  /g' "${MIN_PATH}/git/gitconfig"
   echo "export GIT_USERNAME=${GIT_LOGIN}" >> ~/.aliases.local
   echo "export GIT_EMAIL=${GIT_EMAIL}" >> ~/.aliases.local
+  echo
+  return
+}
+
+_gnuplot () {
+  echo "[gnuplot]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/gnuplot/gnuplot"  "${HOME}/.gnuplot"
   echo
   return
 }
@@ -180,8 +260,6 @@ _i3 () {
   makelink "${MIN_PATH}/i3"                 "${HOME}/.config/i3"
   makelink "${MIN_PATH}/picom"              "${HOME}/.config/picom"
   makelink "${MIN_PATH}/polybar"            "${HOME}/.config/polybar"
-  makelink "${MIN_PATH}/rofi"               "${HOME}/.config/rofi"
-  makelink "${MIN_PATH}/rofi-pass"          "${HOME}/.config/rofi-pass"
   makelink "${MIN_PATH}/xprofile/xprofile"  "${HOME}/.xprofile"
   echo
   return
@@ -189,10 +267,8 @@ _i3 () {
 
 _hyprland () {
   echo "[hyprland]"
-  echo "  Linking hyprland, wofi, wofipass and xprofile configuration files..."
+  echo "  Linking hyprland and xprofile configuration files..."
   makelink "${MIN_PATH}/hyprland"           "${HOME}/.config/hypr"
-  makelink "${MIN_PATH}/wofi"               "${HOME}/.config/wofi"
-  makelink "${MIN_PATH}/wofi-pass"          "${HOME}/.config/wofi-pass"
   makelink "${MIN_PATH}/xprofile/xprofile"  "${HOME}/.xprofile"
   if [ ! -f "${HOME}/.cache/wal/colors-hyprland.conf" ]; then
     echo "  Cheating the absence of pywal for the colorscheme..."
@@ -203,10 +279,35 @@ _hyprland () {
   return
 }
 
-_pywal16() {
+_rofi () {
+  echo "[rofi]"
+  echo "  Linking rofi/rofi-pass configuration"
+  makelink "${MIN_PATH}/rofi"               "${HOME}/.config/rofi"
+  makelink "${MIN_PATH}/rofi-pass"          "${HOME}/.config/rofi-pass"
+  echo
+  return
+}
+
+_pywal16 () {
   echo "[pywal16]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/pywal16"    "${HOME}/.config/wal"
+  echo ""
+  return
+}
+
+_waybar () {
+  echo "[pywal16]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/waybar"    "${HOME}/.config/waybar"
+  echo ""
+  return
+}
+
+_kanshi () {
+  echo "[kanshi]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/kanshi"    "${HOME}/.config/kanshi"
   echo ""
   return
 }
@@ -226,11 +327,14 @@ _zsh () {
   return
 }
 
-_gtk3 () {
+_gtk () {
   # Useful for terminator configuration
-  echo "[gtk3]"
-  echo "  Linking GTK3 configuration files..."
-  makelink "${MIN_PATH}/gtk-3.0/gtk.css" "${HOME}/.config/gtk-3.0/gtk.css"
+  echo "[gtk]"
+  echo "  Linking GTK2/GTK3 configuration files..."
+  makelink "${MIN_PATH}/icons" "${HOME}/.config/icons"
+  makelink "${MIN_PATH}/gtk-2.0/gtkrc-2.0" "${HOME}/.gtkrc-2.0"
+  makelink "${MIN_PATH}/gtk-3.0" "${HOME}/.config/gtk-3.0"
+  makelink "${MIN_PATH}/xsettingsd" "${HOME}/.config/xsettingsd"
   echo ""
   return
 }
@@ -238,6 +342,7 @@ _gtk3 () {
 _scide () {
   echo "[Supercollider IDE]"
   echo "  Linking sc configuration files..."
+  mkdir -p "${HOME}/.config/SuperCollider" 2>/dev/null
   makelink "${MIN_PATH}/supercollider/sc_ide_conf.yaml" "${HOME}/.config/SuperCollider/sc_ide_conf.yaml"
   makelink "${MIN_PATH}/supercollider/sclang_conf.yaml" "${HOME}/.config/SuperCollider/sclang_conf.yaml"
   makelink "${MIN_PATH}/supercollider/startup.scd"      "${HOME}/.config/SuperCollider/startup.scd"

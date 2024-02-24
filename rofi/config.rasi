@@ -1,4 +1,9 @@
 configuration {
-
+  font: "JetBrainsMono NerdFont 14";
+  disable-history: false;
+  fullscreen: false;
+  hide-scrollbar: true;
+  scrollbar: false;
+  sidebar-mode: false;
 }
 @import "~/.cache/wal/colors-rofi-dark.rasi"

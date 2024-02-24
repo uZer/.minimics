@@ -1,0 +1,7 @@
+# Basic configs
+set grid
+set isosamples 50
+set hidden3d
+
+# This file will be appended with wal colors
+load "~/.cache/wal/colors-gnuplot"

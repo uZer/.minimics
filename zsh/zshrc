@@ -10,6 +10,9 @@
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
+## PROFILE
+[[ -f /etc/profile ]] && source /etc/profile
+
 ## PYWAL
 # only trigger pywal when X exists
 # FIXME: support wayland

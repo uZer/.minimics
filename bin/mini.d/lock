@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+
+# Generate a custom lockscreen and effectively lock the screen
+# Requirements:
+# - wayland: swaylock-effects
+# - xorg: betterlockscreen
+
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+#################
+## ENVIRONMENT ##
+#################
+
+# backup colors (pywal overrided)
+foreground=bfbfbf color0=002629 color1=7e3a12 color2=296758 color4=13516c
+color9=A84E18 color10=378A76 color12=1A6C91
+
+# import pywal colors
+# shellcheck source=/dev/null
+. ~/.cache/wal/colors-swaylock.sh
+
+lockscreen=~/.cache/lock.png
+logo=~/ypi.syncbox/projects/schematicwizard.avatars/favicon.png
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+get_usage () {
+  cat << EOF
+Generate a custom lockscreen and effectively lock the screen.
+
+requirements:
+- for wayland:  swaylock-effects (AUR)
+- for xorg:     betterlockscreen (AUR)
+
+usage:
+  $COMMAND -h|--help      display this message
+  $COMMAND -u             for betterlockscreen: generate lockscreen
+
+  $COMMAND                lock screen with default method (fast)
+  $COMMAND privacy        for swaylock: blur background harder and lock
+  $COMMAND ffmpeg         generate a lockscreen with ffmpeg and lock
+
+EOF
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+
+generate_lockscreen () {
+  grim - | ffmpeg -i - -vf "\
+    [in] gblur=sigma=5:steps=2 [blurred]; \
+    [blurred] vignette=angle=PI/4 [out]" \
+    "${lockscreen}"
+}
+
+generate_lockscreen_logo () {
+  grim - | ffmpeg -i - -vf "\
+    [in] gblur=sigma=5:steps=2 [blurred]; \
+    movie=$logo, scale=330:-1 [logo]; \
+    [blurred][logo] overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2 [ready]; \
+    [ready] vignette=angle=PI/4 [out]" \
+    "${lockscreen}"
+}
+
+generate_betterlockscreen () {
+  betterlockscreen -u "${MINIMICS_WALLS}" --span
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+
+# different themes with swaylock
+lock_wayland () {
+  case "${1}" in
+    privacy)
+      # only use pywal background and add intense blur + vignette
+      params="--image $(cat ~/.cache/wal/wal) --effect-blur 25x3 --effect-vignette 0.2:1"
+      ;;
+
+    ffmpeg)
+      # use ffmpeg to generate the lockscreen
+      # cleanup
+      [ -f "${lockscreen}" ] && rm ~/.cache/lock.png &> /dev/null
+      generate_lockscreen
+      params="--image ${lockscreen}"
+      ;;
+
+    *)
+      # native blur and vignette
+      params="-S --effect-blur 7x2 --effect-vignette 0.2:1"
+      ;;
+  esac
+
+  # shellcheck disable=2086
+  swaylock \
+    --daemonize \
+    $params \
+    --indicator-radius 160 \
+    --indicator-thickness 22 \
+    --inside-color "${color0}44" \
+    --inside-clear-color "${color4}aa" \
+    --inside-ver-color "${color2}aa" \
+    --inside-wrong-color "${color1}aa" \
+    --key-hl-color "${color1}" \
+    --bs-hl-color "${color2}" \
+    --ring-color "${color0}" \
+    --ring-clear-color "${color4}" \
+    --ring-wrong-color "${color9}" \
+    --ring-ver-color "${color2}" \
+    --line-uses-inside \
+    --font 'JetBrainsMono Nerd Font:style=Regular 40' \
+    --text-color "${foreground}" \
+    --text-clear-color "${color12}" \
+    --text-wrong-color "${color9}" \
+    --text-ver-color "${color10}" \
+    --separator-color 00000000
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+
+[ $# -eq 1 ] && { [ "$1" == "-h" ] || [ "$1" == "--help" ]; } && get_usage && exit 0
+[ $# -eq 1 ] && [ "$1" == "-u" ] && generate_betterlockscreen && exit 0
+
+case "${XDG_SESSION_TYPE:-null}" in
+  wayland)    lock_wayland "${1:-fast}" ;;
+  *)          betterlockscreen -l dim --text "$(hostname -s) is locked" ;;
+esac

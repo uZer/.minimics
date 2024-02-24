@@ -1,0 +1,2 @@
+#!/bin/sh
+mini run name: google-chrome-stable --profile-directory='chrp-ypi' --app='https://remotedesktop.google.com/access/session/aa6407d5-84cb-ec84-38a6-60e0c3e376e9'
