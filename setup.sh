@@ -8,12 +8,12 @@
 #   ctags:
 #     universal-ctags
 #   hyprland:
-#     xdg-desktop-portal-hyprland wofi rofi rofi-pass swaylock-effects swaybg
-#     slurp grim wl-clipboard wireplumber pipewire pipewire-pulse wdisplays
-#     kanshi playerctl brightnessctl hyprpicker xdg-utils copyq tessen wtype imv
-#     qt5ct qt6ct swaync nwg-look qogir-cursor-theme-git qogir-gtk-theme
-#     qogir-icon-theme terminator ttf-mulish polkit-kde-agent noto-fonts-emoji
-#     xwaylandvideobridge
+#     xdg-desktop-portal-hyprland wofi rofi-lbonn-wayland rofi-pass
+#     swaylock-effects swaybg slurp grim wl-clipboard wireplumber pipewire
+#     pipewire-pulse wdisplays kanshi playerctl brightnessctl hyprpicker
+#     xdg-utils copyq tessen wtype imv qt5ct qt6ct swaync nwg-look
+#     qogir-cursor-theme-git qogir-gtk-theme qogir-icon-theme terminator
+#     ttf-mulish polkit-kde-agent noto-fonts-emoji xwaylandvideobridge
 #   i3:
 #     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
 #     wireplumber pipewire pipewire-pulse brightnessctl playerctl terminator
