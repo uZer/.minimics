@@ -12,26 +12,14 @@ require("mason-lspconfig").setup_handlers({
   function(server_name) -- default handler (optional)
     require("lspconfig")[server_name].setup {}
   end,
-  ["yamlls"] = function()
-    require("lspconfig").yamlls.setup {
+  ["dockerls"] = function()
+    require("lspconfig").dockerls.setup {
       settings = {
-        redhat = {
-          telemetry = { enabled = false },
-        },
-        yaml = {
-          completion = true,
-          hover = true,
-          -- keyOrdering = true,
-        }
-      }
-    }
-  end,
-  ["lua_ls"] = function()
-    require("lspconfig").lua_ls.setup {
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { 'vim' }
+        docker = {
+          languageserver = {
+            formatter = {
+              ignoreMultilineInstructions = true,
+            }
           }
         }
       }
@@ -53,15 +41,27 @@ require("mason-lspconfig").setup_handlers({
       }
     }
   end,
-  ["dockerls"] = function()
-    require("lspconfig").dockerls.setup {
+  ["lua_ls"] = function()
+    require("lspconfig").lua_ls.setup {
       settings = {
-        docker = {
-          languageserver = {
-            formatter = {
-              ignoreMultilineInstructions = true,
-            }
+        Lua = {
+          diagnostics = {
+            globals = { 'vim' }
           }
+        }
+      }
+    }
+  end,
+  ["yamlls"] = function()
+    require("lspconfig").yamlls.setup {
+      settings = {
+        redhat = {
+          telemetry = { enabled = false },
+        },
+        yaml = {
+          completion = true,
+          hover = true,
+          -- keyOrdering = true,
         }
       }
     }
