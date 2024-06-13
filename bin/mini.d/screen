@@ -48,7 +48,7 @@ EOF
 while [ "$#" -ne 0 ]; do
   case "$1" in
     conf) export_config ;;
-    edit) wdisplay ;;
+    edit) wdisplays ;;
     *)
       get_usage
       exit 0
