@@ -51,6 +51,16 @@ require("mason-lspconfig").setup_handlers({
       }
     }
   end,
+  ["jsonls"] = function()
+    require("lspconfig").jsonls.setup {
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+          validate = { enable = true },
+        }
+      }
+    }
+  end,
   ["lua_ls"] = function()
     require("lspconfig").lua_ls.setup {
       settings = {
@@ -68,9 +78,13 @@ require("mason-lspconfig").setup_handlers({
         redhat = {
           telemetry = { enabled = false },
         },
+        schemaStore = {
+          enable = true,
+        },
         yaml = {
           completion = true,
           hover = true,
+          validate = true,
           -- keyOrdering = true,
         }
       }

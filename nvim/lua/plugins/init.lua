@@ -67,8 +67,8 @@ return require('packer').startup(function(use)
   --
   use {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.2',
     config = get_config('telescope'),
+    module = "telescope",
     requires = {
       'nvim-lua/plenary.nvim',
       {
@@ -76,6 +76,17 @@ return require('packer').startup(function(use)
         config = get_config('aerial'),
       }
     }
+  }
+  use {
+    "someone-stole-my-name/yaml-companion.nvim",
+    requires = {
+      { "neovim/nvim-lspconfig" },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+    },
+    config = function()
+      require("telescope").load_extension("yaml_schema")
+    end,
   }
   use {
     -- 'Yggdroot/indentLine',
@@ -116,7 +127,7 @@ return require('packer').startup(function(use)
   --
   use {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v1.x',
+    branch = 'v3.x',
     requires = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
@@ -129,6 +140,7 @@ return require('packer').startup(function(use)
         'williamboman/mason-lspconfig.nvim',
         config = get_config('mason-lspconfig'),
       },
+      { 'b0o/SchemaStore.nvim' },
 
       -- Autocompletion
       {

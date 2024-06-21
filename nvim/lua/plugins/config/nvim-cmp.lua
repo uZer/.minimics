@@ -12,7 +12,7 @@ end
 local options = {
   confirmation = {
     -- completeopt = 'menu,menuone,noinsert,noselect',
-    completeopt = 'menu,menuone,noinsert',
+    completeopt = 'menu,menuone,noinsert,noselect',
     default_behavior = cmp.ConfirmBehavior.Replace,
   },
 
