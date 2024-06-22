@@ -197,28 +197,12 @@ return require('packer').startup(function(use)
     'google/vim-jsonnet',
     ft = "jsonnet",
   }
-  use 'mcfiredrill/vim-liquidsoap'
 
   use {
     'hashivim/vim-terraform',
     config = get_config("vim-terraform"),
     ft = "terraform",
   }
-  -- use 'robbles/logstash.vim'
-  -- use 'davidhalter/jedi-vim'
-  -- use 'parkr/vim-jekyll'
-  -- use 'Glench/Vim-Jinja2-Syntax'
-  -- use 'ekalinin/Dockerfile.vim'
-  -- use 'cespare/vim-toml'
-  -- use 'juliosueiras/vim-terraform-completion'
-  -- use 'PProvost/vim-ps1'
-  -- use 'elzr/vim-json'
-  -- use 'mogelbrod/vim-jsonpath'
-  -- use 'fatih/vim-go'
-  -- use 'petrbroz/vim-glsl'
-  -- use 'evanleck/vim-svelte'
-  -- use 'pangloss/vim-javascript'
-  -- use 'HerringtonDarkholme/yats.vim' -- typescript
 
   --
   -- Colorschemes
