@@ -151,12 +151,20 @@ return require('packer').startup(function(use)
       { 'saadparwaiz1/cmp_luasnip' },
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
+
     }
   }
 
   --
   -- Extra Language support
   --
+
+  -- formatter
+  use {
+    "stevearc/conform.nvim",
+    config = get_config('conform'),
+  }
+
   use {
     'nvim-treesitter/nvim-treesitter',
     config = get_config('treesitter'),
