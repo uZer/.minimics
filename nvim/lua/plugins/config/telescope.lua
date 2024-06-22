@@ -6,9 +6,11 @@ local options = {
         json = true,
         yaml = true,
       }
-    }
+    },
+    yaml_schema = {}
   }
 }
 
-telescope.load_extension('aerial')
+telescope.load_extension("aerial")
+telescope.load_extension("yaml_schema")
 telescope.setup(options)

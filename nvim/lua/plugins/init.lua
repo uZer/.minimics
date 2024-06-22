@@ -68,25 +68,15 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     config = get_config('telescope'),
-    module = "telescope",
     requires = {
+      'neovim/nvim-lspconfig',
       'nvim-lua/plenary.nvim',
+      'someone-stole-my-name/yaml-companion.nvim',
       {
         'stevearc/aerial.nvim',
         config = get_config('aerial'),
       }
     }
-  }
-  use {
-    "someone-stole-my-name/yaml-companion.nvim",
-    requires = {
-      { "neovim/nvim-lspconfig" },
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim" },
-    },
-    config = function()
-      require("telescope").load_extension("yaml_schema")
-    end,
   }
   use {
     -- 'Yggdroot/indentLine',
