@@ -21,6 +21,7 @@
 #     neovim>=0.8.0 wget curl
 #     npm yarn ripgrep fd tree-sitter
 #     luarocks python-pynvim
+#     liquidsoap-prettier
 #   pywal16:
 #     pywal-16-colors
 
