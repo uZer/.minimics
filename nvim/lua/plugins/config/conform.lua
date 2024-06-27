@@ -5,7 +5,8 @@ local slow_format_filetypes = {
 require("conform").setup({
   formatters_by_ft = {
     javascript = { { "prettierd", "prettier" } },
-    liquidsoap = { "liquidsoap-prettier" }
+    liquidsoap = { "liquidsoap-prettier" },
+    python = { "isort", "black" }
   },
   format_on_save = function(bufnr)
     if slow_format_filetypes[vim.bo[bufnr].filetype] then

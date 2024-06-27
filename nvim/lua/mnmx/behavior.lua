@@ -55,43 +55,24 @@ autocmd('Filetype', {
   command = 'setlocal shiftwidth=2 tabstop=2 expandtab'
 })
 
-autocmd({ 'BufRead', 'BufNewFile' }, {
+vim.filetype.add({
   pattern = {
-    '*.liq',
+    [".*/playbooks/.*%.yml"] = "yaml.ansible",
+    [".*/playbooks/.*%.yaml"] = "yaml.ansible",
+    [".*/roles/.*/tasks/.*%.yml"] = "yaml.ansible",
+    [".*/roles/.*/tasks/.*%.yaml"] = "yaml.ansible",
+    [".*/roles/.*/handlers/.*%.yml"] = "yaml.ansible",
+    [".*/roles/.*/handlers/.*%.yaml"] = "yaml.ansible",
+    ["ansible/.*%.yml"] = "yaml.ansible",
+    [".*%.tf"] = "terraform",
+    [".*%.tfvars"] = "terraform",
+    [".terraformrc"] = "hcl",
+    [".terraform.rc"] = "hcl",
+    [".*%.hcl"] = "hcl",
+    [".*%.tfstate"] = "json",
+    [".*%.tfstate.backup"] = "json",
+    [".*%.libjsonnet"] = "jsonnet",
   },
-  command = 'set filetype=liquidsoap',
-})
-
-autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = {
-    '*.tf',
-    '*.tfvars',
-  },
-  command = 'set filetype=terraform',
-})
-
-autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = {
-    '*.hcl',
-    '.terraformrc',
-    '.terraform.rc',
-  },
-  command = 'set filetype=hcl',
-})
-
-autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = {
-    '*.tfstate',
-    '*.tfstate.backup',
-  },
-  command = 'set filetype=json',
-})
-
-autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = {
-    '*.libjsonnet',
-  },
-  command = 'set filetype=jsonnet',
 })
 
 autocmd({ 'BufWritePre' }, {
