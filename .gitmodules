@@ -1,20 +1,20 @@
 [submodule "vim/bundle/vundle"]
-	path = vim/bundle/vundle
-	url = https://github.com/gmarik/vundle.git
+  path = vim/bundle/vundle
+  url = https://github.com/gmarik/vundle.git
 [submodule "vim/bundle/vim-airline"]
-	path = vim/bundle/vim-airline
-	url = https://github.com/bling/vim-airline.git
+  path = vim/bundle/vim-airline
+  url = https://github.com/bling/vim-airline.git
 [submodule "vim/bundle/molokai"]
-	path = vim/bundle/molokai
-	url = https://github.com/tomasr/molokai.git
+  path = vim/bundle/molokai
+  url = https://github.com/tomasr/molokai.git
 [submodule "vim/bundle/jellybeans.vim"]
-	path = vim/bundle/jellybeans.vim
-	url = https://github.com/nanotech/jellybeans.vim.git
+  path = vim/bundle/jellybeans.vim
+  url = https://github.com/nanotech/jellybeans.vim.git
 [submodule "vim/bundle/base16-vim"]
-	path = vim/bundle/base16-vim
-	url = https://github.com/chriskempson/base16-vim.git
+  path = vim/bundle/base16-vim
+  url = https://github.com/chriskempson/base16-vim.git
 [submodule "gnome-terminal-colors-solarized"]
-	path = gnome-terminal-colors-solarized
+  path = gnome-terminal-colors-solarized
     url = https://github.com/sigurdga/gnome-terminal-colors-solarized.git
 [submodule "vim/bundle/syntastic"]
     path = vim/bundle/syntastic
@@ -23,11 +23,11 @@
     path = vim/bundle/vim-fugitive
     url = https://github.com/tpope/vim-fugitive.git
 [submodule "zsh/custom/plugins/zsh-autosuggestions"]
-	path = zsh/custom/plugins/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions.git
+  path = zsh/custom/plugins/zsh-autosuggestions
+  url = https://github.com/zsh-users/zsh-autosuggestions.git
 [submodule "zsh/custom/plugins/zsh-syntax-highlighting"]
-	path = zsh/custom/plugins/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+  path = zsh/custom/plugins/zsh-syntax-highlighting
+  url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "zsh/custom/themes/powerlevel10k"]
-	path = zsh/custom/themes/powerlevel10k
-	url = https://github.com/romkatv/powerlevel10k.git
+  path = zsh/custom/themes/powerlevel10k
+  url = https://github.com/romkatv/powerlevel10k.git
