@@ -6,7 +6,8 @@ require("conform").setup({
   formatters_by_ft = {
     javascript = { { "prettierd", "prettier" } },
     liquidsoap = { "liquidsoap-prettier" },
-    python = { "isort", "black" }
+    python = { "isort", "black" },
+    yaml = { "yamlfmt" }
   },
   format_on_save = function(bufnr)
     if slow_format_filetypes[vim.bo[bufnr].filetype] then
@@ -18,7 +19,7 @@ require("conform").setup({
       end
     end
 
-    return { timeout_ms = 200, lsp_format = "fallback" }, on_format
+    return { timeout_ms = 10000, lsp_format = "fallback" }, on_format
   end,
 
   format_after_save = function(bufnr)

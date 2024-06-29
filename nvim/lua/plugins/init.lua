@@ -164,6 +164,13 @@ return require('packer').startup(function(use)
     "stevearc/conform.nvim",
     config = get_config('conform'),
   }
+  use {
+    "zapling/mason-conform.nvim",
+    requires = {
+      'williamboman/mason.nvim',
+      'stevearc/conform.nvim',
+    }
+  }
 
   use {
     'nvim-treesitter/nvim-treesitter',

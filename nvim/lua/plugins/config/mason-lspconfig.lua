@@ -55,7 +55,12 @@ require("mason-lspconfig").setup_handlers({
     require("lspconfig").jsonls.setup {
       settings = {
         json = {
-          schemas = require('schemastore').json.schemas(),
+          schemas = require('schemastore').json.schemas {
+            ignore = {
+              -- '.eslintrc',
+              -- 'package.json',
+            },
+          },
           validate = { enable = true },
         }
       }
@@ -79,7 +84,11 @@ require("mason-lspconfig").setup_handlers({
           telemetry = { enabled = false },
         },
         schemaStore = {
-          enable = true,
+          enable = false,
+          url = ""
+        },
+        schemas = require('schemastore').yaml.schemas {
+          ignore = {},
         },
         yaml = {
           completion = true,
