@@ -1,0 +1,4 @@
+return {
+  'majutsushi/tagbar',
+  opts = {}
+}

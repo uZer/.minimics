@@ -1,14 +1,23 @@
---
--- MNMX
--- extra settings 
---
+--[[
+ _ _ _  ,  _ _  ,  _ _ _  ,  _, (
+/ / / /_(_/ / /_(_/ / / /_(_(__/_)_
 
-require("mnmx.behavior") -- how neovim behaves
-require("mnmx.keyboard") -- key mappings
-require("mnmx.theme")    -- cosmetics
+  An opinionated neovim configuration.
 
--- Uncomment the following block to include your ~/.vimrc configuration file
--- when neovim starts, it will change the runtimepath to vim's one. Useful
--- to preserve some backward compatibility, for migration purposes, etc.
+  Complaints:
+  https://github.com/uZer/.minimics
 
--- require("mnmx.vimcompat") -- and it's 2010 again
+  Requirements:
+  - neovim >= 0.8.0
+
+  Requirements (NewGame+):
+  - A patched Nerd Font for your terminal or ginit.vim
+  - [plugin: pywal16.nvim] python wal, pywal, pywal16, or variants
+  - [plugin: mason.nvim] https://github.com/williamboman/mason.nvim#requirements
+
+  This thing has been splitted into files with comments, can you believe it?
+
+]]
+
+-- Global options
+require("mnmx.config")
