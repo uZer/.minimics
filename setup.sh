@@ -1,9 +1,5 @@
 #!/bin/bash
 
-###################
-## FEATURE FLAGS ##
-###################
-
 # Special requirements:
 #   ctags:
 #     universal-ctags
@@ -24,6 +20,10 @@
 #     liquidsoap-prettier
 #   pywal16:
 #     pywal-16-colors
+
+###################
+## FEATURE FLAGS ##
+###################
 
 # Available modules:
 # bash

@@ -28,11 +28,14 @@ return {
       },
     },
 
-
     tabline = {
       lualine_a = {
         {
           'buffers',
+          filetype_names = {
+            NvimTree = '',
+          },
+          mode = 2,
           symbols = {
             alternate_file = '',
           }
