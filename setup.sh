@@ -15,8 +15,8 @@
 #     wireplumber pipewire pipewire-pulse brightnessctl playerctl terminator
 #   nvim:
 #     neovim>=0.8.0 wget curl
-#     npm yarn ripgrep fd tree-sitter
-#     luarocks python-pynvim
+#     npm yarn ripgrep fd tree-sitter tree-sitter-cli
+#     luarocks python-pynvim lua-jsregexp
 #     liquidsoap-prettier
 #   pywal16:
 #     pywal-16-colors
