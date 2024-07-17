@@ -6,16 +6,6 @@ return {
     local configs = require("nvim-treesitter.configs")
 
     configs.setup({
-      ensure_installed = {
-        "diff",
-        "dockerfile",
-        "json",
-        "lua",
-        "python",
-        "vim",
-        "vimdoc",
-        "yaml",
-      },
       sync_install = true,
       auto_install = true,
       highlight = {
