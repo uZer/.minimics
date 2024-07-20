@@ -11,11 +11,15 @@ return {
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
   opts = {
+    default_format_opts = {
+      lsp_format = "last"
+    },
     formatters_by_ft = {
+      ["*"] = { "trim_whitespace" },
+      jsonnet = { "jsonnetfmt" },
       liquidsoap = { "liquidsoap-prettier" },
       --   javascript = { { "prettierd", "prettier" } },
       --   python = { "isort", "black" },
-      --   yaml = { "yamlfmt" }
     },
     format_on_save = function(bufnr)
       if slow_format_filetypes[vim.bo[bufnr].filetype] then

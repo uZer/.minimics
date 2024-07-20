@@ -6,6 +6,12 @@ return {
   },
   opts = {
     options = {
+      disable_filetypes = {
+        "NvimTree",
+        "lazy",
+        "mason",
+        "_.*",
+      },
       extensions = {
         'lazy',
         'nvim-tree',
@@ -13,7 +19,8 @@ return {
       },
       ignore_focus = {
         "NvimTree",
-        "Mason",
+        "lazy",
+        "mason",
         "_.*",
       },
       theme = 'pywal16-nvim',
@@ -34,6 +41,8 @@ return {
           'buffers',
           filetype_names = {
             NvimTree = '',
+            mason = '',
+            lazy = ''
           },
           mode = 2,
           symbols = {
