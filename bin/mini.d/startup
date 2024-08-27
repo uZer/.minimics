@@ -18,6 +18,10 @@ wayland () {
   return
 }
 
+minimics_startup_programs () {
+  return
+}
+
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
 
 case "${XDG_SESSION_TYPE:-null}" in
