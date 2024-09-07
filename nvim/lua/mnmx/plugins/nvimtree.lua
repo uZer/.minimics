@@ -50,6 +50,9 @@ return {
     diagnostics = {
       enable = true,
     },
+    modified = {
+      enable = true,
+    },
     respect_buf_cwd = true,
     filters = {
       dotfiles = false,
@@ -63,12 +66,13 @@ return {
     },
     update_focused_file = {
       enable = true,
-      update_cwd = true,
-      ignore_list = {},
+      update_root = {
+        enable = true,
+      }
     },
     update_cwd = true,
     view = {
-      signcolumn = "yes",
+      -- signcolumn = "yes",
       -- width = 32,
     },
     on_attach = my_on_attach,
