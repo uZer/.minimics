@@ -62,7 +62,7 @@ return {
       lualine_y = {
         {
           'diagnostics',
-          sources = { 'nvim_lsp', 'nvim_diagnostic', 'coc' },
+          sources        = { 'nvim_lsp', 'nvim_diagnostic', 'coc' },
           always_visible = true,
 
         }

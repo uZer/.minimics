@@ -38,13 +38,12 @@ local handlers = {
       settings = {
         gopls = {
           analyses = {
-            nilness = true,
-            unusedparams = true,
-            unusedwrite = true,
+            unusedvariable = true,
             useany = true
           },
           gofumpt = true,
           staticcheck = true,
+          usePlaceholders = true,
         }
       }
     }
