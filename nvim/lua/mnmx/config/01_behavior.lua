@@ -4,6 +4,7 @@
 
 -- Show special chars
 vim.opt.list = true
+vim.opt.listchars = "tab:| ,trail:-,nbsp:+"
 
 -- Indentation and tabulations
 vim.opt.tabstop = 2        -- a tab is two spaces
@@ -77,12 +78,6 @@ vim.filetype.add({
     [".*%.libjsonnet"] = "jsonnet",
   },
 })
-
--- fmt with lsp on save
--- autocmd({ 'BufWritePre' }, {
---   pattern = { '*' },
---   command = 'lua vim.lsp.buf.format()',
--- })
 
 -- Return to last edit position when opening files
 vim.cmd([[

@@ -1,4 +1,0 @@
-return {
-  'majutsushi/tagbar',
-  opts = {}
-}

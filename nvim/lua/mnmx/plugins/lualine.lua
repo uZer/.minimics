@@ -6,6 +6,8 @@ return {
   },
   opts = {
     options = {
+      component_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
       disable_filetypes = {
         "NvimTree",
         "lazy",
@@ -27,12 +29,18 @@ return {
       globalstatus = true,
     },
     sections = {
+      lualine_a = { 'mode' },
+      lualine_b = { 'branch', 'diff', 'diagnostics' },
       lualine_c = {
         {
           'filename',
           path = 3, -- use absolute paths with tilde as home
+          newfile_status = true,
         }
       },
+      lualine_x = {},
+      lualine_y = { 'filetype', 'encoding', 'fileformat' },
+      lualine_z = { 'progress', 'location' },
     },
 
     tabline = {
@@ -49,14 +57,12 @@ return {
             alternate_file = '',
           }
         }
-
       },
       lualine_b = {},
       lualine_c = {},
       lualine_x = {
         {
           'lsp_progress',
-          -- timer = { lsp_client_name_enddelay = -1 }
         }
       },
       lualine_y = {
@@ -67,7 +73,11 @@ return {
 
         }
       },
-      lualine_z = {},
+      lualine_z = {
+        {
+          'searchcount',
+        }
+      },
     },
   }
 }
