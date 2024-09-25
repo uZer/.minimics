@@ -1,27 +1,33 @@
 #!/usr/bin/env bash
 # This script is a really simple wrapper to call subcommands.
-# Subcommands must be executables in the mini.d directory.
+# Subcommands must be executables in the .d directory.
 
 set -e
 
-BASEDIR=$(dirname "$(readlink -f "$0")")/mini.d
+BINNAME=mini
+BASEDIR="$(dirname "$(readlink -f "$0")")/${BINNAME}.d"
 
-source "$BASEDIR/../minilib.sh"
+# shellcheck source=lib.logg.sh
+source "${BASEDIR}/../lib.logg.sh"
+# shellcheck source=lib.minimicsrc.sh
+source "${BASEDIR}/../lib.minimicsrc.sh"
+
+export BINPATH="${BASEDIR}/.."
 
 short_usage () {
   cat << EOF
-usage: mini [ common_options ] subcommand [ specific_options ]
-       mini --help
+usage: ${BINNAME} [ common_options ] subcommand [ specific_options ]
+       ${BINNAME} --help
 EOF
 }
 
 get_usage () {
   cat << EOF
 usage:
-  mini [ common_options ] subcommand [ specific_options ]
+  ${BINNAME} [ common_options ] subcommand [ specific_options ]
 
 common options are:
-  -h --help: display this help
+  -h|--help: display this help
 
 available subcommands:
 EOF
@@ -58,10 +64,13 @@ done
 short_usage_scoped () {
   BASE=$1
   cat << EOF
-usage: $(echo "$BASE" | sed "s#$BASEDIR/#mini #g" | sed 's#/# #g') subcommand [ specific_options ]
+usage: $(echo "$BASE" | sed "s#$BASEDIR/#$BINNAME #g" | sed 's#/# #g') subcommand [ specific_options ]
 available subcommands:
 EOF
-  find "$BASE" -type f,l -executable | sed "s#$BASEDIR/#  mini #g" | sed 's#/# #g' | sort
+  find "$BASE" -type f,l -executable | \
+    sed "s#$BASEDIR/#  $BINNAME #g" | \
+    sed 's#/# #g' | \
+    sort
 }
 
 # Recursive

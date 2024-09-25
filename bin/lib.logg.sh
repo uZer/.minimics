@@ -7,7 +7,7 @@
 # if $1 is "kv", $2 is the key, $3 is the value
 DEBUG=true
 
-rflog () {
+logg () {
   logtype=$1
   shift
   case "$logtype" in
@@ -19,7 +19,7 @@ rflog () {
       # Indent and dim
       printf -- "  \033[2m%s\033[22m\n" "$@"
       ;;
-    fail|f|e|red|err|n)
+    fail|f|e|red|err|n|error)
       # Red
       printf -- "\033[31m%s\033[0m\n" "$@"
       ;;
@@ -56,8 +56,5 @@ rflog () {
   esac
 }
 
-export -f rflog
+export -f logg
 export DEBUG
-
-# shellcheck source=../minimicsrc.dist
-. "${HOME}"/.minimicsrc
