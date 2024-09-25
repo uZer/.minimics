@@ -27,69 +27,71 @@ usage:
   ${BINNAME} [ common_options ] subcommand [ specific_options ]
 
 common options are:
-  -h|--help: display this help
+  -h | --help | help:  display this help
+  -l | --list | list:  display all commands and subcommands
 
 available subcommands:
 EOF
-for execfile in $(
-  find "${BASEDIR}" -mindepth 1 -maxdepth 1 -executable | sort
-); do
-  info=$(head -n2 "${execfile}" | tail -n 1)
-  echo "${execfile};${info}" | sed "s#${BASEDIR}/#  #g" | sed 's#/# #g'
-done | column -t -s ';'
+  display_commands "${BASEDIR}"
 }
 
-[ "$#" -eq 0 ] && get_usage && exit 0
+# display a command name and its summary
+display_commands () {
+  find "${1}" -type f,l -executable -printf '\033[0m%p \033[32m' -exec sed -n '2p' {} \; | \
+    sed "s#${BASEDIR}/#  $(basename "$0") #g" | sed 's#/# #g' | sort | column -t -s '#'
+  printf -- "\033[0m\n"
+}
+
+
+# display usage for subcommands
+short_usage_scoped () {
+  BASE=$1
+  cat << EOF
+usage: $(echo "${BASE}" | sed "s#${BASEDIR}/#${BINNAME} #g" | sed 's#/# #g') subcommand [ specific_options ]
+
+available subcommands:
+EOF
+  display_commands "${BASE}"
+}
+
+# recursively explore tree of scripts to display
+# appropriate scoped usage
+call_subscript () {
+  BASE=$1
+  shift
+  COMMAND=$1
+  if [ -f "${BASE}/${COMMAND}" ] && [ -x "${BASE}/${COMMAND}" ]; then
+    shift
+    exec "${BASE}/${COMMAND}" "$@"
+  elif [ -d "${BASE}/${COMMAND}" ]; then
+    shift
+    call_subscript "${BASE}/${COMMAND}" "${@:-''}"
+  else
+    echo "subcommand '${COMMAND}' not found" >&2
+    echo
+    if [ "${BASE}" = "${BASEDIR}" ]; then
+      get_usage >&2
+    else
+      short_usage_scoped "${BASE}" >&2
+    fi
+    exit 1
+  fi
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+[ "$#" -eq 0 ] && get_usage >&2 && exit 0
 
 # Parsing of common options is done here
 while [ "$#" -ne 0 ]; do
   key="$1"
   case "$key" in
-    -h|--help)
-      get_usage
-      exit 0
-      ;;
-    -*)
-      echo "Error: bad option '$key'" >&2
-      short_usage >&2
-      exit 1
-      ;;
-    *)
-      break
-      ;;
+    -h|--help|help) get_usage >&2 ; exit 0 ;;
+    -l|--list|list) display_commands "${BASEDIR}" ; exit 0 ;;
+    -*) echo "Error: bad option '$key'" >&2 ; get_usage >&2 ; exit 1 ;;
+    *) break ;;
   esac
   shift
 done
 
-short_usage_scoped () {
-  BASE=$1
-  cat << EOF
-usage: $(echo "$BASE" | sed "s#$BASEDIR/#$BINNAME #g" | sed 's#/# #g') subcommand [ specific_options ]
-available subcommands:
-EOF
-  find "$BASE" -type f,l -executable | \
-    sed "s#$BASEDIR/#  $BINNAME #g" | \
-    sed 's#/# #g' | \
-    sort
-}
-
-# Recursive
-call_subscript () {
-  BASE=$1
-  shift
-  COMMAND=$1
-  if [ -f "$BASE/$COMMAND" ] && [ -x "$BASE/$COMMAND" ]; then
-    shift
-    exec "$BASE/$COMMAND" "$@"
-  elif [ -d "$BASE/$COMMAND" ]; then
-    shift
-    call_subscript "$BASE/$COMMAND" "${@:-default}"
-  else
-    echo "subcommand '$COMMAND' not found" >&2
-    echo
-    short_usage_scoped "${BASE}" >&2
-    exit 1
-  fi
-}
-
-call_subscript "$BASEDIR" "$@"
+call_subscript "${BASEDIR}" "$@"
