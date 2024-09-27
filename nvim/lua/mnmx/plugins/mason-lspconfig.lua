@@ -133,7 +133,7 @@ return {
       "svelte",
       "taplo",
       "terraformls",
-      "ts_ls",
+      "tsserver",
       "vimls",
       "yamlls",
     },
