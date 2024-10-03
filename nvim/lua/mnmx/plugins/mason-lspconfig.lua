@@ -133,7 +133,6 @@ return {
       "svelte",
       "taplo",
       "terraformls",
-      "tsserver",
       "vimls",
       "yamlls",
     },
@@ -163,6 +162,7 @@ return {
     -- "sqlfmt",
     -- "stylua",
     -- "systemdlint",
+    -- "tsserver", -- half renamed to ts_ls, waiting for the end of the mess
     -- "tflint",
     -- "tfsec",
     -- "yamlfix",
@@ -170,7 +170,8 @@ return {
     -- "yamllint",
     automatic_installation = true,
     handlers = handlers,
-  }
+  },
+  priority = 20,
 }
 
 -- local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()

@@ -16,6 +16,7 @@ return {
     },
     formatters_by_ft = {
       ["*"] = { "trim_whitespace" },
+      go = { "goimports", "gofmt" },
       jsonnet = { "jsonnetfmt" },
       liquidsoap = { "liquidsoap-prettier" },
       --   javascript = { { "prettierd", "prettier" } },

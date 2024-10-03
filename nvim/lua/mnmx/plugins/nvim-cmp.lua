@@ -15,6 +15,7 @@ return {
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lua',
+    'davidsierradz/cmp-conventionalcommits',
     'onsails/lspkind.nvim',
 
     -- -- Snippets
@@ -56,11 +57,17 @@ return {
 
       sources = {
         { name = 'buffer',                 keyword_length = 3 },
-        { name = 'luasnip',                keyword_length = 2 },
+        {
+          name = 'path',
+          option = {
+            trailing_slash = true
+          },
+        },
+        { name = 'conventionalcommits' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lua' },
-        { name = 'path' },
+        { name = 'luasnip',                keyword_length = 2 },
       },
 
       window = {
