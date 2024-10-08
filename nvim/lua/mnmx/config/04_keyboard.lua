@@ -73,11 +73,3 @@ map('', '<C-f>', ':lua require("telescope.builtin").live_grep({grep_open_files=f
 map('', '<C-g>', ':Telescope grep_string<CR>')
 map('', '<C-p>', ':Telescope<CR>')
 map('', '<leader>p', ':Telescope<CR>')
-
--- [plugin: lsp-zero] magic shortcuts
-map('', '<leader>k', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-map('', '<leader>j', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-map('', 'gj', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-map('', 'gk', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-map('', '<leader>f', 'gggqG') -- format the whole file
-map('', '<leader>=', 'gggqG') -- format the whole file
