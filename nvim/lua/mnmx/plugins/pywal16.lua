@@ -5,5 +5,5 @@ return {
   config = function()
     -- load the colorscheme here
     vim.cmd.colorscheme("pywal16")
-  end
+  end,
 }

@@ -15,4 +15,7 @@ return {
       desc = "Buffer Local Keymaps (which-key)",
     },
   },
+  dependencies = {
+    "echasnovski/mini.icons"
+  },
 }

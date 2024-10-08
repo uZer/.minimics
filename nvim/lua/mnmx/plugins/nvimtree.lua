@@ -58,6 +58,19 @@ return {
       dotfiles = false,
     },
     renderer = {
+      -- root_folder_label = ":h:t/:t", -- was ":~:s?$?/..?",
+      root_folder_label = function(root_cwd)
+        -- Get parent directory and current directory
+        local parent_dir = vim.fn.fnamemodify(root_cwd, ":h:t") -- Get parent directory name
+        local current_dir = vim.fn.fnamemodify(root_cwd, ":t")  -- Get current directory name
+
+        -- If parent directory exists, display "parent/current", else just "current"
+        if parent_dir ~= "" then
+          return parent_dir .. "/" .. current_dir
+        else
+          return current_dir
+        end
+      end,
       group_empty = true,
       highlight_git = true,
       icons = {

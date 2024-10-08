@@ -69,23 +69,14 @@ map('', '<leader>tc', ':BufDel<cr>') -- [plugin: bufdel]
 
 -- [plugin: telescope] find stuff
 map('', '<C-o>', ':Telescope find_files<CR>')
-map('', '<C-f>', ':lua require("telescope.builtin").live_grep({grep_open_files=true})<CR>')
-map('', '<C-g>', ':lua require("telescope.builtin").live_grep({grep_open_files=false})<CR>')
+map('', '<C-f>', ':lua require("telescope.builtin").live_grep({grep_open_files=false})<CR>')
+map('', '<C-g>', ':Telescope grep_string<CR>')
 map('', '<C-p>', ':Telescope<CR>')
-
--- [plugin: aerial] toogle
-map('', '<F6>', ':AerialNavToggle<CR>')
-map('', '<F7>', ':AerialToggle<CR>')
-map('', '<leader>l', ':AerialNavToggle<cr>')
-map('', '<leader>m', ':AerialToggle<cr>')
-
--- [plugin: tagbar] toogle
-map('', '<F8>', ':TagbarToggle<CR>')
+map('', '<leader>p', ':Telescope<CR>')
 
 -- [plugin: lsp-zero] magic shortcuts
 map('', '<leader>k', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
 map('', '<leader>j', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-map('', '<leader>l', '<cmd>lua vim.diagnostic.open_float()<cr>')
 map('', 'gj', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
 map('', 'gk', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 map('', '<leader>f', 'gggqG') -- format the whole file
