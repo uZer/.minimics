@@ -56,7 +56,7 @@
     "on-scroll-down": "hyprctl dispatch workspace e-1"
   },
   "battery": {
-    "interval": 1,
+    "interval": 30,
     "bat": "BAT0",
     "format": "{icon} {capacity}%",
     "format-charging": "{icon} {capacity}%",
@@ -69,7 +69,7 @@
     ]
   },
   "bluetooth": {
-    "interval": 1,
+    "interval": 3,
     "format-on": "󰂯 {controller_alias}",
     "format-connected": "󰂯 {device_alias}",
     "format-off": "󰂲",
@@ -81,8 +81,8 @@
     "format-alt": "{:%a %d %b %Y}"
   },
   "cpu": {
-    "interval": 1,
-    "format": " {}%",
+    "interval": 3,
+    "format": " {usage}%",
     "tooltip": false
   },
   "disk": {
