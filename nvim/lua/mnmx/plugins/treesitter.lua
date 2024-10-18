@@ -1,12 +1,13 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+  -- cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   config = function()
     local configs = require("nvim-treesitter.configs")
 
     configs.setup({
-      sync_install = true,
+      ensure_install = { "lua", "vimdoc", "markdown_inline" },
+      -- sync_install = true,
       auto_install = true,
       highlight = {
         enable = true,
@@ -17,5 +18,4 @@ return {
       },
     })
   end,
-  priority = 3,
 }

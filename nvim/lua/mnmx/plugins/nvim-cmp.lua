@@ -30,6 +30,7 @@ return {
     local luasnip = require('luasnip')
 
     -- repair tabs in insert mode
+    ---@diagnostic disable-next-line: deprecated
     table.unpack = table.unpack or unpack -- Lua 5.1 compatibility
 
     local has_words_before = function()

@@ -38,8 +38,8 @@ return {
     { 'gs',         '<cmd>Lspsaga signature_help<CR>',       desc = 'Lspsaga signature help' },
     { 'gr',         '<cmd>Lspsaga finder<CR>',               desc = 'Lspsaga finder' },
     { '<leader>rn', '<cmd>Lspsaga rename<CR>',               desc = 'Lspsaga rename' },
-    { '[e',         '<cmd>Lspsaga diagnostic_jump_prev<CR>', desc = 'Lspsaga previous diagnostic' },
-    { ']e',         '<cmd>Lspsaga diagnostic_jump_next<CR>', desc = 'Lspsaga next diagnostic' },
-    { '<leader>m',  '<cmd>Lspsaga outline<CR>',              desc = 'Lspsaga next diagnostic' },
+    { '<leader>k',  '<cmd>Lspsaga diagnostic_jump_prev<CR>', desc = 'Lspsaga previous diagnostic' },
+    { '<leader>j',  '<cmd>Lspsaga diagnostic_jump_next<CR>', desc = 'Lspsaga next diagnostic' },
+    { '<leader>m',  '<cmd>Lspsaga outline<CR>',              desc = 'Lspsaga outline' },
   }
 }
