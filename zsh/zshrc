@@ -42,6 +42,10 @@ source $HOME/.p10k.zsh
 source $MINIMICS/aliases/aliases
 source $HOME/.aliases.local
 
+for file in $MINIMICS/environment.d/*.conf; do
+    source "$file"
+done
+
 # Autocompletion
 autoload -U zmv
 autoload -U +X bashcompinit && bashcompinit
