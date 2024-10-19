@@ -100,3 +100,15 @@ websocket
 websockets
 wikipedia
 www
+goroutine
+chan
+chans
+goroutines
+gomidi
+NoteOn
+NoteOff
+ControlChange
+ProgramChange
+Pitchbend
+AfterTouch
+SendClock
