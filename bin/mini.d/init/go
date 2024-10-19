@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# bootstrap a go project
+
+set -euo pipefail
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+get_usage () {
+  cat << EOF
+Returns the matching nerdfont icon
+
+usage:
+  $COMMAND [--help, -h]
+  $COMMAND <name>           # bootstrap project <name>
+
+arguments:
+  -h, --help      display this message
+
+example:
+  $COMMAND github.com/bill-of-materials/teleserv
+EOF
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+#################
+## ENVIRONMENT ##
+#################
+
+SCAFFOLDING_PATH="${MIN_PATH}/scaffolding/go"
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+[ $# -lt 1 ] && get_usage && exit 0
+
+mod_fullname="${1}"
+mod_name="${1##*/}"
+logg info "creating go module ${mod_name}..."
+
+cp -r "${SCAFFOLDING_PATH}" "${mod_name}"
+cd "${mod_name}"
+go mod init "${mod_fullname}" 2>/dev/null
+find . -name '{{mod_name}}' | while read -r path; do
+  mv "$path" "$(dirname "$path")/${mod_name}"
+done
+find . -type f -exec sed -i 's#{{mod_fullname}}#'"${mod_fullname}"'#g' {} +
+find . -type f -exec sed -i 's#{{mod_name}}#'"${mod_name}"'#g' {} +
