@@ -57,7 +57,7 @@ map('i', '<C-k>', '<Esc>:m .-2<CR>==gi')
 map('n', '<Leader>M', "mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm")
 
 -- spell check
-map('', '<leader>ss', ':set invspell<CR>')
+map('', '<leader>sc', ':set invspell<CR>')
 
 -- buffers, files & tabs management
 map('', '<F2>', ':bprev<cr>')
