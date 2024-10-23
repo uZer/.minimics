@@ -142,10 +142,7 @@ alias vimdiff="nvim -d"
 alias track='vim ~/ypi.projects/horizon/$(date +%Gw%V) -o ~/ypi.projects/horizon/$(date +%Gw%V --date="last week")'
 alias journal='vim ~/ypi.projects/horizon/journal -O ~/ypi.projects/horizon/collections'
 
-# alias feh='. ~/.cache/wal/colors.sh &> /dev/null; feh -B ${background:-'black'} "$@"'
-alias feh='pqiv -ci "$@" &>/dev/null'
-alias qiv='pqiv -ci "$@" &>/dev/null'
-alias pqiv='pqiv -ci "$@" &>/dev/null'
+alias feh='imv-dir "$@" &>/dev/null'
 alias youtube-dl=yt-dlp
 
 instastory() {
