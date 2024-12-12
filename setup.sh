@@ -5,14 +5,11 @@
 #     universal-ctags
 #   hyprland:
 #     xdg-desktop-portal-hyprland wofi rofi-lbonn-wayland rofi-pass
-#     swaylock-effects swaybg slurp grim wl-clipboard wireplumber pipewire
-#     pipewire-pulse wdisplays kanshi playerctl brightnessctl hyprpicker
-#     xdg-utils copyq tessen wtype imv qt5ct qt6ct swaync nwg-look
+#     swaylock-effects swaybg slop grim swappy wl-clipboard wireplumber
+#     pipewire pipewire-pulse wdisplays kanshi playerctl brightnessctl
+#     hyprpicker xdg-utils copyq tessen wtype imv qt5ct qt6ct swaync nwg-look
 #     qogir-cursor-theme-git qogir-gtk-theme qogir-icon-theme terminator
 #     ttf-mulish polkit-kde-agent noto-fonts-emoji xwaylandvideobridge
-#   i3:
-#     i3blocks i3status i3lock-color picom polybar rofi rofi-pass playerctl
-#     wireplumber pipewire pipewire-pulse brightnessctl playerctl terminator
 #   nvim:
 #     neovim>=0.8.0 wget curl
 #     npm yarn ripgrep fd tree-sitter tree-sitter-cli
@@ -30,20 +27,19 @@
 # ctags
 # chrome
 # copyq
-# dunst
 # env
 # git
 # gnuplot
 # gtk
 # htop
 # hyprland
-# i3
 # kanshi
 # minimics
 # nvim
 # pywal16
 # rofi
 # scide
+# swappy
 # swaync
 # taskwarrior
 # terminator
@@ -54,7 +50,7 @@
 # By default, install selected modules:
 modules=(bash zsh terminator chrome copyq ctags env git gtk htop hyprland  \
          minimics nvim pywal16 rofi waybar scide swaync taskwarrior kanshi \
-         gnuplot)
+         gnuplot swappy)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -144,14 +140,6 @@ _ctags () {
   return
 }
 
-_dunst () {
-  echo "[dunst]"
-  echo "  Linking configuration files..."
-  makelink "${MIN_PATH}/dunst" "${HOME}/.config/dunst"
-  echo
-  return
-}
-
 _swaync () {
   echo "[swaync]"
   echo "  Linking configuration files..."
@@ -231,7 +219,6 @@ _vim () {
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/vim/vimrc"  "${HOME}/.vimrc"
   makelink "${MIN_PATH}/vim"        "${HOME}/.vim"
-  makelink "${MIN_PATH}/nvim"       "${HOME}/.config/nvim"
   echo
   return
 }
@@ -253,17 +240,6 @@ _htop () {
   echo "[htop]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/htop/htoprc" "${HOME}/.config/htop/htoprc"
-  echo
-  return
-}
-
-_i3 () {
-  echo "[i3]"
-  echo "  Linking i3, picom, polybar, rofi, rofi-pass and xprofile configuration files..."
-  makelink "${MIN_PATH}/i3"                 "${HOME}/.config/i3"
-  makelink "${MIN_PATH}/picom"              "${HOME}/.config/picom"
-  makelink "${MIN_PATH}/polybar"            "${HOME}/.config/polybar"
-  makelink "${MIN_PATH}/xprofile/xprofile"  "${HOME}/.xprofile"
   echo
   return
 }
@@ -311,6 +287,14 @@ _kanshi () {
   echo "[kanshi]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/kanshi"    "${HOME}/.config/kanshi"
+  echo ""
+  return
+}
+
+_swappy () {
+  echo "[swappy]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/swappy"    "${HOME}/.config/swappy"
   echo ""
   return
 }

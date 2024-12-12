@@ -10,26 +10,15 @@ minimics_startup_programs () {
   echo "done."
 }
 
+# Folder to store screenshots you may grab without specifying a PATH in swappy
+export MINIMICS_SHOTS=~/path/to/you/screenshotdir
+
 # Folder containing your wallpapers, or single wallpaper file PATH
 export MINIMICS_WALLS=~/path/to/your/wallpapers
 
 # Folder container dwall git project
 export MINIMICS_DWALL=~/path/to/dynamic-wallpaper
 
-# Screen configuration. Obtain screen names and resolutions with xrandr
-export MINIMICS_SCREEN1_NAME=eDP1
-export MINIMICS_SCREEN1_RESOLUTION=1920x1080
-export MINIMICS_SCREEN2_NAME=
-export MINIMICS_SCREEN2_RESOLUTION=
-export MINIMICS_SCREEN3_NAME=
-export MINIMICS_SCREEN3_RESOLUTION=
-# Position of screen2 next to screen1. One of left-of, right-of, above, below
-export MINIMICS_SCREEN2_POSITION=above
-# Position of screen3 next to screen2. One of left-of, right-of, above, below
-export MINIMICS_SCREEN3_POSITION=left-of
-
-# Layout to use in xprofile at startup of the wm session
-export MINIMICS_SCREEN_LAYOUT=single_screen1
 
 # Hardware identifiers / network interfaces names
 export MINIMICS_NET_WIRED_INTERFACE=eth0
@@ -40,14 +29,6 @@ export MINIMICS_BATTERY_NAME=BAT0
 export MINIMICS_POLYBAR_FONT1="roboto:pixelsize=10;2"
 export MINIMICS_POLYBAR_FONT2="Iosevka Nerd Font:size=10;2"
 export MINIMICS_POLYBAR_HEIGHT=25
-
-# Weather
-export MINIMICS_CITY=
-
-# Gitlab
-export MINIMICS_GITLAB_API_URL=https://gitlab.com/api/v4
-export MINIMICS_GITLAB_PROJECT=example/example
-export MINIMICS_GITLAB_PRIVATE_TOKEN=yoursecrettoken
 
 # QT5/QT6
 export QT_QPA_PLATFORMTHEME=qt6ct
