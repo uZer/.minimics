@@ -1,0 +1,12 @@
+[Default]
+save_dir=$HOME/ypi.syncbox/resources/screenshots/swappy
+save_filename_format=%Y-%m-%d.%H-%M-%S.swappy.png
+show_panel=false
+line_size=5
+text_size=15
+text_font=JetBrainsMono Nerd Font
+paint_mode=brush
+early_exit=true
+fill_shape=false
+auto_save=true
+custom_color=rgba(193,125,17,1)
