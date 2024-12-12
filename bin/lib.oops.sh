@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Fail with an error message
+# fail with an error message
 # Useful with piped OR operator:
 #   command || oops "exit with a message"
 #   command || oops "exit with return code 12" 12

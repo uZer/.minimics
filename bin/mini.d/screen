@@ -16,11 +16,13 @@ manipulate screen settings (wayland only)
 usage:
   $COMMAND --help, -h
   $COMMAND conf >> ${MIN_PATH}/kanshi/config
+  $COMMAND shot
 
 arguments:
   -h, --help   display this message
   edit         edit configuration with wdisplays
   conf         output a configuration block formatted for kanshi
+  shot         make and edit a screenshot
 
 EOF
 }
@@ -41,6 +43,11 @@ EOF
 
 }
 
+# Take a screenshot and edit
+screenshot () {
+  slop -f '%x,%y %wx%h' | grim -l 0 -g - - | swappy -f -
+}
+
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 [ $# -lt 1 ] && get_usage && exit 0
@@ -49,6 +56,7 @@ while [ "$#" -ne 0 ]; do
   case "$1" in
     conf) export_config ;;
     edit) wdisplays ;;
+    shot) screenshot ;;
     *)
       get_usage
       exit 0

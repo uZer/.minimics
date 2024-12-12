@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Display messages with colors.
+# display messages with colors.
 #
 # $1 is the type of message (command|fail|success|warn|debug|kv|normal)
 # $2 is the message
