@@ -5,7 +5,7 @@
 #     universal-ctags
 #   hyprland:
 #     xdg-desktop-portal-hyprland wofi rofi-lbonn-wayland rofi-pass
-#     swaylock-effects swaybg slop grim swappy wl-clipboard wireplumber
+#     swaylock-effects swaybg slurp grim swappy wl-clipboard wireplumber
 #     pipewire pipewire-pulse wdisplays kanshi playerctl brightnessctl
 #     hyprpicker xdg-utils copyq tessen wtype imv qt5ct qt6ct swaync nwg-look
 #     qogir-cursor-theme-git qogir-gtk-theme qogir-icon-theme terminator

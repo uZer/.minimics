@@ -45,7 +45,7 @@ EOF
 
 # Take a screenshot and edit
 screenshot () {
-  slop -f '%x,%y %wx%h' | grim -l 0 -g - - | swappy -f -
+  slurp | grim -l 0 -g - - | swappy -f -
 }
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
