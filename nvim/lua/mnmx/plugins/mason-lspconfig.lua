@@ -76,6 +76,21 @@ local handlers = {
     }
   end,
 
+  ["pylsp"] = function()
+    require 'lspconfig'.pylsp.setup {
+      settings = {
+        pylsp = {
+          plugins = {
+            pycodestyle = {
+              -- ignore = { 'W391' },
+              maxLineLength = 120
+            }
+          }
+        }
+      }
+    }
+  end,
+
   ["yamlls"] = function()
     require("lspconfig").yamlls.setup {
       settings = {

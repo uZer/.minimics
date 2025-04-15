@@ -22,6 +22,10 @@ return {
       --   javascript = { { "prettierd", "prettier" } },
       --   python = { "isort", "black" },
     },
+    -- format_on_save = {
+    --   timeout_ms = 500,
+    --   lsp_format = "fallback",
+    -- },
     format_on_save = function(bufnr)
       if slow_format_filetypes[vim.bo[bufnr].filetype] then
         return
