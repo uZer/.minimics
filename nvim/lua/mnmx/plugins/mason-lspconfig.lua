@@ -1,3 +1,4 @@
+local custom_schemas = {}
 local handlers = {
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
@@ -52,11 +53,16 @@ local handlers = {
     require("lspconfig").jsonls.setup {
       settings = {
         json = {
+          -- Disabling builtin schemaStore
+          -- i'm using b0o/SchemaStore plugin for performance and flexibility
+          -- reasons, especially to blacklist some files and extend the
+          -- official store with extra json schemas
+          schemaStore = { enable = false, url = "" },
+          -- use b0o/SchemaStore plugin
+          -- local file modeline should take precedence
           schemas = require('schemastore').json.schemas {
-            ignore = {
-              -- '.eslintrc',
-              -- 'package.json',
-            },
+            extra = custom_schemas,
+            ignore = {},
           },
           validate = { enable = true },
         }
@@ -94,21 +100,22 @@ local handlers = {
   ["yamlls"] = function()
     require("lspconfig").yamlls.setup {
       settings = {
-        redhat = {
-          telemetry = { enabled = false },
-        },
-        schemaStore = {
-          enable = false,
-          url = ""
-        },
-        schemas = require('schemastore').yaml.schemas {
-          ignore = {},
-        },
         yaml = {
+          -- Disabling builtin schemaStore
+          -- i'm using b0o/SchemaStore plugin for performance and flexibility
+          -- reasons, especially to blacklist some files and extend the
+          -- official store with extra json schemas
+          schemaStore = { enable = false, url = "" },
+          -- use b0o/SchemaStore plugin
+          -- local file modeline should take precedence
+          schemas = require('schemastore').yaml.schemas {
+            extra = custom_schemas,
+            ignore = {},
+          },
           completion = true,
-          hover = true,
-          validate = true,
           -- keyOrdering = true,
+          hover = true,
+          validate = { enable = true },
         }
       }
     }
