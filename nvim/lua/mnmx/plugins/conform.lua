@@ -16,11 +16,13 @@ return {
     },
     formatters_by_ft = {
       ["*"] = { "trim_whitespace" },
+      ua = { "stylua" },
       go = { "goimports", "gofmt" },
       jsonnet = { "jsonnetfmt" },
       liquidsoap = { "liquidsoap-prettier" },
-      --   javascript = { { "prettierd", "prettier" } },
-      --   python = { "isort", "black" },
+      -- javascript = { { "prettierd", "prettier" } },
+      -- python = { "isort", "black" },
+      -- yaml = { "prettierd" },
     },
     -- format_on_save = {
     --   timeout_ms = 500,

@@ -1,4 +1,18 @@
-local custom_schemas = {}
+local custom_schemas = {
+  {
+    name = "Kubernetes v1.32.4 Strict",
+    description = "Kubernetes JSON Schema - v1.32.4 strict",
+    url = "kubernetes",
+    fileMatch = {
+      "*.k8s.yaml",
+      "*.k8s.yml",
+      "*.kubernetes.yaml",
+      "gitops/apps/**/*.yaml",
+      "gitops/apps/**/*.yml"
+    },
+  },
+}
+
 local handlers = {
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
@@ -113,6 +127,7 @@ local handlers = {
             ignore = {},
           },
           completion = true,
+          format = false, -- use prettier instead
           -- keyOrdering = true,
           hover = true,
           validate = { enable = true },
