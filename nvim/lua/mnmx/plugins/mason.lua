@@ -1,5 +1,5 @@
 return {
-  'williamboman/mason.nvim',
+  'mason-org/mason.nvim',
   priority = 2,
   opts = {
     max_concurrent_installers = 15,

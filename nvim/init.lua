@@ -13,7 +13,7 @@
   Requirements (NewGame+):
   - A patched Nerd Font for your terminal or ginit.vim
   - [plugin: pywal16.nvim] python wal, pywal, pywal16, or variants
-  - [plugin: mason.nvim] https://github.com/williamboman/mason.nvim#requirements
+  - [plugin: mason.nvim] https://github.com/mason-org/mason.nvim#requirements
 
   This thing has been splitted into files with comments, can you believe it?
 

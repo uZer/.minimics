@@ -5,7 +5,7 @@ local slow_format_filetypes = {
 return {
   "stevearc/conform.nvim",
   dependencies = {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
   },
   init = function()
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
