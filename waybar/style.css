@@ -8,6 +8,11 @@
   min-height: 0;
 }
 
+tooltip {
+  background-color: @background;
+  border: none;
+}
+
 window#waybar {
   background: @backgroundAlpha;
 }
@@ -42,6 +47,7 @@ window#waybar {
 #memory,
 #mode,
 #network,
+#privacy,
 #tray,
 #wireplumber {
   color: @foreground;
@@ -118,6 +124,12 @@ window#waybar {
 #network.disconnected {
   background: @color2;
   border-bottom: .2rem solid @color2Alpha;
+}
+
+#privacy {
+  background-color: @color1;
+  padding: .2rem .5rem;
+  border-bottom: .2rem solid @color1Alpha;
 }
 
 #tray {

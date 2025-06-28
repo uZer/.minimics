@@ -12,16 +12,38 @@
   ],
   "modules-center": [],
   "modules-right": [
-    "bluetooth",
-    "network",
-    "wireplumber",
-    "cpu",
-    "memory",
-    "disk",
-    "battery",
-    "clock",
-    "custom/notification"
+    "group/connectivity",
+    "group/essentials"
   ],
+  "group/metrics": {
+    "orientation": "horizontal",
+    "modules": [
+      "cpu",
+      "memory",
+      "disk"
+    ]
+  },
+  "group/connectivity": {
+    "drawer": {
+      "click-to-reveal": true
+    },
+    "orientation": "horizontal",
+    "modules": [
+      "network",
+      "bluetooth",
+      "group/metrics"
+    ]
+  },
+  "group/essentials": {
+    "orientation": "horizontal",
+    "modules": [
+      "clock",
+      "privacy",
+      "battery",
+      "wireplumber",
+      "custom/notification"
+    ]
+  },
   "custom/playerctl": {
     "exec": "mini nf player",
     "interval": 3,
@@ -56,10 +78,9 @@
     "on-scroll-down": "hyprctl dispatch workspace e-1"
   },
   "battery": {
-    "interval": 30,
-    "bat": "BAT0",
-    "format": "{icon} {capacity}%",
-    "format-charging": "{icon} {capacity}%",
+    "interval": 5,
+    "format": "{icon} {capacity}%{time}",
+    "format-time": " ({H}:{m})",
     "format-icons": [
       "",
       "",
@@ -77,8 +98,31 @@
   },
   "clock": {
     "interval": 1,
-    "format": " {:%Y-%m-%d   %R:%S}",
-    "format-alt": "{:%a %d %b %Y}"
+    "format": " {:L%Y-%m-%d  %R:%S}",
+    "format-alt": "{:L%a %d %b %Y  %R:%S (%Z)}",
+    "tooltip-format": "{tz_list} <tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "timezones": [
+      "Europe/Paris",
+      "America/Chicago",
+      "Etc/UTC",
+      "Europe/Paris",
+      "Europe/Tallinn",
+      "Europe/Moscow",
+      "Asia/Tokyo"
+    ]
   },
   "cpu": {
     "interval": 3,
@@ -86,7 +130,7 @@
     "tooltip": false
   },
   "disk": {
-    "interval": 30,
+    "interval": 15,
     "format": "󰋊 {free}",
     "path": "/"
   },
@@ -103,11 +147,25 @@
     "format-linked": "",
     "tooltip": false
   },
+  "privacy": {
+    "icon-spacing": 4,
+    "icon-size": 14,
+    "modules": [
+      {
+        "type": "screenshare",
+      },
+      {
+        "type": "audio-in",
+      }
+    ],
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+  },
   "tray": {
     "icon-size": 15,
     "spacing": 8
   },
   "wireplumber": {
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "interval": 1,
     "format": "{icon} {volume}%",
     "format-icons": [
