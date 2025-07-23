@@ -9,6 +9,9 @@ return {
         package_pending = "➜",
         package_uninstalled = "✗"
       }
+    },
+    pip = {
+      upgrade_pip = true,
     }
   }
 }
