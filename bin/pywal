@@ -141,19 +141,11 @@ r_swaync () {
   fi
 }
 
-# Refresh waybar
-r_waybar () {
-  if command -v waybar &> /dev/null; then
-    killall -SIGUSR2 waybar
-  fi
-}
-
 # Refresh all configurations
 reload () {
   r_nvim
   # r_swaybg
   r_swaync
-  r_waybar
   r_discord
   r_fox
 }
