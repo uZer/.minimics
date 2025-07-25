@@ -2,6 +2,9 @@
 -- Behaviour options 
 --
 
+-- loglevel
+vim.lsp.set_log_level("ERROR")
+
 -- Show special chars
 vim.opt.list = true
 vim.opt.listchars = "tab:| ,trail:-,nbsp:+"
@@ -24,7 +27,7 @@ vim.opt.ignorecase = true -- ignore case in search pattern
 vim.opt.smartcase = true  -- check case if the pattern contains uppercase chars
 
 -- Copy / Paste settings
-vim.api.nvim_set_option("clipboard", "unnamed") -- Copy to system clipboard
+vim.opt.clipboard = 'unnamedplus'
 
 -- Spell
 vim.opt.spelllang = 'en_us,fr'
