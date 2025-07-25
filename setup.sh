@@ -8,7 +8,7 @@
 #     swaylock-effects swaybg slurp grim swappy wl-clipboard wireplumber
 #     pipewire pipewire-pulse wdisplays kanshi playerctl brightnessctl
 #     hyprpicker xdg-utils copyq tessen wtype imv qt5ct qt6ct swaync nwg-look
-#     qogir-cursor-theme-git qogir-gtk-theme qogir-icon-theme terminator
+#     qogir-cursor-theme-git qogir-gtk-theme qogir-icon-theme alacritty
 #     ttf-mulish polkit-kde-agent noto-fonts-emoji xwaylandvideobridge
 #   nvim:
 #     neovim>=0.8.0 wget curl
@@ -23,6 +23,7 @@
 ###################
 
 # Available modules:
+# alacritty
 # bash
 # ctags
 # chrome
@@ -48,7 +49,7 @@
 # zsh
 
 # By default, install selected modules:
-modules=(bash zsh terminator chrome copyq ctags env git gtk htop hyprland  \
+modules=(bash zsh alacritty chrome copyq ctags env git gtk htop hyprland  \
          minimics nvim pywal16 rofi waybar scide swaync taskwarrior kanshi \
          gnuplot swappy)
 
@@ -171,6 +172,14 @@ _terminator () {
   echo "[terminator]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/terminator" "${HOME}/.config/terminator"
+  echo
+  return
+}
+
+_alacritty () {
+  echo "[alacritty]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/alacritty" "${HOME}/.config/alacritty"
   echo
   return
 }

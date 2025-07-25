@@ -1,0 +1,25 @@
+[cursor]
+blink_interval = 420
+style.blinking = "On"
+style.shape = "Block"
+
+[font]
+size = 11.5
+normal.family = "JetBrainsMono Nerd Font"
+
+[scrolling]
+history = 100000
+
+[selection]
+save_to_clipboard = true
+
+[terminal]
+osc52 = "OnlyCopy"
+
+[window]
+decorations = "None"
+opacity = 0.92
+
+[window.padding]
+x = 0
+y = 0
