@@ -21,8 +21,8 @@
     "orientation": "horizontal",
     "modules": [
       "custom/airplane",
-      "network",
-      "bluetooth"
+      "bluetooth",
+      "network"
     ]
   },
   "group/metrics": {
@@ -152,12 +152,12 @@
   },
   "disk": {
     "interval": 15,
-    "format": "󰋊 {free}",
+    "format": "󰋊 / {free} free",
     "path": "/"
   },
   "memory": {
     "interval": 5,
-    "format": "󰍛 {used}G",
+    "format": "󰍛 {used}G mem used",
     "tooltip": false
   },
   "network": {

@@ -3,9 +3,9 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: Symbols Nerd Font, JetBrainsMono Nerd Font, Helvetica, Arial, sans-serif;
-  font-size: 0.9rem;
-  min-height: 0;
+  font-family: Arimo Nerd Font, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  min-height: 1rem;
 }
 
 tooltip {
@@ -87,8 +87,8 @@ window#waybar {
 
 #bluetooth.disabled,
 #bluetooth.off {
-  background-color: @color12Alpha;
-  border-bottom: .2rem solid @color12Alpha;
+  background-color: @color0Alpha;
+  border-bottom: .2rem solid @color0;
 }
 
 #bluetooth.connected {
@@ -107,13 +107,13 @@ window#waybar {
 }
 
 #custom-airplane {
-  background-color: @color12;
-  border-bottom: .2rem solid @color12Alpha;
+  background: transparent;
+  border-bottom: .2rem solid transparent;
 }
 
 #custom-justicon {
-  background-color: @color1;
-  border-bottom: .2rem solid @color1Alpha;
+  background-color: @color2;
+  border-bottom: .2rem solid @color2Alpha;
 }
 
 #custom-playerctl {
