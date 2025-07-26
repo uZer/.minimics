@@ -27,7 +27,26 @@ vim.opt.ignorecase = true -- ignore case in search pattern
 vim.opt.smartcase = true  -- check case if the pattern contains uppercase chars
 
 -- Copy / Paste settings
-vim.opt.clipboard = 'unnamedplus'
+-- My terminal is alacritty now. It doesn't support runtime capability detection
+-- (the XTGETTCAP sequence) so Neovim can't tell that the terminal supports it.
+-- Because of that I get a clipboard: No provider error when I try to copy to "+
+-- register. In order to prevent this, I enforce the usage of osc52 clipboard
+-- https://www.reddit.com/r/neovim/comments/1d6wreh/tips_for_debugging_osc_52_not_detected_in_neovim/
+--
+-- To paste from terminal, use shift+insert (pasteSelection).
+-- To copy to selection/primary, use "+y or Y (Yy for full line)
+local osc52 = require('vim.ui.clipboard.osc52')
+vim.g.clipboard = {
+  name = 'osc52-write',
+  copy = {
+    ['+'] = osc52.copy('+'),
+    ['*'] = osc52.copy('*'),
+  },
+  paste = {
+    ['+'] = function() return { {}, 'v' } end,
+    ['*'] = function() return { {}, 'v' } end,
+  },
+}
 
 -- Spell
 vim.opt.spelllang = 'en_us,fr'

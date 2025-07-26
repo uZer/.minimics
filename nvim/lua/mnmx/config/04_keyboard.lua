@@ -18,6 +18,11 @@ vim.g.maplocalleader = "\\"
 -- switch CWD to the directory of the open buffer
 map('', '<leader>cd', ':cd %:p:h<cr>:pwd<cr>')
 
+-- yank to clipboard (OSC 52)
+-- no paste support due to security concerns (see alacritty configuration)
+-- so please use terminal paste with shift+insert
+map('', 'Y', '"+y')
+
 -- window management
 map('', '<leader>wj', '<C-w>j') -- move to window...
 map('', '<leader>wk', '<C-w>k')
