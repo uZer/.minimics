@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+# toggle radio activity
+
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+get_usage () {
+  cat << EOF
+toggle radio activity
+
+usage:
+  $COMMAND --help, -h
+  $COMMAND <arg>
+
+arguments:
+  -h, --help   display this message
+  airplane     toggle using airplane mode
+  bt           toggle bluetooth with bluetoothctl
+  btk          toggle bluetooth adapter kernel side with rfkill
+  wifi           toggle wifi with nmcli
+  wifik          toggle wifi adapter kernel side with rfkill
+EOF
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+toggle_airplane () {
+  if rfkill list | grep -q "Soft blocked: yes"; then
+    rfkill unblock all
+  else
+    rfkill block all
+  fi
+}
+
+toggle_bt () {
+  if bluetoothctl show | grep -q "Powered: yes"; then
+    bluetoothctl power off
+  else
+    bluetoothctl power on
+  fi
+}
+
+toggle_btk () {
+  if rfkill list bluetooth | grep -q "Soft blocked: yes"; then
+    rfkill unblock bluetooth
+  else
+    rfkill block bluetooth
+  fi
+}
+
+toggle_wifi () {
+  if nmcli radio wifi | grep -q "enabled"; then
+    nmcli radio wifi off
+  else
+    nmcli radio wifi on
+  fi
+}
+
+toggle_wifik () {
+  if rfkill list wifi | grep -q "Soft blocked: yes"; then
+    rfkill unblock wifi
+  else
+    rfkill block wifi
+  fi
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+[ $# -lt 1 ] && get_usage && exit 0
+
+case "$1" in
+  -h|--help|"")
+    get_usage
+    ;;
+  airplane)
+    toggle_airplane
+    ;;
+  bt)
+    toggle_bt
+    ;;
+  btk)
+    toggle_btk
+    ;;
+  wifi)
+    toggle_wifi
+    ;;
+  wifik)
+    toggle_wifik
+    ;;
+  *)
+    echo "$COMMAND: unknown option '$1'" >&2
+    get_usage
+    exit 1
+    ;;
+esac
