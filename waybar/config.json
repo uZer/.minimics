@@ -14,25 +14,27 @@
   "modules-center": [],
   "modules-right": [
     "group/connectivity",
+    "group/metrics",
     "group/essentials"
   ],
-  "group/metrics": {
+  "group/connectivity": {
     "orientation": "horizontal",
     "modules": [
-      "cpu",
-      "memory",
-      "disk"
+      "custom/airplane",
+      "network",
+      "bluetooth"
     ]
   },
-  "group/connectivity": {
+  "group/metrics": {
+    "orientation": "horizontal",
     "drawer": {
       "click-to-reveal": true
     },
-    "orientation": "horizontal",
     "modules": [
-      "network",
-      "bluetooth",
-      "group/metrics"
+      "custom/justicon",
+      "cpu",
+      "memory",
+      "disk"
     ]
   },
   "group/essentials": {
@@ -44,6 +46,21 @@
       "wireplumber",
       "custom/notification"
     ]
+  },
+  "custom/airplane": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "default": "󰀝"
+    },
+    "on-click": "mini toggle airplane"
+  },
+  "custom/justicon": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "default": ""
+    }
   },
   "custom/playerctl": {
     "exec": "mini nf player",
@@ -92,10 +109,13 @@
   },
   "bluetooth": {
     "interval": 3,
-    "format-on": "󰂯 {controller_alias}",
-    "format-connected": "󰂯 {device_alias}",
-    "format-off": "󰂲",
-    "format-disabled": ""
+    "format-on": " {controller_alias}",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} ({device_battery_percentage}%)",
+    "format-off": " off",
+    "format-disabled": "󰂲",
+    "format-no-controller": "󰂳",
+    "on-click": "mini toggle bt"
   },
   "clock": {
     "interval": 1,
@@ -144,8 +164,10 @@
     "interval": 2,
     "format-wifi": " {essid} {ipaddr}",
     "format-ethernet": " {ipaddr}",
-    "format-disconnected": "",
+    "format-disconnected": "󰤮",
+    "format-disabled": "󰤮",
     "format-linked": "",
+    "on-click": "mini toggle wifi",
     "tooltip": false
   },
   "privacy": {
