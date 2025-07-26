@@ -27,7 +27,7 @@ return {
       }
     })
   end,
-  event = "LspAttach",
+  after = 'nvim-lspconfig',
   keys = {
     { 'K',          '<cmd>Lspsaga hover_doc<CR>',            desc = 'Lspsaga hover doc' },
     { 'gh',         '<cmd>Lspsaga hover_doc<CR>',            desc = 'Lspsaga hover doc' },
