@@ -167,9 +167,15 @@ EOF
   exit_node_status=$(echo "$json" | jq -r 'try .ExitNodeStatus // empty')
   if [[ -z "$exit_node_status" ]]; then
     # No exit node — normal connection
+    is_advertising_exit=$(echo "$json" | jq -r 'try .Self.ExitNodeOption // empty')
+    if [[ -n "$is_advertising_exit" ]]; then
+      text="󱗼 󰩈"
+    else
+      text="󱗼"
+    fi
     jq -cM <<EOF
 {
-  "text": "󱗼",
+  "text": "$text",
   "tooltip": $peers,
   "class": "connected"
 }

@@ -157,9 +157,9 @@ window#waybar {
   border-bottom: .2rem solid @color13Alpha;
 }
 
-#custom-tailscale.exit-disconnected {
-  background-color: @color1;
-  border-bottom: .2rem solid @color1Alpha;
+#custom-tailscale.exit-offline {
+  background-color: @color9;
+  border-bottom: .2rem solid @color9Alpha;
 }
 
 #disk {

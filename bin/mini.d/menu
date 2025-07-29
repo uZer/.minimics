@@ -87,13 +87,19 @@ _tsexit () {
   ' <<< "$json")
 
   # Add "disabled" as the first option
-  choice=$(printf "none\n%s\n" "$exit_nodes" | rofi -dmenu -i -p "Select Exit Node")
+  choice=$(printf "none\n%s\nadvertise exit node\n" "$exit_nodes" |
+    rofi -dmenu -i -p "Select Exit Node")
   choice=$(echo "${choice}" | cut -f1)
 
   # Act on selection
   if [[ "$choice" == "none" ]]; then
+    tailscale set --advertise-exit-node=false
     tailscale set --exit-node=
+  elif [[ "$choice" == "advertise exit node" ]]; then
+    tailscale set --exit-node=
+    tailscale up --advertise-exit-node
   elif [[ -n "$choice" ]]; then
+    tailscale set --advertise-exit-node=false
     tailscale set --exit-node="$choice"
   fi
 }
