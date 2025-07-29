@@ -7,6 +7,8 @@ set -eu
 COMMAND=${0//\// }
 COMMAND=${COMMAND/*mini.d/mini}
 
+DISPLAY_WIFI_SIGNAL=false
+
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 get_usage () {
@@ -64,17 +66,18 @@ status_public_ip () {
 }
 EOF
   elif [[ "$ip" =~ ^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$ ]]; then
+    ipv4="$(curl -s --max-time 2 'https://api.ipify.org' || true)"
     jq -cM <<EOF
 {
-  "text": " IPv6",
-  "tooltip": "exit using IPv6\n\nright clic:    copy IPv4\nmiddle clic: copy IPv6",
+  "text": "󰼔 $ipv4",
+  "tooltip": "$ip",
   "class": "online"
 }
 EOF
   else
     jq -cM <<EOF
 {
-  "text": "",
+  "text": "󰅤",
   "tooltip": "offline",
   "class": "offline"
 }
@@ -91,9 +94,9 @@ status_netif () {
   if [[ -z "$iface" ]]; then
     jq -cM <<EOF
 {
-  text: "",
-  tooltip: "No network connection",
-  class: "disconnected"
+  "text": "",
+  "tooltip": "No network connection",
+  "class": "disconnected"
 }
 EOF
     exit 0
@@ -108,10 +111,15 @@ EOF
     wifi)
       signal=$(nmcli -t -f IN-USE,SSID,SIGNAL device wifi list | grep '^\*' | cut -d: -f3)
       if [[ -n "$signal" ]]; then
-        if (( signal > 80 )); then icon="󰤨 ${signal}%"
-        elif (( signal > 60 )); then icon="󰤥 ${signal}%"
-        elif (( signal > 40 )); then icon="󰤢 ${signal}%"
-        elif (( signal > 20 )); then icon="󰤟 ${signal}%"
+        if [[ "$DISPLAY_WIFI_SIGNAL" = "true" ]]; then
+          value=" ${signal}%"
+        else
+          value=""
+        fi
+        if (( signal > 80 )); then icon="󰤨${value}"
+        elif (( signal > 60 )); then icon="󰤥${value}"
+        elif (( signal > 40 )); then icon="󰤢${value}"
+        elif (( signal > 20 )); then icon="󰤟${value}"
         else icon="󰤯"  # weak signal
         fi
       else
@@ -186,6 +194,7 @@ EOF
   # Extract exit node peer info
   exit_id=$(echo "$json" | jq -r '.ExitNodeStatus.ID')
   exit_online=$(echo "$json" | jq -r '.ExitNodeStatus.Online')
+  exit_still_advertising=$(echo "$json" | jq -r --arg id "$exit_id" '.Peer[] | select(.ID == $id) | .ExitNodeOption')
   exit_name=$(echo "$json" | jq -r --arg id "$exit_id" '.Peer[] | select(.ID == $id) | .DNSName')
 
   # Trim exit node DNS name
@@ -193,7 +202,7 @@ EOF
     exit_name="${exit_name/%.${tailnet}./}"
   fi
 
-  if [[ "$exit_online" == "true" ]]; then
+  if [[ "$exit_online" == "true" ]] && [[ "$exit_still_advertising" == "true" ]]; then
     jq -cM <<EOF
 {
   "text": "󱗼 󰴽 $exit_name",

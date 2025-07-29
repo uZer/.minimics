@@ -22,8 +22,8 @@
     "modules": [
       "custom/airplane",
       "bluetooth",
-      "custom/publicip",
       "group/network-details",
+      "custom/publicip",
       "custom/tailscale"
     ]
   },

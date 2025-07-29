@@ -131,6 +131,12 @@ window#waybar {
   border-bottom: .2rem solid @color4Alpha;
 }
 
+#custom-network-interface.disconnected {
+  background-color: @color0Alpha;
+  border-bottom: .2rem solid @color0;
+}
+
+
 #custom-notification {
   background-color: @color13;
   padding: .2rem .5rem;
@@ -159,7 +165,7 @@ window#waybar {
 
 #custom-tailscale.exit-offline {
   background-color: @color9;
-  border-bottom: .2rem solid @color9Alpha;
+  border-bottom: .2rem solid @color1Alpha;
 }
 
 #disk {
@@ -177,9 +183,14 @@ window#waybar {
   border-bottom: .2rem solid @color4Alpha;
 }
 
+#network.disabled {
+  background-color: @color0Alpha;
+  border-bottom: .2rem solid @color0;
+}
+
 #network.disconnected {
-  background: @color4Alpha;
-  border-bottom: .2rem solid @color4Alpha;
+  background-color: @color0Alpha;
+  border-bottom: .2rem solid @color0;
 }
 
 #privacy {
