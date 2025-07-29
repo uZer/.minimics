@@ -75,7 +75,7 @@
     }
   },
   "custom/network-interface": {
-    "exec": "mini waybar status interface",
+    "exec": "mini waybar status netif",
     "format": "{}",
     "interval": 3,
     "return-type": "json"
@@ -101,9 +101,10 @@
     "escape": true
   },
   "custom/playerctl": {
-    "exec": "mini nf player",
+    "exec": "mini waybar status player",
     "interval": 3,
-    "on-click": "playerctl play-pause"
+    "on-click": "playerctl play-pause",
+    "max-length": 50
   },
   "custom/publicip": {
     "exec": "mini waybar status ip",

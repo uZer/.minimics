@@ -19,14 +19,39 @@ usage:
 
 arguments:
   -h, --help   display this message
-  interface    display default interface for internet connectivity
+  netif        display default interface for internet connectivity
   ip           display public ip
+  player       display playerctl status
   ts           display tailscale status for waybar
   tsp          display tailscale peers for waybar tooltip
 EOF
 }
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+status_player () {
+  metadata=$(playerctl metadata --format 2>/dev/null \
+    '{{lc(status)}} {{artist}} - {{title}} {{lc(playerName)}}')
+  status=$(awk '{print $1}' <<< "$metadata")
+  info=$(awk '{$1=""; print substr($0,2)}' <<< "$metadata")  # everything except the status
+
+  # Map specific status and player name to icon keywords
+  case "$status" in
+    paused) status="pause" ;;
+    playing) status="play" ;;
+  esac
+
+  # Extract player name (assumes it's the last word)
+  player_name=$(awk '{print $NF}' <<< "$info")
+  [[ "$player_name" == "plexamp" ]] && player_name="plex" # plexamp → plex
+  # Remove player name from info
+  info="${info% "$player_name"}"
+  icon_status=$(mini nf convert "$status")
+  icon_player=$(mini nf convert "$player_name")
+
+  # Print final output
+  printf "%s %s %s\n" "$icon_status" "$info" "$icon_player"
+}
 
 status_public_ip () {
   ip="$(curl -s --max-time 2 'https://api64.ipify.org' || true)"
@@ -57,7 +82,7 @@ EOF
   fi
 }
 
-status_defif () {
+status_netif () {
   # Get default route interface
   iface=$(ip route get 1.1.1.1 2>/dev/null |
     awk '{for(i=1;i<=NF;i++) if($i=="dev") print $(i+1); exit}')
@@ -252,11 +277,14 @@ case "$1" in
   -h|--help|"")
     get_usage
     ;;
-  interface)
-    status_defif
+  netif)
+    status_netif
     ;;
   ip)
     status_public_ip
+    ;;
+  player)
+    status_player
     ;;
   ts)
     status_ts
