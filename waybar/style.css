@@ -45,6 +45,7 @@ window#waybar {
 #custom-justicon,
 #custom-playerctl,
 #custom-notification,
+#custom-tailscale,
 #disk,
 #memory,
 #mode,
@@ -127,6 +128,11 @@ window#waybar {
   background-color: @color13;
   padding: .2rem .5rem;
   border-bottom: .2rem solid @color13Alpha;
+}
+
+#custom-tailscale {
+  background-color: @color5;
+  border-bottom: .2rem solid @color5Alpha;
 }
 
 #disk {

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# toggle radio activity
+# toggle network process
 
 set -eu
 
@@ -22,8 +22,9 @@ arguments:
   airplane     toggle using airplane mode
   bt           toggle bluetooth with bluetoothctl
   btk          toggle bluetooth adapter kernel side with rfkill
-  wifi           toggle wifi with nmcli
-  wifik          toggle wifi adapter kernel side with rfkill
+  ts           toggle tailscale vpn
+  wifi         toggle wifi with nmcli
+  wifik        toggle wifi adapter kernel side with rfkill
 EOF
 }
 
@@ -50,6 +51,16 @@ toggle_btk () {
     rfkill unblock bluetooth
   else
     rfkill block bluetooth
+  fi
+}
+
+toggle_ts () {
+  if tailscale status --json 2>/dev/null | jq -r '.BackendState' | grep -q "Running"; then
+    logg debug "Stopping tailscale..."
+    tailscale down
+  else
+    logg debug "Starting tailscale..."
+    tailscale up
   fi
 }
 
@@ -85,6 +96,9 @@ case "$1" in
     ;;
   btk)
     toggle_btk
+    ;;
+  ts)
+    toggle_ts
     ;;
   wifi)
     toggle_wifi

@@ -21,6 +21,7 @@
     "orientation": "horizontal",
     "modules": [
       "custom/airplane",
+      "custom/tailscale",
       "bluetooth",
       "network"
     ]
@@ -62,11 +63,6 @@
       "default": ""
     }
   },
-  "custom/playerctl": {
-    "exec": "mini nf player",
-    "interval": 3,
-    "on-click": "playerctl play-pause"
-  },
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
@@ -86,6 +82,18 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
+  },
+  "custom/playerctl": {
+    "exec": "mini nf player",
+    "interval": 3,
+    "on-click": "playerctl play-pause"
+  },
+  "custom/tailscale": {
+    "exec": "mini waybar status ts",
+    "format": "{}",
+    "interval": 3,
+    "on-click": "mini toggle ts",
+    "return-type": "json"
   },
   "hyprland/workspaces": {
     "all-outputs": false,
