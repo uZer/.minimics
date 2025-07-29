@@ -22,6 +22,7 @@ arguments:
   apps         launch apps menu
   pass         launch pass menu
   screen       launch an applet to choose display mode (xorg)
+  tsexit       select tailscale exit point
 
 EOF
 }
@@ -51,6 +52,49 @@ _screen () {
   # Run script if choice has been made in applet
   if [ "${chosen}" != "" ]; then
     "${bin}" "$(echo -e "${available_options}" | grep "${chosen}" | cut -d ';' -f 2)"
+  fi
+}
+
+_tsexit () {
+  local json exit_nodes choice
+
+  # Get Tailscale status JSON
+  json=$(tailscale status --json 2>/dev/null)
+  if [[ -z "$json" ]]; then
+    echo "Tailscale is not running or no data available." >&2
+    return 1
+  fi
+
+  tailnet=$(jq -r '.MagicDNSSuffix' <<< "$json")
+
+  # Build menu: list of exit node DNSNames + "disabled"
+  exit_nodes=$(jq -r --arg suffix ".$tailnet." '
+    . as $root
+    | .Peer[]
+    | select(.ExitNodeOption == true)
+    | {
+        user: ($root.User[("\(.UserID)")]?.DisplayName // "unknown"),
+        full: .DNSName,
+        label: (
+          if .DNSName | endswith($suffix) then
+            (.DNSName | sub($suffix + "$"; "") | sub("\\.$"; ""))
+          else
+            .DNSName
+          end
+        )
+      }
+    | "\(.label)\t\(.user)\t\($suffix)"
+  ' <<< "$json")
+
+  # Add "disabled" as the first option
+  choice=$(printf "none\n%s\n" "$exit_nodes" | rofi -dmenu -i -p "Select Exit Node")
+  choice=$(echo "${choice}" | cut -f1)
+
+  # Act on selection
+  if [[ "$choice" == "none" ]]; then
+    tailscale set --exit-node=
+  elif [[ -n "$choice" ]]; then
+    tailscale set --exit-node="$choice"
   fi
 }
 

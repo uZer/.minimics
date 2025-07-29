@@ -11,7 +11,7 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 get_usage () {
   cat << EOF
-display status of various system process for waybar
+display various information in waybar
 
 usage:
   $COMMAND --help, -h
@@ -19,11 +19,17 @@ usage:
 
 arguments:
   -h, --help   display this message
-  ts           display tailscale status
+  ts           display tailscale status for waybar
+  tsp          display tailscale peers for waybar tooltip
+  ip           display public ip
 EOF
 }
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+status_public_ip () {
+  echo " $(curl 'https://api.ipify.org')"
+}
 
 status_ts () {
   json=$(tailscale status --json 2>/dev/null || echo "")
@@ -42,7 +48,6 @@ EOF
 
   # Trim DNS name to hostname only (remove MagicDNSSuffix)
   tailnet=$(echo "$json" | jq -r '.MagicDNSSuffix')
-  my_name=$(echo "$json" | jq -r '.Self.DNSName')
   peers=$(status_ts_peers | jq -Rs .)
   # "tooltip": "connected as $my_name\n\npeers:\n" +$peers,
 
@@ -74,7 +79,7 @@ EOF
     jq -cM <<EOF
 {
   "text": "󱗼 󰴽 $exit_name",
-  "tooltip": "Connected via exit node: $exit_name",
+  "tooltip": $peers,
   "class": "exit-online"
 }
 EOF
@@ -82,7 +87,7 @@ EOF
     jq -cM <<EOF
 {
   "text": "󱗼 via $exit_name ()",
-  "tooltip": "Exit node offline: $exit_name",
+  "tooltip": $peers,
   "class": "exit-offline"
 }
 EOF
@@ -93,6 +98,7 @@ status_ts_peers () {
   json=$(tailscale status --json 2>/dev/null || echo "")
   [[ -z "$json" ]] && echo "No Tailscale data" && return
 
+  echo -n '<span font-family="mono" font-size="8pt">'
   echo "$json" | jq -r '
     def ago:
       sub("\\..*"; "Z")
@@ -102,58 +108,53 @@ status_ts_peers () {
         elif $diff < 3600 then ((($diff / 60) | floor | tostring) + "m ago")
         elif $diff < 86400 then ((($diff / 3600) | floor | tostring) + "h ago")
         else ((($diff / 86400) | floor | tostring) + "d ago")
-        end;
+      end;
 
-    . as $root |
-    .Peer[] |
-    {
-      id: .ID,
-      ip: (.TailscaleIPs[0] // "unknown"),
-      raw_dns: .DNSName,
-      user_id: (.UserID | tostring),
-      os: (.OS | ascii_downcase),
-      active: .Active,
-      online: .Online,
-      exit: .ExitNodeOption,
-      last_seen: (.LastSeen // null)
-    }
-    |
-    .dns = (
-      if .raw_dns | endswith("." + $root.MagicDNSSuffix + ".") then
-        (.raw_dns | sub("\\." + $root.MagicDNSSuffix + "." + "$"; ""))
-      else .raw_dns end
-    )
-    |
-    .user = (
-      $root.User[(.user_id)]?.DisplayName // "unknown"
-    )
-    |
-    .os_icon = (
-      if .os | test("ios") then "󰀷"
-      elif .os | test("win") then "󰖳"
-      elif .os | test("android") then ""
-      elif .os | test("linux") then ""
-      elif .os | test("mac|darwin") then ""
-      else "" end
-    )
-    |
-    .exit_icon =
-      if .exit == true then "󰗼" else "" end
-    |
-    .status = (
-      if .active == true then
-        "<span></span>"
-      elif .online == false then
-        "<span> " + (.last_seen | ago) + "</span>"
-      else
-        "<span></span>"
-      end
-    )
-    |
-    "\(.user);\(.dns);(\(.ip));\(.os_icon);\(.exit_icon);\(.status)"
-  ' | sort | column -t -s ';' |
-    sed 's#\t#  #g' |
-    sed 's#^\(.*\)#<span font-family="mono" font-size="8pt">\1</span>#g'
+    . as $root
+    | ([ $root.Self ] + ($root.Peer | to_entries | map(.value)))[]
+    | {
+        id: .ID,
+        ip: (.TailscaleIPs[0] // "unknown"),
+        raw_dns: .DNSName,
+        user_id: (.UserID | tostring),
+        os: (.OS // "unknown" | ascii_downcase),
+        active: (.Active // false),
+        online: (.Online // false),
+        exit: (.ExitNodeOption // false),
+        last_seen: (.LastSeen // null),
+        is_self: (.ID == $root.Self.ID)
+      }
+    | .dns = (
+        if .raw_dns | endswith("." + $root.MagicDNSSuffix + ".") then
+          (.raw_dns | sub("\\." + $root.MagicDNSSuffix + "." + "$"; ""))
+        else .raw_dns end
+      )
+    | .user = (
+        $root.User[.user_id]?.DisplayName // "unknown"
+      )
+    | .os_icon = (
+        if .os | test("ios") then "󰀷"
+        elif .os | test("win") then "󰖳"
+        elif .os | test("android") then ""
+        elif .os | test("linux") then ""
+        elif .os | test("mac|darwin") then ""
+        else "" end
+      )
+    | .exit_icon = if .exit == true then "󰗼" else "" end
+    | .status = (
+        if .is_self == true then
+          "<span>󰋜</span>"
+        elif .active == true then
+          "<span></span>"
+        elif .online == false then
+          "<span> " + (.last_seen | ago) + "</span>"
+        else
+          "<span></span>"
+        end
+      )
+    | "\(.user);\(.dns);(\(.ip));\(.os_icon);\(.exit_icon);\(.status)"
+  ' | sort | column -t -s ';' | sed 's#\t#  #g'
+  echo '</span>'
 }
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
@@ -163,6 +164,9 @@ status_ts_peers () {
 case "$1" in
   -h|--help|"")
     get_usage
+    ;;
+  ip)
+    status_public_ip
     ;;
   ts)
     status_ts

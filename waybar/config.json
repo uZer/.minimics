@@ -13,8 +13,8 @@
   ],
   "modules-center": [],
   "modules-right": [
+    "privacy",
     "group/connectivity",
-    "group/metrics",
     "group/essentials"
   ],
   "group/connectivity": {
@@ -23,7 +23,8 @@
       "custom/airplane",
       "custom/tailscale",
       "bluetooth",
-      "network"
+      "network",
+      "custom/publicip"
     ]
   },
   "group/metrics": {
@@ -41,10 +42,10 @@
   "group/essentials": {
     "orientation": "horizontal",
     "modules": [
-      "clock",
-      "privacy",
-      "battery",
       "wireplumber",
+      "group/metrics",
+      "battery",
+      "clock",
       "custom/notification"
     ]
   },
@@ -88,11 +89,17 @@
     "interval": 3,
     "on-click": "playerctl play-pause"
   },
+  "custom/publicip": {
+    "exec": "mini waybar status ip",
+    "format": "{}",
+    "interval": 30
+  },
   "custom/tailscale": {
     "exec": "mini waybar status ts",
     "format": "{}",
     "interval": 3,
     "on-click": "mini toggle ts",
+    "on-click-right": "mini menu tsexit",
     "return-type": "json"
   },
   "hyprland/workspaces": {

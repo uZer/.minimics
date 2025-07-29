@@ -43,8 +43,9 @@ window#waybar {
 #cpu,
 #custom-airplane,
 #custom-justicon,
-#custom-playerctl,
 #custom-notification,
+#custom-playerctl,
+#custom-publicip,
 #custom-tailscale,
 #disk,
 #memory,
@@ -128,6 +129,11 @@ window#waybar {
   background-color: @color13;
   padding: .2rem .5rem;
   border-bottom: .2rem solid @color13Alpha;
+}
+
+#custom-publicip {
+  background-color: @color4;
+  border-bottom: .2rem solid @color4Alpha;
 }
 
 #custom-tailscale {
