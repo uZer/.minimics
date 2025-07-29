@@ -38,8 +38,15 @@ EOF
 [ $# -lt 1 ] && get_usage && exit 0
 method="${1}" ; shift
 case "${method}" in
-  search) rofi -dmenu -i < "${list}" | awk '{print $1}' | wl-copy ;;
-  convert) grep "${1}" "${list}" | grep -v cod | head -n1 | cut -d ' ' -f1 ;;
+  search)
+    selected=$(rofi -dmenu -i < "${list}" | awk '{printf $1}')
+    [ -n "$selected" ] && wl-copy <<< "$selected" && wtype "$selected"
+    ;;
+
+  convert)
+    grep "${1}" "${list}" | grep -v cod | head -n1 | cut -d ' ' -f1
+    ;;
+
   player)
     # This one is weird, I agree.
     # Returns a string containing the player icon. We have to replace some of
