@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# display tailscale peers for waybar tooltip
+
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+json=$(tailscale status --json 2>/dev/null || echo "")
+[[ -z "$json" ]] && echo "No Tailscale data" && return
+
+echo -n '<span font-family="mono" font-size="8pt">'
+echo "$json" | jq -r '
+  def ago:
+    sub("\\..*"; "Z")
+    | fromdateiso8601 as $date
+    | (now - $date) as $diff
+    | if $diff < 60 then "just now"
+      elif $diff < 3600 then ((($diff / 60) | floor | tostring) + "m ago")
+      elif $diff < 86400 then ((($diff / 3600) | floor | tostring) + "h ago")
+      else ((($diff / 86400) | floor | tostring) + "d ago")
+    end;
+
+  . as $root
+  | ([ $root.Self ] + ($root.Peer | to_entries | map(.value)))[]
+  | {
+      id: .ID,
+      ip: (.TailscaleIPs[0] // "unknown"),
+      raw_dns: .DNSName,
+      user_id: (.UserID | tostring),
+      os: (.OS // "unknown" | ascii_downcase),
+      active: (.Active // false),
+      online: (.Online // false),
+      exit: (.ExitNodeOption // false),
+      last_seen: (.LastSeen // null),
+      is_self: (.ID == $root.Self.ID)
+    }
+  | .dns = (
+      if .raw_dns | endswith("." + $root.MagicDNSSuffix + ".") then
+        (.raw_dns | sub("\\." + $root.MagicDNSSuffix + "." + "$"; ""))
+      else .raw_dns end
+    )
+  | .user = (
+      $root.User[.user_id]?.DisplayName // "unknown"
+    )
+  | .os_icon = (
+      if .os | test("ios") then "󰀷"
+      elif .os | test("win") then "󰖳"
+      elif .os | test("android") then ""
+      elif .os | test("linux") then ""
+      elif .os | test("mac|darwin") then ""
+      else "" end
+    )
+  | .exit_icon = if .exit == true then "󰗼" else "" end
+  | .status = (
+      if .is_self == true then
+        "<span>󰋜</span>"
+      elif .active == true then
+        "<span></span>"
+      elif .online == false then
+        "<span> " + (.last_seen | ago) + "</span>"
+      else
+        "<span></span>"
+      end
+    )
+  | "\(.user);\(.dns);(\(.ip));\(.os_icon);\(.exit_icon);\(.status)"
+' | sort | column -t -s ';' | sed 's#\t#  #g'
+echo '</span>'

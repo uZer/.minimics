@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# display default interface for internet connectivity
+
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+DISPLAY_WIFI_SIGNAL=false
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+# Get default route interface
+iface=$(ip route get 1.1.1.1 2>/dev/null |
+  awk '{for(i=1;i<=NF;i++) if($i=="dev") print $(i+1); exit}')
+
+# Exit if no interface
+if [[ -z "$iface" ]]; then
+  jq -cM <<EOF
+  {
+    "text": "",
+    "tooltip": "No network connection",
+    "class": "disconnected"
+  }
+EOF
+exit 0
+fi
+
+# Determine link type (wifi/ethernet/other)
+type=$(nmcli -t -f DEVICE,TYPE device | grep "^$iface:" | cut -d: -f2)
+[ -z "$type" ] && type="unknown"
+
+# Pick icon based on type
+case "$type" in
+  wifi)
+    signal=$(nmcli -t -f IN-USE,SSID,SIGNAL device wifi list | grep '^\*' | cut -d: -f3)
+    if [[ -n "$signal" ]]; then
+      if [[ "$DISPLAY_WIFI_SIGNAL" = "true" ]]; then
+        value=" ${signal}%"
+      else
+        value=""
+      fi
+      if (( signal > 80 )); then icon="󰤨${value}"
+      elif (( signal > 60 )); then icon="󰤥${value}"
+      elif (( signal > 40 )); then icon="󰤢${value}"
+      elif (( signal > 20 )); then icon="󰤟${value}"
+      else icon="󰤯"  # weak signal
+      fi
+    else
+      icon="󰖩"  # no signal info
+    fi
+    class="wifi"
+    ;;
+
+  ethernet) icon=""; class="wired" ;;
+
+  tun)
+    if [[ "$iface" == "tailscale"* ]]; then
+      icon="󱗼";
+    else
+      icon="󰖂";
+    fi
+    class="vpn"
+    ;;
+
+  *)        icon="󰘚"; class="other" ;;
+esac
+
+# Check carrier/status
+if [[ "$iface" != "tailscale"* ]]; then
+  state=$(cat /sys/class/net/"$iface"/operstate 2>/dev/null || echo "down")
+  [[ "$state" != "up" ]] && class="disconnected"
+else
+  state=$(tailscale status --json 2>/dev/null | jq -r '.Self.Online' || true)
+  [[ "$state" != "true" ]] && class="disconnected"
+fi
+
+jq -cM <<EOF
+{
+  "text": "$icon $iface",
+  "tooltip": "$iface",
+  "class": "$class"
+}
+EOF

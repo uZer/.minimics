@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# display playerctl status for waybar
+
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+metadata=$(playerctl metadata --format 2>/dev/null \
+  '{{lc(status)}} {{artist}} - {{title}} {{lc(playerName)}}')
+status=$(awk '{print $1}' <<< "$metadata")
+info=$(awk '{$1=""; print substr($0,2)}' <<< "$metadata")  # everything except the status
+
+# Map specific status and player name to icon keywords
+case "$status" in
+  paused) status="pause" ;;
+  playing) status="play" ;;
+esac
+
+# Extract player name (assumes it's the last word)
+player_name=$(awk '{print $NF}' <<< "$info")
+[[ "$player_name" == "plexamp" ]] && player_name="plex" # plexamp → plex
+# Remove player name from info
+info="${info% "$player_name"}"
+icon_status=$(mini nf convert "$status")
+icon_player=$(mini nf convert "$player_name")
+
+# Print final output
+printf "%s %s %s\n" "$icon_status" "$info" "$icon_player"

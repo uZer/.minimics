@@ -52,9 +52,9 @@
   "group/essentials": {
     "orientation": "horizontal",
     "modules": [
+      "group/metrics",
       "wireplumber",
       "battery",
-      "group/metrics",
       "clock",
       "custom/notification"
     ]
@@ -111,7 +111,6 @@
     "format": "{}",
     "interval": 5,
     "return-type": "json",
-    "on-click": null,
     "on-click-middle": "$(curl -s --max-time 2 'https://api64.ipify.org' | wl-copy)",
     "on-click-right": "$(curl -s --max-time 2 'https://api.ipify.org' | wl-copy)"
   },

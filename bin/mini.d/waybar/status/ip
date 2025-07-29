@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# display public ip
+
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+ip="$(curl -s --max-time 2 'https://api64.ipify.org' || true)"
+if [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  jq -cM <<EOF
+  {
+    "text": " ${ip}",
+    "tooltip": "exit using IPv4\n\nright clic: copy IPv4",
+    "class": "online"
+  }
+EOF
+elif [[ "$ip" =~ ^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$ ]]; then
+  ipv4="$(curl -s --max-time 2 'https://api.ipify.org' || true)"
+  jq -cM <<EOF
+  {
+    "text": "󰼔 $ipv4",
+    "tooltip": "$ip",
+    "class": "online"
+  }
+EOF
+else
+  jq -cM <<EOF
+  {
+    "text": "󰅤",
+    "tooltip": "offline",
+    "class": "offline"
+  }
+EOF
+fi
