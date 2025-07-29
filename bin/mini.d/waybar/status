@@ -80,7 +80,21 @@ EOF
 
   # Pick icon based on type
   case "$type" in
-    wifi)     icon="󰖩"; class="wifi" ;;
+    wifi)
+      signal=$(nmcli -t -f IN-USE,SSID,SIGNAL device wifi list | grep '^\*' | cut -d: -f3)
+      if [[ -n "$signal" ]]; then
+        if (( signal > 80 )); then icon="󰤨 ${signal}%"
+        elif (( signal > 60 )); then icon="󰤥 ${signal}%"
+        elif (( signal > 40 )); then icon="󰤢 ${signal}%"
+        elif (( signal > 20 )); then icon="󰤟 ${signal}%"
+        else icon="󰤯"  # weak signal
+        fi
+      else
+        icon="󰖩"  # no signal info
+      fi
+      class="wifi"
+      ;;
+
     ethernet) icon=""; class="wired" ;;
     *)        icon="󰘚"; class="other" ;;
   esac
