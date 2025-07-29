@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # display status of various system process for waybar
 
-set -eu
+set -eux
 
 # Pretty print command name
 COMMAND=${0//\// }
@@ -129,16 +129,23 @@ EOF
       ;;
 
     ethernet) icon=""; class="wired" ;;
+    tun)      icon="󱗼"; class="vpn" ;;
     *)        icon="󰘚"; class="other" ;;
   esac
 
   # Check carrier/status
-  state=$(cat /sys/class/net/"$iface"/operstate 2>/dev/null || echo "down")
-  [[ "$state" != "up" ]] && class="${class}-disconnected"
+  if [[ "$iface" != "tailscale"* ]]; then
+    state=$(cat /sys/class/net/"$iface"/operstate 2>/dev/null || echo "down")
+    [[ "$state" != "up" ]] && class="disconnected"
+  else
+    json=$( )
+    state=$(tailscale status --json 2>/dev/null | jq -r '.Self.Online' || true)
+    [[ "$state" != "true" ]] && class="disconnected"
+  fi
 
   jq -cM <<EOF
 {
-  "text": "$icon",
+  "text": "$icon $iface",
   "tooltip": "$iface",
   "class": "$class"
 }
