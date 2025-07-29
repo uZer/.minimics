@@ -54,8 +54,8 @@
     },
     "modules": [
       "custom/health",
-      "cpu",
       "memory",
+      "cpu",
       "disk"
     ]
   },

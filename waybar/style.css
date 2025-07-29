@@ -106,8 +106,8 @@ window#waybar {
 }
 
 #cpu {
-  background-color: @color2;
-  border-bottom: .2rem solid @color2Alpha;
+  background-color: @color9;
+  border-bottom: .2rem solid @color9Alpha;
 }
 
 #custom-airplane {
