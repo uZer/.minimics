@@ -55,7 +55,7 @@ status_player () {
   printf "%s %s %s\n" "$icon_status" "$info" "$icon_player"
 }
 
-status_public_ip () {
+status_ip () {
   ip="$(curl -s --max-time 2 'https://api64.ipify.org' || true)"
   if [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     jq -cM <<EOF
@@ -129,7 +129,16 @@ EOF
       ;;
 
     ethernet) icon=""; class="wired" ;;
-    tun)      icon="󱗼"; class="vpn" ;;
+
+    tun)
+      if [[ "$iface" == "tailscale"* ]]; then
+        icon="󱗼";
+      else
+        icon="󰖂";
+      fi
+      class="vpn"
+      ;;
+
     *)        icon="󰘚"; class="other" ;;
   esac
 
@@ -138,7 +147,6 @@ EOF
     state=$(cat /sys/class/net/"$iface"/operstate 2>/dev/null || echo "down")
     [[ "$state" != "up" ]] && class="disconnected"
   else
-    json=$( )
     state=$(tailscale status --json 2>/dev/null | jq -r '.Self.Online' || true)
     [[ "$state" != "true" ]] && class="disconnected"
   fi
@@ -303,7 +311,7 @@ case "$1" in
     status_netif
     ;;
   ip)
-    status_public_ip
+    status_ip
     ;;
   player)
     status_player
