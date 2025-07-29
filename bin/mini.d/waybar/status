@@ -19,19 +19,92 @@ usage:
 
 arguments:
   -h, --help   display this message
+  interface    display default interface for internet connectivity
+  ip           display public ip
   ts           display tailscale status for waybar
   tsp          display tailscale peers for waybar tooltip
-  ip           display public ip
 EOF
 }
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 status_public_ip () {
-  echo " $(curl 'https://api.ipify.org')"
+  ip="$(curl -s --max-time 2 'https://api64.ipify.org' || true)"
+  if [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    jq -cM <<EOF
+{
+  "text": " ${ip}",
+  "tooltip": "exit using IPv4\n\nright clic: copy IPv4",
+  "class": "online"
+}
+EOF
+  elif [[ "$ip" =~ ^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$ ]]; then
+    jq -cM <<EOF
+{
+  "text": " IPv6",
+  "tooltip": "exit using IPv6\n\nright clic:    copy IPv4\nmiddle clic: copy IPv6",
+  "class": "online"
+}
+EOF
+  else
+    jq -cM <<EOF
+{
+  "text": "",
+  "tooltip": "offline",
+  "class": "offline"
+}
+EOF
+  fi
+}
+
+status_defif () {
+  # Get default route interface
+  iface=$(ip route get 1.1.1.1 2>/dev/null |
+    awk '{for(i=1;i<=NF;i++) if($i=="dev") print $(i+1); exit}')
+
+  # Exit if no interface
+  if [[ -z "$iface" ]]; then
+    jq -cM <<EOF
+{
+  text: "",
+  tooltip: "No network connection",
+  class: "disconnected"
+}
+EOF
+    exit 0
+  fi
+
+  # Determine link type (wifi/ethernet/other)
+  type=$(nmcli -t -f DEVICE,TYPE device | grep "^$iface:" | cut -d: -f2)
+  [ -z "$type" ] && type="unknown"
+
+  # Pick icon based on type
+  case "$type" in
+    wifi)     icon="󰖩"; class="wifi" ;;
+    ethernet) icon=""; class="wired" ;;
+    *)        icon="󰘚"; class="other" ;;
+  esac
+
+  # Check carrier/status
+  state=$(cat /sys/class/net/"$iface"/operstate 2>/dev/null || echo "down")
+  [[ "$state" != "up" ]] && class="${class}-disconnected"
+
+  jq -cM <<EOF
+{
+  "text": "$icon",
+  "tooltip": "$iface",
+  "class": "$class"
+}
+EOF
 }
 
 status_ts () {
+  # If Tailscale unit isn't running
+  if ! systemctl is-active --quiet tailscaled; then
+    exit 0
+  fi
+
+  # Fetch json status
   json=$(tailscale status --json 2>/dev/null || echo "")
 
   # If Tailscale isn't running or has no output
@@ -164,6 +237,9 @@ status_ts_peers () {
 case "$1" in
   -h|--help|"")
     get_usage
+    ;;
+  interface)
+    status_defif
     ;;
   ip)
     status_public_ip

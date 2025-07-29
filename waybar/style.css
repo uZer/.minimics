@@ -42,7 +42,8 @@ window#waybar {
 #clock,
 #cpu,
 #custom-airplane,
-#custom-justicon,
+#custom-health,
+#custom-network-interface,
 #custom-notification,
 #custom-playerctl,
 #custom-publicip,
@@ -113,7 +114,7 @@ window#waybar {
   border-bottom: .2rem solid transparent;
 }
 
-#custom-justicon {
+#custom-health {
   background-color: @color2;
   border-bottom: .2rem solid @color2Alpha;
 }
@@ -123,6 +124,11 @@ window#waybar {
   background-color: @color2;
   padding: .2rem .5rem;
   border-bottom: .2rem solid @color2Alpha;
+}
+
+#custom-network-interface {
+  background-color: @color4;
+  border-bottom: .2rem solid @color4Alpha;
 }
 
 #custom-notification {
@@ -136,9 +142,24 @@ window#waybar {
   border-bottom: .2rem solid @color4Alpha;
 }
 
+#custom-publicip.offline {
+  background-color: @color0Alpha;
+  border-bottom: .2rem solid @color0;
+}
+
 #custom-tailscale {
   background-color: @color5;
   border-bottom: .2rem solid @color5Alpha;
+}
+
+#custom-tailscale.exit-online {
+  background-color: @color13;
+  border-bottom: .2rem solid @color13Alpha;
+}
+
+#custom-tailscale.exit-disconnected {
+  background-color: @color1;
+  border-bottom: .2rem solid @color1Alpha;
 }
 
 #disk {
@@ -173,8 +194,8 @@ window#waybar {
 }
 
 #wireplumber {
-  background-color: @color5;
-  border-bottom: .2rem solid @color5Alpha;
+  background-color: @color2;
+  border-bottom: .2rem solid @color2Alpha;
 }
 
 @keyframes blink {

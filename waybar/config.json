@@ -21,10 +21,20 @@
     "orientation": "horizontal",
     "modules": [
       "custom/airplane",
-      "custom/tailscale",
       "bluetooth",
-      "network",
-      "custom/publicip"
+      "custom/publicip",
+      "group/network-details",
+      "custom/tailscale"
+    ]
+  },
+  "group/network-details": {
+    "orientation": "horizontal",
+    "drawer": {
+      "click-to-reveal": true
+    },
+    "modules": [
+      "custom/network-interface",
+      "network"
     ]
   },
   "group/metrics": {
@@ -33,7 +43,7 @@
       "click-to-reveal": true
     },
     "modules": [
-      "custom/justicon",
+      "custom/health",
       "cpu",
       "memory",
       "disk"
@@ -43,8 +53,8 @@
     "orientation": "horizontal",
     "modules": [
       "wireplumber",
-      "group/metrics",
       "battery",
+      "group/metrics",
       "clock",
       "custom/notification"
     ]
@@ -57,12 +67,18 @@
     },
     "on-click": "mini toggle airplane"
   },
-  "custom/justicon": {
+  "custom/health": {
     "tooltip": false,
     "format": "{icon}",
     "format-icons": {
       "default": ""
     }
+  },
+  "custom/network-interface": {
+    "exec": "mini waybar status interface",
+    "format": "{}",
+    "interval": 3,
+    "return-type": "json"
   },
   "custom/notification": {
     "tooltip": false,
@@ -92,7 +108,11 @@
   "custom/publicip": {
     "exec": "mini waybar status ip",
     "format": "{}",
-    "interval": 30
+    "interval": 5,
+    "return-type": "json",
+    "on-click": null,
+    "on-click-middle": "$(curl -s --max-time 2 'https://api64.ipify.org' | wl-copy)",
+    "on-click-right": "$(curl -s --max-time 2 'https://api.ipify.org' | wl-copy)"
   },
   "custom/tailscale": {
     "exec": "mini waybar status ts",
@@ -177,12 +197,12 @@
   },
   "network": {
     "interval": 2,
-    "format-wifi": " {essid} {ipaddr}",
+    "format-wifi": "󰖩 {essid} {ipaddr}",
     "format-ethernet": " {ipaddr}",
     "format-disconnected": "󰤮",
     "format-disabled": "󰤮",
     "format-linked": "",
-    "on-click": "mini toggle wifi",
+    "on-click-right": "mini toggle wifi",
     "tooltip": false
   },
   "privacy": {
