@@ -23,8 +23,18 @@
       "custom/airplane",
       "bluetooth",
       "group/network-details",
-      "custom/publicip",
+      "group/online",
       "custom/tailscale"
+    ]
+  },
+  "group/online": {
+    "orientation": "horizontal",
+    "drawer": {
+      "click-to-reveal": true
+    },
+    "modules": [
+      "custom/online",
+      "custom/publicip"
     ]
   },
   "group/network-details": {
@@ -106,10 +116,16 @@
     "on-click": "playerctl play-pause",
     "max-length": 50
   },
+  "custom/online": {
+    "exec": "mini waybar status online",
+    "format": "{}",
+    "interval": 3,
+    "return-type": "json"
+  },
   "custom/publicip": {
     "exec": "mini waybar status ip",
     "format": "{}",
-    "interval": 5,
+    "interval": 9,
     "return-type": "json",
     "on-click-middle": "$(curl -s --max-time 2 'https://api64.ipify.org' | wl-copy)",
     "on-click-right": "$(curl -s --max-time 2 'https://api.ipify.org' | wl-copy)"

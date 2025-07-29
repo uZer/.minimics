@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# display online state for waybar
+
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+ip="$(curl -s --max-time 2 'https://api64.ipify.org' || true)"
+if [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  icon=""
+  jq -cM <<EOF
+  {
+    "text": "$icon",
+    "tooltip": "Connected with IPv4 $ip",
+    "class": "online"
+  }
+EOF
+elif [[ "$ip" =~ ^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$ ]]; then
+  icon=" 󰼔"
+  jq -cM <<EOF
+  {
+    "text": "$icon",
+    "tooltip": "Connected with IPv6 $ip",
+    "class": "online"
+  }
+EOF
+else
+  jq -cM <<EOF
+  {
+    "text": "󰅤",
+    "tooltip": "offline",
+    "class": "offline"
+  }
+EOF
+fi

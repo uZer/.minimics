@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# display public ip
+# display public ipv4
 
 set -eu
 
@@ -9,30 +9,37 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
+# Get default public IP in v6 or v4
 ip="$(curl -s --max-time 2 'https://api64.ipify.org' || true)"
-if [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-  jq -cM <<EOF
-  {
-    "text": " ${ip}",
-    "tooltip": "exit using IPv4\n\nright clic: copy IPv4",
-    "class": "online"
-  }
-EOF
-elif [[ "$ip" =~ ^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$ ]]; then
+
+# If public IP is IPv6
+if [[ "$ip" =~ ^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$ ]]; then
+
+  # Get IPv4
   ipv4="$(curl -s --max-time 2 'https://api.ipify.org' || true)"
-  jq -cM <<EOF
-  {
-    "text": "󰼔 $ipv4",
-    "tooltip": "$ip",
-    "class": "online"
-  }
-EOF
+
+  # If has IPv4, we want to display this first and IPv6 in tooltip
+  if [[ "$ipv4" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    displayed_ip=$ipv4
+    tooltip=$ip
+  # Maybe there is no ipv4 so fallback to v6
+  else
+    displayed_ip=$ip
+    tooltip=$ip
+  fi
+
+# If we only have IPv4 don't check v6
+elif [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  displayed_ip=$ip
+  tooltip=$ip
 else
-  jq -cM <<EOF
-  {
-    "text": "󰅤",
-    "tooltip": "offline",
-    "class": "offline"
-  }
-EOF
+  class="offline"
 fi
+
+jq -cM <<EOF
+{
+  "text": "${displayed_ip:-""}",
+  "tooltip": "${tooltip:-offline}",
+  "class": "${class:-online}"
+}
+EOF

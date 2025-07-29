@@ -45,6 +45,7 @@ window#waybar {
 #custom-health,
 #custom-network-interface,
 #custom-notification,
+#custom-online,
 #custom-playerctl,
 #custom-publicip,
 #custom-tailscale,
@@ -136,18 +137,19 @@ window#waybar {
   border-bottom: .2rem solid @color0;
 }
 
-
 #custom-notification {
   background-color: @color13;
   padding: .2rem .5rem;
   border-bottom: .2rem solid @color13Alpha;
 }
 
+#custom-online,
 #custom-publicip {
   background-color: @color4;
   border-bottom: .2rem solid @color4Alpha;
 }
 
+#custom-online.offline,
 #custom-publicip.offline {
   background-color: @color0Alpha;
   border-bottom: .2rem solid @color0;
