@@ -13,6 +13,7 @@
   ],
   "modules-center": [],
   "modules-right": [
+    "custom/airplane",
     "privacy",
     "group/connectivity",
     "group/essentials"
@@ -20,7 +21,6 @@
   "group/connectivity": {
     "orientation": "horizontal",
     "modules": [
-      "custom/airplane",
       "bluetooth",
       "group/network-details",
       "group/online",
@@ -166,7 +166,7 @@
     "format-off": " off",
     "format-disabled": "󰂲",
     "format-no-controller": "󰂳",
-    "on-click": "mini toggle bt"
+    "on-click-right": "mini toggle bt"
   },
   "clock": {
     "interval": 1,

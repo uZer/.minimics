@@ -96,8 +96,8 @@ window#waybar {
 }
 
 #bluetooth.connected {
-  background-color: @color5;
-  border-bottom: .2rem solid @color5Alpha;
+  background-color: @color12;
+  border-bottom: .2rem solid @color12Alpha;
 }
 
 #clock {
@@ -196,9 +196,9 @@ window#waybar {
 }
 
 #privacy {
-  background-color: @color1;
+  background-color: @color9;
   padding: .2rem .5rem;
-  border-bottom: .2rem solid @color1Alpha;
+  border-bottom: .2rem solid @color9Alpha;
 }
 
 #tray {
