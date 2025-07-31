@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# launch pass menu
+
+set -eu
+
+case "${XDG_SESSION_TYPE:-null}" in
+  wayland) tessen --dmenu=rofi --action=autotype ;;
+  *)       rofi-pass ;;
+esac

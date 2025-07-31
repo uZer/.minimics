@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# launch a menu to copy and type nerdfont glyph (wayland only)
+
+list="$(dirname "$(readlink -f "$0")")/.nflist.txt"
+selected=$(rofi -dmenu -i < "${list}" | awk '{printf $1}')
+
+[ -n "$selected" ] && wl-copy <<< "$selected" && wtype "$selected"
