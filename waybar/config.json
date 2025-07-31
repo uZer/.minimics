@@ -134,7 +134,7 @@
     "exec": "mini waybar status ts",
     "format": "{}",
     "interval": 3,
-    "on-click": "mini toggle ts",
+    "on-click-middle": "mini toggle ts",
     "on-click-right": "mini menu tsexit",
     "return-type": "json"
   },
@@ -166,7 +166,8 @@
     "format-off": " off",
     "format-disabled": "󰂲",
     "format-no-controller": "󰂳",
-    "on-click-right": "mini toggle bt"
+    "on-click-middle": "mini toggle bt",
+    "on-click-right": "mini menu bt"
   },
   "clock": {
     "interval": 1,
@@ -218,7 +219,7 @@
     "format-disconnected": "󰤮",
     "format-disabled": "󰤮",
     "format-linked": "",
-    "on-click-right": "mini toggle wifi",
+    "on-click-middle": "mini toggle wifi",
     "tooltip": false
   },
   "privacy": {

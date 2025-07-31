@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# interract with bluetoothctl
+
+# https://github.com/nickclyde/rofi-bluetooth/blob/master/rofi-bluetooth
 #             __ _       _     _            _              _   _
 #  _ __ ___  / _(_)     | |__ | |_   _  ___| |_ ___   ___ | |_| |__
 # | '__/ _ \| |_| |_____| '_ \| | | | |/ _ \ __/ _ \ / _ \| __| '_ \
