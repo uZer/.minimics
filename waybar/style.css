@@ -30,7 +30,7 @@ window#waybar {
 }
 
 #workspaces button.urgent {
-  background: @color1;
+  background: @color9;
 }
 
 #workspaces button.active {
