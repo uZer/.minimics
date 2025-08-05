@@ -83,21 +83,22 @@ autocmd('Filetype', {
 
 vim.filetype.add({
   pattern = {
-    [".*/playbooks/.*%.yml"] = "yaml.ansible",
-    [".*/playbooks/.*%.yaml"] = "yaml.ansible",
-    [".*/roles/.*/tasks/.*%.yml"] = "yaml.ansible",
-    [".*/roles/.*/tasks/.*%.yaml"] = "yaml.ansible",
-    [".*/roles/.*/handlers/.*%.yml"] = "yaml.ansible",
-    [".*/roles/.*/handlers/.*%.yaml"] = "yaml.ansible",
-    ["ansible/.*%.yml"] = "yaml.ansible",
-    [".*%.tf"] = "terraform",
-    [".*%.tfvars"] = "terraform",
-    [".terraformrc"] = "hcl",
-    [".terraform.rc"] = "hcl",
+    [".*%.str"] = "javascript", -- strudel
     [".*%.hcl"] = "hcl",
+    [".*%.libjsonnet"] = "jsonnet",
+    [".*%.tf"] = "terraform",
     [".*%.tfstate"] = "json",
     [".*%.tfstate.backup"] = "json",
-    [".*%.libjsonnet"] = "jsonnet",
+    [".*%.tfvars"] = "terraform",
+    [".*/playbooks/.*%.yaml"] = "yaml.ansible",
+    [".*/playbooks/.*%.yml"] = "yaml.ansible",
+    [".*/roles/.*/handlers/.*%.yaml"] = "yaml.ansible",
+    [".*/roles/.*/handlers/.*%.yml"] = "yaml.ansible",
+    [".*/roles/.*/tasks/.*%.yaml"] = "yaml.ansible",
+    [".*/roles/.*/tasks/.*%.yml"] = "yaml.ansible",
+    [".terraform.rc"] = "hcl",
+    [".terraformrc"] = "hcl",
+    ["ansible/.*%.yml"] = "yaml.ansible",
   },
 })
 
