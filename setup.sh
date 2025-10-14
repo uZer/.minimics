@@ -243,6 +243,13 @@ _kanshi () {
   return
 }
 
+_kicad () {
+  echo "[kicad]"
+  echo "  Linking configuration files..."
+  makelink "${HOME}/.cache/wal/colors-kicad.json" "${HOME}/.config/kicad/9.0/colors/pywal.json"
+  echo
+  return
+}
 _minimics () {
   echo "[minimics]"
   echo "  Creating ${HOME}/.config if needed..."
