@@ -157,7 +157,6 @@ return {
       "gopls",
       "helm_ls",
       "html",
-      "jedi_language_server",
       "jqls",
       "jsonls",
       "jsonnet_ls",
@@ -173,6 +172,7 @@ return {
       "vimls",
       "yamlls",
     },
+    -- "jedi_language_server",
     -- "ansible-lint",
     -- "flake8",
     -- "gitlab_ci_ls", -- way too slow to install

@@ -58,17 +58,12 @@ return {
 
       sources = {
         { name = 'buffer',                 keyword_length = 3 },
-        {
-          name = 'path',
-          option = {
-            trailing_slash = true
-          },
-        },
+        { name = 'path',                   option = { trailing_slash = true }, },
         { name = 'conventionalcommits' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lua' },
-        { name = 'luasnip',                keyword_length = 2 },
+        { name = 'luasnip' },
       },
 
       window = {
