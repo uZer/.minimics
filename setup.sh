@@ -208,6 +208,7 @@ _gtk () {
   makelink "${MIN_PATH}/icons" "${HOME}/.config/icons"
   makelink "${MIN_PATH}/gtk-2.0/gtkrc-2.0" "${HOME}/.gtkrc-2.0"
   makelink "${MIN_PATH}/gtk-3.0" "${HOME}/.config/gtk-3.0"
+  makelink "${MIN_PATH}/gtk-4.0" "${HOME}/.config/gtk-4.0"
   makelink "${MIN_PATH}/xsettingsd" "${HOME}/.config/xsettingsd"
   echo ""
   return
