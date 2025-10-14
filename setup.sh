@@ -156,6 +156,7 @@ _env () {
   makelink "${MIN_PATH}/environment.d/minimics.cedilla.conf"  "${HOME}/.config/environment.d/minimics.cedilla.conf"
   makelink "${MIN_PATH}/environment.d/minimics.golang.conf"   "${HOME}/.config/environment.d/minimics.golang.conf"
   makelink "${MIN_PATH}/environment.d/minimics.path.conf"     "${HOME}/.config/environment.d/minimics.path.conf"
+  makelink "${MIN_PATH}/environment.d/minimics.wayland.conf"   "${HOME}/.config/environment.d/minimics.wayland.conf"
   echo
   return
 }
