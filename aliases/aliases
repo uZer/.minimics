@@ -78,8 +78,6 @@ spyn() { lsof -i -P +c 0 +M | grep -i "$1" }
 
 # MISC
 alias c='clear'
-# alias a='vim ~/.minimics/aliases/aliases'
-alias aloc='vim ~/.aliases.local'
 
 # YOLO AND STUFF FOR YOLO PEOPLE
 alias stfu='shutdown -h now'
@@ -137,7 +135,10 @@ jl() {
 }
 
 alias vim="nvim"
+alias v="nvim"
+alias e="nvim"
 alias vimdiff="nvim -d"
+alias vd="nvim -d"
 
 alias track='vim ~/ypi.projects/horizon/$(date +%Gw%V) -o ~/ypi.projects/horizon/$(date +%Gw%V --date="last week")'
 alias journal='vim ~/ypi.projects/horizon/journal -O ~/ypi.projects/horizon/collections'
