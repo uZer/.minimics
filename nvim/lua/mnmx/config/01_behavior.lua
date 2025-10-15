@@ -71,6 +71,7 @@ autocmd('Filetype', {
     'css',
     'html',
     'javascript',
+    'lisp',
     'lua',
     'scss',
     'typescript',
@@ -99,6 +100,11 @@ vim.filetype.add({
     [".terraform.rc"] = "hcl",
     [".terraformrc"] = "hcl",
     ["ansible/.*%.yml"] = "yaml.ansible",
+    [".*%.kicad_sch"] = "lisp",
+    [".*%.kicad_pcb"] = "lisp",
+    [".*%.kicad_sym"] = "lisp",
+    [".*%.kicad_prl"] = "json",
+    [".*%.kicad_pro"] = "json",
   },
 })
 
