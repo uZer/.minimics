@@ -13,17 +13,82 @@ local custom_schemas = {
   },
 }
 
-local handlers = {
-  -- The first entry (without a key) will be the default handler
-  -- and will be called for each installed server that doesn't have
-  -- a dedicated handler.
-  function(server_name) -- default handler (optional)
-    require("lspconfig")[server_name].setup {}
-  end,
+return {
+  'mason-org/mason-lspconfig.nvim',
+  dependencies = {
+    'mason-org/mason.nvim',
+    'neovim/nvim-lspconfig',
+    'b0o/SchemaStore.nvim',
+  },
+  config = function()
+    local mason_lspconfig = require("mason-lspconfig")
+    mason_lspconfig.setup({
+      automatic_installation = true,
+      ensure_installed = {
+        "ansiblels",
+        "bashls",
+        "clangd",
+        "cssls",
+        "dockerls",
+        "emmet_ls",
+        "eslint",
+        "golangci_lint_ls",
+        "gopls",
+        "helm_ls",
+        "html",
+        "jqls",
+        "jsonls",
+        "jsonnet_ls",
+        "lua_ls",
+        "marksman",
+        "pylsp",
+        "pyright",
+        "spectral",
+        "sqlls",
+        "svelte",
+        "taplo",
+        "terraformls",
+        "vimls",
+        "yamlls",
+      },
+      -- "jedi_language_server",
+      -- "ansible-lint",
+      -- "flake8",
+      -- "gitlab_ci_ls", -- way too slow to install
+      -- "gitleaks",
+      -- "gitlint",
+      -- "glsl",
+      -- "gofumpt",
+      -- "golangci-lint",
+      -- "hadolint",
+      -- "htmlhint",
+      -- "isort",
+      -- "jsonlint",
+      -- "jsonnetfmt",
+      -- "luacheck",
+      -- "luaformatter",
+      -- "markdownlint",
+      -- "markuplint",
+      -- "nginx_language_server", -- can't work with python 3.12 yet!
+      -- "pint",
+      -- "prettierd",
+      -- "shellcheck",
+      -- "shellharden",
+      -- "shfmt",
+      -- "sqlfmt",
+      -- "stylua",
+      -- "systemdlint",
+      -- "tsserver", -- half renamed to ts_ls, waiting for the end of the mess
+      -- "tflint",
+      -- "tfsec",
+      -- "yamlfix",
+      -- "yamlfmt",
+      -- "yamllint",
+    })
+    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- if using nvim-cmp
 
-  -- Language servers configurations
-  ["dockerls"] = function()
-    require("lspconfig").dockerls.setup {
+    vim.lsp.config('dockerls', {
       settings = {
         docker = {
           languageserver = {
@@ -33,22 +98,18 @@ local handlers = {
           }
         }
       }
-    }
-  end,
+    })
 
-  ["eslint"] = function()
-    require("lspconfig").eslint.setup {
+    vim.lsp.config('eslint', {
       on_attach = function(_, bufnr)
         vim.api.nvim_create_autocmd("BufWritePre", {
           buffer = bufnr,
           command = "EslintFixAll",
         })
       end,
-    }
-  end,
+    })
 
-  ["gopls"] = function()
-    require("lspconfig").gopls.setup {
+    vim.lsp.config('gopls', {
       settings = {
         gopls = {
           analyses = {
@@ -60,11 +121,9 @@ local handlers = {
           usePlaceholders = true,
         }
       }
-    }
-  end,
+    })
 
-  ["jsonls"] = function()
-    require("lspconfig").jsonls.setup {
+    vim.lsp.config('jsonls', {
       settings = {
         json = {
           -- Disabling builtin schemaStore
@@ -81,11 +140,9 @@ local handlers = {
           validate = { enable = true },
         }
       }
-    }
-  end,
+    })
 
-  ["lua_ls"] = function()
-    require("lspconfig").lua_ls.setup {
+    vim.lsp.config('lua_ls', {
       settings = {
         Lua = {
           diagnostics = {
@@ -93,26 +150,32 @@ local handlers = {
           }
         }
       }
-    }
-  end,
+    })
 
-  ["pylsp"] = function()
-    require 'lspconfig'.pylsp.setup {
+    vim.lsp.config('pylsp', {
       settings = {
         pylsp = {
+          configurationSources = { "pycodestyle" },
           plugins = {
-            pycodestyle = {
-              -- ignore = { 'W391' },
-              maxLineLength = 120
-            }
+            -- autopep8 = { enabled = false },
+            flake8 = {
+              enabled = true,
+            },
+            -- jedi_completion = { enabled = false },
+            -- jedi_definition = { enabled = false },
+            -- mccabe = { enabled = false },
+            -- preload = { enabled = false },
+            -- pycodestyle = { enabled = false },
+            -- pydocstyle = { enabled = false },
+            -- pylint = { enabled = false },
+            -- rope_autoimport = { enabled = false },
+            -- ruff = { enabled = false },
           }
         }
       }
-    }
-  end,
+    })
 
-  ["yamlls"] = function()
-    require("lspconfig").yamlls.setup {
+    vim.lsp.config('yamlls', {
       settings = {
         yaml = {
           -- Disabling builtin schemaStore
@@ -133,82 +196,9 @@ local handlers = {
           validate = { enable = true },
         }
       }
-    }
+    })
   end,
-}
-
-return {
-  'mason-org/mason-lspconfig.nvim',
-  dependencies = {
-    'mason-org/mason.nvim',
-    'neovim/nvim-lspconfig',
-    'b0o/SchemaStore.nvim',
-  },
-  opts = {
-    ensure_installed = {
-      "ansiblels",
-      "bashls",
-      "clangd",
-      "cssls",
-      "dockerls",
-      "emmet_ls",
-      "eslint",
-      "golangci_lint_ls",
-      "gopls",
-      "helm_ls",
-      "html",
-      "jqls",
-      "jsonls",
-      "jsonnet_ls",
-      "lua_ls",
-      "marksman",
-      "pylsp",
-      "pyright",
-      "spectral",
-      "sqlls",
-      "svelte",
-      "taplo",
-      "terraformls",
-      "vimls",
-      "yamlls",
-    },
-    -- "jedi_language_server",
-    -- "ansible-lint",
-    -- "flake8",
-    -- "gitlab_ci_ls", -- way too slow to install
-    -- "gitleaks",
-    -- "gitlint",
-    -- "glsl",
-    -- "gofumpt",
-    -- "golangci-lint",
-    -- "hadolint",
-    -- "htmlhint",
-    -- "isort",
-    -- "jsonlint",
-    -- "jsonnetfmt",
-    -- "luacheck",
-    -- "luaformatter",
-    -- "markdownlint",
-    -- "markuplint",
-    -- "nginx_language_server", -- can't work with python 3.12 yet!
-    -- "pint",
-    -- "prettierd",
-    -- "shellcheck",
-    -- "shellharden",
-    -- "shfmt",
-    -- "sqlfmt",
-    -- "stylua",
-    -- "systemdlint",
-    -- "tsserver", -- half renamed to ts_ls, waiting for the end of the mess
-    -- "tflint",
-    -- "tfsec",
-    -- "yamlfix",
-    -- "yamlfmt",
-    -- "yamllint",
-    automatic_installation = true,
-    handlers = handlers,
-  },
-  priority = 20,
+  -- default handler
 }
 
 -- local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
