@@ -3,7 +3,7 @@ return {
   event = "VeryLazy",
   opts = {
     mappings = {
-      annotate = "<leader>mr",
+      annotate = "<C-w>m",
     },
   },
 }

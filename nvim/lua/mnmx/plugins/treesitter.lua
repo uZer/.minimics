@@ -3,12 +3,28 @@ return {
   build = ":TSUpdate",
   -- cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   config = function()
-    local configs = require("nvim-treesitter.configs")
-
-    configs.setup({
-      ensure_install = { "lua", "vimdoc", "markdown_inline" },
-      -- sync_install = true,
+    require("nvim-treesitter.configs").setup({
       auto_install = true,
+      ensure_installed = {
+        "bash",
+        "dockerfile",
+        "go",
+        "gomod",
+        "gosum",
+        "hyprlang",
+        "json",
+        "jsonnet",
+        "liquidsoap",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "terraform",
+        "toml",
+        "vimdoc",
+        "yaml",
+      },
+      -- sync_install = true,
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,

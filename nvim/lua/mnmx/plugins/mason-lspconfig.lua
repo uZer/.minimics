@@ -43,7 +43,6 @@ return {
         "marksman",
         "pylsp",
         "pyright",
-        "spectral",
         "sqlls",
         "svelte",
         "taplo",
@@ -75,6 +74,7 @@ return {
       -- "shellcheck",
       -- "shellharden",
       -- "shfmt",
+      -- "spectral",
       -- "sqlfmt",
       -- "stylua",
       -- "systemdlint",
@@ -155,22 +155,22 @@ return {
     vim.lsp.config('pylsp', {
       settings = {
         pylsp = {
-          configurationSources = { "pycodestyle" },
-          plugins = {
-            -- autopep8 = { enabled = false },
-            flake8 = {
-              enabled = true,
-            },
-            -- jedi_completion = { enabled = false },
-            -- jedi_definition = { enabled = false },
-            -- mccabe = { enabled = false },
-            -- preload = { enabled = false },
-            -- pycodestyle = { enabled = false },
-            -- pydocstyle = { enabled = false },
-            -- pylint = { enabled = false },
-            -- rope_autoimport = { enabled = false },
-            -- ruff = { enabled = false },
-          }
+          configurationSources = { "flake8" },
+          -- plugins = {
+          --   autopep8 = { enabled = false },
+          --   flake8 = {
+          --     enabled = true,
+          --   },
+          --   jedi_completion = { enabled = false },
+          --   jedi_definition = { enabled = false },
+          --   mccabe = { enabled = false },
+          --   preload = { enabled = false },
+          --   pycodestyle = { enabled = false },
+          --   pydocstyle = { enabled = false },
+          --   pylint = { enabled = false },
+          --   rope_autoimport = { enabled = false },
+          --   ruff = { enabled = false },
+          -- }
         }
       }
     })
