@@ -21,6 +21,7 @@ return {
     opts = {
       ensure_installed = {
         'bandit',
+        'commitlint',
         'markdownlint',
         'shfmt',
       }
