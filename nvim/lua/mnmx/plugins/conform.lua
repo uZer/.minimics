@@ -12,7 +12,7 @@ return {
   end,
   opts = {
     default_format_opts = {
-      lsp_format = "last"
+      lsp_format = "first"
     },
     formatters_by_ft = {
       ["*"] = { "trim_whitespace" },
