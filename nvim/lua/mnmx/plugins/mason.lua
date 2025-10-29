@@ -1,17 +1,29 @@
 return {
-  'mason-org/mason.nvim',
-  priority = 2,
-  opts = {
-    max_concurrent_installers = 15,
-    ui = {
-      icons = {
-        package_installed = "✓",
-        package_pending = "➜",
-        package_uninstalled = "✗"
+  {
+    'mason-org/mason.nvim',
+    priority = 2,
+    opts = {
+      max_concurrent_installers = 15,
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗"
+        }
+      },
+      pip = {
+        upgrade_pip = true,
       }
-    },
-    pip = {
-      upgrade_pip = true,
+    }
+  },
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    opts = {
+      ensure_installed = {
+        'bandit',
+        'markdownlint',
+        'shfmt',
+      }
     }
   }
 }

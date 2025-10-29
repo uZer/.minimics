@@ -32,6 +32,7 @@ return {
         "dockerls",
         "emmet_ls",
         "eslint",
+        "gitlab_ci_ls",
         "golangci_lint_ls",
         "gopls",
         "helm_ls",

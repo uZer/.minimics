@@ -97,6 +97,8 @@ vim.filetype.add({
     [".*/roles/.*/handlers/.*%.yml"] = "yaml.ansible",
     [".*/roles/.*/tasks/.*%.yaml"] = "yaml.ansible",
     [".*/roles/.*/tasks/.*%.yml"] = "yaml.ansible",
+    [".gitlab-ci.yaml"] = "yaml.gitlab",
+    [".gitlab-ci.yml"] = "yaml.gitlab",
     [".terraform.rc"] = "hcl",
     [".terraformrc"] = "hcl",
     ["ansible/.*%.yml"] = "yaml.ansible",
