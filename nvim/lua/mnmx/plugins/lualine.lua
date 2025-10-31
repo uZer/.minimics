@@ -2,81 +2,112 @@ return {
   {
     'linrongbin16/lsp-progress.nvim',
     config = function()
-      require('lsp-progress').setup()
-      -- listen lsp-progress event and refresh lualine
-      vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+      require('lsp-progress').setup({})
+
+      -- listen for LSP progress updates and refresh lualine
+      local group = vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
       vim.api.nvim_create_autocmd("User", {
-        group = "lualine_augroup",
+        group = group,
         pattern = "LspProgressStatusUpdated",
-        callback = require("lualine").refresh,
+        callback = function()
+          require("lualine").refresh()
+        end,
       })
     end,
   },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = {
-      'ojroques/nvim-bufdel'
+      'ojroques/nvim-bufdel',
+      'lewis6991/gitsigns.nvim',
+      'mfussenegger/nvim-lint',
     },
     opts = function()
-      local function diff_gitsigns()
-        local gitsigns = vim.b.gitsigns_status_dict
-        if gitsigns then
+      -- define diff source safely
+      local function diff_source()
+        local signs = vim.b.gitsigns_status_dict
+        if signs then
           return {
-            added = gitsigns.added,
-            modified = gitsigns.changed,
-            removed = gitsigns.removed
+            added = signs.added,
+            modified = signs.changed,
+            removed = signs.removed,
           }
         end
+        return nil
       end
+
+      -- linter display helper
+      local function active_linters()
+        local lint = require('lint')
+        local linters = lint._resolve_linter_by_ft(vim.bo.filetype)
+        if not linters or #linters == 0 then
+          return ''
+        end
+        return table.concat(linters, '  ')
+      end
+
+      -- LSP progress display helper
+      local function lsp_status()
+        local progress = require("lsp-progress")
+        return progress.progress({
+          max_size = 80,
+          format = function(messages)
+            local clients = vim.lsp.get_clients()
+            if #messages > 0 then
+              return table.concat(messages, " ")
+            end
+            local names = {}
+            for _, client in ipairs(clients) do
+              if client and client.name ~= "" then
+                table.insert(names, 1, client.name)
+              end
+            end
+            return table.concat(names, "  ")
+          end,
+        })
+      end
+
       return {
         options = {
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
-          disable_filetypes = {
-            "NvimTree",
-            "lazy",
-            "mason",
-            "_.*",
-          },
-          extensions = {
-            'lazy',
-            'nvim-tree',
-            'mason',
-          },
-          ignore_focus = {
-            "NvimTree",
-            "lazy",
-            "mason",
-            "_.*",
-          },
+          disable_filetypes = { "NvimTree", "lazy", "mason", "_.*" },
+          extensions = { 'lazy', 'nvim-tree', 'mason' },
+          ignore_focus = { "NvimTree", "lazy", "mason", "_.*" },
           theme = 'pywal16-nvim',
           globalstatus = true,
         },
+
         sections = {
-          lualine_a = { 'mode' },
+          lualine_a = {
+            'mode'
+          },
           lualine_b = {
-            { 'branch' },
+            -- {
+            --   'branch'
+            -- },
             {
               'diff',
-              source = diff_gitsigns
-            }
+              source = diff_source
+            },
           },
           lualine_c = {
             {
               'filename',
-              path = 3, -- use absolute paths with tilde as home
-              newfile_status = true,
-            }
+              path = 3,
+              newfile_status = true
+            },
           },
           lualine_x = {},
           lualine_y = {
+            'fileformat',
             'encoding',
-            'fileformat'
           },
           lualine_z = {
+            'selectioncount',
+            'searchcount',
             'progress',
             'location',
-            'searchcount'
           },
         },
 
@@ -84,74 +115,36 @@ return {
           lualine_a = {
             {
               'buffers',
-              filetype_names = {
-                NvimTree = '',
-                mason = '',
-                lazy = ''
-              },
+              filetype_names = { NvimTree = '', mason = '', lazy = '' },
               mode = 2,
-              symbols = {
-                alternate_file = '',
-              }
-            }
+              symbols = { alternate_file = '' },
+            },
           },
-          lualine_b = {},
-          lualine_c = {},
           lualine_x = {
             {
               'diagnostics',
-              sources        = { 'nvim_diagnostic' },
+              sources = { 'nvim_diagnostic' },
               always_visible = false,
             },
             {
-              function()
-                return require("lsp-progress").progress({
-                  max_size = 80,
-                  format = function(messages)
-                    local active_clients =
-                        vim.lsp.get_clients()
-                    if #messages > 0 then
-                      return table.concat(messages, " ")
-                    end
-                    local client_names = {}
-                    for _, client in ipairs(active_clients) do
-                      if client and client.name ~= "" then
-                        table.insert(
-                          client_names,
-                          1,
-                          client.name
-                        )
-                      end
-                    end
-                    return table.concat(client_names, "  ")
-                  end,
-                })
-              end,
-              icon = { "", align = "left" },
+              lsp_status,
+              icon = { "", align = "left" }
             },
-
           },
           lualine_y = {
             {
-              function()
-                local linters = require('lint')._resolve_linter_by_ft(vim.bo.filetype)
-                if not linters or #linters == 0 then
-                  -- no linter
-                  return ''
-                end
-                return table.concat(linters, '  ')
-              end,
-              icon = { "󰱺", align = "left" },
+              active_linters,
+              icon = { "󰱺", align = "left" }
             },
           },
           lualine_z = {
             {
               'filetype',
               icon = { align = "left" }
-            }
+            },
           },
         },
       }
-    end
+    end,
   },
 }
