@@ -17,5 +17,8 @@ vim.opt.fillchars = {
 }
 
 -- misc
-vim.opt.cmdheight = 1 -- command line height
-vim.opt.number = true -- display line numbers
+vim.opt.cmdheight = 1    -- command line height
+vim.opt.number = true    -- display line numbers
+vim.opt.showmode = false -- hides -- INSERT --, -- VISUAL --, etc.
+vim.opt.ruler = false    -- hides line/column info in cmd area
+vim.opt.showcmd = false  -- hides keys like 'gk', 'dd', etc.
