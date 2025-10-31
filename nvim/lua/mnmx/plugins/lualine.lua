@@ -92,13 +92,14 @@ return {
             },
           },
           lualine_c = {
+          },
+          lualine_x = {
             {
               'filename',
               path = 3,
               newfile_status = true
             },
           },
-          lualine_x = {},
           lualine_y = {
             'fileformat',
             'encoding',
