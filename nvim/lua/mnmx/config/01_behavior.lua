@@ -55,7 +55,6 @@ vim.opt.spell = false -- enable spell check with <leader>ss
 -- Other
 vim.opt.fileformats = { "unix", "dos", "mac" }         -- use Unix first
 vim.opt.textwidth = 80                                 -- for `gq` and linebreak text at 80 columns when typing
-vim.opt.lazyredraw = true                              -- don't redraw while executing macros (perfs.)
 vim.opt.scrolloff = 7                                  -- scroll when at n lines from the borders of the buffer
 vim.opt.swapfile = false                               -- reduce pollution, save the planet
 vim.opt.wildignore = { "*.o", "*.obj", "*~", "*.pyc" } -- ignore some files
