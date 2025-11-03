@@ -12,7 +12,7 @@
 #     ttf-mulish polkit-kde-agent noto-fonts-emoji xwaylandvideobridge
 #   nvim:
 #     neovim>=0.8.0 wget curl
-#     npm yarn ripgrep fd tree-sitter tree-sitter-cli
+#     npm yarn ripgrep fd tree-sitter tree-sitter-cli cargo
 #     luarocks python-pynvim lua-jsregexp
 #     liquidsoap-prettier
 #   pywal16:
@@ -50,9 +50,9 @@
 # zsh
 
 # By default, install selected modules:
-modules=(bash zsh alacritty chrome copyq ctags env git gtk htop hyprland  \
-         minimics nvim pywal16 rofi waybar scide swaync taskwarrior kanshi \
-         gnuplot swappy kicad)
+modules=(bash zsh alacritty chrome copyq ctags env git gtk htop hyprland
+  minimics nvim pywal16 rofi waybar scide swaync taskwarrior kanshi
+  gnuplot swappy kicad)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -72,7 +72,7 @@ echo
 
 # Configuration file linking method, taking care of old conf if necessary
 # backing it up in a new directory : $_BACKUPDIR
-makelink () {
+makelink() {
   _SOURCE="${1}"
   _DEST="${2}"
 
@@ -118,7 +118,7 @@ makelink () {
 ## INSTALLATION SCRIPTS ##
 ##########################
 
-_alacritty () {
+_alacritty() {
   echo "[alacritty]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/alacritty" "${HOME}/.config/alacritty"
@@ -126,7 +126,7 @@ _alacritty () {
   return
 }
 
-_bash () {
+_bash() {
   echo "[bash]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/bash/bashrc" "${HOME}/.bashrc"
@@ -134,7 +134,7 @@ _bash () {
   return
 }
 
-_chrome () {
+_chrome() {
   echo "[google-chrome]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/chrome/chrome-flags.conf" "${HOME}/.config/chrome-flags.conf"
@@ -142,7 +142,7 @@ _chrome () {
   return
 }
 
-_copyq () {
+_copyq() {
   echo "[copyq]"
   echo "  Linking configuration files..."
   mkdir -p "${HOME}/.config/copyq/themes"
@@ -152,7 +152,7 @@ _copyq () {
   return
 }
 
-_ctags () {
+_ctags() {
   echo "[ctags]"
   echo "  Linking Universal Ctags configuration files..."
   makelink "${MIN_PATH}/ctags" "${HOME}/.ctags.d"
@@ -160,19 +160,19 @@ _ctags () {
   return
 }
 
-_env () {
+_env() {
   echo "[env]"
   echo "  Linking configuration files..."
   mkdir -p "${HOME}/.config/environment.d"
-  makelink "${MIN_PATH}/environment.d/minimics.cedilla.conf"  "${HOME}/.config/environment.d/minimics.cedilla.conf"
-  makelink "${MIN_PATH}/environment.d/minimics.golang.conf"   "${HOME}/.config/environment.d/minimics.golang.conf"
-  makelink "${MIN_PATH}/environment.d/minimics.path.conf"     "${HOME}/.config/environment.d/minimics.path.conf"
-  makelink "${MIN_PATH}/environment.d/minimics.wayland.conf"   "${HOME}/.config/environment.d/minimics.wayland.conf"
+  makelink "${MIN_PATH}/environment.d/minimics.cedilla.conf" "${HOME}/.config/environment.d/minimics.cedilla.conf"
+  makelink "${MIN_PATH}/environment.d/minimics.golang.conf" "${HOME}/.config/environment.d/minimics.golang.conf"
+  makelink "${MIN_PATH}/environment.d/minimics.path.conf" "${HOME}/.config/environment.d/minimics.path.conf"
+  makelink "${MIN_PATH}/environment.d/minimics.wayland.conf" "${HOME}/.config/environment.d/minimics.wayland.conf"
   echo
   return
 }
 
-_git () {
+_git() {
   echo "[git]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/git/gitconfig" "${HOME}/.gitconfig"
@@ -184,24 +184,24 @@ _git () {
   GIT_EMAIL="${GIT_EMAIL:-piolet.y@gmail.com}"
   echo "  name  = ${GIT_LOGIN}"
   echo "  email = ${GIT_EMAIL}"
-  git config --global user.name  "${GIT_LOGIN}"
+  git config --global user.name "${GIT_LOGIN}"
   git config --global user.email "${GIT_EMAIL}"
   sed -i 's/^[\t]/  /g' "${MIN_PATH}/git/gitconfig"
-  echo "export GIT_USERNAME=${GIT_LOGIN}" >> ~/.aliases.local
-  echo "export GIT_EMAIL=${GIT_EMAIL}" >> ~/.aliases.local
+  echo "export GIT_USERNAME=${GIT_LOGIN}" >>~/.aliases.local
+  echo "export GIT_EMAIL=${GIT_EMAIL}" >>~/.aliases.local
   echo
   return
 }
 
-_gnuplot () {
+_gnuplot() {
   echo "[gnuplot]"
   echo "  Linking configuration files..."
-  makelink "${MIN_PATH}/gnuplot/gnuplot"  "${HOME}/.gnuplot"
+  makelink "${MIN_PATH}/gnuplot/gnuplot" "${HOME}/.gnuplot"
   echo
   return
 }
 
-_gtk () {
+_gtk() {
   # Useful for terminator configuration
   echo "[gtk]"
   echo "  Linking GTK2/GTK3 configuration files..."
@@ -214,7 +214,7 @@ _gtk () {
   return
 }
 
-_htop () {
+_htop() {
   echo "[htop]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/htop/htoprc" "${HOME}/.config/htop/htoprc"
@@ -222,11 +222,11 @@ _htop () {
   return
 }
 
-_hyprland () {
+_hyprland() {
   echo "[hyprland]"
   echo "  Linking hyprland and xprofile configuration files..."
-  makelink "${MIN_PATH}/hyprland"           "${HOME}/.config/hypr"
-  makelink "${MIN_PATH}/xprofile/xprofile"  "${HOME}/.xprofile"
+  makelink "${MIN_PATH}/hyprland" "${HOME}/.config/hypr"
+  makelink "${MIN_PATH}/xprofile/xprofile" "${HOME}/.xprofile"
   if [ ! -f "${HOME}/.cache/wal/colors-hyprland.conf" ]; then
     echo "  Cheating the absence of pywal for the colorscheme..."
     mkdir -p "${HOME}/.cache/wal" 2>/dev/null
@@ -236,22 +236,22 @@ _hyprland () {
   return
 }
 
-_kanshi () {
+_kanshi() {
   echo "[kanshi]"
   echo "  Linking configuration files..."
-  makelink "${MIN_PATH}/kanshi"    "${HOME}/.config/kanshi"
+  makelink "${MIN_PATH}/kanshi" "${HOME}/.config/kanshi"
   echo ""
   return
 }
 
-_kicad () {
+_kicad() {
   echo "[kicad]"
   echo "  Linking configuration files..."
   makelink "${HOME}/.cache/wal/colors-kicad.json" "${HOME}/.config/kicad/9.0/colors/pywal.json"
   echo
   return
 }
-_minimics () {
+_minimics() {
   echo "[minimics]"
   echo "  Creating ${HOME}/.config if needed..."
   mkdir -p "${HOME}/.config" 2>/dev/null
@@ -267,17 +267,17 @@ _minimics () {
   echo "  Create ${HOME}/.minimicsrc..."
   if [ ! -f "${HOME}/.minimicsrc" ] &&
     [ -f "${MIN_PATH}/minimicsrc.dist" ]; then
-      cp minimicsrc.dist "${HOME}/.minimicsrc"
+    cp minimicsrc.dist "${HOME}/.minimicsrc"
   fi
   cd "${MY_DIR}" || echo "Can't cd to previous folder.'"
   echo
   return
 }
 
-_nvim () {
+_nvim() {
   echo "[nvim]"
   echo "  Linking configuration files..."
-  makelink "${MIN_PATH}/nvim"       "${HOME}/.config/nvim"
+  makelink "${MIN_PATH}/nvim" "${HOME}/.config/nvim"
   if [ ! -f "${HOME}/.cache/wal/colors-wal.vim" ]; then
     echo "  Cheating the absence of pywal for the colorscheme..."
     mkdir -p "${HOME}/.cache/wal" 2>/dev/null
@@ -287,43 +287,43 @@ _nvim () {
   return
 }
 
-_pywal16 () {
+_pywal16() {
   echo "[pywal16]"
   echo "  Linking configuration files..."
-  makelink "${MIN_PATH}/pywal16"    "${HOME}/.config/wal"
+  makelink "${MIN_PATH}/pywal16" "${HOME}/.config/wal"
   echo ""
   return
 }
 
-_rofi () {
+_rofi() {
   echo "[rofi]"
   echo "  Linking rofi/rofi-pass configuration"
-  makelink "${MIN_PATH}/rofi"               "${HOME}/.config/rofi"
-  makelink "${MIN_PATH}/rofi-pass"          "${HOME}/.config/rofi-pass"
+  makelink "${MIN_PATH}/rofi" "${HOME}/.config/rofi"
+  makelink "${MIN_PATH}/rofi-pass" "${HOME}/.config/rofi-pass"
   echo
   return
 }
 
-_scide () {
+_scide() {
   echo "[Supercollider IDE]"
   echo "  Linking sc configuration files..."
   mkdir -p "${HOME}/.config/SuperCollider" 2>/dev/null
   makelink "${MIN_PATH}/supercollider/sc_ide_conf.yaml" "${HOME}/.config/SuperCollider/sc_ide_conf.yaml"
   makelink "${MIN_PATH}/supercollider/sclang_conf.yaml" "${HOME}/.config/SuperCollider/sclang_conf.yaml"
-  makelink "${MIN_PATH}/supercollider/startup.scd"      "${HOME}/.config/SuperCollider/startup.scd"
+  makelink "${MIN_PATH}/supercollider/startup.scd" "${HOME}/.config/SuperCollider/startup.scd"
   echo ""
   return
 }
 
-_swappy () {
+_swappy() {
   echo "[swappy]"
   echo "  Linking configuration files..."
-  makelink "${MIN_PATH}/swappy"    "${HOME}/.config/swappy"
+  makelink "${MIN_PATH}/swappy" "${HOME}/.config/swappy"
   echo ""
   return
 }
 
-_swaync () {
+_swaync() {
   echo "[swaync]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/swaync" "${HOME}/.config/swaync"
@@ -331,7 +331,7 @@ _swaync () {
   return
 }
 
-_taskwarrior () {
+_taskwarrior() {
   echo "[taskwarrior]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/taskwarrior/taskrc" "${HOME}/.taskrc"
@@ -339,7 +339,7 @@ _taskwarrior () {
   return
 }
 
-_terminator () {
+_terminator() {
   echo "[terminator]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/terminator" "${HOME}/.config/terminator"
@@ -347,34 +347,34 @@ _terminator () {
   return
 }
 
-_vim () {
+_vim() {
   echo "[vim]"
   echo "  Linking configuration files..."
-  makelink "${MIN_PATH}/vim/vimrc"  "${HOME}/.vimrc"
-  makelink "${MIN_PATH}/vim"        "${HOME}/.vim"
+  makelink "${MIN_PATH}/vim/vimrc" "${HOME}/.vimrc"
+  makelink "${MIN_PATH}/vim" "${HOME}/.vim"
   echo
   return
 }
 
-_waybar () {
+_waybar() {
   echo "[pywal16]"
   echo "  Linking configuration files..."
-  makelink "${MIN_PATH}/waybar"    "${HOME}/.config/waybar"
+  makelink "${MIN_PATH}/waybar" "${HOME}/.config/waybar"
   echo ""
   return
 }
 
-_zsh () {
+_zsh() {
   echo "[zsh]"
   echo "  Linking configuration files..."
-  makelink "${MIN_PATH}/zsh/zshrc"    "${HOME}/.zshrc"
+  makelink "${MIN_PATH}/zsh/zshrc" "${HOME}/.zshrc"
   makelink "${MIN_PATH}/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
   if [ ! -e "${OHMYZSH_PATH}" ]; then
     echo "  Downloading oh-my-zsh..."
     git clone https://github.com/robbyrussell/oh-my-zsh.git "${OHMYZSH_PATH}"
   fi
   echo "  Creating custom aliases file in ~/.aliases.local ..."
-  touch ~/.aliases.local > /dev/null 2>&1
+  touch ~/.aliases.local >/dev/null 2>&1
   echo ""
   return
 }
