@@ -1,7 +1,7 @@
 local custom_schemas = {
   {
-    name = "Kubernetes v1.32.4 Strict",
-    description = "Kubernetes JSON Schema - v1.32.4 strict",
+    name = "Kubernetes Strict",
+    description = "Kubernetes JSON Schema - strict",
     url = "kubernetes",
     fileMatch = {
       "*.k8s.yaml",
@@ -178,23 +178,39 @@ return {
 
     vim.lsp.config('yamlls', {
       settings = {
+        redhat = {
+          telemetry = { enabled = false, },
+        },
+        -- settings are defined here:
+        -- https://github.com/redhat-developer/yaml-language-server?tab=readme-ov-file#language-server-settings
         yaml = {
+          format = {
+            enable = true,
+            -- singleQuote = true, # default false
+          },
+          validate = true,
+          hover = true,
+          completion = true,
+
           -- Disabling builtin schemaStore
           -- i'm using b0o/SchemaStore plugin for performance and flexibility
           -- reasons, especially to blacklist some files and extend the
           -- official store with extra json schemas
-          schemaStore = { enable = false, url = "" },
+          schemaStore = {
+            enable = false,
+            url = ""
+          },
           -- use b0o/SchemaStore plugin
           -- local file modeline should take precedence
           schemas = require('schemastore').yaml.schemas {
             extra = custom_schemas,
             ignore = {},
           },
-          completion = true,
-          format = false, -- use prettier instead
-          -- keyOrdering = true,
-          hover = true,
-          validate = { enable = true },
+
+          kubernetesCRDStore = {
+            enable = true,
+            url = "https://raw.githubusercontent.com/datreeio/CRDs-catalog/main"
+          },
         }
       }
     })
