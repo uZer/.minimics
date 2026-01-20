@@ -29,14 +29,15 @@ return {
   end,
   after = 'nvim-lspconfig',
   keys = {
+    { 'gk',         '<cmd>Lspsaga hover_doc<CR>',            desc = 'Lspsaga hover doc' },
     { 'K',          '<cmd>Lspsaga hover_doc<CR>',            desc = 'Lspsaga hover doc' },
-    { 'gh',         '<cmd>Lspsaga hover_doc<CR>',            desc = 'Lspsaga hover doc' },
-    { '<leader>ca', '<cmd>Lspsaga code_action<CR>',          desc = 'Lspsaga code action',        mode = { 'n', 'v' }, },
+    { 'gj',         '<cmd>Lspsaga code_action<CR>',          desc = 'Lspsaga code action',        mode = { 'n', 'v' }, },
     { 'J',          '<cmd>Lspsaga code_action<CR>',          desc = 'Lspsaga code action',        mode = { 'n', 'v' }, },
     { 'gd',         '<cmd>Lspsaga goto_definition<CR>',      desc = 'Lspsaga go to definition' },
     { 'gp',         '<cmd>Lspsaga peek_definition<CR>',      desc = 'Lspsaga peek definition' },
     { 'gs',         '<cmd>Lspsaga signature_help<CR>',       desc = 'Lspsaga signature help' },
-    { 'gr',         '<cmd>Lspsaga finder<CR>',               desc = 'Lspsaga finder' },
+    { 'gf',         '<cmd>Lspsaga finder<CR>',               desc = 'Lspsaga finder' },
+    { 'gr',         '<cmd>Lspsaga finder<CR>',               desc = 'Lspsaga finder' }, -- references
     { '<leader>rn', '<cmd>Lspsaga rename<CR>',               desc = 'Lspsaga rename' },
     { '<leader>k',  '<cmd>Lspsaga diagnostic_jump_prev<CR>', desc = 'Lspsaga previous diagnostic' },
     { '<leader>j',  '<cmd>Lspsaga diagnostic_jump_next<CR>', desc = 'Lspsaga next diagnostic' },
