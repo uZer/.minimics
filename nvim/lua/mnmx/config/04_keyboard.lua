@@ -16,7 +16,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = "\\"
 
 -- switch CWD to the directory of the open buffer
-map('', '<leader>cd', ':cd %:p:h<cr>:pwd<cr>')
+map('', '<C-w>cd', ':cd %:p:h<cr>:pwd<cr>')
 
 -- yank to clipboard (OSC 52)
 -- no paste support due to security concerns (see alacritty configuration)
@@ -58,9 +58,6 @@ map('v', '<C-k>', ":m '<-2<CR>gv=gv")
 map('i', '<C-j>', '<Esc>:m .+1<CR>==gi')
 map('i', '<C-k>', '<Esc>:m .-2<CR>==gi')
 
--- remove the Windows ^M when the encodings gets messed up
-map('n', '<Leader>M', "mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm")
-
 -- spell check
 map('', '<leader>sc', ':set invspell<CR>')
 
@@ -75,6 +72,6 @@ map('', '<leader>tc', ':BufDel<cr>') -- [plugin: bufdel]
 -- [plugin: telescope] find stuff
 map('', '<C-o>', ':Telescope find_files<CR>')
 map('', '<C-f>', ':lua require("telescope.builtin").live_grep({grep_open_files=false})<CR>')
-map('', '<C-g>', ':Telescope grep_string<CR>')
+map('', '<C-g>', ':lua require("telescope.builtin").grep_string<CR>')
 map('', '<C-p>', ':Telescope<CR>')
 map('', '<leader>p', ':Telescope<CR>')
