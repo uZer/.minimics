@@ -18,7 +18,8 @@ return {
     }
   end,
   keys = {
-    { "gy", "<cmd>GitLink blame<cr>",  mode = { "n", "v" }, desc = "Yank git blame link" },
-    { "gY", "<cmd>GitLink! blame<cr>", mode = { "n", "v" }, desc = "Open git blame link" },
+    { "gy", "<cmd>GitLink<cr>",        mode = { "n", "v" }, desc = "Yank git link" },
+    { "gY", "<cmd>GitLink!<cr>",       mode = { "n", "v" }, desc = "Open git link" },
+    { "gb", "<cmd>GitLink! blame<cr>", mode = { "n", "v" }, desc = "Open git blame link" },
   },
 }
