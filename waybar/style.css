@@ -42,6 +42,7 @@ window#waybar {
 #clock,
 #cpu,
 #custom-airplane,
+#custom-ghpr,
 #custom-health,
 #custom-network-interface,
 #custom-notification,
@@ -118,6 +119,18 @@ window#waybar {
 #custom-health {
   background-color: @color2;
   border-bottom: .2rem solid @color2Alpha;
+}
+
+#custom-ghpr {
+  color: @color5;
+  background-color: @color0;
+  border-bottom: .2rem solid @color0Alpha;
+}
+
+#custom-ghpr-bot {
+  color: @color8;
+  background-color: @color16;
+  border-bottom: .2rem solid @color16Alpha;
 }
 
 #custom-playerctl {

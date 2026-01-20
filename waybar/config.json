@@ -15,6 +15,7 @@
   "modules-right": [
     "custom/airplane",
     "privacy",
+    "custom/ghpr",
     "group/connectivity",
     "group/essentials"
   ],
@@ -83,6 +84,12 @@
     "format-icons": {
       "default": ""
     }
+  },
+  "custom/ghpr": {
+    "exec": "mini waybar status ghpr",
+    "interval": 120,
+    "return-type": "json",
+    "on-click": "firefox -P ffp \"https://github.com/search?q=is%3Apr+is%3Aopen+-author%3Aapp%2Frenovate+org%3Abill-of-materials+user%3AuZer&type=pullrequests\""
   },
   "custom/network-interface": {
     "exec": "mini waybar status netif",
