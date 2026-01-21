@@ -122,9 +122,9 @@ window#waybar {
 }
 
 #custom-ghpr {
-  color: @color5;
-  background-color: @color0;
-  border-bottom: .2rem solid @color0Alpha;
+  color: @color15;
+  background-color: @color9;
+  border-bottom: .2rem solid @color9Alpha;
 }
 
 #custom-ghpr-bot {

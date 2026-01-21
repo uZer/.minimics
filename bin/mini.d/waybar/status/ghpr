@@ -12,18 +12,16 @@ COMMAND=${COMMAND/*mini.d/mini}
 # To define the github token on your system:
 # create a token here: https://github.com/settings/personal-access-tokens
 # scopes: fine grained, Metadata: Read-only, Pull requests: Read-only
-#
-# define GITHUB_TOKEN_WAYBAR with:
-# systemctl --user set-environment GITHUB_TOKEN_WAYBAR=ghp_xxxxxxxxxxxxxxxxx
+# define MINIMICS_GITHUB_TOKEN in ~/.minimicsrc
 
 COUNT_PR=$(
   curl -s \
-    -H "Authorization: Bearer $GITHUB_TOKEN" \
+    -H "Authorization: Bearer ${MINIMICS_GITHUB_TOKEN}" \
     -H "Accept: application/vnd.github+json" \
     "https://api.github.com/search/issues?q=is%3Apr+is%3Aopen+-author%3Aapp%2Frenovate+org%3Abill-of-materials+user%3AuZer" | jq '.total_count'
 )
 
-if [ "$COUNT_PR" -eq 0 ]; then
+if [[ "${COUNT_PR}" -eq 0 ]]; then
   jq -cM <<EOF
   {
     "text": "",
@@ -34,9 +32,9 @@ EOF
 else
   jq -cM <<EOF
   {
-    "text": " $COUNT_PR",
-    "tooltip": "$COUNT_PR",
-    "class": "${class:-offline}"
+    "text": " ${COUNT_PR}",
+    "tooltip": "${COUNT_PR}",
+    "class": "${class:-online}"
   }
 EOF
 fi
