@@ -87,7 +87,8 @@
   },
   "custom/ghpr": {
     "exec": "mini waybar status ghpr",
-    "interval": 120,
+    "format": "{}",
+    "interval": 60,
     "return-type": "json",
     "on-click": "firefox -P ffp \"https://github.com/search?q=is%3Apr+is%3Aopen+-author%3Aapp%2Frenovate+org%3Abill-of-materials+user%3AuZer&type=pullrequests\""
   },
@@ -168,7 +169,8 @@
   },
   "bluetooth": {
     "interval": 3,
-    "format-on": " {controller_alias}",
+    "format-on": "",
+    "tooltip-format": "{controller_alias} ({controller_address}) | {status}\n{num_connections} decives connected\n{device_enumerate}",
     "format-connected": " {device_alias}",
     "format-connected-battery": " {device_alias} ({device_battery_percentage}%)",
     "format-off": " off",
