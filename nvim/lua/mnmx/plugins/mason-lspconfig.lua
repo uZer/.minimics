@@ -8,7 +8,8 @@ local custom_schemas = {
       "*.k8s.yml",
       "*.kubernetes.yaml",
       "gitops/apps/**/*.yaml",
-      "gitops/apps/**/*.yml"
+      "gitops/apps/**/*.yml",
+      "manifests/**/*.yml"
     },
   },
 }
