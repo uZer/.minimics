@@ -133,10 +133,10 @@
   "custom/publicip": {
     "exec": "mini waybar status ip",
     "format": "{}",
-    "interval": 9,
+    "interval": 15,
     "return-type": "json",
-    "on-click-middle": "$(curl -s --max-time 2 'https://api64.ipify.org' | wl-copy)",
-    "on-click-right": "$(curl -s --max-time 2 'https://api.ipify.org' | wl-copy)"
+    "on-click-middle": "$(curl -s --max-time 4 'https://api64.ipify.org' | wl-copy)",
+    "on-click-right": "$(curl -s --max-time 4 'https://api.ipify.org' | wl-copy)"
   },
   "custom/tailscale": {
     "exec": "mini waybar status ts",
