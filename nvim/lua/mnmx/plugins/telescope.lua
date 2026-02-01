@@ -7,15 +7,19 @@ return {
       build = 'make'
     },
   },
-  opts = {
-    extensions = {
-      aerial = {
-        show_nesting = {
-          json = true,
-          yaml = true,
-        }
-      },
-      yaml_schema = {}
-    }
-  }
+  config = function()
+    local telescope = require("telescope")
+
+    telescope.setup({
+      extensions = {
+        aerial = {
+          show_nesting = {
+            json = true,
+            yaml = true,
+          }
+        },
+        yaml_schema = {}
+      }
+    })
+  end,
 }
