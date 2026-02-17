@@ -9,8 +9,8 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
-get_usage () {
-  cat << EOF
+get_usage() {
+  cat <<EOF
 manipulate screen settings (wayland only)
 
 usage:
@@ -30,11 +30,11 @@ EOF
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
 # Export a configuration block that can be used in kanshi directly
-export_config () {
+export_config() {
   kanshi_config=$(hyprctl monitors -j | jq -r '.[] |
     {make, model, serial, x, y, width, height, refreshRate, scale, transform} |
       "  output \"\(.make) \(.model) \(.serial)\" position \(.x),\(.y) mode \(.width)x\(.height)@\(.refreshRate) scale \(.scale) transform normal enable"')
-  cat << EOF
+  cat <<EOF
 
 profile unnamedprofile {
 $kanshi_config
@@ -44,8 +44,12 @@ EOF
 }
 
 # Take a screenshot and edit
-screenshot () {
-  slurp | grim -l 0 -g - - | swappy -f -
+screenshot() {
+  slurp | {
+    read -r geo
+    sleep 1
+    echo "$geo"
+  } | grim -l 0 -g - - | swappy -f -
 }
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
@@ -54,13 +58,13 @@ screenshot () {
 
 while [ "$#" -ne 0 ]; do
   case "$1" in
-    conf) export_config ;;
-    edit) wdisplays ;;
-    shot) screenshot ;;
-    *)
-      get_usage
-      exit 0
-      ;;
+  conf) export_config ;;
+  edit) wdisplays ;;
+  shot) screenshot ;;
+  *)
+    get_usage
+    exit 0
+    ;;
   esac
   shift
 done
