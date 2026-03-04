@@ -116,3 +116,8 @@
   signingkey = 0BB86EA4B04B1A568DD15FBC6534FBBC86B7DB4D
   name = Youenn Piolet
   email = piolet.y@gmail.com
+
+[includeIf "gitdir:~/rf.gitlab/"]
+  path = ~/rf.venv.custom/gitconfig
+[includeIf "gitdir:~/rf.github/"]
+  path = ~/rf.venv.custom/gitconfig
