@@ -5,15 +5,15 @@ set -eu
 
 # Get Tailscale status JSON
 json=$(tailscale status --json 2>/dev/null)
-if [[ -z "$json" ]]; then
+if [[ -z "${json}" ]]; then
   echo "Tailscale is not running or no data available." >&2
   return 1
 fi
 
-tailnet=$(jq -r '.MagicDNSSuffix' <<< "$json")
+tailnet=$(jq -r '.MagicDNSSuffix' <<<"${json}")
 
 # Build menu: list of exit node DNSNames + "disabled"
-exit_nodes=$(jq -r --arg suffix ".$tailnet." '
+exit_nodes=$(jq -r --arg suffix ".${tailnet}." '
   . as $root
   | .Peer[]
   | select(.ExitNodeOption == true)
@@ -29,21 +29,21 @@ exit_nodes=$(jq -r --arg suffix ".$tailnet." '
       )
     }
   | "\(.label)\t\(.user)\t\($suffix)"
-' <<< "$json")
+' <<<"${json}")
 
 # Add "disabled" as the first option
-choice=$(printf "none\n%s\nadvertise exit node\n" "$exit_nodes" |
+choice=$(printf "none\n%s\nadvertise exit node\n" "${exit_nodes}" |
   rofi -dmenu -i -p "Select Exit Node")
 choice=$(echo "${choice}" | cut -f1)
 
 # Act on selection
-if [[ "$choice" == "none" ]]; then
+if [[ "${choice}" == "none" ]]; then
   tailscale set --advertise-exit-node=false
   tailscale set --exit-node=
-elif [[ "$choice" == "advertise exit node" ]]; then
+elif [[ "${choice}" == "advertise exit node" ]]; then
   tailscale set --exit-node=
   tailscale up --advertise-exit-node
-elif [[ -n "$choice" ]]; then
+elif [[ -n "${choice}" ]]; then
   tailscale set --advertise-exit-node=false
-  tailscale set --exit-node="$choice"
+  tailscale set --exit-node="${choice}"
 fi

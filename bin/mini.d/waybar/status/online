@@ -9,7 +9,7 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
-ip="$(curl -s --max-time 2 'https://api64.ipify.org' || true)"
+ip="$(curl -s --max-time 10 'https://api64.ipify.org' || true)"
 if [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   icon=""
   jq -cM <<EOF

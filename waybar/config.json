@@ -127,7 +127,7 @@
   "custom/online": {
     "exec": "mini waybar status online",
     "format": "{}",
-    "interval": 3,
+    "interval": 15,
     "return-type": "json"
   },
   "custom/publicip": {
@@ -135,8 +135,8 @@
     "format": "{}",
     "interval": 15,
     "return-type": "json",
-    "on-click-middle": "$(curl -s --max-time 4 'https://api64.ipify.org' | wl-copy)",
-    "on-click-right": "$(curl -s --max-time 4 'https://api.ipify.org' | wl-copy)"
+    "on-click-middle": "$(curl -s --max-time 10 'https://api64.ipify.org' | wl-copy)",
+    "on-click-right": "$(curl -s --max-time 10 'https://api.ipify.org' | wl-copy)"
   },
   "custom/tailscale": {
     "exec": "mini waybar status ts",
