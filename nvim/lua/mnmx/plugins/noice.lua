@@ -2,7 +2,15 @@ return {
   "folke/noice.nvim",
   event = "VeryLazy",
   opts = {
-    -- add any options here
+    views = {
+      notify = {
+        -- position = {
+        --   row = "100%",
+        --   col = "100%",
+        -- },
+        anchor = "SE",
+      },
+    },
   },
   keys = {
     {
@@ -17,7 +25,12 @@ return {
     -- OPTIONAL:
     --   `nvim-notify` is only needed, if you want to use the notification view.
     --   If not available, we use `mini` as the fallback
-    "rcarriga/nvim-notify",
+    {
+      "rcarriga/nvim-notify",
+      opts = {
+        top_down = false, -- newer notifications appear at the bottom
+      },
+    },
     -- "nvim-mini/mini.notify"
   }
 }
