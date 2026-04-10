@@ -14,8 +14,8 @@ return {
     default_format_opts = {
       lsp_format = "fallback",
     },
+
     formatters_by_ft = {
-      ["*"] = { "trim_whitespace" },
       lua = { "stylua" },
       go = { "goimports", "gofmt" },
       jsonnet = { "jsonnetfmt" },
@@ -29,17 +29,14 @@ return {
         return
       end
 
-      return {
-        timeout_ms = 5000,
-        lsp_format = "fallback",
-      }
+      return { timeout_ms = 5000 }
     end,
 
     format_after_save = function(bufnr)
       if slow_format_filetypes[vim.bo[bufnr].filetype] then
         return {
+          formatters = { "trim_whitespace" },
           timeout_ms = 15000,
-          lsp_format = "fallback",
         }
       end
     end,
