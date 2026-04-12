@@ -36,11 +36,6 @@ return {
 
     require("luasnip.loaders.from_vscode").lazy_load()
 
-    local has_words_before = function()
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-    end
-
     return {
       performance = {
         debounce = 60,
@@ -125,10 +120,10 @@ return {
       mapping = cmp.mapping.preset.insert({
 
         -- Docs
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-n>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-p>"] = cmp.mapping.scroll_docs(4),
 
-        -- Trigger
+        -- Complete
         ["<C-Space>"] = cmp.mapping.complete(),
 
         -- Abort
@@ -137,7 +132,7 @@ return {
         -- Confirm (explicit, safe)
         ["<CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
-          select = false,
+          select = true,
         }),
 
         -- Navigation
@@ -150,12 +145,10 @@ return {
             cmp.select_next_item()
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
           else
             fallback()
           end
-        end, { "i", "s" }),
+        end),
 
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -165,7 +158,7 @@ return {
           else
             fallback()
           end
-        end, { "i", "s" }),
+        end),
       }),
     }
   end,
@@ -173,8 +166,6 @@ return {
   config = function(_, opts)
     local cmp = require("cmp")
     cmp.setup(opts)
-
-    -- Cmdline completion
 
     -- Search (/)
     cmp.setup.cmdline("/", {
@@ -188,7 +179,8 @@ return {
     cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = "path" },
+        { name = "path", priority = 1200 },
+        { name = "nvim_lsp", priority = 1000 },
       }, {
         { name = "cmdline" },
       }),
