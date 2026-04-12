@@ -1,10 +1,10 @@
 return {
-  'echasnovski/mini.splitjoin',
+  "echasnovski/mini.splitjoin",
   opts = {
     mappings = {
-      toggle = '<leader>sj',
-      join = '<leader>sJ',
-      split = '<leader>ss',
+      toggle = "<leader>sj",
+      join = "<leader>sJ",
+      split = "<leader>ss",
     },
-  }
+  },
 }

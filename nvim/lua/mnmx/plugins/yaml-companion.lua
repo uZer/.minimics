@@ -10,5 +10,5 @@ return {
   config = function()
     require("yaml-companion").setup(opts)
     require("telescope").load_extension("yaml_schema")
-  end
+  end,
 }

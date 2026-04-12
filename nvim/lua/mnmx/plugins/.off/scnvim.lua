@@ -1,3 +1,3 @@
 return {
-  'davidgranstrom/scnvim',
+  "davidgranstrom/scnvim",
 }

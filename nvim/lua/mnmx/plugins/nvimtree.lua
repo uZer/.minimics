@@ -1,13 +1,19 @@
 local function my_on_attach(bufnr)
   -- default mappings
-  local api = require('nvim-tree.api')
+  local api = require("nvim-tree.api")
   local function opts(desc)
-    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    return {
+      desc = "nvim-tree: " .. desc,
+      buffer = bufnr,
+      noremap = true,
+      silent = true,
+      nowait = true,
+    }
   end
-  api.config.mappings.default_on_attach(bufnr)
+  api.map.on_attach.default(bufnr)
 
   -- override with custom mappings
-  vim.keymap.set('n', 'U', api.tree.change_root_to_parent, opts('Up'))
+  vim.keymap.set("n", "U", api.tree.change_root_to_parent, opts("Up"))
 end
 
 -- Browse the directory with nvim-tree when opening a buffer on a directory
@@ -28,9 +34,8 @@ local function open_nvim_tree(data)
   require("nvim-tree.api").tree.open()
 end
 
-
 return {
-  'nvim-tree/nvim-tree.lua',
+  "nvim-tree/nvim-tree.lua",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
@@ -62,7 +67,7 @@ return {
       root_folder_label = function(root_cwd)
         -- Get parent directory and current directory
         local parent_dir = vim.fn.fnamemodify(root_cwd, ":h:t") -- Get parent directory name
-        local current_dir = vim.fn.fnamemodify(root_cwd, ":t")  -- Get current directory name
+        local current_dir = vim.fn.fnamemodify(root_cwd, ":t") -- Get current directory name
 
         -- If parent directory exists, display "parent/current", else just "current"
         if parent_dir ~= "" then
@@ -75,13 +80,13 @@ return {
       highlight_git = true,
       icons = {
         git_placement = "after",
-      }
+      },
     },
     update_focused_file = {
       enable = true,
       update_root = {
         enable = true,
-      }
+      },
     },
     update_cwd = true,
     view = {
@@ -89,5 +94,5 @@ return {
       -- width = 32,
     },
     on_attach = my_on_attach,
-  }
+  },
 }

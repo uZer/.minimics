@@ -1,8 +1,8 @@
 return {
   {
-    'linrongbin16/lsp-progress.nvim',
+    "linrongbin16/lsp-progress.nvim",
     config = function()
-      require('lsp-progress').setup({})
+      require("lsp-progress").setup({})
 
       -- listen for LSP progress updates and refresh lualine
       local group = vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
@@ -16,11 +16,11 @@ return {
     end,
   },
   {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     dependencies = {
-      'ojroques/nvim-bufdel',
-      'lewis6991/gitsigns.nvim',
-      'mfussenegger/nvim-lint',
+      "ojroques/nvim-bufdel",
+      "lewis6991/gitsigns.nvim",
+      "mfussenegger/nvim-lint",
     },
     opts = function()
       -- define diff source safely
@@ -38,12 +38,12 @@ return {
 
       -- linter display helper
       local function active_linters()
-        local lint = require('lint')
+        local lint = require("lint")
         local linters = lint._resolve_linter_by_ft(vim.bo.filetype)
         if not linters or #linters == 0 then
-          return ''
+          return ""
         end
-        return table.concat(linters, '  ')
+        return table.concat(linters, "  ")
       end
 
       -- LSP progress display helper
@@ -69,79 +69,78 @@ return {
 
       return {
         options = {
-          component_separators = { left = '', right = '' },
-          section_separators = { left = '', right = '' },
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
           disable_filetypes = { "NvimTree", "lazy", "mason", "_.*" },
-          extensions = { 'lazy', 'nvim-tree', 'mason' },
+          extensions = { "lazy", "nvim-tree", "mason" },
           ignore_focus = { "NvimTree", "lazy", "mason", "_.*" },
-          theme = 'pywal16-nvim',
+          theme = "pywal16-nvim",
           globalstatus = true,
         },
 
         sections = {
           lualine_a = {
-            'mode'
+            "mode",
           },
           lualine_b = {
             -- {
             --   'branch'
             -- },
             {
-              'diff',
-              source = diff_source
+              "diff",
+              source = diff_source,
             },
           },
-          lualine_c = {
-          },
+          lualine_c = {},
           lualine_x = {
             {
-              'filename',
+              "filename",
               path = 3,
-              newfile_status = true
+              newfile_status = true,
             },
           },
           lualine_y = {
-            'fileformat',
-            'encoding',
+            "fileformat",
+            "encoding",
           },
           lualine_z = {
-            'selectioncount',
-            'searchcount',
-            'progress',
-            'location',
+            "selectioncount",
+            "searchcount",
+            "progress",
+            "location",
           },
         },
 
         tabline = {
           lualine_a = {
             {
-              'buffers',
-              filetype_names = { NvimTree = '', mason = '', lazy = '' },
+              "buffers",
+              filetype_names = { NvimTree = "", mason = "", lazy = "" },
               mode = 2,
-              symbols = { alternate_file = '' },
+              symbols = { alternate_file = "" },
             },
           },
           lualine_x = {
             {
-              'diagnostics',
-              sources = { 'nvim_diagnostic' },
+              "diagnostics",
+              sources = { "nvim_diagnostic" },
               always_visible = false,
             },
             {
               lsp_status,
-              icon = { "", align = "left" }
+              icon = { "", align = "left" },
             },
           },
           lualine_y = {
             {
               active_linters,
-              icon = { "󰱺", align = "left" }
+              icon = { "󰱺", align = "left" },
             },
           },
           lualine_z = {
             {
-              'filetype',
-              icon = { align = "left" }
+              "filetype",
+              icon = { align = "left" },
             },
           },
         },

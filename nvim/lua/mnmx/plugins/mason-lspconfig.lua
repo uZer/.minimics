@@ -9,17 +9,17 @@ local custom_schemas = {
       "*.kubernetes.yaml",
       "gitops/apps/**/*.yaml",
       "gitops/apps/**/*.yml",
-      "manifests/**/*.yml"
+      "manifests/**/*.yml",
     },
   },
 }
 
 return {
-  'mason-org/mason-lspconfig.nvim',
+  "mason-org/mason-lspconfig.nvim",
   dependencies = {
-    'mason-org/mason.nvim',
-    'neovim/nvim-lspconfig',
-    'b0o/SchemaStore.nvim',
+    "mason-org/mason.nvim",
+    "neovim/nvim-lspconfig",
+    "b0o/SchemaStore.nvim",
   },
   config = function()
     local mason_lspconfig = require("mason-lspconfig")
@@ -90,19 +90,19 @@ return {
     -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     -- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- if using nvim-cmp
 
-    vim.lsp.config('dockerls', {
+    vim.lsp.config("dockerls", {
       settings = {
         docker = {
           languageserver = {
             formatter = {
               ignoreMultilineInstructions = true,
-            }
-          }
-        }
-      }
+            },
+          },
+        },
+      },
     })
 
-    vim.lsp.config('eslint', {
+    vim.lsp.config("eslint", {
       on_attach = function(_, bufnr)
         vim.api.nvim_create_autocmd("BufWritePre", {
           buffer = bufnr,
@@ -111,21 +111,21 @@ return {
       end,
     })
 
-    vim.lsp.config('gopls', {
+    vim.lsp.config("gopls", {
       settings = {
         gopls = {
           analyses = {
             unusedvariable = true,
-            useany = true
+            useany = true,
           },
           gofumpt = true,
           staticcheck = true,
           usePlaceholders = true,
-        }
-      }
+        },
+      },
     })
 
-    vim.lsp.config('jsonls', {
+    vim.lsp.config("jsonls", {
       settings = {
         json = {
           -- Disabling builtin schemaStore
@@ -135,26 +135,26 @@ return {
           schemaStore = { enable = false, url = "" },
           -- use b0o/SchemaStore plugin
           -- local file modeline should take precedence
-          schemas = require('schemastore').json.schemas {
+          schemas = require("schemastore").json.schemas({
             extra = custom_schemas,
             ignore = {},
-          },
+          }),
           validate = { enable = true },
-        }
-      }
+        },
+      },
     })
 
-    vim.lsp.config('lua_ls', {
+    vim.lsp.config("lua_ls", {
       settings = {
         Lua = {
           diagnostics = {
-            globals = { 'vim' }
-          }
-        }
-      }
+            globals = { "vim" },
+          },
+        },
+      },
     })
 
-    vim.lsp.config('pylsp', {
+    vim.lsp.config("pylsp", {
       settings = {
         pylsp = {
           configurationSources = { "flake8" },
@@ -173,14 +173,14 @@ return {
           --   rope_autoimport = { enabled = false },
           --   ruff = { enabled = false },
           -- }
-        }
-      }
+        },
+      },
     })
 
-    vim.lsp.config('yamlls', {
+    vim.lsp.config("yamlls", {
       settings = {
         redhat = {
-          telemetry = { enabled = false, },
+          telemetry = { enabled = false },
         },
         -- settings are defined here:
         -- https://github.com/redhat-developer/yaml-language-server?tab=readme-ov-file#language-server-settings
@@ -199,21 +199,21 @@ return {
           -- official store with extra json schemas
           schemaStore = {
             enable = false,
-            url = ""
+            url = "",
           },
           -- use b0o/SchemaStore plugin
           -- local file modeline should take precedence
-          schemas = require('schemastore').yaml.schemas {
+          schemas = require("schemastore").yaml.schemas({
             extra = custom_schemas,
             ignore = {},
-          },
+          }),
 
           kubernetesCRDStore = {
             enable = true,
-            url = "https://raw.githubusercontent.com/datreeio/CRDs-catalog/main"
+            url = "https://raw.githubusercontent.com/datreeio/CRDs-catalog/main",
           },
-        }
-      }
+        },
+      },
     })
   end,
   -- default handler

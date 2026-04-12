@@ -8,7 +8,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     "--filter=blob:none",
     "--branch=stable",
     lazyrepo,
-    lazypath
+    lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
@@ -16,11 +16,11 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     {
-      import = "mnmx.plugins"
-    }
+      import = "mnmx.plugins",
+    },
   },
   install = {
-    colorscheme = { "pywal16" }
+    colorscheme = { "pywal16" },
   },
   defaults = {
     lazy = false,
@@ -32,5 +32,5 @@ require("lazy").setup({
   },
   change_detection = {
     enabled = false,
-  }
+  },
 })

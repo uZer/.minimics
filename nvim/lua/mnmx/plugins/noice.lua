@@ -16,7 +16,7 @@ return {
     {
       "?",
       "<cmd>Notifications<cr>",
-      desc = "show history of notifications"
+      desc = "show history of notifications",
     },
   },
   dependencies = {
@@ -32,5 +32,5 @@ return {
       },
     },
     -- "nvim-mini/mini.notify"
-  }
+  },
 }

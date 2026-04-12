@@ -13,6 +13,6 @@ return {
   },
   dependencies = {
     "echasnovski/mini.ai",
-    "echasnovski/mini.icons"
+    "echasnovski/mini.icons",
   },
 }

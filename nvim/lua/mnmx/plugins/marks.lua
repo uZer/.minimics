@@ -3,7 +3,6 @@ return {
   event = "VeryLazy",
   opts = {
     mappings = {
-
       preview = "mm",
       prev = "mk",
       next = "mj",

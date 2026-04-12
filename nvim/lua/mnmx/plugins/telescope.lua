@@ -1,10 +1,10 @@
 return {
-  'nvim-telescope/telescope.nvim',
+  "nvim-telescope/telescope.nvim",
   dependencies = {
-    'nvim-lua/plenary.nvim',
+    "nvim-lua/plenary.nvim",
     {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'make'
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
     },
   },
   config = function()
@@ -16,10 +16,10 @@ return {
           show_nesting = {
             json = true,
             yaml = true,
-          }
+          },
         },
-        yaml_schema = {}
-      }
+        yaml_schema = {},
+      },
     })
   end,
 }

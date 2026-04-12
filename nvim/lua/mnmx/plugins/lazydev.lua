@@ -5,5 +5,5 @@ return {
     library = {
       { path = "${MIN_PATH}/nvim/lua/", words = { "vim" } },
     },
-  }
+  },
 }

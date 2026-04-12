@@ -6,18 +6,18 @@ return {
   keys = function()
     local strudel = require("strudel")
     return {
-      { "<leader>sl", strudel.launch,     desc = "Launch Strudel" },
-      { "<leader>sq", strudel.quit,       desc = "Quit Strudel" },
-      { "<leader>st", strudel.toggle,     desc = "Strudel Toggle Play/Stop" },
-      { "<leader>su", strudel.update,     desc = "Strudel Update" },
-      { "<leader>ss", strudel.stop,       desc = "Strudel top Playback" },
+      { "<leader>sl", strudel.launch, desc = "Launch Strudel" },
+      { "<leader>sq", strudel.quit, desc = "Quit Strudel" },
+      { "<leader>st", strudel.toggle, desc = "Strudel Toggle Play/Stop" },
+      { "<leader>su", strudel.update, desc = "Strudel Update" },
+      { "<leader>ss", strudel.stop, desc = "Strudel top Playback" },
       { "<leader>sb", strudel.set_buffer, desc = "Strudel set current buffer" },
-      { "<leader>sx", strudel.execute,    desc = "Strudel set current buffer and update" },
+      { "<leader>sx", strudel.execute, desc = "Strudel set current buffer and update" },
     }
   end,
 
   config = function()
-    require("strudel").setup {
+    require("strudel").setup({
       ui = {
         -- Maximise the menu panel
         -- (optional, default: true)
@@ -39,6 +39,6 @@ return {
       -- Only works if the playback was already started (doesn't start the playback on save)
       -- (optional, default: false)
       update_on_save = true,
-    }
+    })
   end,
 }

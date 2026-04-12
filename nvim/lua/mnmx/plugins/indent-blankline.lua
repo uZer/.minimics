@@ -3,10 +3,10 @@ return {
   main = "ibl",
   opts = {
     indent = {
-      char = '¦',
+      char = "¦",
     },
     viewport_buffer = {
       max = 500,
     },
-  }
+  },
 }

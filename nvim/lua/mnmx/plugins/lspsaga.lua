@@ -1,7 +1,7 @@
 return {
-  'nvimdev/lspsaga.nvim',
+  "nvimdev/lspsaga.nvim",
   config = function()
-    require('lspsaga').setup({
+    require("lspsaga").setup({
       code_action = {
         extend_gitsigns = true,
       },
@@ -11,36 +11,46 @@ return {
       },
       finder = {
         keys = {
-          toggle_or_open = '<cr>',
-          vsplit = 'o',
-          split = 'n',
+          toggle_or_open = "<cr>",
+          vsplit = "o",
+          split = "n",
         },
       },
       outline = {
         keys = {
-          jump = '<CR>',
-          toggle_or_jump = '<space>',
-        }
+          jump = "<CR>",
+          toggle_or_jump = "<space>",
+        },
       },
       ui = {
-        code_action = ' '
-      }
+        code_action = " ",
+      },
     })
   end,
-  after = 'nvim-lspconfig',
+  after = "nvim-lspconfig",
   keys = {
-    { 'gk',         '<cmd>Lspsaga hover_doc<CR>',            desc = 'Lspsaga hover doc' },
-    { 'K',          '<cmd>Lspsaga hover_doc<CR>',            desc = 'Lspsaga hover doc' },
-    { 'gj',         '<cmd>Lspsaga code_action<CR>',          desc = 'Lspsaga code action',        mode = { 'n', 'v' }, },
-    { 'J',          '<cmd>Lspsaga code_action<CR>',          desc = 'Lspsaga code action',        mode = { 'n', 'v' }, },
-    { 'gd',         '<cmd>Lspsaga goto_definition<CR>',      desc = 'Lspsaga go to definition' },
-    { 'gp',         '<cmd>Lspsaga peek_definition<CR>',      desc = 'Lspsaga peek definition' },
-    { 'gs',         '<cmd>Lspsaga signature_help<CR>',       desc = 'Lspsaga signature help' },
-    { 'gf',         '<cmd>Lspsaga finder<CR>',               desc = 'Lspsaga finder' },
-    { 'gr',         '<cmd>Lspsaga finder<CR>',               desc = 'Lspsaga finder' }, -- references
-    { '<leader>rn', '<cmd>Lspsaga rename<CR>',               desc = 'Lspsaga rename' },
-    { '<leader>k',  '<cmd>Lspsaga diagnostic_jump_prev<CR>', desc = 'Lspsaga previous diagnostic' },
-    { '<leader>j',  '<cmd>Lspsaga diagnostic_jump_next<CR>', desc = 'Lspsaga next diagnostic' },
-    { '<leader>m',  '<cmd>Lspsaga outline<CR>',              desc = 'Lspsaga outline' },
-  }
+    { "gk", "<cmd>Lspsaga hover_doc<CR>", desc = "Lspsaga hover doc" },
+    { "K", "<cmd>Lspsaga hover_doc<CR>", desc = "Lspsaga hover doc" },
+    {
+      "gj",
+      "<cmd>Lspsaga code_action<CR>",
+      desc = "Lspsaga code action",
+      mode = { "n", "v" },
+    },
+    {
+      "J",
+      "<cmd>Lspsaga code_action<CR>",
+      desc = "Lspsaga code action",
+      mode = { "n", "v" },
+    },
+    { "gd", "<cmd>Lspsaga goto_definition<CR>", desc = "Lspsaga go to definition" },
+    { "gp", "<cmd>Lspsaga peek_definition<CR>", desc = "Lspsaga peek definition" },
+    { "gs", "<cmd>Lspsaga signature_help<CR>", desc = "Lspsaga signature help" },
+    { "gf", "<cmd>Lspsaga finder<CR>", desc = "Lspsaga finder" },
+    { "gr", "<cmd>Lspsaga finder<CR>", desc = "Lspsaga finder" }, -- references
+    { "<leader>rn", "<cmd>Lspsaga rename<CR>", desc = "Lspsaga rename" },
+    { "<leader>k", "<cmd>Lspsaga diagnostic_jump_prev<CR>", desc = "Lspsaga previous diagnostic" },
+    { "<leader>j", "<cmd>Lspsaga diagnostic_jump_next<CR>", desc = "Lspsaga next diagnostic" },
+    { "<leader>m", "<cmd>Lspsaga outline<CR>", desc = "Lspsaga outline" },
+  },
 }

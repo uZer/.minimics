@@ -1,4 +1,4 @@
 return {
-  'notjedi/nvim-rooter.lua',
-  opts = {}
+  "notjedi/nvim-rooter.lua",
+  opts = {},
 }

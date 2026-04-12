@@ -1,4 +1,4 @@
 return {
-  'echasnovski/mini.ai',
-  opts = {}
+  "echasnovski/mini.ai",
+  opts = {},
 }

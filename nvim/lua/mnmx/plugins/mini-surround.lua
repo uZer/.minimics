@@ -1,7 +1,7 @@
 return {
-  'echasnovski/mini.surround',
+  "echasnovski/mini.surround",
   opts = {
     respect_selection_type = true,
     custom_surroundings = nil,
-  }
+  },
 }
