@@ -1,0 +1,26 @@
+  {
+    "$schema": "https://opencode.ai/config.json",
+    "default_agent": "plan",
+    "permission": {
+      "*": "ask",
+      "bash": "deny",
+      "codesearch": "allow",
+      "external_directory": {
+        "*": "deny",
+        "~/.minimics/**": "allow"
+      },
+      "grep": "allow",
+      "question": "allow",
+      "list": "allow",
+      "lsp": "allow",
+      "read": {
+        "*": "allow",
+        "*.env": "ask",
+        "*.env.*": "ask",
+      },
+      "skill": "allow",
+      "task": "allow",
+      "webfetch": "allow",
+      "websearch": "allow",
+    }
+  }

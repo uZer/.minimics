@@ -15,6 +15,7 @@
 #     npm yarn ripgrep fd tree-sitter tree-sitter-cli cargo
 #     luarocks python-pynvim lua-jsregexp
 #     liquidsoap-prettier
+#     opencode
 #   pywal16:
 #     pywal-16-colors
 
@@ -38,6 +39,7 @@
 # kicad
 # minimics
 # nvim
+# opencode
 # pywal16
 # rofi
 # scide
@@ -52,7 +54,7 @@
 # By default, install selected modules:
 modules=(bash zsh alacritty chrome copyq ctags env git gtk htop hyprland
   minimics nvim pywal16 rofi waybar scide swaync taskwarrior kanshi
-  gnuplot swappy kicad)
+  gnuplot swappy kicad opencode)
 
 # Dotfiles path
 MIN_PATH="${HOME}/.minimics"
@@ -251,6 +253,15 @@ _kicad() {
   echo
   return
 }
+
+_opencode() {
+  echo "[opencode]"
+  echo "  Linking configuration files..."
+  makelink "${MIN_PATH}/opencode/opencode.json" "${HOME}/.config/opencode/opencode.json"
+  echo
+  return
+}
+
 _minimics() {
   echo "[minimics]"
   echo "  Creating ${HOME}/.config if needed..."
