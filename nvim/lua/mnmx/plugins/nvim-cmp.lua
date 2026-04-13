@@ -46,7 +46,7 @@ return {
 
       completion = {
         completeopt = "menu,menuone,noinsert,noselect",
-        keyword_length = 2,
+        keyword_length = 1,
       },
 
       experimental = {
