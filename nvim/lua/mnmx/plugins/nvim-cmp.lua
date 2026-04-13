@@ -123,17 +123,21 @@ return {
         ["<C-n>"] = cmp.mapping.scroll_docs(-4),
         ["<C-p>"] = cmp.mapping.scroll_docs(4),
 
-        -- Complete
-        ["<C-Space>"] = cmp.mapping.complete(),
-
         -- Abort
         ["<C-e>"] = cmp.mapping.abort(),
 
+        -- Complete
         -- Confirm (explicit, safe)
-        ["<CR>"] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        }),
+        ["<C-Space>"] = cmp.mapping(function()
+          if cmp.visible() then
+            cmp.confirm({
+              behavior = cmp.ConfirmBehavior.Replace,
+              select = true,
+            })
+          else
+            cmp.complete()
+          end
+        end),
 
         -- Navigation
         ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -141,20 +145,20 @@ return {
 
         -- Tab logic (correct hierarchy)
         ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
+          if luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
+          elseif cmp.visible() then
+            cmp.select_next_item()
           else
             fallback()
           end
         end),
 
         ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
+          if luasnip.jumpable(-1) then
             luasnip.jump(-1)
+          elseif cmp.visible() then
+            cmp.select_prev_item()
           else
             fallback()
           end
