@@ -49,10 +49,6 @@ return {
         keyword_length = 1,
       },
 
-      experimental = {
-        ghost_text = true, -- inline suggestions
-      },
-
       preselect = cmp.PreselectMode.None, -- strict behavior
 
       snippet = {
