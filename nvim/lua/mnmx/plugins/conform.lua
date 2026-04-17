@@ -20,6 +20,7 @@ return {
       go = { "goimports", "gofmt" },
       jsonnet = { "jsonnetfmt" },
       liquidsoap = { "liquidsoap-prettier" },
+      yaml = { "yamlfmt" },
     },
 
     format_on_save = function(bufnr)
