@@ -44,7 +44,7 @@ return {
         "marksman",
         "pylsp",
         "pyright",
-        "rust-analyzer",
+        "rust_analyzer",
         "sqlls",
         "svelte",
         "taplo",
