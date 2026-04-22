@@ -20,7 +20,7 @@ return {
       go = { "goimports", "gofmt" },
       jsonnet = { "jsonnetfmt" },
       liquidsoap = { "liquidsoap-prettier" },
-      terragrunt = { "terragrunt_hclfmt" },
+      hcl = { "terraform_fmt", "terragrunt_hclfmt" },
       yaml = { "yamlfmt" },
     },
 
