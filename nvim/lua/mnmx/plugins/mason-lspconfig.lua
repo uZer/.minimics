@@ -22,6 +22,10 @@ return {
     "b0o/SchemaStore.nvim",
   },
   config = function()
+    vim.lsp.config("*", {
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    })
+
     local mason_lspconfig = require("mason-lspconfig")
     mason_lspconfig.setup({
       automatic_installation = true,
@@ -88,8 +92,6 @@ return {
       -- "yamlfmt",
       -- "yamllint",
     })
-    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- if using nvim-cmp
 
     vim.lsp.config("dockerls", {
       settings = {

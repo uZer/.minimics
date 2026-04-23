@@ -24,6 +24,7 @@ return {
         "commitlint",
         "markdownlint",
         "shfmt",
+        "yamlfmt",
       },
     },
   },
