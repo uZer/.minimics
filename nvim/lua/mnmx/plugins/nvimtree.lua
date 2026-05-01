@@ -43,6 +43,16 @@ local function my_on_attach(bufnr)
     vim.fn.system({ "git", "reset", path })
     print("git reset " .. path)
   end, opts("Git reset"))
+
+  -- git restore
+  vim.keymap.set("n", "gR", function()
+    local path = get_node_path()
+    if not path then
+      return
+    end
+    vim.fn.system({ "git", "restore", path })
+    print("git reset " .. path)
+  end, opts("Git reset"))
 end
 
 -- Browse the directory with nvim-tree when opening a buffer on a directory
