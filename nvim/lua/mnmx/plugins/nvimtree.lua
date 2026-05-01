@@ -14,6 +14,35 @@ local function my_on_attach(bufnr)
 
   -- override with custom mappings
   vim.keymap.set("n", "U", api.tree.change_root_to_parent, opts("Up"))
+
+  -- helper to get absolute path
+  local function get_node_path()
+    local node = api.tree.get_node_under_cursor()
+    if not node then
+      return nil
+    end
+    return node.absolute_path
+  end
+
+  -- git add
+  vim.keymap.set("n", "ga", function()
+    local path = get_node_path()
+    if not path then
+      return
+    end
+    vim.fn.system({ "git", "add", path })
+    print("git add " .. path)
+  end, opts("Git add"))
+
+  -- git reset
+  vim.keymap.set("n", "gA", function()
+    local path = get_node_path()
+    if not path then
+      return
+    end
+    vim.fn.system({ "git", "reset", path })
+    print("git reset " .. path)
+  end, opts("Git reset"))
 end
 
 -- Browse the directory with nvim-tree when opening a buffer on a directory
@@ -58,7 +87,6 @@ return {
     modified = {
       enable = true,
     },
-    respect_buf_cwd = true,
     filters = {
       dotfiles = false,
     },
@@ -77,11 +105,13 @@ return {
         end
       end,
       group_empty = true,
-      highlight_git = true,
+      highlight_git = "name",
+      highlight_opened_files = "name",
       icons = {
         git_placement = "after",
       },
     },
+    respect_buf_cwd = true,
     update_focused_file = {
       enable = true,
       update_root = {
@@ -91,7 +121,7 @@ return {
     update_cwd = true,
     view = {
       -- signcolumn = "yes",
-      -- width = 32,
+      width = 32,
     },
     on_attach = my_on_attach,
   },
