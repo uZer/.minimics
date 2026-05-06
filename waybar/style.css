@@ -3,7 +3,11 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: Arimo Nerd Font, Helvetica, Arial, sans-serif;
+  font-family:
+    Arimo Nerd Font,
+    Helvetica,
+    Arial,
+    sans-serif;
   font-size: 1rem;
   min-height: 1rem;
 }
@@ -20,8 +24,8 @@ window#waybar {
 #workspaces button {
   background: @color0;
   color: @foreground;
-  padding: .25rem;
-  border-bottom: .2rem solid @color6;
+  padding: 0.25rem;
+  border-bottom: 0.2rem solid @color6;
 }
 
 /* Removes Strange Hover effect */
@@ -34,7 +38,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background: @color4
+  background: @color4;
 }
 
 #battery,
@@ -58,23 +62,23 @@ window#waybar {
 #tray,
 #wireplumber {
   color: @foreground;
-  padding: .25rem .5rem;
+  padding: 0.25rem 0.5rem;
   margin: 0;
 }
 
 #battery {
   background-color: @color2;
-  border-bottom: .2rem solid @color2Alpha;
+  border-bottom: 0.2rem solid @color2Alpha;
 }
 
 #battery.charging {
   background-color: @color3;
-  border-bottom: .2rem solid @color3Alpha;
+  border-bottom: 0.2rem solid @color3Alpha;
 }
 
 #battery.plugged {
   background-color: @color2;
-  border-bottom: .2rem solid @color2Alpha;
+  border-bottom: 0.2rem solid @color2Alpha;
 }
 
 #battery.warning:not(.charging) {
@@ -87,141 +91,141 @@ window#waybar {
 
 #bluetooth {
   background-color: @color12;
-  border-bottom: .2rem solid @color12Alpha;
+  border-bottom: 0.2rem solid @color12Alpha;
 }
 
 #bluetooth.disabled,
 #bluetooth.off {
   background-color: @color0Alpha;
-  border-bottom: .2rem solid @color0;
+  border-bottom: 0.2rem solid @color0;
 }
 
 #bluetooth.connected {
   background-color: @color12;
-  border-bottom: .2rem solid @color12Alpha;
+  border-bottom: 0.2rem solid @color12Alpha;
 }
 
 #clock {
   background-color: @color0;
-  border-bottom: .2rem solid @color0Alpha;
+  border-bottom: 0.2rem solid @color0Alpha;
 }
 
 #cpu {
   background-color: @color9;
-  border-bottom: .2rem solid @color9Alpha;
+  border-bottom: 0.2rem solid @color9Alpha;
 }
 
 #custom-airplane {
   background: transparent;
-  border-bottom: .2rem solid transparent;
+  border-bottom: 0.2rem solid transparent;
 }
 
 #custom-health {
   background-color: @color2;
-  border-bottom: .2rem solid @color2Alpha;
+  border-bottom: 0.2rem solid @color2Alpha;
 }
 
 #custom-ghpr {
   color: @color15;
   background-color: @color9;
-  border-bottom: .2rem solid @color9Alpha;
+  border-bottom: 0.2rem solid @color9Alpha;
 }
 
 #custom-ghpr-bot {
   color: @color8;
   background-color: @color16;
-  border-bottom: .2rem solid @color16Alpha;
+  border-bottom: 0.2rem solid @color16Alpha;
 }
 
 #custom-playerctl {
   /* color: @color10; */
   background-color: @color2;
-  padding: .2rem .5rem;
-  border-bottom: .2rem solid @color2Alpha;
+  padding: 0.2rem 0.5rem;
+  border-bottom: 0.2rem solid @color2Alpha;
 }
 
 #custom-network-interface {
   background-color: @color4;
-  border-bottom: .2rem solid @color4Alpha;
+  border-bottom: 0.2rem solid @color4Alpha;
 }
 
 #custom-network-interface.disconnected {
   background-color: @color0Alpha;
-  border-bottom: .2rem solid @color0;
+  border-bottom: 0.2rem solid @color0;
 }
 
 #custom-notification {
   background-color: @color13;
-  padding: .2rem .5rem;
-  border-bottom: .2rem solid @color13Alpha;
+  padding: 0.2rem 0.5rem;
+  border-bottom: 0.2rem solid @color13Alpha;
 }
 
 #custom-online,
 #custom-publicip {
   background-color: @color4;
-  border-bottom: .2rem solid @color4Alpha;
+  border-bottom: 0.2rem solid @color4Alpha;
 }
 
 #custom-online.offline,
 #custom-publicip.offline {
   background-color: @color0Alpha;
-  border-bottom: .2rem solid @color0;
+  border-bottom: 0.2rem solid @color0;
 }
 
 #custom-tailscale {
   background-color: @color5;
-  border-bottom: .2rem solid @color5Alpha;
+  border-bottom: 0.2rem solid @color5Alpha;
 }
 
 #custom-tailscale.exit-online {
   background-color: @color13;
-  border-bottom: .2rem solid @color13Alpha;
+  border-bottom: 0.2rem solid @color13Alpha;
 }
 
 #custom-tailscale.exit-offline {
   background-color: @color9;
-  border-bottom: .2rem solid @color1Alpha;
+  border-bottom: 0.2rem solid @color1Alpha;
 }
 
 #disk {
   background-color: @color3;
-  border-bottom: .2rem solid @color3Alpha;
+  border-bottom: 0.2rem solid @color3Alpha;
 }
 
 #memory {
   background-color: @color6;
-  border-bottom: .2rem solid @color6Alpha;
+  border-bottom: 0.2rem solid @color6Alpha;
 }
 
 #network {
   background-color: @color4;
-  border-bottom: .2rem solid @color4Alpha;
+  border-bottom: 0.2rem solid @color4Alpha;
 }
 
 #network.disabled {
   background-color: @color0Alpha;
-  border-bottom: .2rem solid @color0;
+  border-bottom: 0.2rem solid @color0;
 }
 
 #network.disconnected {
   background-color: @color0Alpha;
-  border-bottom: .2rem solid @color0;
+  border-bottom: 0.2rem solid @color0;
 }
 
 #privacy {
   background-color: @color9;
-  padding: .2rem .5rem;
-  border-bottom: .2rem solid @color9Alpha;
+  padding: 0.2rem 0.5rem;
+  border-bottom: 0.2rem solid @color9Alpha;
 }
 
 #tray {
-  border-bottom: .2rem solid @color4;
+  border-bottom: 0.2rem solid @color4;
   background: @color0;
 }
 
 #wireplumber {
   background-color: @color2;
-  border-bottom: .2rem solid @color2Alpha;
+  border-bottom: 0.2rem solid @color2Alpha;
 }
 
 @keyframes blink {

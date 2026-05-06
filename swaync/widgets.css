@@ -25,14 +25,13 @@
   color: @foreground;
 }
 
-
 /* Inhibitors widget */
 .widget-inhibitors {
   margin: 8px;
   font-size: 1.5rem;
 }
 
-.widget-inhibitors>button {
+.widget-inhibitors > button {
   font-size: initial;
   color: @foreground;
   text-shadow: none;
@@ -42,6 +41,6 @@
   border-radius: 12px;
 }
 
-.widget-inhibitors>button:hover {
+.widget-inhibitors > button:hover {
   /* background: @noti-bg-hover; */
 }

@@ -1,7 +1,7 @@
 // Local server
 // o = Server.default.options;
-// o.inDevice_("ASIO : Focusrite USB ASIO");
-// o.outDevice_("ASIO : Focusrite USB ASIO");
+// o.inDevice*("ASIO : Focusrite USB ASIO");
+// o.outDevice*("ASIO : Focusrite USB ASIO");
 // o.sampleRate = 48000;
 // o.numBuffers = 64;
 // o.memSize = 65536;
