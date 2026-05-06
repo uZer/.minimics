@@ -15,5 +15,18 @@ rules:
   type-enum:
     - 2
     - always
-    - [bump, clean, doc, feat, fix, hotfix, maint, refact, chore]
+    - [
+        bump,
+        chore,
+        ci,
+        clean,
+        doc,
+        feat,
+        fix,
+        hotfix,
+        maint,
+        refact,
+        style,
+        tests,
+      ]
 defaultIgnores: true
