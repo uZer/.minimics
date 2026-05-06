@@ -42,7 +42,6 @@
   t           = tag
   ui          = update-index
 
-
 [checkout]
   defaultRemote = origin
 
@@ -65,6 +64,9 @@
   changed     = yellow
   untracked   = red
 
+[commit]
+	gpgsign = true
+
 [core]
   editor      = nvim
 
@@ -76,7 +78,7 @@
   cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 
 [gpg]
-  program = /usr/bin/gpg
+	format = ssh
 
 [merge]
   tool = nvimdiff
@@ -113,11 +115,12 @@
   insteadOf = https://gitlab.dnm.radiofrance.fr/
 
 [user]
-  signingkey = 0BB86EA4B04B1A568DD15FBC6534FBBC86B7DB4D
+	signingkey = /home/ypiolet/.ssh/id_ed25519.pub
   name = Youenn Piolet
-  email = piolet.y@gmail.com
+	email = piolet.y@gmail.com
 
 [includeIf "gitdir:~/rf.gitlab/"]
   path = ~/rf.venv.custom/gitconfig
 [includeIf "gitdir:~/rf.github/"]
   path = ~/rf.venv.custom/gitconfig
+
