@@ -17,11 +17,11 @@ return {
 
     formatters_by_ft = {
       lua = { "stylua" },
-      go = { "goimports", "gofmt" },
+      go = { "gofumpt", "gofmt", "goimports" },
       jsonnet = { "jsonnetfmt" },
       liquidsoap = { "liquidsoap-prettier" },
       hcl = { "terraform_fmt", "terragrunt_hclfmt" },
-      yaml = { "yamlfmt" },
+      yaml = { "prettier" },
     },
 
     format_on_save = function(bufnr)
@@ -31,7 +31,7 @@ return {
         return
       end
 
-      return { timeout_ms = 5000 }
+      return { timeout_ms = 2000 }
     end,
 
     format_after_save = function(bufnr)
