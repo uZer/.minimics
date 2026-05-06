@@ -1,0 +1,11 @@
+gtk-3.0/gtk.css
+pywal16/templates/colors-copyq.css
+supercollider/sc_ide_conf.yaml
+zsh/custom/plugins/zsh-autosuggestions
+zsh/custom/plugins/zsh-syntax-highlighting
+zsh/custom/themes/powerlevel10k
+.git
+*.html
+*.md
+*.json
+*.js
