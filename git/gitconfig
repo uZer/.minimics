@@ -1,126 +1,120 @@
 [alias]
-  prune       = fetch --prune
-  undo        = reset --soft HEAD^
+prune       = fetch --prune
+undo        = reset --soft HEAD^
 
-  # Very useful
-  po          = push origin master
-  mr          = merge remotes/origin/master
-  cl          = clean --force -d
-  lgs         = log --stat --graph
-  # status
-  st          = status
-  # commit
-  ci          = commit --all
-  # branch
-  b           = branch
-  br          = branch
-  bt          = branch --track
-  ba          = branch --all
-  # checkout
-  co          = checkout
-  cob         = checkout -b
-  cobt        = checkout -b --track
-  # diff
-  d = difftool
-  # log
-  l           = log
-  lp          = log --patch
-  ls          = log --stat
-  lr          = log --raw
-  lg          = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-  lo          = log --pretty=oneline
-  # fetch
-  f           = fetch
-  # remote
-  r           = remote
-  rs          = remote show
-  ra          = remote add
-  rd          = remote del
-  # misc
-  lsf         = ls-files
-  m           = merge
-  t           = tag
-  ui          = update-index
+# Very useful
+po          = push origin master
+mr          = merge remotes/origin/master
+cl          = clean --force -d
+lgs         = log --stat --graph
+# status
+st          = status
+# commit
+ci          = commit --all
+# branch
+b           = branch
+br          = branch
+bt          = branch --track
+ba          = branch --all
+# checkout
+co          = checkout
+cob         = checkout -b
+cobt        = checkout -b --track
+# diff
+d = difftool
+# log
+l           = log
+lp          = log --patch
+ls          = log --stat
+lr          = log --raw
+lg          = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+lo          = log --pretty=oneline
+# fetch
+f           = fetch
+# remote
+r           = remote
+rs          = remote show
+ra          = remote add
+rd          = remote del
+# misc
+lsf         = ls-files
+m           = merge
+t           = tag
+ui          = update-index
 
 [checkout]
-  defaultRemote = origin
+defaultRemote = origin
 
 [color]
-  ui          = true
-  branch      = auto
-  diff        = auto
-  status      = auto
+ui          = true
+branch      = auto
+diff        = auto
+status      = auto
 [color "branch"]
-  current     = blue reverse
-  local       = green
-  remote      = yellow
+current     = blue reverse
+local       = green
+remote      = yellow
 [color "diff"]
-  meta        = blue
-  frag        = yellow
-  old         = red
-  new         = green
+meta        = blue
+frag        = yellow
+old         = red
+new         = green
 [color "status"]
-  added       = green
-  changed     = yellow
-  untracked   = red
+added       = green
+changed     = yellow
+untracked   = red
 
 [commit]
-	gpgsign = true
+gpgsign = true
 
 [core]
-  editor      = nvim
+editor      = nvim
 
 [diff]
-  tool = nvimdiff
+tool = nvimdiff
 [difftool]
-  prompt = false
+prompt = false
 [difftool "nvimdiff"]
-  cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 
 [gpg]
-	format = ssh
+format = ssh
 
 [merge]
-  tool = nvimdiff
+tool = nvimdiff
 [mergetool]
-  keepBackup = false
+keepBackup = false
 [mergetool "nvimdiff"]
-  cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
+cmd = nvim -d \"$LOCAL\" \"$MERGED\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
 [mergetool "fugitive"]
-  cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 
 [pull]
-  rebase = true
+rebase = true
 [push]
-  # Default behavior for git push
-  #  nothing - do not push anything.
-  #  matching - push all branches having the same name in both ends.
-  #  upstream - push the current branch to its upstream branch.
-  #  simple - like upstream, but refuses to push if the upstream branch’s name is different from the local one.
-  #  current - push the current branch to a branch of the same name.
-  default = current
-  followTags = true
-  autoSetupRemote = true
+# Default behavior for git push
+#  nothing - do not push anything.
+#  matching - push all branches having the same name in both ends.
+#  upstream - push the current branch to its upstream branch.
+#  simple - like upstream, but refuses to push if the upstream branch’s name is different from the local one.
+#  current - push the current branch to a branch of the same name.
+default = current
+followTags = true
+autoSetupRemote = true
 
 [rebase]
-  instructionFormat = (%an <%ae>) %s
+instructionFormat = (%an <%ae>) %s
 
 [status]
-  showUntrackedFiles = all
+showUntrackedFiles = all
 
 [transfert]
-  fsckobjects = true
+fsckobjects = true
 
 [url "git@gitlab.dnm.radiofrance.fr:"]
-  insteadOf = https://gitlab.dnm.radiofrance.fr/
+insteadOf = https://gitlab.dnm.radiofrance.fr/
 
 [user]
-	signingkey = /home/ypiolet/.ssh/id_ed25519.pub
-  name = Youenn Piolet
-	email = piolet.y@gmail.com
-
-[includeIf "gitdir:~/rf.gitlab/"]
-  path = ~/rf.venv.custom/gitconfig
-[includeIf "gitdir:~/rf.github/"]
-  path = ~/rf.venv.custom/gitconfig
-
+signingkey = /home/ypiolet/.ssh/id_ed25519.pub
+name = Youenn Piolet
+email = piolet.y@gmail.com
