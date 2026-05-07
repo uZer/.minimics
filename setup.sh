@@ -4,20 +4,26 @@
 #   ctags:
 #     universal-ctags
 #   hyprland:
-#     xdg-desktop-portal-hyprland wofi rofi-lbonn-wayland rofi-pass
-#     swaylock-effects swaybg slurp grim swappy wl-clipboard wireplumber
-#     pipewire pipewire-pulse wdisplays kanshi playerctl brightnessctl
-#     hyprpicker xdg-utils copyq tessen wtype imv qt5ct qt6ct swaync nwg-look
-#     qogir-cursor-theme-git qogir-gtk-theme qogir-icon-theme alacritty
-#     ttf-mulish polkit-kde-agent noto-fonts-emoji xwaylandvideobridge
+#     alacrittybrightnessctl copyq grim hyprpicker imv kanshi noto-fonts-emoji
+#     nwg-lookpipewire pipewire-pulse playerctl polkit-kde-agent
+#     qogir-cursor-theme-git qogir-gtk-theme qogir-icon-theme qt5ct qt6ct
+#     rofi-lbonn-wayland rofi-pass slurp swappy swaybg swaylock-effects swaync
+#     tessen ttf-mulish wdisplays wireplumber wl-clipboard wlcopy wofi wtype
+#     xdg-desktop-portal-hyprland xdg-utilsxwaylandvideobridge
+#   git:
+#     git lazygit
 #   nvim:
-#     neovim>=0.8.0 wget curl
+#     neovim wget curl
 #     npm yarn ripgrep fd tree-sitter tree-sitter-cli cargo
 #     luarocks python-pynvim lua-jsregexp
 #     liquidsoap-prettier
 #     opencode
 #   pywal16:
 #     pywal-16-colors
+#   wsl:
+#     xdg-utils
+#   zsh:
+#     sudo which fzf uv colordiff mlocate tig shellcheck prettier htop tree
 
 ###################
 ## FEATURE FLAGS ##
@@ -110,6 +116,7 @@ makelink() {
   fi
 
   # Make the new link
+  mkdir -p "$(dirname "${_DEST}")" 2>/dev/null
   ln -s "${_SOURCE}" "${_DEST}"
   return 0
 }
@@ -178,19 +185,17 @@ _git() {
   echo "[git]"
   echo "  Linking configuration files..."
   makelink "${MIN_PATH}/git/gitconfig" "${HOME}/.gitconfig"
+  makelink "${MIN_PATH}/lazygit" "${HOME}/.config/lazygit"
   echo "  What is your github login? [Default: Youenn Piolet]"
   read -r GIT_LOGIN
   echo "  What is your github email? [Default: piolet.y@gmail.com]"
   read -r GIT_EMAIL
   GIT_LOGIN="${GIT_LOGIN:-Youenn Piolet}"
   GIT_EMAIL="${GIT_EMAIL:-piolet.y@gmail.com}"
-  echo "  name  = ${GIT_LOGIN}"
-  echo "  email = ${GIT_EMAIL}"
+  echo "name  = ${GIT_LOGIN}"
+  echo "email = ${GIT_EMAIL}"
   git config --global user.name "${GIT_LOGIN}"
   git config --global user.email "${GIT_EMAIL}"
-  sed -i 's/^[\t]/  /g' "${MIN_PATH}/git/gitconfig"
-  echo "export GIT_USERNAME=${GIT_LOGIN}" >>~/.aliases.local
-  echo "export GIT_EMAIL=${GIT_EMAIL}" >>~/.aliases.local
   echo
   return
 }
