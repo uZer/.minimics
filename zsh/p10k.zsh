@@ -34,6 +34,7 @@
     # os_icon                 # os identifier
     context                 # user@hostname
     dir                     # current directory
+    background_jobs         # presence of background jobs
     vcs                     # git status
     # prompt_char           # prompt symbol
   )
@@ -46,7 +47,7 @@
     status                  # exit code of the last command
     time                    # current time
     # command_execution_time  # duration of the last command
-    background_jobs         # presence of background jobs
+    # background_jobs         # presence of background jobs
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     anaconda                # conda environment (https://conda.io/)
@@ -591,10 +592,10 @@
 
   #######################[ background_jobs: presence of background jobs ]#######################
   # Don't show the number of background jobs.
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
+  # typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
   # Background jobs color.
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=6
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND=0
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=0
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND=9
   # Custom icon.
   # typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
