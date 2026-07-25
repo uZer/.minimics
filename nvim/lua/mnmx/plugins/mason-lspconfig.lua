@@ -46,7 +46,6 @@ return {
         "jsonnet_ls",
         "lua_ls",
         "marksman",
-        "nginx_language_server",
         "pylsp",
         "pyright",
         "rust_analyzer",
@@ -76,6 +75,7 @@ return {
       -- "luaformatter",
       -- "markdownlint",
       -- "markuplint",
+      -- "nginx_language_server", -- python version required is too old
       -- "pint",
       -- "prettierd",
       -- "shellcheck",
