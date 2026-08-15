@@ -159,3 +159,7 @@ instastory() {
     -pix_fmt yuv420p -c:a aac \
     $1.instastory.mp4
 }
+
+kdecode () {
+	kubectl get secret -o json $@ | jq '.data | map_values(@base64d)'
+}
