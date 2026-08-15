@@ -131,7 +131,7 @@ return {
     update_cwd = true,
     view = {
       -- signcolumn = "yes",
-      width = 32,
+      width = 35,
     },
     on_attach = my_on_attach,
   },
