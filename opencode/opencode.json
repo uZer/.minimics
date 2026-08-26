@@ -1,26 +1,40 @@
-  {
-    "$schema": "https://opencode.ai/config.json",
-    "default_agent": "plan",
-    "permission": {
-      "*": "ask",
-      "bash": "deny",
-      "codesearch": "allow",
-      "external_directory": {
-        "*": "deny",
-        "~/.minimics/**": "allow"
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
       },
-      "grep": "allow",
-      "question": "allow",
-      "list": "allow",
-      "lsp": "allow",
-      "read": {
-        "*": "allow",
-        "*.env": "ask",
-        "*.env.*": "ask",
-      },
-      "skill": "allow",
-      "task": "allow",
-      "webfetch": "allow",
-      "websearch": "allow",
+      "models": {
+        "qwen2.5-coder:3b-instruct-q4_K_S": {
+          "name": "Qwen 2.5 Coder 3B"
+        }
+      }
     }
+  },
+  "default_agent": "plan",
+  "permission": {
+    "*": "ask",
+    "bash": "deny",
+    "codesearch": "allow",
+    "external_directory": {
+      "*": "deny",
+      "~/.minimics/**": "allow"
+    },
+    "grep": "allow",
+    "question": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "read": {
+      "*": "allow",
+      "*.env": "ask",
+      "*.env.*": "ask",
+    },
+    "skill": "allow",
+    "task": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
   }
+}
