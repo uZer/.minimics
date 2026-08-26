@@ -9,8 +9,8 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
-get_usage () {
-  cat << EOF
+get_usage() {
+  cat <<EOF
 Runs a program on the specified workspace depending on your window manager.
 If the process forks we can't be sure the right workspace will be used.
 
@@ -37,7 +37,13 @@ shift
 command=${*}
 
 case "${XDG_SESSION_DESKTOP:-null}" in
-  hyprland) hyprctl dispatch exec [workspace "${workspace}"] -- "${command}" ;;
-  i3) i3-msg "workspace ${workspace}; ${command}" ;;
-  *) eval "$command" ;;
+hyprland)
+  hyprctl dispatch "hl.dsp.exec_cmd(\"[workspace ${workspace}] ${command}\")"
+  ;;
+i3)
+  i3-msg "workspace ${workspace}; ${command}"
+  ;;
+*)
+  "$@"
+  ;;
 esac
