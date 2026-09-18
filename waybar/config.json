@@ -90,7 +90,7 @@
     "format": "{}",
     "interval": 60,
     "return-type": "json",
-    "on-click": "firefox -P ffp \"https://github.com/search?q=is%3Apr+is%3Aopen+-author%3Aapp%2Frenovate+org%3Abill-of-materials+user%3AuZer&type=pullrequests\""
+    "on-click": "firefox -P ffp \"https://github.com/search?q=is%3Apr+is%3Aopen+org%3Abill-of-materials+user%3AuZer&type=pullrequests\""
   },
   "custom/network-interface": {
     "exec": "mini waybar status netif",
