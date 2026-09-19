@@ -48,30 +48,24 @@ return {
 
       -- LSP progress display helper
       local function lsp_status()
-        local progress = require("lsp-progress")
-        return progress.progress({
-          max_size = 80,
-          format = function(messages)
-            local clients = vim.lsp.get_clients()
-            if #messages > 0 then
-              return table.concat(messages, " ")
-            end
-            local names = {}
-            for _, client in ipairs(clients) do
-              if client and client.name ~= "" then
-                table.insert(names, 1, client.name)
-              end
-            end
-            return table.concat(names, "  ")
-          end,
-        })
+        return require("lsp-progress").progress()
       end
 
       return {
         options = {
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
-          disable_filetypes = { "NvimTree", "lazy", "mason", "_.*" },
+          disable_filetypes = {
+            "NvimTree",
+            "lazy",
+            "mason",
+            "_.*",
+            "AgenticChat",
+            "AgenticInput",
+            "AgenticCode",
+            "AgenticFiles",
+            "AgenticDiagnostics",
+          },
           extensions = { "lazy", "nvim-tree", "mason" },
           ignore_focus = { "NvimTree", "lazy", "mason", "_.*" },
           theme = "pywal16-nvim",
