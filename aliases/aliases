@@ -147,7 +147,7 @@ alias track='vim ~/ypi.projects/horizon/$(date +%Gw%V) -o ~/ypi.projects/horizon
 alias journal='vim ~/ypi.projects/horizon/journal -O ~/ypi.projects/horizon/collections'
 
 alias feh='imv-dir "$@" &>/dev/null'
-alias youtube-dl=yt-dlp
+alias yt='yt-dlp -f "bestvideo+bestaudio" --merge-output-format mkv --output "%(title)s.%(ext)s"'
 
 instastory() {
   # Convert vertical video to Instagram story format.
