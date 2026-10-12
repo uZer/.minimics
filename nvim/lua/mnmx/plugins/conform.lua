@@ -1,5 +1,5 @@
 local slow_format_filetypes = {
-  "liquidsoap",
+  liquidsoap = true,
 }
 
 return {
@@ -21,6 +21,8 @@ return {
       jsonnet = { "jsonnetfmt" },
       liquidsoap = { "liquidsoap-prettier" },
       hcl = { "terraform_fmt", "terragrunt_hclfmt" },
+      terraform = { "terraform_fmt" },
+      ["terraform-vars"] = { "terraform_fmt" },
 
       -- js
       javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -37,6 +39,8 @@ return {
       json = { "prettierd", "prettier", stop_after_first = true },
       jsonc = { "prettierd", "prettier", stop_after_first = true },
       yaml = { "prettierd", "prettier", stop_after_first = true },
+
+      ["*"] = { "trim_whitespace" },
     },
 
     format_on_save = function(bufnr)
