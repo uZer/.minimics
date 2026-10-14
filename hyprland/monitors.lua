@@ -3,4 +3,5 @@ hl.monitor({
   mode = "preferred",
   position = "auto",
   scale = "auto",
+  -- mirror = "eDP-1",
 })
