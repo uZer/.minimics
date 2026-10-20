@@ -24,3 +24,14 @@ profile rfoid2-encom {
   output "BNQ BenQ BL2480 HCL0118801Q" position 1920,0 mode 1920x1080@60.00000 scale 1 transform normal enable
   output "BNQ BenQ BL2480 JBL0105001Q" position 0,0 mode 1920x1080@60.00000 scale 1 transform normal enable
 }
+
+profile rfoid2-cpx-solo {
+  output eDP-1 position 3072,900 mode 1920x1200@60.00100 scale 1.3333334 transform normal enable
+  output "LG Electronics LG TV SSCR2 0x01010101" position 0,0 mode 3840x2160@30.00000 scale 1.25 transform normal disable
+}
+
+profile rfoid2-cpx-dock {
+  output eDP-1 position 3072,900 mode 1920x1200@60.00100 scale 1.3333334 transform normal enable
+  output "LG Electronics LG TV SSCR2 0x01010101" position 0,0 mode 3840x2160@30.00000 scale 1.25 transform normal enable
+}
+
