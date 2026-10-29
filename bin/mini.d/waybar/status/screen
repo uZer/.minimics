@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# display screen mirroring state for waybar
+
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+json=$(hyprctl monitors all -j | jq '[.[] | select(.disabled == false or .mirrorOf != "none")]')
+
+# Hide the button with a single screen
+if [ "$(jq 'length' <<<"$json")" -lt 2 ]; then exit 0 ; fi
+
+if jq -e 'any(.[]; .mirrorOf != "none")' <<<"$json" >/dev/null; then
+  jq -cM <<EOF
+  {
+    "text": "󱠍",
+    "tooltip": "Extend screens",
+    "class": "mirror"
+  }
+EOF
+else
+  jq -cM <<EOF
+  {
+    "text": "󰍺",
+    "tooltip": "Mirror screens",
+    "class": "extend"
+  }
+EOF
+fi

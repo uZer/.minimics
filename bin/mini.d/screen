@@ -16,12 +16,16 @@ manipulate screen settings (wayland only)
 usage:
   $COMMAND --help, -h
   $COMMAND conf >> ${MIN_PATH}/kanshi/config
+  $COMMAND mirror
+  $COMMAND extend
   $COMMAND shot
 
 arguments:
   -h, --help   display this message
   edit         edit configuration with wdisplays
   conf         output a configuration block formatted for kanshi
+  mirror       mirror the main screen on every external screen
+  extend       extend the desktop on every external screen
   shot         make and edit a screenshot
 
 EOF
@@ -43,6 +47,38 @@ EOF
 
 }
 
+# Name of the main screen: internal panel if any, focused screen otherwise
+main_screen() {
+  hyprctl monitors all -j | jq -r '
+    [.[] | select(.disabled == false or .mirrorOf != "none")] as $m |
+    ([$m[] | select(.name | test("^(eDP|LVDS|DSI)-")) | .name] | first) //
+    ([$m[] | select(.focused) | .name] | first) //
+    $m[0].name'
+}
+
+# Names of every enabled screen except the main one
+external_screens() {
+  hyprctl monitors all -j | jq -r --arg main "$1" '.[] |
+    select(.disabled == false or .mirrorOf != "none") |
+    select(.name != $main) | .name'
+}
+
+# Mirror the main screen on external screens, or extend the desktop
+set_mirror() {
+  main=$(main_screen)
+  rule=""
+  [ "$1" = "mirror" ] && rule="mirror = \"$main\","
+  for screen in $(external_screens "$main"); do
+    hyprctl -q eval "hl.monitor({ output = \"$screen\", mode = \"preferred\", position = \"auto\", scale = \"auto\", $rule })"
+  done
+  # Let kanshi restore known layouts
+  if [ "$1" = "extend" ] && pgrep -x kanshi >/dev/null; then
+    kanshictl reload
+  fi
+  # Refresh waybar screen module
+  pkill -RTMIN+8 waybar || true
+}
+
 # Take a screenshot and edit
 screenshot() {
   slurp | {
@@ -60,6 +96,8 @@ while [ "$#" -ne 0 ]; do
   case "$1" in
   conf) export_config ;;
   edit) wdisplays ;;
+  extend) set_mirror extend ;;
+  mirror) set_mirror mirror ;;
   shot) screenshot ;;
   *)
     get_usage

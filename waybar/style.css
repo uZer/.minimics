@@ -53,6 +53,7 @@ window#waybar {
 #custom-online,
 #custom-playerctl,
 #custom-publicip,
+#custom-screen,
 #custom-tailscale,
 #disk,
 #memory,
@@ -170,6 +171,16 @@ window#waybar {
 #custom-publicip.offline {
   background-color: @color0Alpha;
   border-bottom: 0.2rem solid @color0;
+}
+
+#custom-screen.extend {
+  background-color: @color12;
+  border-bottom: 0.2rem solid @color12Alpha;
+}
+
+#custom-screen.mirror {
+  background-color: @color9;
+  border-bottom: 0.2rem solid @color9Alpha;
 }
 
 #custom-tailscale {

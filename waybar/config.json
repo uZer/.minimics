@@ -16,6 +16,7 @@
     "custom/airplane",
     "privacy",
     "custom/ghpr",
+    "custom/screen",
     "group/connectivity",
     "group/essentials"
   ],
@@ -91,6 +92,14 @@
     "interval": 60,
     "return-type": "json",
     "on-click": "firefox -P ffp \"https://github.com/search?q=is%3Apr+is%3Aopen+org%3Abill-of-materials+user%3AuZer&type=pullrequests\""
+  },
+  "custom/screen": {
+    "exec": "mini waybar status screen",
+    "format": "{}",
+    "interval": 3,
+    "signal": 8,
+    "return-type": "json",
+    "on-click": "mini waybar status screen | jq -e '.class == \"mirror\"' >/dev/null && mini screen extend || mini screen mirror"
   },
   "custom/network-interface": {
     "exec": "mini waybar status netif",
