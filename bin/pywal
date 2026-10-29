@@ -125,11 +125,13 @@ r_nvim () {
     nvim --server {} --remote-send ":colorscheme pywal16<CR>" \; &>/dev/null
 }
 
-# Refresh sway theme
-r_swaybg () {
-  if command -v swaybg &> /dev/null; then
-    killall swaybg 2>/dev/null
-    swaybg -m fill -i "$(cat ~/.cache/wal/wal)" 2>/dev/null &
+# Refresh wallpaper (hyprland only)
+# hyprpaper.conf reads the ~/.cache/wal/wallpaper symlink at startup
+r_hyprpaper () {
+  wall="$(cat ~/.cache/wal/wal)"
+  ln -sf "${wall}" ~/.cache/wal/wallpaper
+  if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ] && pgrep -x hyprpaper &> /dev/null; then
+    hyprctl hyprpaper wallpaper ",${wall},cover" &> /dev/null
   fi
 }
 
@@ -144,7 +146,7 @@ r_swaync () {
 # Refresh all configurations
 reload () {
   r_nvim
-  # r_swaybg
+  r_hyprpaper
   r_swaync
   # r_discord
   # r_fox

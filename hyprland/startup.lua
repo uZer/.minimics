@@ -24,8 +24,5 @@ hl.on("hyprland.start", function()
       .. "fi"
   )
 
-  -- Original:
-  -- exec = killall swaybg ; swaybg -m fill -i "$(cat ~/.cache/wal/wal)" 2>/dev/null &
-
-  hl.exec_cmd([[killall swaybg ; swaybg -m fill -i "$(cat ~/.cache/wal/wal)" 2>/dev/null &]])
+  hl.exec_cmd([[killall swaybg ; ln -sf "$(cat ~/.cache/wal/wal)" ~/.cache/wal/wallpaper ; hyprpaper]])
 end)

@@ -7,7 +7,7 @@
 #     alacrittybrightnessctl copyq grim hyprpicker imv kanshi noto-fonts-emoji
 #     nwg-lookpipewire pipewire-pulse playerctl polkit-kde-agent
 #     qogir-cursor-theme-git qogir-gtk-theme qogir-icon-theme qt5ct qt6ct
-#     rofi-lbonn-wayland rofi-pass slurp swappy swaybg swaylock-effects swaync
+#     rofi-lbonn-wayland rofi-pass slurp swappy hyprpaper swaylock-effects swaync
 #     tessen ttf-mulish wdisplays wireplumber wl-clipboard wlcopy wofi wtype
 #     xdg-desktop-portal-hyprland xdg-utilsxwaylandvideobridge
 #   git:
