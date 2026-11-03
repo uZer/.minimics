@@ -55,10 +55,7 @@ return {
 
     format_after_save = function(bufnr)
       if slow_format_filetypes[vim.bo[bufnr].filetype] then
-        return {
-          formatters = { "trim_whitespace" },
-          timeout_ms = 15000,
-        }
+        return { timeout_ms = 15000 }
       end
     end,
   },
