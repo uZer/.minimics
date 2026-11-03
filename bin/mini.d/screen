@@ -64,10 +64,11 @@ external_screens() {
 }
 
 # Mirror the main screen on external screens, or extend the desktop
-set_mirror() {
+set_mirror_config() {
   main=$(main_screen)
-  rule=""
-  [ "$1" = "mirror" ] && rule="mirror = \"$main\","
+  # An explicit empty mirror is required: omitting it keeps the current mirror
+  rule="mirror = \"\""
+  [ "$1" = "mirror" ] && rule="mirror = \"$main\""
   for screen in $(external_screens "$main"); do
     hyprctl -q eval "hl.monitor({ output = \"$screen\", mode = \"preferred\", position = \"auto\", scale = \"auto\", $rule })"
   done
@@ -96,8 +97,8 @@ while [ "$#" -ne 0 ]; do
   case "$1" in
   conf) export_config ;;
   edit) wdisplays ;;
-  extend) set_mirror extend ;;
-  mirror) set_mirror mirror ;;
+  extend) set_mirror_config extend ;;
+  mirror) set_mirror_config mirror ;;
   shot) screenshot ;;
   *)
     get_usage
