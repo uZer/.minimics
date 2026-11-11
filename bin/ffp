@@ -1,3 +1,3 @@
 #!/bin/sh
-# mini run name: google-chrome-stable --ozone-platform=wayland --profile-directory='chrp-ypi'
-mini run name: firefox -P ffp
+# mini run 16 google-chrome-stable --ozone-platform=wayland --profile-directory='chrp-ypi'
+mini run 16 firefox -P ffp

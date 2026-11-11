@@ -1,2 +1,2 @@
 #!/bin/sh
-mini run name: google-chrome-stable --ozone-platform=wayland --profile-directory='chrp-ypi' --app='https://remotedesktop.google.com/access/session/2cb5c886-c44a-51f5-7f7a-a12bbe741035'
+mini run 11 google-chrome-stable --ozone-platform=wayland --profile-directory='chrp-ypi' --app='https://remotedesktop.google.com/access/session/2cb5c886-c44a-51f5-7f7a-a12bbe741035'

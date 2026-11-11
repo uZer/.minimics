@@ -19,7 +19,7 @@ usage:
   $COMMAND <workspace> <command>
 
 example:
-  $COMMAND name: nvim-qt ~/.minimicsrc
+  $COMMAND 15 nvim-qt ~/.minimicsrc
   $COMMAND 3 pavucontrol
 
 arguments:
