@@ -6,7 +6,7 @@
 local workspaces = {
   T = { id = "11", icon = "" },
   Y = { id = "12", icon = "󰙯" },
-  SEMICOLON = { id = "13", icon = "" },
+  SEMICOLON = { id = "13", icon = "" },
   I = { id = "14", icon = "" },
   O = { id = "15", icon = "" },
   P = { id = "16", icon = "" },
