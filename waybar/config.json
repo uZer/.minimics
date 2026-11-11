@@ -14,10 +14,8 @@
   "modules-center": [],
   "modules-right": [
     "custom/airplane",
-    "privacy",
-    "custom/ghpr",
-    "custom/screen",
     "group/connectivity",
+    "privacy",
     "group/essentials"
   ],
   "group/connectivity": {
@@ -67,7 +65,9 @@
       "group/metrics",
       "wireplumber",
       "battery",
+      "custom/screen",
       "clock",
+      "custom/ghpr",
       "custom/notification"
     ]
   },
@@ -99,7 +99,8 @@
     "interval": 3,
     "signal": 8,
     "return-type": "json",
-    "on-click": "mini waybar status screen | jq -e '.class == \"mirror\"' >/dev/null && mini screen extend || mini screen mirror"
+    "on-click": "mini waybar status screen | jq -e '.class == \"mirror\"' >/dev/null && mini screen extend || mini screen mirror",
+    "on-click-right": "mini menu screen"
   },
   "custom/network-interface": {
     "exec": "mini waybar status netif",
@@ -183,12 +184,12 @@
     "tooltip-format": "{controller_alias} ({controller_address}) | {status}\n{num_connections} decives connected\n{device_enumerate}",
     "format-connected": " {device_alias}",
     "format-connected-battery": " {device_alias} ({device_battery_percentage}%)",
-    "format-off": " off",
+    "format-off": "󰂲",
     "format-disabled": "󰂲",
     "format-no-controller": "󰂳",
     "on-click-middle": "mini toggle bt",
     "on-click-right": "mini menu bt",
-    "on-click": "mini menu bt"
+    "on-click": "mini toggle bt"
   },
   "clock": {
     "interval": 1,

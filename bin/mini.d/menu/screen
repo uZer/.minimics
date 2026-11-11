@@ -1,17 +1,74 @@
 #!/usr/bin/env bash
-# launch a menu to change screen configuration for Xorg. Deprecated
+# launch a menu to switch to a kanshi profile matching connected screens
 
 set -eu
 
-bin="${HOME}/.minimics/bin/screen.sh"
-bin_message="XRANDR CONFIGURATION"
-cmd="rofi -theme ${HOME}/.minimics/rofi/screen.rasi"
-available_options=$("${bin}" options)
+config="${XDG_CONFIG_HOME:-${HOME}/.config}/kanshi/config"
 
-# Open rofi and fetch result
-chosen=$(echo -e "${available_options}" | cut -d ';' -f 1 | ${cmd} -p "${bin_message}" -dmenu -selected-row 0)
+# Connected screens as "name<TAB>make model serial", disabled ones included
+screens=$(hyprctl monitors all -j | jq -r '.[] |
+  "\(.name)\t\([.make, .model, .serial] | map(select(. != "")) | join(" "))"')
 
-# Run script if choice has been made in applet
-if [ "${chosen}" != "" ]; then
-  "${bin}" "$(echo -e "${available_options}" | grep "${chosen}" | cut -d ';' -f 2)"
+# Profiles whose outputs match exactly the connected screens
+profiles=$(awk -v screens="${screens}" '
+  BEGIN {
+    n = split(screens, lines, "\n")
+    for (i = 1; i <= n; i++) {
+      split(lines[i], f, "\t")
+      name[i] = f[1]
+      desc[i] = f[2]
+    }
+  }
+  /^[[:space:]]*#/ { next }
+  match($0, /^[[:space:]]*profile[[:space:]]+[^[:space:]{]+/) {
+    profile = substr($0, RSTART, RLENGTH)
+    sub(/^[[:space:]]*profile[[:space:]]+/, "", profile)
+    count = 0
+    ok = 1
+    split("", used)
+    next
+  }
+  profile != "" && match($0, /^[[:space:]]*output[[:space:]]+/) {
+    rest = substr($0, RSTART + RLENGTH)
+    if (rest ~ /^"/) {
+      crit = substr(rest, 2)
+      crit = substr(crit, 1, index(crit, "\"") - 1)
+    } else {
+      crit = rest
+      sub(/[[:space:]].*/, "", crit)
+    }
+    count++
+    found = 0
+    for (i = 1; i <= n; i++) {
+      if (!(i in used) && (crit == "*" || crit == name[i] || crit == desc[i])) {
+        used[i] = 1
+        found = 1
+        break
+      }
+    }
+    if (!found) ok = 0
+    next
+  }
+  profile != "" && /^[[:space:]]*}/ {
+    if (ok && count == n) print profile
+    profile = ""
+  }
+' "${config}")
+
+if [[ -z "${profiles}" ]]; then
+  rofi -e "no matching kanshi profile"
+  exit 0
+fi
+
+# Preselect the active profile
+current=$(kanshictl status 2>/dev/null | sed -n 's/^Current profile: //p')
+row=$(grep -nxF "${current}" <<<"${profiles}" | cut -d: -f1 || true)
+row=$((${row:-1} - 1))
+
+choice=$(rofi -dmenu -i -p "Kanshi profile" -selected-row "${row}" <<<"${profiles}" || true)
+
+# Act on selection
+if [[ -n "${choice}" ]]; then
+  kanshictl switch "${choice}"
+  pkill -RTMIN+8 waybar || true
 fi

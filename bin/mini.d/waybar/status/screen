@@ -11,10 +11,15 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 json=$(hyprctl monitors all -j | jq '[.[] | select(.disabled == false or .mirrorOf != "none")]')
 
-# Hide the button with a single screen
-if [ "$(jq 'length' <<<"$json")" -lt 2 ]; then exit 0 ; fi
-
-if jq -e 'any(.[]; .mirrorOf != "none")' <<<"$json" >/dev/null; then
+if [ "$(jq 'length' <<<"$json")" -lt 2 ]; then
+  jq -cM <<EOF
+  {
+    "text": "󰍹",
+    "tooltip": "Single screen",
+    "class": "single"
+  }
+EOF
+elif jq -e 'any(.[]; .mirrorOf != "none")' <<<"$json" >/dev/null; then
   jq -cM <<EOF
   {
     "text": "󱠍",
