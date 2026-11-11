@@ -19,17 +19,25 @@ profile rfoid2 {
 #######
 # CPX #
 #######
-profile rfoid2-cpx-dock {
+
+# TV plugged directly on laptop HDMI port, dock can't do 4K@60
+profile rfoid2-cpx-studio-desk {
+  output eDP-1 position 2560,540 mode 1920x1200@60.00100 scale 1.3333334 transform normal enable
+  output "LG Electronics LG TV SSCR2 0x01010101" position 0,0 mode 3840x2160@60.00000 scale 1.5 transform normal enable
+}
+
+# TV plugged on the dock
+profile rfoid2-cpx-studio-dock {
   output eDP-1 position 2560,540 mode 1920x1200@60.00100 scale 1.3333334 transform normal enable
   output "LG Electronics LG TV SSCR2 0x01010101" position 0,0 mode 3840x2160@30.00000 scale 1.5 transform normal enable
 }
 
-profile rfoid2-cpx-solo {
+profile rfoid2-cpx-studio-solo {
   output eDP-1 position 2560,540 mode 1920x1200@60.00100 scale 1.3333334 transform normal enable
   output "LG Electronics LG TV SSCR2 0x01010101" position 0,0 mode 3840x2160@30.00000 scale 1.5 transform normal disable
 }
 
-profile rfoid2-cpx-nolaptop {
+profile rfoid2-cpx-studio-nolaptop {
   output eDP-1 position 2560,540 mode 1920x1200@60.00100 scale 1.3333334 transform normal disable
   output "LG Electronics LG TV SSCR2 0x01010101" position 0,0 mode 3840x2160@30.00000 scale 1.5 transform normal enable
 }
