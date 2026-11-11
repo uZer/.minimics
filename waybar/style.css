@@ -121,6 +121,11 @@ window#waybar {
   border-bottom: 0.2rem solid transparent;
 }
 
+#custom-airplane.on {
+  background-color: @color1;
+  border-bottom: 0.2rem solid @color1Alpha;
+}
+
 #custom-health {
   background-color: @color2;
   border-bottom: 0.2rem solid @color2Alpha;

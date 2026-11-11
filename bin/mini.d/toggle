@@ -36,6 +36,7 @@ toggle_airplane () {
   else
     rfkill block all
   fi
+  pkill -RTMIN+9 waybar || true
 }
 
 toggle_bt () {

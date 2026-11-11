@@ -72,11 +72,11 @@
     ]
   },
   "custom/airplane": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "default": "󰀝"
-    },
+    "exec": "mini waybar status airplane",
+    "format": "{}",
+    "interval": 5,
+    "signal": 9,
+    "return-type": "json",
     "on-click": "mini toggle airplane"
   },
   "custom/health": {

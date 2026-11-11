@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# display airplane mode status for waybar
+
+set -eu
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+# Airplane mode is on when no radio is left soft-unblocked
+if rfkill list | grep -q "Soft blocked: no"; then
+  jq -cM -n '{text: "󰀝", tooltip: "Airplane mode off", class: "off"}'
+else
+  jq -cM -n '{text: "󰀞", tooltip: "Airplane mode on", class: "on"}'
+fi
