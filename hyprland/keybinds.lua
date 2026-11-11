@@ -136,14 +136,10 @@ end
 -- NAMED WORKSPACES
 -- ============================================================
 
-local named_workspaces = {
-  T = "name:",
-  Y = "name:󰙯",
-  SEMICOLON = "name:",
-  I = "name:",
-  O = "name:",
-  P = "name:",
-}
+local named_workspaces = {}
+for key, ws in pairs(require("workspaces")) do
+  named_workspaces[key] = ws.id
+end
 
 bind("T", hl.dsp.focus({ workspace = named_workspaces.T }))
 bind("Y", hl.dsp.focus({ workspace = named_workspaces.Y }))

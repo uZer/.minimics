@@ -56,32 +56,34 @@ hl.window_rule({
 -- APPLICATION WORKSPACES
 -- ============================================================
 
+local workspaces = require("workspaces")
+
 hl.window_rule({
   match = {
     class = "^Discord$",
   },
-  workspace = "name:󰙯",
+  workspace = workspaces.Y.id,
 })
 
 hl.window_rule({
   match = {
     class = "^Spotify",
   },
-  workspace = "name:",
+  workspace = workspaces.SEMICOLON.id,
 })
 
 hl.window_rule({
   match = {
     class = "^Plexamp",
   },
-  workspace = "name:",
+  workspace = workspaces.SEMICOLON.id,
 })
 
 hl.window_rule({
   match = {
     class = "^Slack",
   },
-  workspace = "name:",
+  workspace = workspaces.I.id,
 })
 
 hl.window_rule({
