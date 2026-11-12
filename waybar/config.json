@@ -71,8 +71,8 @@
       "custom/ghpr-mine",
       "custom/ghpr-external",
       "custom/ghpr-bots",
-      "custom/notification",
-      "clock"
+      "clock",
+      "custom/notification"
     ]
   },
   "custom/airplane": {

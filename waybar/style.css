@@ -193,6 +193,15 @@ window#waybar {
   border-bottom: 0.2rem solid @color9Alpha;
 }
 
+/* nothing to read: quiet, like the clock */
+#custom-notification.none,
+#custom-notification.dnd-none,
+#custom-notification.inhibited-none,
+#custom-notification.dnd-inhibited-none {
+  background-color: @color0;
+  border-bottom: 0.2rem solid @color0Alpha;
+}
+
 #custom-online,
 #custom-publicip {
   background-color: @color4;
