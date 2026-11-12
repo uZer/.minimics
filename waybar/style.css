@@ -50,6 +50,7 @@ window#waybar {
 #custom-ghpr-external,
 #custom-ghpr-mine,
 #custom-glpr-mine,
+#custom-jira-mine,
 #custom-health,
 #custom-network-interface,
 #custom-notification,
@@ -162,6 +163,13 @@ window#waybar {
   border-bottom: 0.2rem solid @color4Alpha;
 }
 
+/* my jira tickets, not done */
+#custom-jira-mine {
+  color: @color15;
+  background-color: @color4;
+  border-bottom: 0.2rem solid @color4Alpha;
+}
+
 #custom-playerctl {
   /* color: @color10; */
   background-color: @color2;
@@ -180,9 +188,9 @@ window#waybar {
 }
 
 #custom-notification {
-  background-color: @color3;
+  background-color: @color9;
   padding: 0.2rem 0.5rem;
-  border-bottom: 0.2rem solid @color3Alpha;
+  border-bottom: 0.2rem solid @color9Alpha;
 }
 
 #custom-online,

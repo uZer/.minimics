@@ -33,5 +33,12 @@ export MINIMICS_GITLAB_PRIVATE_TOKEN=yoursecrettoken
 # read:org): a fine grained one sees a single owner's repos
 # export MINIMICS_GITHUB_TOKEN=ghp_...
 
+# Jira: login and site are acli's (`acli jira auth login`). Optional: the
+# board the waybar jira module opens. Open it in jira, its url reads
+# https://<site>/jira/software/projects/<PROJECT>/boards/<BOARD>
+# (PROJECT is also the prefix of the tickets' keys: PROJ-123)
+export MINIMICS_JIRA_PROJECT=PROJ
+export MINIMICS_JIRA_BOARD=42
+
 # QT5/QT6
 export QT_QPA_PLATFORMTHEME=qt6ct

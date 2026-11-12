@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+# display my assigned jira tickets, on the site acli is logged in
+
+set -euo pipefail
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+# jira login: acli's own (`acli jira auth login`). No token to define here.
+# on-click opens my board: define MINIMICS_JIRA_PROJECT and
+# MINIMICS_JIRA_BOARD in ~/.minimicsrc (see minimicsrc.dist). Without them:
+# a search of my tickets.
+
+#################
+## ENVIRONMENT ##
+#################
+
+# my tickets: assigned to me, not done
+JQL="assignee = currentUser() AND statusCategory != Done ORDER BY updated DESC"
+# on-click: my board, filtered on me (account id read from my tickets: not
+# written here), by components
+JIRA_PROJECT="${MINIMICS_JIRA_PROJECT:-}"
+JIRA_BOARD="${MINIMICS_JIRA_BOARD:-}"
+
+# waybar asks every minute: one fetch, kept 55s
+CACHE="${XDG_RUNTIME_DIR:-/tmp}/minimics-jira.json"
+CACHE_TTL=55
+
+ICON_MINE=$'\U000f0303'      # nf-md-jira
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+get_usage () {
+  cat << EOF
+Count my jira tickets, as a waybar module
+
+usage:
+  $COMMAND [--help, -h]
+  $COMMAND <kind>       # waybar json: count, tickets in the tooltip
+  $COMMAND <kind> url   # my board, filtered on me (on-click), or a search
+
+kinds:
+  mine       tickets assigned to me, not done
+
+arguments:
+  -h, --help      display this message
+
+EOF
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+# the lists, from jira, as {site, me, mine: [{key, status, summary}]}.
+# me: my account id, from the assignee of my tickets (null without any)
+fetch() {
+  local site
+  site=$(acli jira auth status | sed -n 's/^ *Site: *//p')
+  [[ -n "${site}" ]]
+  jq -n \
+    --arg site "${site}" \
+    --argjson mine "$(acli jira workitem search --jql "${JQL}" \
+      --fields key,summary,status,assignee --paginate --json)" '
+    {
+      site: $site,
+      me: ($mine | first | .fields.assignee.accountId),
+      mine: [$mine[] | {key, status: .fields.status.name, summary: .fields.summary}]
+    }'
+}
+
+# the cached lists, fetched again when older than CACHE_TTL. flock: a call
+# waits for the fetch in progress instead of starting its own.
+# The lock lives in a subshell: released when it ends, never inherited
+lists() {
+  (
+    flock 9
+    if [[ ! -s "${CACHE}" ]] \
+      || (( $(date +%s) - $(stat -c %Y "${CACHE}") > CACHE_TTL )); then
+      fetch > "${CACHE}.tmp" && mv "${CACHE}.tmp" "${CACHE}"
+    fi
+    cat "${CACHE}"
+  ) 9> "${CACHE}.lock"
+}
+
+# url of a kind. mine: my board, filtered on me when my id is known; a
+# search of my tickets when no board is defined
+search_url() {
+  case "$1" in
+    mine)
+      lists | jq -r --arg project "${JIRA_PROJECT}" --arg board "${JIRA_BOARD}" \
+          --arg jql "${JQL}" '
+        if $project != "" and $board != "" then
+          "https://\(.site)/jira/software/projects/\($project | @uri)/boards/\($board | @uri)?"
+          + (if .me then "filter=\("assignee = \(.me)" | @uri)&" else "" end)
+          + "groupBy=components"
+        else
+          "https://\(.site)/issues/?jql=\($jql | @uri)"
+        end'
+      ;;
+  esac
+}
+
+# waybar json of a kind: icon and count, the tickets in the tooltip
+status() {
+  local icon
+  case "$1" in
+    mine) icon="${ICON_MINE}" ;;
+  esac
+  if ! lists > /dev/null 2>&1; then
+    jq -cn '{text: "", tooltip: "jira unreachable", class: "offline"}'
+    return
+  fi
+  lists | jq -c --arg kind "$1" --arg icon "${icon}" '
+    .[$kind] as $tickets
+    # the tooltip is pango markup: escape the summaries
+    | ($tickets | map("\(.key) [\(.status)] \(.summary | gsub("&"; "&amp;") | gsub("<"; "&lt;") | gsub(">"; "&gt;"))") | join("\n")) as $list
+    | if ($tickets | length) == 0
+      then {text: "", tooltip: "", class: "offline"}
+      else {text: "\($icon) \($tickets | length)", tooltip: $list, class: "online"}
+      end'
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+[[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -lt 1 ]] && get_usage && exit 0
+kind="$1"
+[[ "${kind}" =~ ^(mine)$ ]] || { get_usage; exit 1; }
+
+case "${2:-}" in
+  url) search_url "${kind}" ;;
+  "")  status "${kind}" ;;
+  *)   get_usage; exit 1 ;;
+esac

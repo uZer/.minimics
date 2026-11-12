@@ -66,12 +66,13 @@
       "wireplumber",
       "battery",
       "custom/screen",
-      "clock",
+      "custom/jira-mine",
+      "custom/glpr-mine",
+      "custom/ghpr-mine",
       "custom/ghpr-external",
       "custom/ghpr-bots",
-      "custom/ghpr-mine",
-      "custom/glpr-mine",
-      "custom/notification"
+      "custom/notification",
+      "clock"
     ]
   },
   "custom/airplane": {
@@ -124,6 +125,15 @@
     "on-click": "firefox -P ffp \"$(mini waybar status glpr mine url)\"",
     "on-click-middle": "mini waybar status glpr mine url | wl-copy -n",
     "on-click-right": "mini waybar status glpr mine url | wl-copy -n"
+  },
+  "custom/jira-mine": {
+    "exec": "mini waybar status jira mine",
+    "format": "{}",
+    "interval": 60,
+    "return-type": "json",
+    "on-click": "firefox -P ffp \"$(mini waybar status jira mine url)\"",
+    "on-click-middle": "mini waybar status jira mine url | wl-copy -n",
+    "on-click-right": "mini waybar status jira mine url | wl-copy -n"
   },
   "custom/screen": {
     "exec": "mini waybar status screen",
