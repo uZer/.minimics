@@ -49,6 +49,7 @@ window#waybar {
 #custom-ghpr-bots,
 #custom-ghpr-external,
 #custom-ghpr-mine,
+#custom-glpr-mine,
 #custom-health,
 #custom-network-interface,
 #custom-notification,
@@ -149,6 +150,13 @@ window#waybar {
 
 /* my PRs in other people's repos */
 #custom-ghpr-mine {
+  color: @color15;
+  background-color: @color4;
+  border-bottom: 0.2rem solid @color4Alpha;
+}
+
+/* my MRs on the office gitlab */
+#custom-glpr-mine {
   color: @color15;
   background-color: @color4;
   border-bottom: 0.2rem solid @color4Alpha;

@@ -70,6 +70,7 @@
       "custom/ghpr-external",
       "custom/ghpr-bots",
       "custom/ghpr-mine",
+      "custom/glpr-mine",
       "custom/notification"
     ]
   },
@@ -93,21 +94,36 @@
     "format": "{}",
     "interval": 60,
     "return-type": "json",
-    "on-click": "firefox -P ffp \"$(mini waybar status ghpr external url)\""
+    "on-click": "firefox -P ffp \"$(mini waybar status ghpr external url)\"",
+    "on-click-middle": "mini waybar status ghpr external url | wl-copy -n",
+    "on-click-right": "mini waybar status ghpr external url | wl-copy -n"
   },
   "custom/ghpr-bots": {
     "exec": "mini waybar status ghpr bots",
     "format": "{}",
     "interval": 60,
     "return-type": "json",
-    "on-click": "firefox -P ffp \"$(mini waybar status ghpr bots url)\""
+    "on-click": "firefox -P ffp \"$(mini waybar status ghpr bots url)\"",
+    "on-click-middle": "mini waybar status ghpr bots url | wl-copy -n",
+    "on-click-right": "mini waybar status ghpr bots url | wl-copy -n"
   },
   "custom/ghpr-mine": {
     "exec": "mini waybar status ghpr mine",
     "format": "{}",
     "interval": 60,
     "return-type": "json",
-    "on-click": "firefox -P ffp \"$(mini waybar status ghpr mine url)\""
+    "on-click": "firefox -P ffp \"$(mini waybar status ghpr mine url)\"",
+    "on-click-middle": "mini waybar status ghpr mine url | wl-copy -n",
+    "on-click-right": "mini waybar status ghpr mine url | wl-copy -n"
+  },
+  "custom/glpr-mine": {
+    "exec": "mini waybar status glpr mine",
+    "format": "{}",
+    "interval": 60,
+    "return-type": "json",
+    "on-click": "firefox -P ffp \"$(mini waybar status glpr mine url)\"",
+    "on-click-middle": "mini waybar status glpr mine url | wl-copy -n",
+    "on-click-right": "mini waybar status glpr mine url | wl-copy -n"
   },
   "custom/screen": {
     "exec": "mini waybar status screen",

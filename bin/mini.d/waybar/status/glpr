@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+# display my opened gitlab MRs, on the instance configured in glab
+
+set -euo pipefail
+
+# Pretty print command name
+COMMAND=${0//\// }
+COMMAND=${COMMAND/*mini.d/mini}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+# gitlab login: glab's own, on its default host (`glab auth login`,
+# `glab config set host <host>`). No token to define here.
+
+#################
+## ENVIRONMENT ##
+#################
+
+# mini exports DEBUG (lib.logg.sh) for its logs: glab reads it too, and
+# prints its traces
+unset DEBUG
+
+# the waybar modules ask at once: one fetch for all, kept 55s
+CACHE="${XDG_RUNTIME_DIR:-/tmp}/minimics-glpr.json"
+CACHE_TTL=55
+
+ICON_MINE=$''          # nf-fa-gitlab
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+get_usage () {
+  cat << EOF
+Count opened gitlab MRs, as a waybar module
+
+usage:
+  $COMMAND [--help, -h]
+  $COMMAND <kind>       # waybar json: count, MR list in the tooltip
+  $COMMAND <kind> url   # gitlab dashboard url of these MRs (on-click)
+
+kinds:
+  mine       my MRs, all projects of the instance
+
+arguments:
+  -h, --help      display this message
+
+EOF
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+# the lists, from gitlab, as {host, username, mine: [{url, ref, title}]}.
+# --hostname: else glab picks the host of the git remote of the cwd
+fetch() {
+  local host
+  host=$(glab config get host)
+  jq -n \
+    --arg host "${host}" \
+    --argjson user "$(glab api --hostname "${host}" user)" \
+    --argjson mine "$(glab api --hostname "${host}" \
+      'merge_requests?scope=created_by_me&state=opened&per_page=100')" '
+    {
+      host: $host,
+      username: $user.username,
+      mine: [$mine[] | {url: .web_url, ref: .references.full, title}]
+    }'
+}
+
+# the cached lists, fetched again when older than CACHE_TTL. flock: the
+# other modules wait for the fetch in progress instead of starting theirs.
+# The lock lives in a subshell: released when it ends, never inherited
+lists() {
+  (
+    flock 9
+    if [[ ! -s "${CACHE}" ]] \
+      || (( $(date +%s) - $(stat -c %Y "${CACHE}") > CACHE_TTL )); then
+      fetch > "${CACHE}.tmp" && mv "${CACHE}.tmp" "${CACHE}"
+    fi
+    cat "${CACHE}"
+  ) 9> "${CACHE}.lock"
+}
+
+# gitlab dashboard url of a kind
+search_url() {
+  case "$1" in
+    mine)
+      lists | jq -r '"https://\(.host)/dashboard/merge_requests?author_username=\(.username | @uri)"'
+      ;;
+  esac
+}
+
+# waybar json of a kind: icon and count, the MRs in the tooltip
+status() {
+  local icon
+  case "$1" in
+    mine) icon="${ICON_MINE}" ;;
+  esac
+  if ! lists > /dev/null 2>&1; then
+    jq -cn '{text: "", tooltip: "gitlab unreachable", class: "offline"}'
+    return
+  fi
+  lists | jq -c --arg kind "$1" --arg icon "${icon}" '
+    .[$kind] as $mrs
+    # the tooltip is pango markup: escape the titles
+    | ($mrs | map("\(.ref) \(.title | gsub("&"; "&amp;") | gsub("<"; "&lt;") | gsub(">"; "&gt;"))") | join("\n")) as $list
+    | if ($mrs | length) == 0
+      then {text: "", tooltip: "", class: "offline"}
+      else {text: "\($icon) \($mrs | length)", tooltip: $list, class: "online"}
+      end'
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+[[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -lt 1 ]] && get_usage && exit 0
+kind="$1"
+[[ "${kind}" =~ ^(mine)$ ]] || { get_usage; exit 1; }
+
+case "${2:-}" in
+  url) search_url "${kind}" ;;
+  "")  status "${kind}" ;;
+  *)   get_usage; exit 1 ;;
+esac
