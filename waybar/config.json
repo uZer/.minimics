@@ -65,12 +65,12 @@
       "group/metrics",
       "wireplumber",
       "battery",
-      "custom/screen",
       "custom/jira-mine",
       "custom/glpr-mine",
       "custom/ghpr-mine",
       "custom/ghpr-external",
       "custom/ghpr-bots",
+      "custom/screen",
       "clock",
       "custom/notification"
     ]
