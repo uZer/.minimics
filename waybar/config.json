@@ -67,7 +67,9 @@
       "battery",
       "custom/screen",
       "clock",
-      "custom/ghpr",
+      "custom/ghpr-external",
+      "custom/ghpr-bots",
+      "custom/ghpr-mine",
       "custom/notification"
     ]
   },
@@ -86,12 +88,26 @@
       "default": ""
     }
   },
-  "custom/ghpr": {
-    "exec": "mini waybar status ghpr",
+  "custom/ghpr-external": {
+    "exec": "mini waybar status ghpr external",
     "format": "{}",
     "interval": 60,
     "return-type": "json",
-    "on-click": "firefox -P ffp \"https://github.com/search?q=is%3Apr+is%3Aopen+org%3Abill-of-materials+user%3AuZer&type=pullrequests\""
+    "on-click": "firefox -P ffp \"$(mini waybar status ghpr external url)\""
+  },
+  "custom/ghpr-bots": {
+    "exec": "mini waybar status ghpr bots",
+    "format": "{}",
+    "interval": 60,
+    "return-type": "json",
+    "on-click": "firefox -P ffp \"$(mini waybar status ghpr bots url)\""
+  },
+  "custom/ghpr-mine": {
+    "exec": "mini waybar status ghpr mine",
+    "format": "{}",
+    "interval": 60,
+    "return-type": "json",
+    "on-click": "firefox -P ffp \"$(mini waybar status ghpr mine url)\""
   },
   "custom/screen": {
     "exec": "mini waybar status screen",

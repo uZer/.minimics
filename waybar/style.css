@@ -46,7 +46,9 @@ window#waybar {
 #clock,
 #cpu,
 #custom-airplane,
-#custom-ghpr,
+#custom-ghpr-bots,
+#custom-ghpr-external,
+#custom-ghpr-mine,
 #custom-health,
 #custom-network-interface,
 #custom-notification,
@@ -131,16 +133,25 @@ window#waybar {
   border-bottom: 0.2rem solid @color2Alpha;
 }
 
-#custom-ghpr {
+/* PRs of other people in my repos */
+#custom-ghpr-external {
   color: @color15;
   background-color: @color9;
   border-bottom: 0.2rem solid @color9Alpha;
 }
 
-#custom-ghpr-bot {
-  color: @color8;
-  background-color: @color16;
-  border-bottom: 0.2rem solid @color16Alpha;
+/* PRs of bots and of my local renovate */
+#custom-ghpr-bots {
+  color: @color15;
+  background-color: @color9;
+  border-bottom: 0.2rem solid @color9Alpha;
+}
+
+/* my PRs in other people's repos */
+#custom-ghpr-mine {
+  color: @color15;
+  background-color: @color4;
+  border-bottom: 0.2rem solid @color4Alpha;
 }
 
 #custom-playerctl {

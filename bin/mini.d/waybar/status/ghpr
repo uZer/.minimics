@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# display opened github pr needing review
+# display opened github PRs: external contributors, bots, mine elsewhere
 
 set -euo pipefail
 
@@ -9,32 +9,167 @@ COMMAND=${COMMAND/*mini.d/mini}
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
-# To define the github token on your system:
-# create a token here: https://github.com/settings/personal-access-tokens
-# scopes: fine grained, Metadata: Read-only, Pull requests: Read-only
-# define MINIMICS_GITHUB_TOKEN in ~/.minimicsrc
+# github token: `gh auth token` by default (log in with `gh auth login`).
+# MINIMICS_GITHUB_TOKEN in ~/.minimicsrc overrides it. It must read both
+# GH_USER's repos and GH_ORG's: a classic token (scopes: repo,
+# read:org), not a fine grained one, which belongs to a single owner and
+# then silently sees no PR of the other (empty external and bots counts).
 
-COUNT_PR=$(
-  curl -s \
-    -H "Authorization: Bearer ${MINIMICS_GITHUB_TOKEN}" \
-    -H "Accept: application/vnd.github+json" \
-    "https://api.github.com/search/issues?q=is%3Apr+is%3Aopen+org%3Abill-of-materials+user%3AuZer" | jq '.total_count'
-)
+#################
+## ENVIRONMENT ##
+#################
 
-if [[ "${COUNT_PR}" -eq 0 ]]; then
-  jq -cM <<EOF
-  {
-    "text": "",
-    "tooltip": "",
-    "class": "${class:-offline}"
-  }
+GH_USER="uZer"
+GH_ORG="bill-of-materials"
+# PRs of mine in these owners' repos are not "elsewhere"
+GH_OWN_ORGS=("${GH_ORG}" "radiofrance")
+# commit authors of my local renovate: its own address, and Renovate's
+# default one (commits made before gitAuthor was set)
+RENOVATE_EMAILS=("renovator@billofmaterials.art" "renovate@whitesourcesoftware.com")
+
+# the three waybar modules ask at once: one fetch for all, kept 55s
+CACHE="${XDG_RUNTIME_DIR:-/tmp}/minimics-ghpr.json"
+CACHE_TTL=55
+
+ICON_EXTERNAL="󰙊"      # nf-oct-people
+ICON_BOTS=""
+ICON_MINE=""          # nf-oct-git_pull_request
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+get_usage () {
+  cat << EOF
+Count opened github PRs, as a waybar module
+
+usage:
+  $COMMAND [--help, -h]
+  $COMMAND <kind>       # waybar json: count, PR list in the tooltip
+  $COMMAND <kind> url   # github search url of these PRs (on-click)
+
+kinds:
+  external   PRs of other people in my repos and ${GH_ORG}'s (no bots)
+  bots       PRs of bots in these repos, and those of my local renovate
+             (authored by me, commits by ${RENOVATE_EMAILS[0]})
+  mine       my PRs elsewhere (not ${GH_USER}, ${GH_OWN_ORGS[*]})
+
+arguments:
+  -h, --help      display this message
+
 EOF
-else
-  jq -cM <<EOF
-  {
-    "text": " ${COUNT_PR}",
-    "tooltip": "${COUNT_PR}",
-    "class": "${class:-online}"
-  }
-EOF
-fi
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+# one GraphQL search: url, author (login, User/Bot) and commit emails of
+# each open PR, as a json array
+search_pr() {
+  jq -n --arg q "$1" '{
+    query: "query($q: String!) { search(query: $q, type: ISSUE, first: 100) { nodes { ... on PullRequest { url author { login __typename } commits(first: 20) { nodes { commit { author { email } } } } } } } }",
+    variables: {q: $q}
+  }' \
+  | curl -sf \
+      -H "Authorization: Bearer ${TOKEN}" \
+      -H "Content-Type: application/json" \
+      -d @- https://api.github.com/graphql \
+  | jq -e '[.data.search.nodes[]
+            | select(.url)
+            | {url, login: .author.login, type: .author.__typename,
+               emails: [.commits.nodes[].commit.author.email] | unique}]'
+}
+
+# the three lists, from github, as {external, bots, mine}
+fetch() {
+  local own_repos excluded=""
+  own_repos=$(
+    jq -s 'add | unique_by(.url)' \
+      <(search_pr "is:pr is:open org:${GH_ORG}") \
+      <(search_pr "is:pr is:open user:${GH_USER}")
+  )
+  for org in "${GH_OWN_ORGS[@]}"; do excluded+=" -org:${org}"; done
+  jq -n \
+    --argjson own "${own_repos}" \
+    --argjson mine "$(search_pr "is:pr is:open author:${GH_USER} -user:${GH_USER}${excluded}")" \
+    --arg me "${GH_USER}" \
+    --argjson renovate "$(printf '%s\n' "${RENOVATE_EMAILS[@]}" | jq -R . | jq -s .)" '
+    def renovate_mine: .login == $me and any(.emails[]; IN($renovate[]));
+    {
+      external: [$own[] | select(.type != "Bot" and .login != $me)],
+      bots:     [$own[] | select(.type == "Bot" or renovate_mine)],
+      mine:     $mine
+    }'
+}
+
+# the cached lists, fetched again when older than CACHE_TTL. flock: the
+# other modules wait for the fetch in progress instead of starting theirs.
+# The lock lives in a subshell: released when it ends, never inherited
+lists() {
+  (
+    flock 9
+    if [[ ! -s "${CACHE}" ]] \
+      || (( $(date +%s) - $(stat -c %Y "${CACHE}") > CACHE_TTL )); then
+      fetch > "${CACHE}.tmp" && mv "${CACHE}.tmp" "${CACHE}"
+    fi
+    cat "${CACHE}"
+  ) 9> "${CACHE}.lock"
+}
+
+# github search url of a kind: the same PRs, as close as a search can say
+# (it can't filter on commit emails: renovate's PRs, the bot's and my local
+# one's, carry its label). No parentheses: the web search page reads the
+# boolean groups the API takes differently and finds nothing. Repeated
+# org:/user: qualifiers are OR'ed
+search_url() {
+  local q bots excluded=""
+  local scope="org:${GH_ORG} user:${GH_USER}"
+  bots=$(lists | jq -r '[.external[], .bots[]] | map(select(.type == "Bot") | .login) | unique[]')
+  case "$1" in
+    external)
+      q="is:pr is:open ${scope} -author:${GH_USER}"
+      for b in ${bots}; do q+=" -author:app/${b}"; done
+      ;;
+    bots)
+      q="is:pr is:open ${scope} label:dependencies"
+      ;;
+    mine)
+      for org in "${GH_OWN_ORGS[@]}"; do excluded+=" -org:${org}"; done
+      q="is:pr is:open author:${GH_USER} -user:${GH_USER}${excluded}"
+      ;;
+  esac
+  echo "https://github.com/search?type=pullrequests&q=$(jq -rn --arg q "$q" '$q | @uri')"
+}
+
+# waybar json of a kind: icon and count, the PRs in the tooltip
+status() {
+  local icon
+  case "$1" in
+    external) icon="${ICON_EXTERNAL}" ;;
+    bots)     icon="${ICON_BOTS}" ;;
+    mine)     icon="${ICON_MINE}" ;;
+  esac
+  if ! lists > /dev/null 2>&1; then
+    jq -cn '{text: "", tooltip: "github unreachable", class: "offline"}'
+    return
+  fi
+  lists | jq -c --arg kind "$1" --arg icon "${icon}" '
+    .[$kind] as $prs
+    | ($prs | map(.url | sub("https://github.com/"; "") | sub("/pull/"; "#")) | join("\n")) as $list
+    | if ($prs | length) == 0
+      then {text: "", tooltip: "", class: "offline"}
+      else {text: "\($icon) \($prs | length)", tooltip: $list, class: "online"}
+      end'
+}
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+[[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -lt 1 ]] && get_usage && exit 0
+kind="$1"
+[[ "${kind}" =~ ^(external|bots|mine)$ ]] || { get_usage; exit 1; }
+
+TOKEN="${MINIMICS_GITHUB_TOKEN:-}"
+[[ -z "${TOKEN}" || "${TOKEN}" == "github_..." ]] && TOKEN=$(gh auth token 2>/dev/null || true)
+
+case "${2:-}" in
+  url) search_url "${kind}" ;;
+  "")  status "${kind}" ;;
+  *)   get_usage; exit 1 ;;
+esac
