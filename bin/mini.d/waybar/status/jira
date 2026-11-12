@@ -29,7 +29,7 @@ JIRA_BOARD="${MINIMICS_JIRA_BOARD:-}"
 CACHE="${XDG_RUNTIME_DIR:-/tmp}/minimics-jira.json"
 CACHE_TTL=55
 
-ICON_MINE=$'\U000f0303'      # nf-md-jira
+ICON_MINE="󰌃"
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
