@@ -30,16 +30,37 @@ float_title("^.*(p|P)references.*")
 float_title("^.*(q|Q)uarks$")
 
 float_class("^feh")
-float_class("^Nautilus")
-float_class("^SuperCollider")
+float_class("^(org\\.gnome\\.)?[Nn]autilus")
+float_class("^(SuperCollider|scide)")
 float_class("^(k|K)rusader")
 float_class("^(n|N)emo")
-float_class("^qt\\.ct")
+float_class("^qt[56]ct$")
 float_class("^.*ctl")
 float_class("^.*copyq")
 
 float_title("^Microsoft Teams Notification$")
 float_title("^Loading Microsoft Teams$")
+
+-- Firefox extension popups open titled "Mozilla Firefox" and get their real
+-- title later; window rules only apply `float` at open, so float on retitle.
+local float_on_retitle = {
+  "^Extension : %(Torrent Control%) %- ",
+}
+
+hl.on("window.title", function(window)
+  if not window or window.floating then
+    return
+  end
+  for _, pattern in ipairs(float_on_retitle) do
+    if window.title:find(pattern) then
+      hl.dispatch(hl.dsp.window.float({
+        action = "enable",
+        window = "address:" .. window.address,
+      }))
+      return
+    end
+  end
+end)
 
 -- ============================================================
 -- TILED WINDOWS
@@ -60,21 +81,21 @@ local workspaces = require("workspaces")
 
 hl.window_rule({
   match = {
-    class = "^Discord$",
+    class = "^[Dd]iscord$",
   },
   workspace = workspaces.Y.id,
 })
 
 hl.window_rule({
   match = {
-    class = "^Spotify",
+    class = "^[Ss]potify$",
   },
   workspace = workspaces.SEMICOLON.id,
 })
 
 hl.window_rule({
   match = {
-    class = "^Plexamp",
+    class = "^[Pp]lexamp$",
   },
   workspace = workspaces.SEMICOLON.id,
 })
@@ -88,7 +109,7 @@ hl.window_rule({
 
 hl.window_rule({
   match = {
-    class = "^Slack",
+    class = "^[Ss]lack$",
   },
   workspace = workspaces.I.id,
 })
