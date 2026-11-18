@@ -44,7 +44,8 @@ float_title("^Loading Microsoft Teams$")
 -- Firefox extension popups open titled "Mozilla Firefox" and get their real
 -- title later; window rules only apply `float` at open, so float on retitle.
 local float_on_retitle = {
-  "^Extension : %(Torrent Control%) %- ",
+  -- French locale: the space before ":" is a no-break space (U+00A0)
+  "^Extension[^:]*: %(Torrent Control%) %- ",
 }
 
 hl.on("window.title", function(window)
