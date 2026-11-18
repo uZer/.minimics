@@ -81,6 +81,13 @@ hl.window_rule({
 
 hl.window_rule({
   match = {
+    class = "^feishin$",
+  },
+  workspace = workspaces.SEMICOLON.id,
+})
+
+hl.window_rule({
+  match = {
     class = "^Slack",
   },
   workspace = workspaces.I.id,
