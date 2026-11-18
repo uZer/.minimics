@@ -41,27 +41,15 @@ float_class("^.*copyq")
 float_title("^Microsoft Teams Notification$")
 float_title("^Loading Microsoft Teams$")
 
--- Firefox extension popups open titled "Mozilla Firefox" and get their real
--- title later; window rules only apply `float` at open, so float on retitle.
-local float_on_retitle = {
-  -- French locale: the space before ":" is a no-break space (U+00A0)
-  "^Extension[^:]*: %(Torrent Control%) %- ",
-}
-
-hl.on("window.title", function(window)
-  if not window or window.floating then
-    return
-  end
-  for _, pattern in ipairs(float_on_retitle) do
-    if window.title:find(pattern) then
-      hl.dispatch(hl.dsp.window.float({
-        action = "enable",
-        window = "address:" .. window.address,
-      }))
-      return
-    end
-  end
-end)
+-- Firefox windows float centered (popups, extension dialogs, new windows);
+-- bin/ffp and bin/ffo launch their main window with `mini run --tile`.
+hl.window_rule({
+  match = {
+    class = "^firefox$",
+  },
+  float = true,
+  center = true,
+})
 
 -- ============================================================
 -- TILED WINDOWS

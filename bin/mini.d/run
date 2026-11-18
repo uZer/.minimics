@@ -16,7 +16,7 @@ If the process forks we can't be sure the right workspace will be used.
 
 usage:
   $COMMAND --help, -h
-  $COMMAND <workspace> <command>
+  $COMMAND [--tile] <workspace> <command>
 
 example:
   $COMMAND 15 nvim-qt ~/.minimicsrc
@@ -24,11 +24,19 @@ example:
 
 arguments:
   -h, --help      display this message
+  -t, --tile      force the window to tile, overriding floating window rules
+                  (hyprland only)
 
 EOF
 }
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
+
+rules=""
+case "${1:-}" in
+-h | --help) get_usage && exit 0 ;;
+-t | --tile) rules="; tile" && shift ;;
+esac
 
 [ $# -lt 2 ] && get_usage && exit 0
 
@@ -38,7 +46,7 @@ command=${*}
 
 case "${XDG_SESSION_DESKTOP:-null}" in
 hyprland)
-  hyprctl dispatch "hl.dsp.exec_cmd(\"[workspace ${workspace}] ${command}\")"
+  hyprctl dispatch "hl.dsp.exec_cmd(\"[workspace ${workspace}${rules}] ${command}\")"
   ;;
 i3)
   i3-msg "workspace ${workspace}; ${command}"
