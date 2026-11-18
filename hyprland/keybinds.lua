@@ -36,7 +36,7 @@ bind(
   })
 )
 
-bind("SHIFT + Q", hl.dsp.window.kill())
+bind("SHIFT + Q", hl.dsp.window.close())
 bind("SHIFT + E", hl.dsp.exit())
 
 -- ============================================================
